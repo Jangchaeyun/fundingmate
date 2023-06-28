@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "../Reward.css";
+import "../../../Page/Reward/Reward.css";
 
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 

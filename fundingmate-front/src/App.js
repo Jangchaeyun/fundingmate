@@ -1,7 +1,8 @@
+import { Route, Routes } from "react-router";
 import "./App.css";
+import Reward from "./pages/Reward/Reward";
+import Rewarddetail from "./pages/Rewarddetail/Rewarddetail";
 import Home from "./pages/Home/Home";
-// import Reward from "./Component/Reward/Reward";
-// import Rewarddetail from "./Component/RewardDetail/Rewarddetail";
 
 function App() {
   return (
