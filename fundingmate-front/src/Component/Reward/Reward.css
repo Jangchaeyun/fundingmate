@@ -1,7 +1,9 @@
-p {
+.reward_title {
   font-size: 20px;
   display: flex;
   margin-top: 2%;
+  cursor: pointer;
+  font-weight: 800;
 }
 
 .reward {
@@ -23,7 +25,7 @@ p {
 
 .reward_card {
   border-radius: 5px 5px 0px 0px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
   width: 262px;
   height: 275px;
   margin-bottom: 3%;
@@ -33,7 +35,6 @@ p {
 
 .reward_card:hover {
   transform: scale(1.01);
-  overflow: hidden;
 }
 
 .reward_img {

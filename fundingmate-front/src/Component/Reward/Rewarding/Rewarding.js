@@ -4,7 +4,7 @@ import "../Reward.css";
 const Rewarding = () => {
   return (
     <div className="rewarding">
-      <p>진행중인 리워드</p>
+      <p className="reward_title">진행중인 리워드</p>
       <div class="rewarding_proj">
         펀딩메이트에서 핫한 프로젝트를 만나보세요
       </div>

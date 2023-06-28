@@ -8,12 +8,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { BellOutlined } from "@ant-design/icons";
 
 const Preopen = () => {
   return (
     <div className="reward">
-      <p>사전 공개</p>
+      <p className="reward_title">사전 공개</p>
       <div class="rewarding_proj">
         곧 오픈할 프로젝트들을 가장 먼저 만나보세요.
       </div>

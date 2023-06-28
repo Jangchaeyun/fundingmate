@@ -4,7 +4,7 @@ import "../Reward.css";
 const Finish = () => {
   return (
     <div className="rewarding">
-      <p>종료된 리워드 프로젝트</p>
+      <p className="reward_title">종료된 리워드 프로젝트</p>
       <div class="rewarding_proj">마무리된 리워드 프로젝트입니다.</div>
       <div className="reward_cards">
         <div className="reward_card">
