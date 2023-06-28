@@ -2,13 +2,13 @@ import "./App.css";
 import Reward from "./pages/Reward/Reward";
 import Rewarddetail from "./pages/Rewarddetail/Rewarddetail";
 import InvestBasicInfo from "./Component/InvestMake/InvestBasicInfo";
-
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<Main />} />
+        {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
         <Route exact path="/reward-detail" element={<Rewarddetail />} />
       </Routes>
