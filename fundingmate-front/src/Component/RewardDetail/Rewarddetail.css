@@ -1,0 +1,78 @@
+.desc_subtitle {
+  font-size: 11px;
+  margin-top: 1%;
+  margin-bottom: 0.2%;
+  margin-left: 2.5%;
+}
+
+b {
+  color: #14b8ff;
+}
+
+.desc_title {
+  font-size: 15px;
+  margin-bottom: 0.8%;
+  margin-left: 2.4%;
+}
+
+.desc_contents {
+  display: flex;
+}
+
+.main_img {
+  width: 490px;
+  height: 300px;
+}
+
+.desc_img {
+  text-align: center;
+}
+.sub_img1 {
+  width: 100px;
+  height: 52.583px;
+  margin-right: 0.7%;
+}
+
+.sub_img2 {
+  width: 100px;
+  height: 52.583px;
+}
+
+.fund_category {
+  color: #14b8ff;
+  font-size: 13px;
+  margin-bottom: 0.5%;
+}
+
+.fund_price {
+  font-size: 20px;
+}
+
+.rewarding {
+  color: black;
+  font-size: 12px;
+}
+
+.fund_rate {
+  display: flex;
+  width: 60%;
+  margin-left: 0.6%;
+  color: #9b9b9b;
+  font-size: 12px;
+  margin-top: 1%;
+}
+
+.fund_rate_title {
+  width: 68%;
+}
+
+.fund_rate_per {
+  width: 101%;
+  color: black;
+}
+
+.fund_rate_price {
+  color: #9b9b9b;
+  font-size: 10px;
+  margin-top: 1%;
+}
