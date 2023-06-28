@@ -10,9 +10,11 @@ function App() {
       <Routes>
         {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
-        <Route exact path="/reward-detail" element={<Rewarddetail />} />
       </Routes>
-      <InvestBasicInfo />
+      <Routes>
+        <Route exact path="/reward-detail/story" element={<Rewarddetail />} />
+      </Routes>
+      {/* <InvestBasicInfo /> */}
     </div>
   );
 }

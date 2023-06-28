@@ -78,9 +78,13 @@ const Desc = () => {
           </div>
           <div className="company">
             <div className="name_view">
-              <img src="/assets/imgs/boy.png" className="boy_img" />
+              <img src="/assets/imgs/smartboy.jpg" className="boy_img" />
               <div className="company_name">스마트보이</div>
             </div>
+          </div>
+          <div className="info">
+            펀딩을 마치면 결제 예약 상태입니다. 종료일에 100% 이상이 달성되었을
+            경우에만 결제 예정일에 결제가 됩니다.
           </div>
         </div>
       </div>
