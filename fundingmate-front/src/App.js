@@ -1,7 +1,8 @@
-import { Route, Routes } from "react-router";
 import "./App.css";
 import Reward from "./pages/Reward/Reward";
 import Rewarddetail from "./pages/Rewarddetail/Rewarddetail";
+import InvestBasicInfo from "./Component/InvestMake/InvestBasicInfo";
+
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route exact path="/reward" element={<Reward />} />
         <Route exact path="/reward-detail" element={<Rewarddetail />} />
       </Routes>
+      <InvestBasicInfo />
     </div>
   );
 }

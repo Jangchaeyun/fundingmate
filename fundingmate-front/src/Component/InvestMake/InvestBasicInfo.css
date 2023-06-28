@@ -1,0 +1,19 @@
+.proj-progress-div {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-top: 10%;
+}
+.proj-progress {
+    width: 21px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #e4e4e4;
+    background: #fff;
+    margin-right: 10px; /* 사이 간격 */
+    margin-left: 0; /* 왼쪽 간격 없애기 */
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
