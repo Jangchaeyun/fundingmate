@@ -12,6 +12,7 @@
   --sub-color: #ffce50;
   --grey: #9b9b9b;
   --white: white;
+  --info: rgba(248, 199, 199, 0.56);
 }
 
 * {
