@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Reward from "./Component/Reward/Reward";
-import Rewarddetail from "./Component/RewardDetail/Rewarddetail";
+import Reward from "./Page/Reward/Reward";
+import Rewarddetail from "./Page/Rewarddetail/Rewarddetail";
 
 function App() {
   return (

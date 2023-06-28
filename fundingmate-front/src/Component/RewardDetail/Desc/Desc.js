@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../Rewarddetail.css";
+import "../../../Page/Rewarddetail/Rewarddetail.css";
+import { ShareAltOutlined } from "@ant-design/icons";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
@@ -44,11 +45,17 @@ const Desc = () => {
             <div className="fund_rate_per">1050%</div>
             <sub className="fund_rate_price">목표 금액 10,0000원</sub>
           </div>
-          <div className="fund_rate">
-            <div className="fund_rate_title">달성률</div>
-            <div className="fund_rate_per">1050%</div>
-            <sub className="fund_rate_price">목표 금액 10,0000원</sub>
+          <div className="fund_date">
+            <div className="fund_date_title">남은기간</div>
+            <div className="fund_date_dday">11일</div>
+            <sub className="fund_date_enddate">2023.07.13 종료</sub>
           </div>
+          <div className="fund_people">
+            <div className="fund_people_title">참여자수</div>
+            <div className="fund_people_count">140명</div>
+            <button className="fund_btn">펀딩하기</button>
+          </div>
+          <button className="proj_share">프로젝트 공유하기</button>
         </div>
       </div>
     </div>
