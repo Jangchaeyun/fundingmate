@@ -44,6 +44,11 @@ const Desc = () => {
             <div className="fund_rate_per">1050%</div>
             <sub className="fund_rate_price">목표 금액 10,0000원</sub>
           </div>
+          <div className="fund_rate">
+            <div className="fund_rate_title">달성률</div>
+            <div className="fund_rate_per">1050%</div>
+            <sub className="fund_rate_price">목표 금액 10,0000원</sub>
+          </div>
         </div>
       </div>
     </div>
