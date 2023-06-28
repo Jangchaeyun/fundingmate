@@ -1,14 +1,18 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import "./App.css";
-import Reward from "./Component/Reward/Reward";
+import Reward from "./pages/Reward/Reward";
+import Rewarddetail from "./pages/Rewarddetail/Rewarddetail";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        {/* <Route exact path="/" element={<Main />} /> */}
-        <Route exact path="/reward" element={<Reward />} />
-      </Routes>
+      <Home/>
+//       <Routes>
+//         {/* <Route exact path="/" element={<Main />} /> */}
+//         <Route exact path="/reward" element={<Reward />} />
+//         <Route exact path="/reward-detail" element={<Rewarddetail />} />
+//       </Routes>
     </div>
   );
 }

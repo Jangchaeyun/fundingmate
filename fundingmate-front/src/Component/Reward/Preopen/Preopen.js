@@ -1,6 +1,5 @@
 import React from "react";
-import "../Reward.css";
-
+import "../../../Page/Reward/Reward.css";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
