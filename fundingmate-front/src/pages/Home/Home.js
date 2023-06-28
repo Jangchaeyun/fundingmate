@@ -7,7 +7,7 @@ function Home() {
         <div className="home">
             <Header />
             <Routes>
-                <Route exact path="/" element={<Home />} />
+                {/*<Route exact path="/" element={<Main />} />*/}
                 {/*<Route exact path="/reward" element={<Reward />} />*/}
             </Routes>
             <Footer />

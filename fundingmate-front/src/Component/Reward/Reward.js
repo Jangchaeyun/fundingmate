@@ -1,4 +1,4 @@
-import "../App/App.css";
+import "../../App.css";
 import Banner from "./Banner/Banner";
 import Rewarding from "./Rewarding/Rewarding";
 import Preopen from "./Preopen/Preopen";
