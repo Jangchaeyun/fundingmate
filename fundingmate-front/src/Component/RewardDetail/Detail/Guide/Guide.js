@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../../Page/Rewarddetail/Rewarddetail.css";
+import "../../../../pages/Rewarddetail/Rewarddetail.css";
 
 const Guide = () => {
   return <div>Guide</div>;

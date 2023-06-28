@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "../../../Page/Rewarddetail/Rewarddetail.css";
-import { ShareAltOutlined } from "@ant-design/icons";
+import "../../../pages/Rewarddetail/Rewarddetail.css";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
@@ -56,6 +55,33 @@ const Desc = () => {
             <button className="fund_btn">펀딩하기</button>
           </div>
           <button className="proj_share">프로젝트 공유하기</button>
+          <div className="circles">
+            <div className="circle">
+              <img src="/assets/imgs/calendar.png" className="icon_img" />
+            </div>
+            <div className="circle">
+              <img src="/assets/imgs/credit.png" className="icon_img" />
+            </div>
+            <div className="circle">
+              <img src="/assets/imgs/delivery.png" className="icon_img" />
+            </div>
+          </div>
+          <div className="schedule">
+            <div className="fund_end_date_title">펀딩 종료일</div>
+            <div className="price_date_title">결제 예정일</div>
+            <div className="send_date_title">발송 예정일</div>
+          </div>
+          <div className="schedule">
+            <div className="end">23/07/13</div>
+            <div className="end">23/07/22</div>
+            <div className="end">23/07/23</div>
+          </div>
+          <div className="company">
+            <div className="name_view">
+              <img src="/assets/imgs/boy.png" className="boy_img" />
+              <div className="company_name">스마트보이</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
