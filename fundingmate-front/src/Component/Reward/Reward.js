@@ -1,9 +1,8 @@
-import { BrowserRouter as Router } from "react-router-dom";
 import "../../App.css";
-import Banner from "./Main/Banner/Banner";
-import Finish from "./Main/Finish/Finish";
-import Preopen from "./Main/Preopen/Preopen";
-import Rewarding from "./Main/Rewarding/Rewarding";
+import Banner from "./Banner/Banner";
+import Rewarding from "./Rewarding/Rewarding";
+import Preopen from "./Preopen/Preopen";
+import Finish from "./Finish/Finish";
 
 const Reward = () => {
   return (
