@@ -1,0 +1,123 @@
+.rew_check_header {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.rew_check_info {
+  background-color: var(--info);
+  width: 40%;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.rew_category_card {
+  width: 94.8%;
+  border-radius: 10px;
+  border: 1px solid var(--black);
+  margin-top: 15px;
+  padding-top: 10px;
+  padding-left: 54px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.right {
+  margin-left: 95%;
+  font-size: 20px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.rew_sub_content {
+  display: flex;
+  width: 30%;
+  margin-left: -5px;
+  margin-top: 6px;
+}
+
+.rew_count {
+  width: 150px;
+}
+
+.rew_content {
+  margin-top: 3px;
+  font-weight: bold;
+}
+
+.rew_content_info {
+  margin-top: 4px;
+  margin-bottom: 15px;
+}
+
+.checkout_header {
+  background-color: var(--grey);
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.checkout_processes {
+  display: flex;
+  justify-content: center;
+  width: 19%;
+}
+
+.checkout_process {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: 1px solid var(--black);
+  margin-top: 12px;
+}
+
+.checkout_line {
+  width: 30px;
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 25px;
+}
+
+.card {
+  margin-left: 15px;
+  margin-top: 14px;
+  font-size: 20px;
+}
+
+.active {
+  color: var(--main-color);
+}
+
+.checkout_process_texts {
+  display: flex;
+  width: 21%;
+  margin-top: 10px;
+}
+
+.reward_list_titles {
+  display: flex;
+  width: 100%;
+}
+
+.reward_list_title {
+  margin-top: 30px;
+  margin-left: 6px;
+}
+
+.reward_add {
+  margin-top: 30px;
+  margin-right: 6px;
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+.rew_sub_contents {
+  display: flex;
+  width: 30%;
+  margin-left: -21px;
+  margin-top: 6px;
+}
