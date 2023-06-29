@@ -17,8 +17,9 @@
 }
 
 * {
-  width: 1080px;
-  margin: 0 auto;
+/*  width: 1080px;*/
+
+/*  margin: 0 auto;*/
   font-family: "SUITE-Regular";
-  overflow-x: hidden;
+/*  overflow-x: hidden;*/
 }
