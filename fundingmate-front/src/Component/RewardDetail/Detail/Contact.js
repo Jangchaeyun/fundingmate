@@ -10,7 +10,7 @@ const Contact = () => {
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <Link className="story " to={"/reward-detail/story"}>
+          <Link className="story" to={"/reward-detail/story"}>
             스토리
           </Link>
           <div className="contact_box">

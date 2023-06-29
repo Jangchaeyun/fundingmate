@@ -1,3 +1,7 @@
+.desc {
+  margin-left: 4.5%;
+}
+
 .desc_subtitle {
   font-size: 11px;
   margin-top: 1%;
@@ -243,7 +247,7 @@ b {
 
 .menu {
   margin-top: 3%;
-  margin-left: 5%;
+  margin-left: 7%;
 }
 
 .menu_items {
@@ -263,6 +267,7 @@ b {
   transition: all 0.4s linear;
   cursor: pointer;
   text-decoration: none;
+  color: var(--black);
 }
 
 .story:hover {
@@ -273,6 +278,7 @@ b {
   transition: all 0.4s linear;
   cursor: pointer;
   text-decoration: none;
+  color: var(--black);
 }
 
 .contact:hover {
@@ -290,6 +296,7 @@ b {
   transition: all 0.4s linear;
   cursor: pointer;
   text-decoration: none;
+  color: var(--black);
 }
 
 .guide:hover {
@@ -299,7 +306,7 @@ b {
 .story_content {
   margin-top: 2%;
   font-size: 13px;
-  margin-left: 15%;
+  margin-left: 17%;
 }
 
 .product_img {
@@ -308,7 +315,7 @@ b {
 
 .con {
   margin-top: 4%;
-  margin-left: 10%;
+  margin-left: 17%;
 }
 
 .con_subtitle {
@@ -328,7 +335,7 @@ b {
 
 .con_input {
   margin-top: 3%;
-  width: 89.5%;
+  width: 82.5%;
   height: 73px;
   border: 1px solid var(--grey);
   resize: none;
@@ -341,7 +348,7 @@ b {
 .sub {
   margin-top: 1%;
   float: right;
-  margin-right: 10.1%;
+  margin-right: 17.1%;
   width: 13%;
   height: 25px;
   border: 1px solid var(--main-color);
@@ -401,7 +408,7 @@ b {
 }
 
 .guide_infos {
-  margin-left: 10%;
+  margin-left: 17%;
 }
 
 .text {

@@ -46,7 +46,7 @@
 
 .menu {
   margin-top: 3%;
-  margin-left: 6%;
+  margin-left: 7%;
 }
 
 .fund_story,
@@ -86,7 +86,7 @@
 
 .con_input {
   margin-top: 3%;
-  width: 84.5%;
+  width: 82.5%;
   height: 73px;
   border: 1px solid var(--grey);
   resize: none;
