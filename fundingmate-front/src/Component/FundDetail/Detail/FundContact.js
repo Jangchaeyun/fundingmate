@@ -10,16 +10,16 @@ const FundContact = () => {
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <Link className="story " to={"/reward-detail/story"}>
+          <Link className="story " to={"/fund-detail/story"}>
             스토리
           </Link>
           <div className="contact_box">
-            <Link className="contact active" to={"/reward-detail/contact"}>
+            <Link className="contact active" to={"/fund-detail/contact"}>
               문의
             </Link>
             <div className="contact_count">0</div>
           </div>
-          <Link className="guide" to={"/reward-detail/guide"}>
+          <Link className="guide" to={"/fund-detail/guide"}>
             안내
           </Link>
         </div>
