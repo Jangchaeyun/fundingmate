@@ -1,0 +1,21 @@
+.footer {
+    width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+.f-logo {
+    font-size: 20px;
+    margin: 20px 0;
+}
+.f-title {
+    color: #14B8FF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.f-content {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+.f-content>div {
+    margin: 10px 0;
+}

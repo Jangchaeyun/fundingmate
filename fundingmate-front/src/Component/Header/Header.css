@@ -5,6 +5,8 @@ a {
 
 .header {
     height: 100px;
+    width: 1080px;
+    margin: 0 auto;
 }
 .hTop {
     display: flex;
@@ -19,7 +21,11 @@ a {
 }
 .hTopMenu {
     flex-basis: 20%;
-    font-size: 18px;
+    font-size: 16px;
+}
+
+.nav {
+    margin: 0 20px;
 }
 .hTopMenu>span:first-of-type {
     margin-right: 20px;
@@ -39,13 +45,16 @@ a {
     border-radius: 20px;
     padding-left: 20px;
     float: right;
-    margin-right: 50px;
 }
 .nav-search:focus {
 
 }
 .nav-search-btn {
-    /*position: absolute;*/
-    /*right: -42%;*/
-    /*line-height: 35px;*/
+    position: relative;
+    right: -650px;
+    top: 2px;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
 }

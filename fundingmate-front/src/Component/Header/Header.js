@@ -22,7 +22,7 @@ function Header() {
                     <li><a href="">오픈예정</a></li>
                 </ul>
                 <input type="text" className="nav-search" placeholder="프로젝트 명/기업 명" maxLength="10"/>
-                <SearchOutlined  className="nav-search-btn" style={{fontSize:"20px"}}/>
+                <button type="submit" className="nav-search-btn"><SearchOutlined/></button>
             </nav>
 
         </header>
