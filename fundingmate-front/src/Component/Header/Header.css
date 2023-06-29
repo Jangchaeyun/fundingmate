@@ -1,0 +1,51 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    height: 100px;
+}
+.hTop {
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+.hlogo {
+    flex-basis: 80%;
+}
+.hlogoL {
+    font-size: 24px;
+}
+.hTopMenu {
+    flex-basis: 20%;
+    font-size: 18px;
+}
+.hTopMenu>span:first-of-type {
+    margin-right: 20px;
+}
+.nav-item {
+    display: inline;
+    line-height: 2;
+}
+.nav-item>li {
+    display: inline;
+    margin-right: 20px;
+}
+.nav-search {
+    width: 300px;
+    height: 30px;
+    border: 1px solid #14B8FF;
+    border-radius: 20px;
+    padding-left: 20px;
+    float: right;
+    margin-right: 50px;
+}
+.nav-search:focus {
+
+}
+.nav-search-btn {
+    /*position: absolute;*/
+    /*right: -42%;*/
+    /*line-height: 35px;*/
+}
