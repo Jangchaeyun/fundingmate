@@ -1,7 +1,7 @@
 import React from "react";
-import "../../../../pages/Rewarddetail/Rewarddetail.css";
+import "../../../pages/Rewarddetail/Rewarddetail.css";
 import { Link } from "react-router-dom";
-import Desc from "../../Desc/Desc";
+import Desc from "../Desc/Desc";
 
 const Story = () => {
   return (
@@ -10,11 +10,18 @@ const Story = () => {
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <div className="story">스토리</div>
-          <Link className="contact" to="/register-item/contact">
-            문의<sup className="contact_count">0</sup>
+          <Link className="story active" to={"/reward-detail/story"}>
+            스토리
           </Link>
-          <div className="guide">안내</div>
+          <div className="contact_box">
+            <Link className="contact" to={"/reward-detail/contact"}>
+              문의
+            </Link>
+            <div className="contact_count">0</div>
+          </div>
+          <Link className="guide" to={"/reward-detail/guide"}>
+            안내
+          </Link>
         </div>
       </div>
       <div className="story_content">

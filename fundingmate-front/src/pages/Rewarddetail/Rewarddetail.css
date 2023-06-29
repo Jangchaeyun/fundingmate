@@ -196,6 +196,10 @@ b {
   cursor: pointer;
 }
 
+.contact_box {
+  display: flex;
+}
+
 .company:hover {
   transform: scale(1.03);
   border: 1px solid var(--main-color);
@@ -239,6 +243,7 @@ b {
 
 .menu {
   margin-top: 3%;
+  margin-left: 5%;
 }
 
 .menu_items {
@@ -250,10 +255,14 @@ b {
   transition: all 0.4s linear;
 }
 
-.story {
+.active {
   color: var(--main-color);
+}
+
+.story {
   transition: all 0.4s linear;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .story:hover {
@@ -264,16 +273,23 @@ b {
   transition: all 0.4s linear;
   cursor: pointer;
   text-decoration: none;
-  color: var(--black);
 }
 
 .contact:hover {
   color: var(--main-color);
 }
 
+.contact_count {
+  color: var(--main-color);
+  margin-left: -70.4%;
+  margin-top: -0.9%;
+  font-size: 9px;
+}
+
 .guide {
   transition: all 0.4s linear;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .guide:hover {
@@ -283,8 +299,111 @@ b {
 .story_content {
   margin-top: 2%;
   font-size: 13px;
+  margin-left: 15%;
 }
 
 .product_img {
   width: 100%;
+}
+
+.con {
+  margin-top: 4%;
+  margin-left: 10%;
+}
+
+.con_subtitle {
+  font-size: 14px;
+}
+
+.con_title {
+  color: var(--main-color);
+  margin-top: 1%;
+  font-size: 18px;
+}
+
+.con_info {
+  margin-top: 1%;
+  font-size: 14px;
+}
+
+.con_input {
+  margin-top: 3%;
+  width: 89.5%;
+  height: 73px;
+  border: 1px solid var(--grey);
+  resize: none;
+}
+
+.con_input:focus {
+  outline: none;
+}
+
+.sub {
+  margin-top: 1%;
+  float: right;
+  margin-right: 10.1%;
+  width: 13%;
+  height: 25px;
+  border: 1px solid var(--main-color);
+  justify-content: center;
+  background-color: var(--white);
+  margin-bottom: 2%;
+  cursor: pointer;
+  transition: all 0.4s linear;
+}
+
+.sub:hover {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.con_list {
+  margin-top: 2%;
+  background-color: var(--lightgrey);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-bottom: 2%;
+  padding-left: 36%;
+}
+
+.guide_title {
+  margin-top: 3%;
+  padding-bottom: 1%;
+}
+
+.guide_content {
+  font-size: 12px;
+}
+
+.guide_line {
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+.guide_line2 {
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.guide_category {
+  font-size: 13px;
+  margin-bottom: 1%;
+}
+
+.guide_category_info {
+  color: var(--grey);
+  font-size: 12px;
+  margin-bottom: 1%;
+}
+
+.guide_category_info_con {
+  margin-bottom: 1%;
+}
+
+.guide_infos {
+  margin-left: 10%;
+}
+
+.text {
+  text-align: center;
 }
