@@ -1,5 +1,6 @@
 import React from "react";
 import "./InvestBasicInfo.css";
+import "./InvestMakeCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
@@ -7,12 +8,12 @@ const InvestBasicInfo = () => {
 
     return (
         <>
-        <div className="investBasicInfo-wrapper">
+        <div className="investMake-wrapper">
             <div className="proj-progress-div">
-                <div className="proj-progress-ing proj-progress-common">1</div>
-                <div className="proj-progress proj-progress-common">2</div>
-                <div className="proj-progress proj-progress-common">3</div>
-                <div className="proj-progress proj-progress-common">4</div>
+                <div className="proj-progress-ing proj-progress-common proj-progress-line">1</div>
+                <div className="proj-progress proj-progress-common proj-progress-line">2</div>
+                <div className="proj-progress proj-progress-common proj-progress-line">3</div>
+                <div className="proj-progress proj-progress-common proj-progress-line">4</div>
                 <div className="proj-progress proj-progress-common">5</div>
             </div>
 
@@ -75,9 +76,9 @@ const InvestBasicInfo = () => {
             </p>
             <br/>
 
-            <div className="image-upload">
-                <div className="image-upload-info">
-                <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px"}}/></div>
+            <div className="ibi-image-upload">
+                <div className="ibi-image-upload-info">
+                <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px", cursor:"pointer"}}/></div>
                 최적 사이즈 740*492px
                 </div>
                 </div>
@@ -92,7 +93,9 @@ const InvestBasicInfo = () => {
             </p>
             <input type="text" name="pri_keyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
             <div className="button-top-margin"></div>
-            <div className="next-button"> 다음 단계 </div>
+            <div className="investMake-button-div">
+            <div className="investMake-next-button"> 다음 단계 </div>
+            </div>
             <div className="button-botoom-margin"></div>
         </div>
         </>

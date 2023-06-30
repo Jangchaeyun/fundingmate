@@ -1,60 +1,4 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-.investBasicInfo-wrapper{
-    width: 1080px;
-    overflow-x: hidden;
-    margin: 0 auto;
-
-}
-.proj-progress-div {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
-    margin-top: 10%;
-margin-bottom: 5%;
-}
-.proj-progress {
-    border: 1px solid #e4e4e4;
-    color: var(--grey);
-    background: #fff;
-}
-.proj-progress-ing{
-    border: 1px solid;
-    border-color: transparent;
-    background: var(--sub-color);
-    color:#ffffff;
-}
-.proj-progress-common{
-    width: 21px;
-    height: 20px;
-    border-radius: 20px;
-    margin-right: 1%; /* 사이 간격 */
-    margin-left: 0; /* 왼쪽 간격 없애기 */
-    text-align: center;
-    font-size: 12px;
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-}
-.custom-font-title{
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.custom-font-sub-title{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-.custom-font-text{
-    font-size: 16px;
-}
-.input-box{
-    margin-top: 10px;
-    width: 350px;
-    height: 20px;
-
-}
-.image-upload{
+.ibi-image-upload{
     width: 350px;
     height: 250px;
     border: 1px solid var(--grey);
@@ -63,29 +7,12 @@ margin-bottom: 5%;
 
 }
 
-.image-upload-info{
+.ibi-image-upload-info{
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
     flex-direction: column;
+    margin-top:28%;
+    font-size: 15px;
 }
 
-.button-top-margin{
-    margin-bottom: 10%;
-}
-
-.next-button{
-    width: 149px;
-    height: 34px;
-    border-radius: 7px;
-    background: var(--main-color);
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    color:#ffffff;
-    cursor: pointer;
-    margin: 0 auto;
-}
-.button-botoom-margin{
-    margin-bottom: 15%;
-}
