@@ -4,11 +4,12 @@ import {
   ReconciliationOutlined,
   CaretRightOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  let navigate = useNavigate();
   return (
-    <div>
-      <div className="checkout_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
+    <div>      <div className="checkout_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="checkout_processes">
         <div className="checkout_process active">
           <CreditCardOutlined className="card" />
@@ -23,6 +24,7 @@ const Checkout = () => {
         <div></div>
         <div className="checkout_process_text">결제 예약 확인</div>
       </div>
+
       <div className="reward_list_titles">
         <div className="reward_list_title">내가 선택한 리워드</div>
         <div className="reward_add">리워드 추가</div>
@@ -76,7 +78,9 @@ const Checkout = () => {
           <br/>
           <label className="check_title"><input type="checkbox" className="check" required/> [필수] 리워드 제공에 필요한 정보 제공에 동의합니다.</label>
         </div>
-        <button type="submit" className="complete">결제 예약 완료</button>
+        <button type="submit" className="complete" onClick={() => {
+            navigate("/reward-checkout/complete");
+          }}>결제 예약 완료</button>
       </form>
     </div>
   );

@@ -249,3 +249,22 @@ select:focus {
   border: none;
   cursor: pointer;
 }
+
+.reward_ckeckout_com {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 16%;
+}
+
+.home_btn {
+  width: 150px;
+  height: 35px;
+  text-align: center;
+  margin-left: 40%;
+  margin-top: 3%;
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+}
