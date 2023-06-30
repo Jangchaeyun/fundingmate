@@ -8,15 +8,15 @@
 }
 
 .proj_good_share {
-  margin-left: -3%;
   display: flex;
   width: 50%;
+  margin-left: -3%;
 }
 
 .proj_good {
   margin-top: 2%;
   margin-left: 8%;
-  width: 44%;
+  width: 51%;
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
@@ -34,7 +34,7 @@
 .fund_proj_share {
   margin-top: 2%;
   width: 31%;
-  margin-left: -7%;
+  margin-left: -4%;
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
@@ -94,7 +94,7 @@
 
 .fund_submit {
   margin-top: 1%;
-  margin-left: 75%;
+  margin-left: 73%;
   margin-right: 0.4%;
   width: 10%;
   height: 25px;
@@ -114,13 +114,13 @@
 .fund_con_list {
   margin-top: 2%;
   border: 1px solid var(--lightgrey);
-  margin-bottom: 2%;
-  padding-left: 36%;
+  width: 83%;
+  margin-left: 0%;
 }
 
 .fund_con_name {
   margin-top: 1%;
-  margin-left: -33%;
+  margin-left: 2%;
   font-size: 13px;
 }
 
@@ -133,7 +133,7 @@
   width: 70px;
   height: 25px;
   margin-bottom: 1%;
-  margin-left: 41%;
+  margin-left: 89%;
   background-color: var(--white);
   border: 1px solid var(--main-color);
   cursor: pointer;

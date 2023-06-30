@@ -1,4 +1,3 @@
-import "../../App.css";
 import Banner from "../../Component/Reward/Banner";
 import Finish from "../../Component/Reward/Finish";
 import Preopen from "../../Component/Reward/Preopen";

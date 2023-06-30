@@ -18,7 +18,7 @@ const Rewarding = () => {
           }}
         >
           <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-          <div className="company_name"> 스마트보이</div>
+          <div className="com_name"> 스마트보이</div>
           <div className="reward_name"> 실버 커팅볼 스퀘어 체인 여자 팔찌</div>
           <div className="reward_detail">
             <div className="price">12.345원 펀딩</div>
@@ -28,7 +28,7 @@ const Rewarding = () => {
         </div>
         <div className="reward_card">
           <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-          <div className="company_name"> 스마트보이</div>
+          <div className="com_name"> 스마트보이</div>
           <div className="reward_name"> 실버 커팅볼 스퀘어 체인 여자 팔찌</div>
           <div className="reward_detail">
             <div className="price">12.345원 펀딩</div>
@@ -38,7 +38,7 @@ const Rewarding = () => {
         </div>
         <div className="reward_card">
           <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-          <div className="company_name"> 스마트보이</div>
+          <div className="com_name"> 스마트보이</div>
           <div className="reward_name"> 실버 커팅볼 스퀘어 체인 여자 팔찌</div>
           <div className="reward_detail">
             <div className="price">12.345원 펀딩</div>
@@ -48,7 +48,7 @@ const Rewarding = () => {
         </div>
         <div className="reward_card">
           <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-          <div className="company_name"> 스마트보이</div>
+          <div className="com_name"> 스마트보이</div>
           <div className="reward_name"> 실버 커팅볼 스퀘어 체인 여자 팔찌</div>
           <div className="reward_detail">
             <div className="price">12.345원 펀딩</div>

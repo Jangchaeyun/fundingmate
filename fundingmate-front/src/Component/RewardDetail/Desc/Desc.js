@@ -47,7 +47,7 @@ const Desc = () => {
           <div className="fund_date">
             <div className="fund_date_title">남은기간</div>
             <div className="fund_date_dday">11일</div>
-            <sub className="fund_date_enddate">2023.07.13 종료</sub>
+            <sub className="fund_date_end">2023.07.13 종료</sub>
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>

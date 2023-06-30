@@ -24,7 +24,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
@@ -39,7 +39,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
@@ -54,7 +54,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
@@ -69,7 +69,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
@@ -84,7 +84,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
@@ -99,7 +99,7 @@ const Preopen = () => {
           <SwiperSlide>
             <div className="reward_card">
               <img src="/assets/imgs/bracelet.jpg" className="reward_img" />
-              <div className="company_name"> 스마트보이</div>
+              <div className="com_name"> 스마트보이</div>
               <div className="reward_name">
                 실버 커팅볼 스퀘어 체인 여자 팔찌
               </div>
