@@ -6,7 +6,7 @@
   font-size: 11px;
   margin-top: 1%;
   margin-bottom: 0.2%;
-  margin-left: 12%;
+  margin-left: 10%;
 }
 
 b {
@@ -16,7 +16,7 @@ b {
 .desc_title {
   font-size: 15px;
   margin-bottom: 0.8%;
-  margin-left: 12%;
+  margin-left: 10%;
 }
 
 .desc_contents {
@@ -43,6 +43,11 @@ b {
   height: 52.583px;
 }
 
+.desc_content {
+  width: 100%;
+  margin-left: 3%;
+}
+
 .fund_category {
   color: var(--main-color);
   font-size: 13px;
@@ -60,7 +65,7 @@ b {
 
 .fund_rate {
   display: flex;
-  width: 60%;
+  width: 39%;
   margin-left: 0.6%;
   color: var(--grey);
   font-size: 12px;
@@ -68,11 +73,12 @@ b {
 }
 
 .fund_rate_title {
-  width: 68%;
+  width: 22%;
+  margin-left: 0px;
 }
 
 .fund_rate_per {
-  width: 101%;
+  margin-left: 2%;
   color: var(--black);
 }
 
@@ -80,11 +86,12 @@ b {
   color: var(--black);
   font-size: 10px;
   margin-top: 1%;
+  margin-right: -15%;
 }
 
 .fund_date {
   display: flex;
-  width: 85%;
+  width: 35%;
   margin-left: 0.6%;
   color: var(--grey);
   font-size: 12px;
@@ -92,23 +99,24 @@ b {
 }
 
 .fund_date_title {
-  width: 44%;
+  color: var(--grey);
+  margin-left: 0%;
 }
 
 .fund_date_dday {
   color: var(--black);
-  width: 43%;
+  margin-right: 2%;
 }
 
-.fund_date_enddate {
+.fund_date_end {
   color: var(--black);
   font-size: 10px;
-  margin-top: 1%;
+  margin-right: -15%;
 }
 
 .fund_people {
   display: flex;
-  width: 37%;
+  width: 43%;
   margin-left: 0.6%;
   color: var(--grey);
   font-size: 12px;
@@ -118,28 +126,31 @@ b {
 }
 
 .fund_people_title {
-  width: 44%;
+  width: 59%;
+  margin-top: 1%;
 }
 
 .fund_people_count {
   color: var(--black);
   width: 43%;
+  margin-top: 1%;
 }
 
 .fund_btn {
-  width: 70%;
-  background-color: var(--main-color);
-  color: var(--white);
-  border: none;
-  border-radius: 5px;
-  font-size: 12px;
-  height: 20px;
-  cursor: pointer;
+  width: 69%;
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    height: 22px;
+    margin-left: 1%;
+    cursor: pointer;
 }
 
 .proj_share {
   margin-top: 2%;
-  width: 40%;
+  width: 44%;
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
@@ -192,7 +203,7 @@ b {
 .company {
   border-radius: 5px;
   border: 1px solid var(--black);
-  width: 40%;
+  width: 42.5%;
   height: 40px;
   margin-top: 2%;
   margin-left: 0.6%;
@@ -213,7 +224,8 @@ b {
 .company_name {
   font-size: 12px;
   color: var(--black);
-  margin-top: 1%;
+  margin-top: 7%;
+  margin-left: -27%;
   transition: all 0.2s linear;
 }
 
@@ -230,7 +242,7 @@ b {
   width: 35px;
   height: 35px;
   border-radius: 50px;
-  margin-left: 0.7%;
+  margin-left: 2.7%;
 }
 
 .info {
@@ -247,14 +259,14 @@ b {
 
 .menu {
   margin-top: 3%;
-  margin-left: 7%;
+  margin-left: -6%;
 }
 
 .menu_items {
   display: flex;
   width: 50%;
   margin-top: 1%;
-  margin-left: 30%;
+  margin-left: 25%;
   font-size: 14px;
   transition: all 0.4s linear;
 }
@@ -287,7 +299,7 @@ b {
 
 .contact_count {
   color: var(--main-color);
-  margin-left: -70.4%;
+  margin-left: -0.4%;
   margin-top: -0.9%;
   font-size: 9px;
 }
@@ -365,12 +377,14 @@ b {
 }
 
 .con_list {
-  margin-top: 2%;
   background-color: var(--lightgrey);
   padding-top: 50px;
   padding-bottom: 50px;
+  margin-left: 0%;
+  padding-left: 302px;
   margin-bottom: 2%;
-  padding-left: 36%;
+  margin-top: 5%;
+  width: 49.4%;
 }
 
 .guide_title {

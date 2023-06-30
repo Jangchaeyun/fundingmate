@@ -19,7 +19,7 @@
 * {
   margin: 0 auto;
   font-family: "SUITE-Regular";
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 body {

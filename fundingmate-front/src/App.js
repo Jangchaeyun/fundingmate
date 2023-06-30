@@ -11,6 +11,7 @@ import FundContact from "./Component/FundDetail/Detail/FundContact";
 import FundGuide from "./Component/FundDetail/Detail/FundGuide";
 import CheckCategory from "./Component/Checkout/CheckCategory";
 import Checkout from "./Component/Checkout/Checkout";
+import CheckoutComplete from "./Component/Checkout/CheckoutComplete";
 function App() {
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
       <Routes>
         <Route exact path="/checkout/check" element={<CheckCategory />} />
         <Route exact path="/reward-checkout" element={<Checkout />} />
+        <Route exact path="/reward-checkout/complete" element={<CheckoutComplete />} />
       </Routes>
       {/* <InvestBasicInfo /> */}
     </div>

@@ -34,7 +34,7 @@ const Banner = () => {
         {items.map((item, idx) => {
           return (
             <SwiperSlide key={idx}>
-              <img src={item.src} />
+              <img src={item.src}  className="banner_img"/>
             </SwiperSlide>
           );
         })}
