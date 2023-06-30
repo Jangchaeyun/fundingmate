@@ -36,6 +36,7 @@
   margin-bottom: 3%;
   transition: all 0.2s linear;
   cursor: pointer;
+  margin-left: 0.6%;
 }
 
 .reward_card:hover {
