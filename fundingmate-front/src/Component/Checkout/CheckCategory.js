@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CheckCategory = () => {
   let navigate = useNavigate();
   return (
-    <div className="rew_check_category">
+    <div className="rew_check_category checkout">
       <div className="rew_check_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="rew_check_info">펀딩을 마치면 결제 예약 상태입니다.</div>
 

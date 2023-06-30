@@ -1,11 +1,11 @@
-import { CreditCardOutlined, ReconciliationOutlined } from '@ant-design/icons'
-import React from 'react'
-import { useNavigate } from 'react-router';
+import { CreditCardOutlined, ReconciliationOutlined } from "@ant-design/icons";
+import React from "react";
+import { useNavigate } from "react-router";
 
 const CheckoutComplete = () => {
   let navigate = useNavigate();
   return (
-    <div>
+    <div className="checkout">
       <div className="checkout_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="checkout_processes">
         <div className="checkout_process">
@@ -21,14 +21,22 @@ const CheckoutComplete = () => {
         <div></div>
         <div className="checkout_process_text active">결제 예약 확인</div>
       </div>
-      <div className='reward_ckeckout_com'>
+      <div className="reward_ckeckout_com">
         결제가 정상적으로 예약되었습니다.
       </div>
-      <button type='button' className='home_btn' onClick={() => {
+      <div className="button_com">
+        <button
+          type="button"
+          className="home_btn"
+          onClick={() => {
             navigate("/");
-          }}>홈으로</button>
+          }}
+        >
+          홈으로
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CheckoutComplete
+export default CheckoutComplete;

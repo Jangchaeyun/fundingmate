@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const FundGuide = () => {
   return (
-    <div>
+    <div className="desc">
       <Desc />
       <div className="menu">
         <hr />

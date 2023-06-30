@@ -5,7 +5,7 @@ import "../../../pages/Funddetail/Funddetail.css";
 
 const FundContact = () => {
   return (
-    <div>
+    <div className="desc">
       <Desc />
       <div className="menu">
         <hr />
