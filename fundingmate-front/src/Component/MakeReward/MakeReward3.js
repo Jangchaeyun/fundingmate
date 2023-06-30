@@ -54,6 +54,7 @@ const MakeReward3 = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 width={1000}
+                okText="추가" // 'OK' 버튼의 이름 변경
             >
                 <p>some contents...</p>
                 <p>some contents...</p>
