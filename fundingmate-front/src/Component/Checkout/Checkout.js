@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 const Checkout = () => {
   let navigate = useNavigate();
   return (
-    <div>      <div className="checkout_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
+    <div><div className="checkout_header">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="checkout_processes">
         <div className="checkout_process active">
           <CreditCardOutlined className="card" />
@@ -43,7 +43,7 @@ const Checkout = () => {
           실버 커팅볼 스퀘어 체인 여자 팔찌 1개 분량입니다.
         </div>
       </div>
-      <form>
+      <form className="checkout_form">
         <p className="title">결제자 핸드폰 번호</p>
         <div className="phone">
           <input type="text" className="phone_num" required/>
@@ -78,11 +78,11 @@ const Checkout = () => {
           <br/>
           <label className="check_title"><input type="checkbox" className="check" required/> [필수] 리워드 제공에 필요한 정보 제공에 동의합니다.</label>
         </div>
-        <button type="submit" className="complete" onClick={() => {
+        <button type="submit" className="complete" onSubmit={() => {
             navigate("/reward-checkout/complete");
           }}>결제 예약 완료</button>
       </form>
-    </div>
+      </div>
   );
 };
 
