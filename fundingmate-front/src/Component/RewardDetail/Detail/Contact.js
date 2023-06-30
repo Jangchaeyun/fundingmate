@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
-    <div>
+    <div className="desc">
       <Desc />
       <div className="menu">
         <hr />

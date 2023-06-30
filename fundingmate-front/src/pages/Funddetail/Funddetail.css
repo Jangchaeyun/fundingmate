@@ -1,5 +1,5 @@
 .funding_people {
-  width: 50%;
+  width: 58%;
 }
 
 .funding_btn {
@@ -9,18 +9,18 @@
 
 .proj_good_share {
   display: flex;
-  width: 50%;
-  margin-left: -3%;
+  width: 67%;
+  margin-left: -4%;
 }
 
 .proj_good {
   margin-top: 2%;
-  margin-left: 8%;
-  width: 51%;
+  margin-left: 7%;
+  width: 52%;
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
-  height: 25px;
+  height: 34px;
   border-radius: 5px;
   transition: all 0.2s linear;
   cursor: pointer;
@@ -38,7 +38,7 @@
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
-  height: 25px;
+  height: 34px;
   border-radius: 5px;
   transition: all 0.2s linear;
   cursor: pointer;
@@ -46,7 +46,7 @@
 
 .menu {
   margin-top: 3%;
-    margin-left: -12%;
+  margin-left: -12%;
 }
 
 .fund_story,
@@ -62,7 +62,7 @@
 
 .fund_story {
   margin-left: -4%;
-    margin-right: 6%;
+  margin-right: 6%;
 }
 
 .fund_story:hover {
@@ -98,7 +98,7 @@
 
 .con_input {
   margin-top: 3%;
-  width: 82.5%;
+  width: 84.5%;
   height: 73px;
   border: 1px solid var(--grey);
   resize: none;
@@ -106,7 +106,7 @@
 
 .fund_submit {
   margin-top: 1%;
-  margin-left: 73%;
+  margin-left: 74.7%;
   margin-right: 0.4%;
   width: 10%;
   height: 25px;
@@ -126,7 +126,7 @@
 .fund_con_list {
   margin-top: 2%;
   border: 1px solid var(--lightgrey);
-  width: 83%;
+  width: 84.8%;
   margin-left: 0%;
 }
 
