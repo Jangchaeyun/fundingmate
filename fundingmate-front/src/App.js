@@ -7,8 +7,8 @@ import InvestMoneyInfo from "./Component/InvestMake/InvestMoneyInfo";
 function App() {
   return (
     <div className="App">
-        {/*<InvestBasicInfo />*/}
-        <InvestMoneyInfo/>
+        <InvestBasicInfo />
+        {/*<InvestMoneyInfo/>*/}
     </div>
   );
 }
