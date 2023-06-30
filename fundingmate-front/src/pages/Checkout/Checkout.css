@@ -268,3 +268,7 @@ select:focus {
   border: none;
   cursor: pointer;
 }
+
+.checkout_form {
+  margin-left: 30%;
+}
