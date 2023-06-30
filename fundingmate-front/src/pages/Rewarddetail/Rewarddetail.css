@@ -74,12 +74,14 @@ b {
 
 .fund_rate_title {
   width: 22%;
-  margin-left: 0px;
+  margin-left: 0%;
+  margin-right: 7%;
 }
 
 .fund_rate_per {
   margin-left: 2%;
   color: var(--black);
+  margin-right: 3%;
 }
 
 .fund_rate_price {
@@ -91,7 +93,7 @@ b {
 
 .fund_date {
   display: flex;
-  width: 35%;
+  width: 66%;
   margin-left: 0.6%;
   color: var(--grey);
   font-size: 12px;
@@ -101,11 +103,12 @@ b {
 .fund_date_title {
   color: var(--grey);
   margin-left: 0%;
+    margin-right: 4%;
 }
 
 .fund_date_dday {
   color: var(--black);
-  margin-right: 2%;
+  margin-right: 12%;
 }
 
 .fund_date_end {
@@ -169,7 +172,7 @@ b {
   display: flex;
   width: 40%;
   margin-top: 2%;
-  margin-left: 0%;
+  margin-left: 4%;
 }
 
 .circle {
@@ -178,6 +181,7 @@ b {
   border-radius: 50px;
   border: 1px solid #000;
   background: #fff;
+  margin-right: 12px;
 }
 
 .icon_img {
@@ -190,7 +194,7 @@ b {
   display: flex;
   width: 40%;
   margin-top: 1%;
-  margin-left: 0%;
+  margin-left: 3%;
   font-size: 11px;
   color: var(--grey);
   text-align: center;
@@ -198,6 +202,7 @@ b {
 
 .end {
   color: var(--main-color);
+  margin-left: 3%;
 }
 
 .company {
@@ -213,6 +218,7 @@ b {
 
 .contact_box {
   display: flex;
+  width: 13%;
 }
 
 .company:hover {
@@ -224,9 +230,17 @@ b {
 .company_name {
   font-size: 12px;
   color: var(--black);
-  margin-top: 7%;
-  margin-left: -27%;
+  margin-top: 6%;
+  margin-left: 11%;
   transition: all 0.2s linear;
+}
+
+.fund_end_date_title {
+  margin-right: 2%;
+}
+
+.price_date_title {
+  margin-right: 2%;
 }
 
 .company_name:hover {
@@ -264,9 +278,9 @@ b {
 
 .menu_items {
   display: flex;
-  width: 50%;
+  width: 100%;
   margin-top: 1%;
-  margin-left: 25%;
+  margin-left: 45%;
   font-size: 14px;
   transition: all 0.4s linear;
 }
@@ -280,6 +294,8 @@ b {
   cursor: pointer;
   text-decoration: none;
   color: var(--black);
+  margin-left: -4%;
+  margin-right: 6%;
 }
 
 .story:hover {
@@ -291,6 +307,7 @@ b {
   cursor: pointer;
   text-decoration: none;
   color: var(--black);
+  margin-left: 30%;
 }
 
 .contact:hover {
@@ -309,6 +326,7 @@ b {
   cursor: pointer;
   text-decoration: none;
   color: var(--black);
+  margin-left: 4%;
 }
 
 .guide:hover {

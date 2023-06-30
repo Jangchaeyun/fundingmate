@@ -34,7 +34,7 @@
 .fund_proj_share {
   margin-top: 2%;
   width: 31%;
-  margin-left: -4%;
+  margin-left: 3%;
   background-color: var(--white);
   border: 1px solid #000;
   font-size: 12px;
@@ -46,7 +46,7 @@
 
 .menu {
   margin-top: 3%;
-  margin-left: 7%;
+    margin-left: -12%;
 }
 
 .fund_story,
@@ -60,6 +60,11 @@
   color: var(--main-color);
 }
 
+.fund_story {
+  margin-left: -4%;
+    margin-right: 6%;
+}
+
 .fund_story:hover {
   color: var(--main-color);
 }
@@ -68,6 +73,13 @@
   color: var(--main-color);
 }
 
+.fund_contact {
+  margin-left: 30%;
+}
+
+.fund_guide {
+  margin-left: 4%;
+}
 .fund_guide:hover {
   color: var(--main-color);
 }
