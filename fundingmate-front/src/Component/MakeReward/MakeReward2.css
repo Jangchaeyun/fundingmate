@@ -9,6 +9,10 @@
     margin-left: 3px;
     margin-top: 10px;
     cursor: pointer;
+    border: none;
+    background: white;
+    color:#CCCCCC;
+
 }
 
 .imi-image-upload{

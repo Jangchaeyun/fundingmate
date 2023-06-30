@@ -1,11 +1,9 @@
-*{
-    padding: 0;
-    margin: 0;
-}
+
 .investMake-wrapper{
     max-width: 1080px;
     overflow-x: hidden;
     margin: 0 auto;
+    padding: 0;
 
 }
 .proj-progress-div {
@@ -66,6 +64,7 @@
 }
 .custom-font-text{
     font-size: 16px;
+    color: #343434;
 }
 .input-box{
     margin-top: 10px;
@@ -93,7 +92,7 @@
     align-items: center; /* 수직 가운데 정렬 */
     color:#ffffff;
     cursor: pointer;
-
+    border: none;
 }
 
 .investMake-prev-button{
@@ -107,6 +106,7 @@
     color:#939393;
     cursor: pointer;
     margin-right: 1%;
+    border: none;
 }
 .investMake-button-div {
     display: flex;

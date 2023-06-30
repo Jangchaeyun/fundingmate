@@ -1,0 +1,75 @@
+.rew-card-add-button{
+    width: 90px;
+    height: 25px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
+    margin-top: 8%;
+    cursor: pointer;
+    background: white;
+}
+.rew-card-add-icon{
+    color: var(--main-color);
+}
+
+.make-rew-card {
+    width: 94.8%;
+    border-radius: 10px;
+    border: 1px solid var(--black);
+    margin-top: 2%;
+    
+    margin-bottom: 3%;
+
+    cursor: pointer;
+}
+.make-rew-card-price{
+    font-size: 24px;
+    font-weight: 800;
+}
+.make-rew-card-contents {
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+.make-rew-card-count{
+    margin-right: 2%;
+}
+.make-rew-card-sub-content{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.make-rew-card-edit-button{
+    border: 1px solid #B0B0B0;
+    border-radius: 5px;
+    width: 45px;
+    height: 25px;
+    margin-right: 3%;
+    cursor: pointer;
+}
+/*.make-rew-card-edit-button-modify{
+    border: 1px solid #57CCFF;
+    background:  #C6EEFF;
+    color: #22A7E1;
+}*/
+.make-rew-card-edit-button-delete{
+    border: 1px solid #FF7474;
+    background:  #FFD3D3;
+    color: #DF3636;
+}
+.make-rew-card-div{
+    display: flex;
+   align-items: center;
+    justify-content: space-between;
+}
+.make-rew-card-edit-button-div{
+    display: flex;
+
+}
+.make-rew-card-div{
+    margin: 2% 3% 2% 3%;
+ }

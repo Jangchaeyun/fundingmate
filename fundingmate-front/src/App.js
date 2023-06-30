@@ -1,14 +1,16 @@
 
 import "./App.css";
-import InvestBasicInfo from "./Component/InvestMake/InvestBasicInfo";
-import InvestMoneyInfo from "./Component/InvestMake/InvestMoneyInfo";
+import MakeReward1 from "./Component/MakeReward/MakeReward1";
+import MakeReward2 from "./Component/MakeReward/MakeReward2";
+import MakeReward3 from "./Component/MakeReward/MakeReward3";
 
 
 function App() {
   return (
     <div className="App">
-        <InvestBasicInfo />
-        {/*<InvestMoneyInfo/>*/}
+        <MakeReward1 />
+        <MakeReward2/>
+        <MakeReward3/>
     </div>
   );
 }

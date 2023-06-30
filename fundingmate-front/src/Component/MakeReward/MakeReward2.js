@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
-import "./InvestMoneyInfo.css";
-import "./InvestMakeCommon.css";
+import "./MakeReward2.css";
+import "./MakeRewardCommon.css";
 
-import { DatePicker, Space } from 'antd';
+
 import {PlusCircleOutlined, PlusSquareOutlined} from "@ant-design/icons";
 
 import { Editor } from '@toast-ui/react-editor';
@@ -12,8 +12,8 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
 
-const { RangePicker } = DatePicker;
-const InvestBasicInfo = () => {
+
+const MakeReward2 = () => {
     const editorRef = useRef();
     const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
@@ -45,7 +45,7 @@ const InvestBasicInfo = () => {
             </p>
             <div className="projMake-video">
             <input type="text" name="rew_videp_address" className="input-box"/>
-            <div className="video-add"><PlusSquareOutlined style={{ fontSize: "23px"}} /></div>
+            <button className="video-add"><PlusSquareOutlined style={{ fontSize: "23px"}} /></button>
             </div>
             <br/>
 
@@ -92,8 +92,8 @@ const InvestBasicInfo = () => {
 
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-            <div className="investMake-prev-button"> 이전 단계 </div>
-            <div className="investMake-next-button"> 다음 단계 </div>
+            <button className="investMake-prev-button"> 이전 단계 </button>
+            <button className="investMake-next-button"> 다음 단계 </button>
             </div>
                 <div className="button-botoom-margin"></div>
 
@@ -101,4 +101,4 @@ const InvestBasicInfo = () => {
         </>
     );
 };
-export default InvestBasicInfo;
+export default MakeReward2;

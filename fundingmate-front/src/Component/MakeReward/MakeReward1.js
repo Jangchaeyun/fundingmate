@@ -1,10 +1,10 @@
 import React from "react";
-import "./InvestBasicInfo.css";
-import "./InvestMakeCommon.css";
+import "./MakeReward1.css";
+import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
-const InvestBasicInfo = () => {
+const MakeReward1 = () => {
 
     return (
         <>
@@ -26,6 +26,33 @@ const InvestBasicInfo = () => {
                 프로젝트가 성공한 경우, 크라우디는 모금액에서 수수료(12%, vat 별도)를 제한 금액을 정산해드립니다.
             </p>
 
+            <br/>
+            <br/>
+
+            <p className="custom-font-sub-title">
+                <b>프로젝트의 카테고리를 정해주세요</b>
+            </p>
+
+            <select className="makeReward-option">
+                <option value="none">카테고리를 선택해주세요.</option>
+                <option value="테크/가전">테크/가전</option>
+                <option value="패션/잡화">패션/잡화</option>
+                <option value="홈/리빙">홈/리빙</option>
+                <option value="뷰티">뷰티</option>
+                <option value="푸드">푸드</option>
+                <option value="출판">출판</option>
+                <option value="클래스/컨설팅">클래스/컨설팅</option>
+                <option value="레저/아웃도어">레저/아웃도어</option>
+                <option value="스포츠/모빌리티">스포츠/모빌리티</option>
+                <option value="컬쳐/아티스트">컬쳐/아티스트</option>
+                <option value="캐릭터/굿즈">캐릭터/굿즈</option>
+                <option value="반려동물">반려동물</option>
+                <option value="베이비/키즈">베이비/키즈</option>
+                <option value="게임/취미">게임/취미</option>
+                <option value="여행/숙박">여행/숙박</option>
+            </select>
+
+            <br/>
             <br/>
             <br/>
 
@@ -89,16 +116,16 @@ const InvestBasicInfo = () => {
                 <b>프로젝트 키워드를 적어주세요</b>
             </p>
             <p className="custom-font-text">
-                (선택사항) 제목 외에도 키워드 검색 시 검색 결과에 프로젝트가 나타납니다.
+                <b style={{color:"#E93232"}}>(선택사항)</b> 제목 외에도 키워드 검색 시 검색 결과에 프로젝트가 나타납니다.
             </p>
             <input type="text" name="pri_keyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-            <div className="investMake-next-button"> 다음 단계 </div>
+            <button className="investMake-next-button"> 다음 단계 </button>
             </div>
             <div className="button-botoom-margin"></div>
         </div>
         </>
     );
 };
-export default InvestBasicInfo;
+export default MakeReward1;
