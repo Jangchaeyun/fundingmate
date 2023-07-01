@@ -44,7 +44,7 @@ const MakeReward2 = () => {
                 <b>동영상 주소를 적어주세요</b>
             </p>
             <div className="projMake-video">
-            <input type="text" name="rew_videp_address" className="input-box"/>
+            <input type="text" name="rewardVideoAddress" className="input-box"/>
             <button className="video-add"><PlusSquareOutlined style={{ fontSize: "23px"}} /></button>
             </div>
             <br/>

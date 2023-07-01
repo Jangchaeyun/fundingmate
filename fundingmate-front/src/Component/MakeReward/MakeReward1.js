@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 const MakeReward1 = () => {
-
+    const [inputContent, setInputContent] = useState("");
+    const inputMaxLength = 60;
+    const handleInputChange = (event) => {
+        const {value} = event.target;
+        if(value.length <= inputMaxLength){
+            setInputContent(value);
+        }
+    };
     return (
         <>
         <div className="investMake-wrapper">
@@ -63,8 +70,10 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 프로젝트의 핵심 내용을 담을 수 있는 간결한 제목을 정해주세요.
             </p>
-            <input type="text" name="pri_name" className="input-box"/>
-
+            <div>
+            <input type="text" name="projName" className="input-box" value={inputContent} onChange={handleInputChange}/>
+                <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>
+            </div>
             <br/>
             <br/>
             <br/>
@@ -76,7 +85,7 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 최소 100,000원 이상이어야 합니다.
             </p>
-            <input type="text" name="pri_target_amount" className="input-box" placeholder="0"/> &nbsp;원
+            <input type="text" name="projTargetAmount" className="input-box" placeholder="0"/> &nbsp;원
 
             <br/>
             <br/>
@@ -86,9 +95,9 @@ const MakeReward1 = () => {
                 <b>프로젝트의 진행 기간을 적어주세요</b>
             </p>
 
-            <Space direction="vertical" size={12}>
+
                 <RangePicker />
-            </Space>
+
 
             <br/>
             <br/>
@@ -106,9 +115,10 @@ const MakeReward1 = () => {
             <div className="ibi-image-upload">
                 <div className="ibi-image-upload-info">
                 <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px", cursor:"pointer"}}/></div>
-                최적 사이즈 740*492px
+                    최적 사이즈 740*492px
                 </div>
                 </div>
+
             <br/>
             <br/>
             <br/>

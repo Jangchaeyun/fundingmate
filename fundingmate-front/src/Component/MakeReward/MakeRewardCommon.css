@@ -67,8 +67,9 @@
     color: #343434;
 }
 .input-box{
-    margin-top: 10px;
-    width: 350px;
+ /*   margin-top: 10px;*/
+   /* width: 350px;*/
+    width: 40%;
     height: 20px;
 
 }
