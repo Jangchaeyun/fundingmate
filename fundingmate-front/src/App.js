@@ -14,6 +14,7 @@ import Checkout from "./Component/Checkout/Checkout";
 import CheckoutComplete from "./Component/Checkout/CheckoutComplete";
 import FundPeople from "./Component/Checkout/FundPeople";
 import Checkfund from "./Component/Checkout/Checkfund";
+import FundCheckout from "./Component/Checkout/FundCheckout";
 function App() {
   return (
     <div className="App">
@@ -50,6 +51,16 @@ function App() {
           element={<FundPeople />}
         />
         <Route exact path="/fund-checkout/checkfund" element={<Checkfund />} />
+        <Route
+          exact
+          path="/fund-checkout/checkout"
+          element={<FundCheckout />}
+        />
+        <Route
+          exact
+          path="/fund-checkout/complete"
+          element={<CheckoutComplete />}
+        />
       </Routes>
       {/* <InvestBasicInfo /> */}
     </div>

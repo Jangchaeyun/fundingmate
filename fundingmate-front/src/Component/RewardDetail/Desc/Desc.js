@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
+import { useNavigate } from "react-router-dom";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
   const [isClicked, setIsClicked] = useState(false);
+  let navigate = useNavigate();
 
   const handleClick = () => {
     if (isClicked) {
@@ -52,7 +54,14 @@ const Desc = () => {
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
             <div className="fund_people_count">140명</div>
-            <button className="fund_btn">펀딩하기</button>
+            <button
+              className="fund_btn"
+              onClick={() => {
+                navigate("/fund-checkout/fundpeople");
+              }}
+            >
+              펀딩하기
+            </button>
           </div>
           <button className="proj_share">프로젝트 공유하기</button>
           <div className="circles">
