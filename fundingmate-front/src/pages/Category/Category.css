@@ -1,0 +1,175 @@
+.category_card {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: none;
+  background-color: var(--lightgrey);
+}
+
+.category_img {
+  width: 70px;
+  height: 70px;
+  margin-left: 14px;
+  margin-top: 14px;
+}
+
+.category_name {
+  margin-top: 7%;
+  margin-left: 26%;
+}
+
+.category_img2 {
+  width: 80px;
+  height: 80px;
+  margin-left: 8px;
+  margin-top: 13px;
+}
+
+.category_img3 {
+  width: 80px;
+  height: 80px;
+  margin-left: 9px;
+  margin-top: 11px;
+}
+
+.category_name4 {
+  margin-left: 37%;
+  margin-top: 7%;
+}
+
+.category_img4 {
+  width: 70px;
+  height: 70px;
+  margin-left: 15px;
+  margin-top: 14px;
+}
+
+.category_name5 {
+  margin-left: 37%;
+  margin-top: 7%;
+}
+
+.category_img5 {
+  width: 70px;
+  height: 70px;
+  margin-left: 16px;
+  margin-top: 17px;
+}
+
+.category_img6 {
+  width: 70px;
+  height: 70px;
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.category_name7 {
+  margin-left: 15%;
+  margin-top: 7%;
+}
+
+.category_img7 {
+  width: 70px;
+  height: 70px;
+  margin-left: 14px;
+  margin-top: 15px;
+}
+
+.category_img8 {
+  width: 74px;
+  height: 67px;
+  margin-left: 14px;
+  margin-top: 11px;
+}
+
+.category_name8 {
+  margin-left: 15%;
+  margin-top: 7%;
+}
+
+.category_img9 {
+  width: 100px;
+  height: 80px;
+  margin-left: 1px;
+  margin-top: 10px;
+}
+
+.category_name9 {
+  margin-top: 7%;
+  margin-left: 12%;
+}
+
+.category_img10 {
+  width: 60px;
+  height: 60px;
+  margin-left: 21px;
+  margin-top: 17px;
+  border-radius: 10px;
+}
+
+.category_name10 {
+  margin-top: 7%;
+  margin-left: 16%;
+}
+
+.category_img11 {
+  width: 87px;
+  height: 63px;
+  margin-left: 6px;
+  margin-top: 18px;
+  border-radius: 25px;
+}
+
+.category_name11 {
+  margin-top: 7%;
+  margin-left: 19%;
+}
+
+.category_img12 {
+  width: 60px;
+  height: 60px;
+  margin-left: 19px;
+  margin-top: 20px;
+}
+
+.category_name12 {
+  margin-top: 7%;
+  margin-left: 30%;
+}
+
+.category_img13 {
+  width: 70px;
+  height: 70px;
+  margin-left: 16px;
+  margin-top: 15px;
+}
+
+.category_name13 {
+  margin-top: 7%;
+  margin-left: 23%;
+}
+
+.category_img14 {
+  width: 70px;
+  height: 70px;
+  margin-left: 18px;
+  margin-top: 15px;
+}
+
+.category_name14 {
+  margin-top: 7%;
+  margin-left: 23%;
+}
+
+.category_img15 {
+  width: 70px;
+  height: 76px;
+  margin-left: 15px;
+  margin-top: 12px;
+}
+
+.category_name15 {
+  margin-top: 7%;
+  margin-left: 23%;
+}
