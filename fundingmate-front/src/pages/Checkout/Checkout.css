@@ -279,3 +279,68 @@ select:focus {
 .button_com {
   text-align: center;
 }
+
+.fund_box_title {
+  margin-top: 40px;
+}
+
+.fund_box {
+  margin-top: 30px;
+  padding-top: 1%;
+  padding-left: 5%;
+  border-radius: 10px;
+  border: 1px solid var(--black);
+}
+
+.fund_count_minus_plus {
+  display: flex;
+  width: 50%;
+  margin-bottom: 1%;
+}
+
+.minus,
+.plus {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--main-color);
+  background-color: var(--white);
+  color: var(--main-color);
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.minus:hover,
+.plus:hover {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.minus {
+  margin-right: 1%;
+}
+
+.plus {
+  margin-left: 1%;
+}
+
+.fund_minus_plus_count {
+  width: 29px;
+  height: 29px;
+  text-align: center;
+  border: 0.5px solid var(--black);
+  border-radius: 0px;
+  font-size: 14px;
+  color: var(--black);
+}
+
+.fund_minus_plus_count_number {
+  margin-top: 20%;
+}
+
+.fund_checkout_boxs {
+  overflow-x: hidden;
+}
+
+.funchekout_box {
+  overflow-x: hidden;
+}
