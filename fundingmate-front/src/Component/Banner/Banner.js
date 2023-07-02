@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 
 
 function Banner() {
@@ -20,7 +21,10 @@ function Banner() {
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     spaceBetween={10}
                     slidesPerView={1}
-                    navigation
+                    navigation={{
+                        prevEl: ".bannerPrevNav",
+                        nextEl: ".bannerNextNav",
+                    }}
                     pagination={{
                         type: "fraction",
                         renderFraction: function (currentClass, totalClass) { // type이 fraction일 때 사용
@@ -30,23 +34,24 @@ function Banner() {
                     }}
                     autoplay={{delay: 3000, disableOnInteraction: false}}
                     loop={true}
+
                 >
                     <SwiperSlide className="banner-slide">
                         <a href="#!" className="banner-link">
-                            {/*<img*/}
-                            {/*    className="banner-img"*/}
-                            {/*    src={require("../../assets/images/banner/배너1.webp")}*/}
-                            {/*    alt="배너1"*/}
-                            {/*    // width={"100%"}*/}
-                            {/*    // height={"300px"}*/}
-                            {/*/>*/}
+                            <img
+                                className="banner-img"
+                                src={require("../../assets/images/Banner/고고.jpg")}
+                                alt="배너1"
+                                // width={"100%"}
+                                // height={"300px"}
+                            />
                         </a>
                     </SwiperSlide>
                     <SwiperSlide className="banner-slide">
                         <a href="#!" className="banner-link">
                             <img
                                 className="banner-img"
-                                src={require("../../assets/images/banner/배너1.webp")}
+                                src={require("../../assets/images/Banner/고고.jpg")}
                                 alt="배너1"
                                 width={"100%"}
                                 height={"300px"}
@@ -57,7 +62,7 @@ function Banner() {
                         <a href="#!" className="banner-link">
                             <img
                                 className="banner-img"
-                                src={require("../../assets/images/banner/배너1.webp")}
+                                src={require("../../assets/images/Banner/고고.jpg")}
                                 alt="배너1"
                                 width={"100%"}
                                 height={"300px"}
@@ -65,6 +70,10 @@ function Banner() {
                         </a>
                     </SwiperSlide>
                 </Swiper>
+                    <div className="bannerNav">
+                        <LeftOutlined className="bannerPrevNav"/>
+                        <RightOutlined className="bannerNextNav"/>
+                    </div>
             </div>
         </div>
     );

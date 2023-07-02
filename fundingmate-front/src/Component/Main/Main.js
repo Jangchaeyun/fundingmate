@@ -1,15 +1,13 @@
 import React from 'react';
-import "./Main.css"
-import RewordContent from "../Content/RewordContent";
-import InvestmentContent from "../Content/InvestmentContent";
-import ComingsoonContent from "../Content/ComingsoonContent";
+import "../Content/Project.css"
+import Project from "../Content/Project";
 
 function Main() {
     return (
         <div className="container">
-            <RewordContent />
-            <InvestmentContent />
-            <ComingsoonContent />
+            <Project title="리워드 프로젝트"/>
+            <Project title="창업 프로젝트"/>
+            <Project title="사전공개"/>
         </div>
     );
 }
