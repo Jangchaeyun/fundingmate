@@ -6,10 +6,10 @@ function Header() {
         <header className="header">
             <div className="hTop">
                 <span className="hlogo">
-                    <a href="" className="hlogoL">LOGO</a>
+                    <a href="/" className="hlogoL">LOGO</a>
                 </span>
                 <span className="hTopMenu">
-                    <span><a href="">로그인</a></span>
+                    <span><a href="login">로그인</a></span>
                     <span><a href="">프로젝트 만들기</a></span>
                 </span>
             </div>

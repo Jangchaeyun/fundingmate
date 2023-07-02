@@ -1,0 +1,13 @@
+.content-title {
+    margin: 20px;
+    font-weight: bold;
+}
+.content-item-list {
+    height: 250px;
+    border: 1px solid;
+}
+.content-item-img {
+    width: 230px;
+    height: 150px;
+    margin: 10px;
+}
