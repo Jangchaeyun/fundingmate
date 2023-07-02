@@ -113,3 +113,40 @@
     display: flex;
     justify-content: center;
 }
+
+.rew-add{
+    margin-left: 3px;
+
+    cursor: pointer;
+    border: none;
+    background: white;
+    color:#CCCCCC;
+
+}
+
+.rew-delete{
+    margin-left: -6px;
+
+    cursor: pointer;
+    border: none;
+    background: white;
+    color:#CCCCCC;
+
+}
+
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border: 1px solid var(--main-color);
+}
+
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
+    background:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-today-btn{
+    color: var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
+    border-color:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker:hover, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
+    border-color:var(--main-color);
+}

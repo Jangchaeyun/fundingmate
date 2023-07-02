@@ -89,10 +89,10 @@
     margin-top: 4%;
 }
 .rew-unlimited{
-    width: 100px;
+    width: 120px;
     height: 30px;
     border:1px solid #D2D2D2;
-    border-radius: 8px 0 0 8px;
+    border-radius: 7px 0 0 7px;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -102,10 +102,10 @@
     margin-right: -1px;
 }
 .rew-limit{
-    width: 100px;
+    width: 120px;
     height: 30px;
     border:1px solid #D2D2D2;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 7px 7px 0;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -118,7 +118,7 @@
     display: flex;
 }
 .rew-unlimited.clicked{
-    width: 100px;
+    width: 120px;
     height: 30px;
     border:1px solid;
     border: none;
@@ -133,7 +133,7 @@
     color: #845F00;
 }
 .rew-limit.clicked{
-    width: 100px;
+    width: 120px;
     height: 30px;
     border:1px solid;
     border: none;
@@ -147,14 +147,102 @@
     margin-left: -1px;
     color: #845F00;
 }
-.modal-input-box{
+
+.rew-sar{
+    width: 120px;
+    height: 30px;
+    border:1px solid #D2D2D2;
+    border-radius: 7px 0 0 7px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    margin-right: -1px;}
+
+.rew-noSar{
+    width: 120px;
+    height: 30px;
+    border:1px solid #D2D2D2;
+    border-radius: 0 7px 7px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+    margin-left: -1px;
+}
+
+.rew-sa-buttons{
+    display: flex;
+}
+.rew-sar.clicked{
+    width: 120px;
+    height: 30px;
+    border:1px solid;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFCE50;
+    cursor: pointer;
+    margin-right: -1px;
+    color: #845F00;
+}
+.rew-noSar.clicked{
+    width: 120px;
+    height: 30px;
+    border:1px solid;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFCE50;
+    cursor: pointer;
+    margin-left: -1px;
+    color: #845F00;
+}
+.modal-limit-input-box{
     width: 80px;
     height: 20px;
-    margin-left: 2%;
+    margin-left: 10%;
 
 }
+.modal-input-box{
+    width: 70%;
+    height: 20px;
+
+}
+
 .rew-textarea{
     width: 99%;
     resize: none;
     height: 130px;
 }
+.reward-opt-names{
+    width: 70%;
+    height: 20px;
+
+}
+.custom-font-modal-option-text{
+    font-size: 14px;
+}
+.rew-option-show-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--main-color);
+    border-radius: 7px;
+    background-color: white;
+    width: 200px;
+    height: 30px;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
