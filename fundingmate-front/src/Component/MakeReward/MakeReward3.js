@@ -8,8 +8,8 @@ import { DatePicker, Space } from 'antd';
 const MakeReward3 = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [cards, setCards] = useState([]); // 카드 배열 추가
-
-    const initialState = {
+    const [editingCardIndex, setEditingCardIndex] = useState(null); // 수정 중인 카드의 인덱스
+/*    const initialState = {
         modalOpen: false,
         rewardAmount: "",
         rewardAvailableCount: "",
@@ -19,20 +19,61 @@ const MakeReward3 = () => {
         saClicked: null,
         showOption: false,
         optionFields: [],
+    };*/
+    const [rewardAmount, setRewardAmount] = useState("");
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [rewardAvailableCount, setRewardAvailableCount] = useState("");
+    const handleRewAdd = () => {
+        setModalOpen(false);
+        setInputContent("");
+        setTextareaContent("");
+        setShowOption(false);
+        setOptionFields([]);
+        setLimitClicked(null); // 리워드 제공 가능 수 초기화
+        setSaClicked(null); // 배송지 필요 여부 초기화
+        setRewardAmount("");
+        setSelectedDate(null);
+
     };
 
     const handleOk = () => {
+        if (editingCardIndex !== null) {
+            // 수정 중인 카드의 정보 업데이트
+            const updatedCards = [...cards];
+            updatedCards[editingCardIndex] = {
+                ...updatedCards[editingCardIndex],
+                rewardAmount,
+                rewardAvailableCount: limitClicked === 'rew-limit-button' ? rewardAvailableCount : '무제한',
+                rewardTitle: inputContent,
+                rewardContent: textareaContent,
+                expectedDeliveryDate: selectedDate ? selectedDate.format('YYYY.MM.DD') : '',
+                rewardOptions: optionFields.map((field) => field.rewardOptName),
+                shippingAddressRequired: saClicked === 'rew-sar-button' ? '배송지 필요' : '배송지 필요없음',
+            };
+            setCards(updatedCards);
+        } else {
+            // 새로운 카드 추가
+            setCards((prevCards) => [
+                ...prevCards,
+                {
+                    rewardAmount,
+                    rewardAvailableCount: limitClicked === 'rew-limit-button' ? rewardAvailableCount : '무제한',
+                    rewardTitle: inputContent,
+                    rewardContent: textareaContent,
+                    expectedDeliveryDate: selectedDate ? selectedDate.format('YYYY.MM.DD') : '',
+                    rewardOptions: optionFields.map((field) => field.rewardOptName),
+                    shippingAddressRequired: saClicked === 'rew-sar-button' ? '배송지 필요' : '배송지 필요없음',
+                },
+            ]);
+        }
         setModalOpen(false);
-        setCards(prevCards => [...prevCards, {}]); // 새로운 카드 객체를 배열에 추가
-        resetModalState();
-
     };
-
     const handleCancel = () => {
         setModalOpen(false);
-        resetModalState();
+
 
     };
+
 
     const [limitClicked, setLimitClicked] = useState(null);
     const handleLimitButtonClick = (buttonId) =>{
@@ -114,7 +155,7 @@ const MakeReward3 = () => {
             <Button type="primary"  className="rew-card-add-button" id="rew-card-add-button"
                     icon={<PlusOutlined id="rew-card-add-icon" style={{fontSize:"11px", marginRight:"1px"}}/>}
                     onClick={() => {
-                        resetModalState();
+                        handleRewAdd();
                         setModalOpen(true);
                     }}>
                 리워드 추가
@@ -134,7 +175,10 @@ const MakeReward3 = () => {
                 <p className="custom-font-modal-sub-title">
                     리워드 금액
                 </p>
-                <input type="text" name="rewardAmount" className="modal-input-box" placeholder="0"/>&nbsp;원
+                <input type="text" name="rewardAmount" id="rew-amount-input" className="modal-input-box" placeholder="0"
+                       value={rewardAmount}
+                       onChange={(e) => setRewardAmount(e.target.value)}
+                />&nbsp;원
 
                 <p className="custom-font-modal-sub-title">
                     리워드 제공 가능 수
@@ -179,7 +223,10 @@ const MakeReward3 = () => {
                     예상 배송일
                 </p>
 
-                <DatePicker style={{width:"240px", height:"30px"}} onChange={onChange}/>
+                <DatePicker style={{width:"240px", height:"30px"}} id="rew-date-picker" onChange={onChange}
+                            value={selectedDate}
+                            onChange={(date) => setSelectedDate(date)}
+                />
 
                 <p className="custom-font-modal-sub-title">
                     리워드 옵션
@@ -243,7 +290,10 @@ const MakeReward3 = () => {
                 <div>
                 <div className="make-rew-card-edit-button-div">
                     <button className="make-rew-card-edit-button">복사</button>
-                    <button  className="make-rew-card-edit-button">수정</button>
+                    <button  className="make-rew-card-edit-button" onClick={() => {
+                        setEditingCardIndex(index); // 수정 중인 카드의 인덱스 저장
+                        setModalOpen(true); // 모달 열기
+                    }}>수정</button>
                     <button  className="make-rew-card-edit-button make-rew-card-edit-button-delete">삭제</button>
                 </div>
                 </div>
