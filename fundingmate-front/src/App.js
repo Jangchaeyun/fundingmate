@@ -18,13 +18,14 @@ import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
 import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import { Route, Routes } from "react-router-dom";
-
+import Founder from "./pages/MyPage/Founder";
 function App() {
   return (
     <div className="App">
       <Routes>
         {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
+        <Route exact path="/my-page?type=founder" element={<Founder />} />
       </Routes>
       <Routes>
         <Route exact path="/reward-detail/story" element={<Story />} />
