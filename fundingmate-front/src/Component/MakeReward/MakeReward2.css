@@ -1,0 +1,29 @@
+
+
+.projMake-video{
+    display: flex;
+    align-items: center;
+}
+
+
+
+.imi-image-upload{
+    width: 130px;
+    height: 85px;
+    border: 1px solid var(--grey);
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 1%;
+}
+
+.imi-image-upload-info{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-top:25%;
+}
+
+.imi-image{
+    display: flex;
+}
+

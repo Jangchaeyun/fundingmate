@@ -1,7 +1,5 @@
 import "./App.css";
 import Reward from "./pages/Reward/Reward";
-import InvestBasicInfo from "./Component/InvestMake/InvestBasicInfo";
-import { Route, Routes } from "react-router-dom";
 import Story from "./Component/RewardDetail/Detail/Story";
 import Contact from "./Component/RewardDetail/Detail/Contact";
 import Guide from "./Component/RewardDetail/Detail/Guide";
@@ -15,6 +13,10 @@ import CheckoutComplete from "./Component/Checkout/CheckoutComplete";
 import FundPeople from "./Component/Checkout/FundPeople";
 import Checkfund from "./Component/Checkout/Checkfund";
 import FundCheckout from "./Component/Checkout/FundCheckout";
+import MakeReward1 from "./Component/MakeReward/MakeReward1";
+import MakeReward2 from "./Component/MakeReward/MakeReward2";
+import MakeReward3 from "./Component/MakeReward/MakeReward3";
+import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 function App() {
   return (
@@ -64,9 +66,13 @@ function App() {
           element={<CheckoutComplete />}
         />
       </Routes>
-      {/* <InvestBasicInfo /> */}
+    <Routes>
+        <Route exact path="/MakeReward1" element={<MakeReward1 />} />
+        <Route exact path="/MakeReward2" element={<MakeReward2/>} />
+        <Route exact path="/MakeReward3" element={<MakeReward3/>} />
+    </Routes>
     </div>
   );
-}
+};
 
 export default App;
