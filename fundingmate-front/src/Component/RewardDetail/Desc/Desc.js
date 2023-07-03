@@ -19,7 +19,7 @@ const Desc = () => {
   return (
     <div className="desc">
       <div className="desc_subtitle">
-        해당 프로젝트는<b>[HandMade]</b>와 함께합니다.
+        해당 프로젝트는<b className="bold">[HandMade]</b>와 함께합니다.
       </div>
       <div className="desc_title">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="desc_contents">
@@ -57,7 +57,7 @@ const Desc = () => {
             <button
               className="fund_btn"
               onClick={() => {
-                navigate("/fund-checkout/fundpeople");
+                navigate("/checkout/check");
               }}
             >
               펀딩하기
