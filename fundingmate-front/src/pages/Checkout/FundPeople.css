@@ -84,10 +84,11 @@
 }
 
 .call_number_input {
-  width: 42%;
+  width: 41%;
   height: 29px;
   margin-top: 10px;
   margin-left: 6%;
+  font-size: 11px;
   padding-left: 5px;
 }
 
