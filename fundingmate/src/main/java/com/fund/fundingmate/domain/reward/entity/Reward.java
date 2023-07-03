@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Reward")
@@ -88,40 +89,6 @@ public class Reward {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Reward{" +
-                "rewardNo=" + rewardNo +
-                ", projName='" + projName + '\'' +
-                ", projTargetAmout=" + projTargetAmout +
-                ", projDateStart=" + projDateStart +
-                ", projDateEnd=" + projDateEnd +
-                ", rewardRepImgSavedName='" + rewardRepImgSavedName + '\'' +
-                ", projKeyWord='" + projKeyWord + '\'' +
-                ", rewardVideoAddress='" + rewardVideoAddress + '\'' +
-                ", rewardContentImgSavedName='" + rewardContentImgSavedName + '\'' +
-                ", projContent='" + projContent + '\'' +
-                ", rewardRefundExchangePolicy='" + rewardRefundExchangePolicy + '\'' +
-                ", rewardContact='" + rewardContact + '\'' +
-                ", rewardEmail='" + rewardEmail + '\'' +
-                ", rewardCategory='" + rewardCategory + '\'' +
-                ", modelName='" + modelName + '\'' +
-                ", countryOfOrigin='" + countryOfOrigin + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", asPhoneNumber='" + asPhoneNumber + '\'' +
-                ", rewardIdBusinessLicenseImgSavedName='" + rewardIdBusinessLicenseImgSavedName + '\'' +
-                ", businessAddress='" + businessAddress + '\'' +
-                ", bank='" + bank + '\'' +
-                ", accNumber='" + accNumber + '\'' +
-                ", depositorName='" + depositorName + '\'' +
-                ", rewardBankAccountCopyImgSavedName='" + rewardBankAccountCopyImgSavedName + '\'' +
-                ", taxBillEmail='" + taxBillEmail + '\'' +
-                ", websiteUrl='" + websiteUrl + '\'' +
-                ", facebookUrl='" + facebookUrl + '\'' +
-                ", instagramUrl='" + instagramUrl + '\'' +
-                ", blogUrl='" + blogUrl + '\'' +
-                ", twitterUrl='" + twitterUrl + '\'' +
-                ", user=" + user +
-                '}';
-    }
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    private List<RewardType> rewardTypes;
 }

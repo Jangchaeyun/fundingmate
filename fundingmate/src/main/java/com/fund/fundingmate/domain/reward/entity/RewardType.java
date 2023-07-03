@@ -13,7 +13,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RewardType {
+public class    RewardType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rewardTypeNo;
