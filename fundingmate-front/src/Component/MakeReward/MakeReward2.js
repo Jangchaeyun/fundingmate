@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef, useState } from 'react';
 import "./MakeReward2.css";
 import "./MakeRewardCommon.css";
 
@@ -18,7 +18,26 @@ const MakeReward2 = () => {
     const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
         console.log(data);}
+    const [selectedImages, setSelectedImages] = useState([]);
 
+    const handleImageUpload = (event) => {
+        const files = event.target.files;
+
+        if (files) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const image = e.target.result;
+                setSelectedImages((prevImages) => [...prevImages, image]);
+            };
+
+            Array.from(files).forEach((file) => reader.readAsDataURL(file));
+        }
+    };
+
+    const handleImageClick = () => {
+        document.getElementById('imageUpload').click();
+    };
     return (
         <>
         <div className="investMake-wrapper">
@@ -53,20 +72,37 @@ const MakeReward2 = () => {
                 <b>이미지를 등록해주세요</b>
             </p>
             <div className="imi-image">
-            <div className="imi-image-upload">
-                <div className="imi-image-upload-info">
-                    <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "15px", cursor:"pointer" , marginRight:"3px"}}/></div>
-                    최적 사이즈<br/> 740*417px
+                <div className="imi-image-upload">
+                    <div className="imi-image-upload-info" onClick={handleImageClick} >
+                        <div style={{ marginBottom: '2%' }}>
+                            <PlusCircleOutlined style={{ fontSize: '15px', cursor: 'pointer', marginRight: '3px' }} />
+                        </div>
+                        최적 사이즈<br />740*417px
+                    </div>
+
+                    {selectedImages[0] && (
+                        <img src={selectedImages[0]} alt="uploaded" className="uploaded-image" />
+                    )}
+                </div>
+                <div className="imi-image-upload">
+                    <div className="imi-image-upload-info" onClick={handleImageClick}>
+                        <div>
+                            <PlusCircleOutlined style={{ fontSize: '19px', cursor: 'pointer', marginRight: '3px' }} />
+                        </div>
+                    </div>
+                    {selectedImages[1] && (
+                        <img src={selectedImages[1]} alt="uploaded" className="uploaded-image" />
+                    )}
                 </div>
             </div>
-            <div className="imi-image-upload">
-                <div className="imi-image-upload-info">
-                    <div><PlusCircleOutlined style={{ fontSize: "19px", cursor:"pointer" , marginRight:"3px"}}/></div>
-
-                </div>
-            </div>
-            </div>
-
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+                multiple
+            />
             <br/>
             <br/>
             <br/>

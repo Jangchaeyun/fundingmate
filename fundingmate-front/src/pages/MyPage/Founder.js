@@ -1,3 +1,4 @@
+/*
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 function Founder() {
     return (
         <>
-            {/* header */}
+            {/!* header *!/}
             <div className="mypage-container">
                 <h1>마이페이지</h1>
             </div>
@@ -38,12 +39,12 @@ function Founder() {
                     <Form.Label>이메일: </Form.Label>
                     <Form.Control type="email" />
                 </Form.Group>
-                {/* <Button variant="primary" type="submit">
+                {/!* <Button variant="primary" type="submit">
            Click here to submit form
-        </Button> */}
+        </Button> *!/}
             </Form>
         </>
     );
 }
 
-export default Founder;
+export default Founder;*/
