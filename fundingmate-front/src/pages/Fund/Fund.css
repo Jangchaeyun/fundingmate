@@ -1,0 +1,37 @@
+.realtime_boxs {
+  display: flex;
+}
+
+.realtime_title {
+  font-size: 20px;
+  font-weight: 800px;
+  margin-bottom: 1%;
+}
+
+.realtime_box {
+  background-color: var(--lightgrey);
+  width: 262px;
+  height: 150px;
+}
+
+.name {
+  margin-top: 1%;
+  margin-left: 1%;
+  color: #00000094;
+  font-size: 11px;
+}
+
+.content {
+  margin-top: 4%;
+  margin-left: 1%;
+}
+
+.realtime_company_name {
+  background-color: var(--grey);
+  width: 70px;
+  height: 15px;
+  font-size: 11px;
+  text-align: center;
+  margin-left: 2%;
+  margin-top: 31%;
+}
