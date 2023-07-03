@@ -1,9 +1,6 @@
 package com.fund.fundingmate.domain.user.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,23 +24,11 @@ public class User {
 
     private String name;
 
+    private String birthday;
+
     private String tel;
 
     private String notificationStatus;
 
     private Integer vitalization;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userNo=" + userNo +
-                ", id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", tel='" + tel + '\'' +
-                ", notificationStatus='" + notificationStatus + '\'' +
-                ", vitalization=" + vitalization +
-                '}';
-    }
 }

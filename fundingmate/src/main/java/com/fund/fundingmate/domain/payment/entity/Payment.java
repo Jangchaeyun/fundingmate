@@ -17,6 +17,10 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentNo;
 
+    @ManyToOne
+    @JoinColumn(name = "user_no")
+    private User user;
+
     private String paymentType;
 
     private String paymentCode;
@@ -24,8 +28,4 @@ public class Payment {
     private String paymentMethod;
 
     private Integer paymentAmount;
-
-    @ManyToOne
-    @JoinColumn(name = "user_no")
-    private User user;
 }
