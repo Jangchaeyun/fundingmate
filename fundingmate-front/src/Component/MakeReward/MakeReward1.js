@@ -4,7 +4,7 @@ import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
-/*sd*/
+
 const MakeReward1 = () => {
     const [inputContent, setInputContent] = useState("");
     const inputMaxLength = 60;
