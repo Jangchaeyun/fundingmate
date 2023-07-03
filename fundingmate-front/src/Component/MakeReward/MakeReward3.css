@@ -216,14 +216,16 @@
 }
 .modal-input-box{
     width: 70%;
-    height: 20px;
-
+    height: 25px;
+    border-radius: 7px;
+    border: 1px solid var(--grey);
 }
 
-.rew-textarea{
+.rew-modal-textarea{
     width: 99%;
     resize: none;
     height: 130px;
+    border-radius: 7px;
 }
 .reward-opt-names{
     width: 70%;

@@ -128,7 +128,7 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 <b style={{color:"#E93232"}}>(선택사항)</b> 제목 외에도 키워드 검색 시 검색 결과에 프로젝트가 나타납니다.
             </p>
-            <input type="text" name="pri_keyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
+            <input type="text" name="priKeyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
             <button className="investMake-next-button"> 다음 단계 </button>

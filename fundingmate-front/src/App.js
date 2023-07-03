@@ -16,6 +16,7 @@ import FundCheckout from "./Component/Checkout/FundCheckout";
 import MakeReward1 from "./Component/MakeReward/MakeReward1";
 import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
+import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
         <Route exact path="/MakeReward1" element={<MakeReward1 />} />
         <Route exact path="/MakeReward2" element={<MakeReward2/>} />
         <Route exact path="/MakeReward3" element={<MakeReward3/>} />
+        <Route exact path="/MakeReward4" element={<MakeReward4/>} />
     </Routes>
     </div>
   );

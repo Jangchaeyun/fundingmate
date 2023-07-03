@@ -70,8 +70,9 @@
  /*   margin-top: 10px;*/
    /* width: 350px;*/
     width: 40%;
-    height: 20px;
-
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
 }
 
 .button-top-margin{
@@ -134,6 +135,14 @@
 
 }
 
+.rew-textarea{
+    width: 99%;
+    resize: none;
+    height: 130px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
 :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
     border: 1px solid var(--main-color);
 }
@@ -149,4 +158,7 @@
 }
 :where(.css-dev-only-do-not-override-12upa3x).ant-picker:hover, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
     border-color:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker{
+    border: 1px solid var(--grey);
 }

@@ -214,7 +214,7 @@ const MakeReward3 = () => {
                     리워드 내용
                 </p>
                 <div>
-                <textarea type="text" name="rewardContent" className="rew-textarea" value={textareaContent} onChange={handleMaxLengthChange}/>
+                <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={textareaContent} onChange={handleMaxLengthChange}/>
                 <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>
                 </div>
 
