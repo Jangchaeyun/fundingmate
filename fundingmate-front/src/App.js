@@ -15,12 +15,14 @@ import CheckoutComplete from "./Component/Checkout/CheckoutComplete";
 import FundPeople from "./Component/Checkout/FundPeople";
 import Checkfund from "./Component/Checkout/Checkfund";
 import FundCheckout from "./Component/Checkout/FundCheckout";
+import Founder from "./pages/MyPage/Founder";
 function App() {
   return (
     <div className="App">
       <Routes>
         {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
+        <Route exact path="/my-page?type=founder" element={<Founder />} />
       </Routes>
       <Routes>
         <Route exact path="/reward-detail/story" element={<Story />} />
