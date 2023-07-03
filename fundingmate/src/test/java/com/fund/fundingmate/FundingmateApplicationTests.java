@@ -1,9 +1,10 @@
 package com.fund.fundingmate;
 
-import com.fund.fundingmate.domain.user.repository.UserRepostiory;
+import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.domain.user.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 class FundingmateApplicationTests {
 	@Autowired
-	private UserRepostiory userRepostiory;
+	private UserRepository userRepository;
 
 	@Test
 	void insertMember() {
@@ -27,6 +28,6 @@ class FundingmateApplicationTests {
 		user.setTel("010-3345-1589");
 		user.setVitalization(0);
 
-		userRepostiory.save(user);
+		userRepository.save(user);
 	}
 }
