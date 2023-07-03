@@ -23,6 +23,7 @@
 .makeReward-option{
   /*  width: 350px;*/
     width: 40%;
-    height: 25px;
+    height: 28px;
     border: 1px solid var(--grey);
+    border-radius: 5px;
 }
