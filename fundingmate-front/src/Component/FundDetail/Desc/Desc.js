@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../pages/Rewarddetail/Rewarddetail.css";
+import "../../../pages/Funddetail/Funddetail.css";
 import { useNavigate } from "react-router-dom";
 
 const Desc = () => {
@@ -18,9 +18,7 @@ const Desc = () => {
   };
   return (
     <div className="desc">
-      <div className="desc_subtitle">
-        해당 프로젝트는<b>[HandMade]</b>와 함께합니다.
-      </div>
+      <div className="desc_subtitle"></div>
       <div className="desc_title">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="desc_contents">
         <div className="desc_img">
@@ -37,9 +35,9 @@ const Desc = () => {
           />
         </div>
         <div className="desc_content">
-          <div className="fund_category">리워드</div>
+          <div className="fund_category">악세서리</div>
           <div className="fund_price">
-            12,345원 <b className="rewarding">펀딩중</b>
+            21,345,455원 <b className="rewarding">펀딩중</b>
           </div>
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
@@ -49,41 +47,23 @@ const Desc = () => {
           <div className="fund_date">
             <div className="fund_date_title">남은기간</div>
             <div className="fund_date_dday">11일</div>
-            <sub className="fund_date_end">2023.07.13 종료</sub>
+            <sub className="fund_date_enddate">2023.07.13 종료</sub>
           </div>
           <div className="fund_people">
-            <div className="fund_people_title">참여자수</div>
+            <div className="fund_people_title">펀딩자수</div>
             <div className="fund_people_count">140명</div>
             <button
               className="fund_btn"
               onClick={() => {
-                navigate("/fund-checkout/fundpeople");
+                navigate("/checkout/check");
               }}
             >
               펀딩하기
             </button>
           </div>
-          <button className="proj_share">프로젝트 공유하기</button>
-          <div className="circles">
-            <div className="circle">
-              <img src="/assets/imgs/calendar.png" className="icon_img" />
-            </div>
-            <div className="circle">
-              <img src="/assets/imgs/credit.png" className="icon_img" />
-            </div>
-            <div className="circle">
-              <img src="/assets/imgs/delivery.png" className="icon_img" />
-            </div>
-          </div>
-          <div className="schedule">
-            <div className="fund_end_date_title">펀딩 종료일</div>
-            <div className="price_date_title">결제 예정일</div>
-            <div className="send_date_title">발송 예정일</div>
-          </div>
-          <div className="schedule">
-            <div className="end">23/07/13</div>
-            <div className="end">23/07/22</div>
-            <div className="end">23/07/23</div>
+          <div className="proj_good_share">
+            <button className="proj_good">12명이 관심있어요</button>
+            <button className="fund_proj_share">공유하기</button>
           </div>
           <div className="company">
             <div className="name_view">
@@ -91,10 +71,7 @@ const Desc = () => {
               <div className="company_name">스마트보이</div>
             </div>
           </div>
-          <div className="info">
-            펀딩을 마치면 결제 예약 상태입니다. 종료일에 100% 이상이 달성되었을
-            경우에만 결제 예정일에 결제가 됩니다.
-          </div>
+          <div className="info">수익배분은 3%</div>
         </div>
       </div>
     </div>
