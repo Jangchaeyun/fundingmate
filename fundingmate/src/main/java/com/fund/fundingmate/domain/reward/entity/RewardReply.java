@@ -15,9 +15,7 @@ import java.util.Date;
 public class RewardReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long repNo;
-
-    private String repTitle;
+    private Long id;
 
     private String repContent;
 
