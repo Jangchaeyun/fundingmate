@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="invest folder">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward4.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,11 +34,11 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -51,27 +55,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "investMake",
-    "last_opened_file_path": "D:/yth/springboot-work/intellj/fundingmate",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;investMake&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/yth/springboot-work/intellj/fundingmate/fundingmate-front&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="fundingmate" />
@@ -178,7 +182,10 @@
       <workItem from="1687846283684" duration="1338000" />
       <workItem from="1687853960732" duration="978000" />
       <workItem from="1687855013164" duration="2035000" />
-      <workItem from="1688452357495" duration="901000" />
+      <workItem from="1688452357495" duration="1021000" />
+      <workItem from="1688453418899" duration="126000" />
+      <workItem from="1688453581337" duration="28000" />
+      <workItem from="1688453622972" duration="8859000" />
     </task>
     <task id="LOCAL-00001" summary="invest folder">
       <option name="closed" value="true" />
@@ -193,6 +200,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="invest folder" />

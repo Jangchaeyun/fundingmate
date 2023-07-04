@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward3.css";
 import "./MakeRewardCommon.css";
 import {PlusOutlined, PlusSquareOutlined,MinusSquareOutlined} from "@ant-design/icons";
@@ -7,6 +8,9 @@ import { useState } from 'react';
 import { DatePicker, Space } from 'antd';
 const MakeReward3 = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const initCard = {rewardAmount:'',rewardAvailableLimit:'',rewardAvailableCount:0,rewardTitle:'',rewardContent:'',rewardDeleverydate:'',rewardShipAddress:'',
+        rewardOptName:'', rewardOptCon:''};
+    const [card, setCard] = useState({...initCard});
     const [cards, setCards] = useState([]); // 카드 배열 추가
     const [editingCardIndex, setEditingCardIndex] = useState(null); // 수정 중인 카드의 인덱스
 /*    const initialState = {
@@ -20,65 +24,34 @@ const MakeReward3 = () => {
         showOption: false,
         optionFields: [],
     };*/
-    const [rewardAmount, setRewardAmount] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [rewardAvailableCount, setRewardAvailableCount] = useState("");
-    const handleRewAdd = () => {
-        setEditingCardIndex(null);
-        setRewardAmount("");
-        setSelectedDate(null);
-        setRewardAvailableCount("");
-        setInputContent("");
-        setTextareaContent("");
-        setShowOption(false);
-        setOptionFields([]);
-        setLimitClicked(null);
+    // const [rewardAmount, setRewardAmount] = useState("");
+    // const [selectedDate, setSelectedDate] = useState(null);
+    // const [rewardAvailableCount, setRewardAvailableCount] = useState("");
+    // const handleRewAdd = () => {
+    //     setEditingCardIndex(null);
+    //     setRewardAmount("");
+    //     setSelectedDate(null);
+    //     setRewardAvailableCount("");
+    //     setInputContent("");
+    //     setTextareaContent("");
+    //     setShowOption(false);
+    //     setOptionFields([]);
+    //     setLimitClicked(null);
+    //
+    //     setModalOpen(false);
+    // };
 
-        setModalOpen(false);
-    };
+
 
     const handleOk = () => {
-        if (editingCardIndex !== null) {
-            // 수정 중인 카드의 정보 업데이트
-            const updatedCards = [...cards];
-            updatedCards[editingCardIndex] = {
-                ...updatedCards[editingCardIndex],
-                rewardAmount,
-                rewardAvailableCount: limitClicked === 'rew-limit-button' ? rewardAvailableCount : '무제한',
-                rewardTitle: inputContent,
-                rewardContent: textareaContent,
-                expectedDeliveryDate: selectedDate ? selectedDate.format('YYYY.MM.DD') : '',
-                rewardOptions: optionFields.map((field) => field.rewardOptName),
-                shippingAddressRequired: saClicked === 'rew-sar-button' ? '배송지 필요' : '배송지 필요없음',
-            };
-            setCards(updatedCards);
-        } else {
-            // 새로운 카드 추가
-            setCards((prevCards) => [
-                ...prevCards,
-                {
-                    rewardAmount,
-                    rewardAvailableCount: limitClicked === 'rew-limit-button' ? rewardAvailableCount : '무제한',
-                    rewardTitle: inputContent,
-                    rewardContent: textareaContent,
-                    expectedDeliveryDate: selectedDate ? selectedDate.format('YYYY.MM.DD') : '',
-                    rewardOptions: optionFields.map((field) => field.rewardOptName),
-                    shippingAddressRequired: saClicked === 'rew-sar-button' ? '배송지 필요' : '배송지 필요없음',
-                },
-            ]);
-        }
-        // 모달 닫기 및 상태 초기화
         setModalOpen(false);
-        setEditingCardIndex(null);
-        setRewardAmount("");
-        setSelectedDate(null);
-        setRewardAvailableCount("");
-        setInputContent("");
-        setTextareaContent("");
-        setShowOption(false);
-        setOptionFields([]);
-        setLimitClicked(null);
+        if(editingCardIndex!=null) {  //수정
+
+        } else { //추가
+            setCards(prevCards => [...prevCards, card]); // 새로운 카드 객체를 배열에 추가
+        }
     };
+
     const handleCancel = () => {
         setModalOpen(false);
 
@@ -87,13 +60,14 @@ const MakeReward3 = () => {
 
 
     const [limitClicked, setLimitClicked] = useState(null);
-    const handleLimitButtonClick = (buttonId) =>{
-        setLimitClicked(buttonId);
+    const handleLimitButtonClick = (isLimit) =>{
+        setCard({...card, rewardAvailableLimit:isLimit })
+        setLimitClicked(isLimit);
     }
 
     const [saClicked, setSaClicked] = useState(null);
-    const handleSaButtonClick = (buttonId) =>{
-        setSaClicked(buttonId);
+    const handleSaButtonClick = (isAddress) =>{
+        setCard({...card, rewardShipAddress:isAddress})
     }
 
     const [textareaContent, setTextareaContent] = useState("");
@@ -135,6 +109,22 @@ const MakeReward3 = () => {
             setShowOption(false);
         }
     };
+    const navigateToStep1 = useNavigate();
+    const navigateToStep2 = useNavigate();
+
+    const handlePreviousStep = () => {
+        navigateToStep1("/make-reward/story");
+    };
+
+    const handleNextStep = () => {
+        navigateToStep2("/make-reward/goodsinfo");
+    };
+
+    const rewardChange = (e) => {
+        console.log(e);
+        setCard({...card, [e.target.name]:e.target.value});
+    }
+
 
     return (
         <>
@@ -166,7 +156,8 @@ const MakeReward3 = () => {
             <Button type="primary"  className="rew-card-add-button" id="rew-card-add-button"
                     icon={<PlusOutlined id="rew-card-add-icon" style={{fontSize:"11px", marginRight:"1px"}}/>}
                     onClick={() => {
-                        handleRewAdd();
+                        setCard({...initCard});
+                        //handleRewAdd();
                         setModalOpen(true);
                     }}>
                 리워드 추가
@@ -178,7 +169,7 @@ const MakeReward3 = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 width={655}
-                okText="추가" // 'OK' 버튼의 이름 변경
+                okText={editingCardIndex !== null ? '수정' : '추가'} //
                 cancelText="취소"
                 okButtonProps={{ style: { backgroundColor: "var(--main-color)" } }}
 
@@ -187,8 +178,8 @@ const MakeReward3 = () => {
                     리워드 금액
                 </p>
                 <input type="text" name="rewardAmount" id="rew-amount-input" className="modal-input-box" placeholder="0"
-                       value={rewardAmount}
-                       onChange={(e) => setRewardAmount(e.target.value)}
+                       value={card.rewardAmount}
+                       onChange={rewardChange}
                 />&nbsp;원
 
                 <p className="custom-font-modal-sub-title">
@@ -198,17 +189,17 @@ const MakeReward3 = () => {
                 <div className="rew-limit-buttons">
                     <button className={`rew-unlimited ${limitClicked === 'rew-unlimited-button' ? 'clicked' : ''}`}
                             id="rew-unlimited-button"
-                            onClick={()=>handleLimitButtonClick("rew-unlimited-button")}
+                            onClick={()=>handleLimitButtonClick(0)}
                     >무제한</button>
                     <button className={`rew-limit ${limitClicked==='rew-limit-button' ? 'clicked' : ''}`}
                             id="rew-limit-button"
-                            onClick={()=>handleLimitButtonClick("rew-limit-button")}
+                            onClick={()=>handleLimitButtonClick(1)}
                             >제한</button>
 
                 </div>
-                        {limitClicked === 'rew-limit-button' && (
+                        {limitClicked === 1 && (
                             <div style={{display:'flex', alignItems:'center'}}>
-                        <input type="text" name="rewardAvailableCount" className="modal-limit-input-box"  placeholder="0"/>&nbsp;개
+                        <input type="text" name="rewardAvailableCount" className="modal-limit-input-box"  placeholder="0" value={card.rewardAvailableCount} onChange={rewardChange}/>&nbsp;개
                             </div>
                         )}
 
@@ -218,14 +209,14 @@ const MakeReward3 = () => {
                     리워드 제목
                 </p>
                 <div>
-                <input type="text" name="rewardTitle" className="modal-input-box" value={inputContent} onChange={handleInputChange}/>
+                <input type="text" name="rewardTitle" className="modal-input-box" value={card.rewardTitle} onChange={rewardChange}/>
                 <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>
                 </div>
                 <p className="custom-font-modal-sub-title">
                     리워드 내용
                 </p>
                 <div>
-                <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={textareaContent} onChange={handleMaxLengthChange}/>
+                <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={card.rewardContent} onChange={rewardChange}/>
                 <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>
                 </div>
 
@@ -234,9 +225,8 @@ const MakeReward3 = () => {
                     예상 배송일
                 </p>
 
-                <DatePicker style={{width:"240px", height:"30px"}} id="rew-date-picker" onChange={onChange}
-                            value={selectedDate}
-                            onChange={(date) => setSelectedDate(date)}
+                <DatePicker style={{width:"240px", height:"30px"}} id="rew-date-picker"
+                            value={card.rewardDeleverydate} name="rewardDeleverydate"  onChange={(value, dateString) => { setCard({...card, rewardDeleverydate:dateString}); }}
                 />
 
                 <p className="custom-font-modal-sub-title">
@@ -261,8 +251,8 @@ const MakeReward3 = () => {
                           <p style={{marginLeft:"100px", fontSize:"13px"}}>옵션 값</p>
                       </div>
                         <div style={{display:'flex', alignItems:'center'}}>
-                            <input type="text" name="rewardOptName" className="reward-opt-names" placeholder="예시)사이즈"/>
-                            <input type="text" name="rewardOptCon" className="reward-opt-con" placeholder="예시)S, M, L"  style={{marginLeft:"18px"}}/>
+                            <input type="text" name="rewardOptName" className="reward-opt-names" placeholder="예시)사이즈" value={card.rewardOptName} onChange={rewardChange}/>
+                            <input type="text" name="rewardOptCon" className="reward-opt-con" placeholder="예시)S, M, L"  value={card.rewardOptCon} style={{marginLeft:"18px"}} onChange={rewardChange}/>
                             <button className="rew-add" onClick={handleAddOption}><PlusSquareOutlined style={{ fontSize: "23px"}} /></button>
                             <button className="rew-delete" onClick={()=>handleDeleteOption(index)}><MinusSquareOutlined style={{ fontSize: "23px"}} /></button>
 
@@ -279,35 +269,36 @@ const MakeReward3 = () => {
                 <div className="rew-sa-buttons">
                     <button className={`rew-sar ${saClicked === 'rew-sar-button' ? 'clicked' : ''}`}
                             id="rew-sar-button"
-                            onClick={()=>handleSaButtonClick("rew-sar-button")}
+                            onClick={()=>handleSaButtonClick(1)}
                     >배송지 필요</button>
                     <button className={`rew-noSar ${saClicked==='rew-noSar-button' ? 'clicked' : ''}`}
                             id="rew-noSar-button"
-                            onClick={()=>handleSaButtonClick("rew-noSar-button")}
+                            onClick={()=>handleSaButtonClick(0)}
                     >배송지 필요없음</button>
                 </div>
                 </div>
 
             </Modal>
-            {cards.map((card, index) => (
+            {cards.map((cardItem, index) => (
             <div className="make-rew-card">
                 <div className="make-rew-card-div">
                 <div>
-                <div className="make-rew-card-price">12,345원</div>
+                <div className="make-rew-card-price">{cardItem.rewardAmount}원</div>
                 <div className="make-rew-card-contents">
-                    <div className="make-rew-card-count">무제한&nbsp;|&nbsp;0개 펀딩</div>
-                    <div className="make-rew-card-date">예상 배송일 2023.07.23</div>
+                    <div className="make-rew-card-count">{cardItem.rewardAvailableLimit==1? '제한':'무제한'}&nbsp;|&nbsp;0개 펀딩</div>
+                    <div className="make-rew-card-date">예상 배송일 {cardItem.rewardDeleverydate}</div>
                 </div>
 
-                <div className="make-rew-card-sub-content">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
+                <div className="make-rew-card-sub-content">{cardItem.rewardTitle}</div>
                 <div className="make-rew-card-sub-content-info">
-                    실버 커팅볼 스퀘어 체인 여자 팔찌 1개 분량입니다.
+                    {cardItem.rewardContent}
                 </div>
                 </div>
                 <div>
                 <div className="make-rew-card-edit-button-div">
                     <button className="make-rew-card-edit-button">복사</button>
                     <button  className="make-rew-card-edit-button" onClick={() => {
+                        setCard({...cardItem})
                         setEditingCardIndex(index); // 수정 중인 카드의 인덱스 저장
                         setModalOpen(true); // 모달 열기
                     }}>수정</button>
@@ -320,8 +311,8 @@ const MakeReward3 = () => {
 
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-            <button className="investMake-prev-button"> 이전 단계 </button>
-            <button className="investMake-next-button"> 다음 단계 </button>
+            <button className="investMake-prev-button" onClick={handlePreviousStep}> 이전 단계 </button>
+            <button className="investMake-next-button" onClick={handleNextStep}> 다음 단계 </button>
             </div>
                 <div className="button-botoom-margin"></div>
 

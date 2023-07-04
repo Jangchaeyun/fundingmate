@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
@@ -6,6 +7,7 @@ import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 
 const MakeReward1 = () => {
+
     const [inputContent, setInputContent] = useState("");
     const inputMaxLength = 60;
     const [selectedImage, setSelectedImage] = useState(null);
@@ -35,6 +37,11 @@ const MakeReward1 = () => {
             setInputContent(value);
         }
     };
+    const navigate = useNavigate(); // useNavigate 추가
+    const handleNextStep = () => {
+        navigate("/make-reward/story");
+    };
+
     return (
         <>
         <div className="investMake-wrapper">
@@ -167,7 +174,9 @@ const MakeReward1 = () => {
             <input type="text" name="pri_keyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-            <button className="investMake-next-button"> 다음 단계 </button>
+            <button className="investMake-next-button"
+                    onClick={handleNextStep}
+            >다음 단계 </button>
             </div>
             <div className="button-botoom-margin"></div>
         </div>

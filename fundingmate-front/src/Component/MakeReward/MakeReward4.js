@@ -1,10 +1,21 @@
 import React, {useState} from "react";
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward4.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 const MakeReward4 = () => {
+    const navigateToStep1 = useNavigate();
+    const navigateToStep2 = useNavigate();
+
+    const handlePreviousStep = () => {
+        navigateToStep1("/make-reward/typelist");
+    };
+
+    const handleNextStep = () => {
+        navigateToStep2("/make-reward/hostinfo");
+    };
 
     return (
         <>
@@ -106,8 +117,8 @@ const MakeReward4 = () => {
 
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-                <button className="investMake-prev-button"> 이전 단계 </button>
-                <button className="investMake-next-button"> 다음 단계 </button>
+                <button className="investMake-prev-button" onClick={handlePreviousStep}> 이전 단계 </button>
+                <button className="investMake-next-button"  onClick={handleNextStep}> 다음 단계 </button>
             </div>
             <div className="button-botoom-margin"></div>
 

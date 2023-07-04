@@ -1,9 +1,11 @@
 import React, {useState} from "react";
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
 import  DaumPostcode  from 'react-daum-postcode';
+import { Modal } from 'antd';
 const { RangePicker } = DatePicker;
 
 const MakeReward5 = () => {
@@ -46,31 +48,42 @@ const MakeReward5 = () => {
     };
 
     const [showPostcode, setShowPostcode] = useState(false);
-    const [businessAddress, setBusinessAddress] = useState('');
+    const [businessAddress, setBusinessAddress] = useState("");
 
     const handleComplete = (data) => {
         let fullAddress = data.address;
-        let extraAddress = '';
+        let extraAddress = "";
 
         const { addressType, bname, buildingName } = data;
-        if (addressType === 'R') {
-            if (bname !== '') {
+        if (addressType === "R") {
+            if (bname !== "") {
                 extraAddress += bname;
             }
-            if (buildingName !== '') {
-                extraAddress += `${extraAddress !== '' && ', '}${buildingName}`;
+            if (buildingName !== "") {
+                extraAddress += `${extraAddress !== "" && ", "}${buildingName}`;
             }
-            fullAddress += `${extraAddress !== '' ? ` ${extraAddress}` : ''}`;
+            fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
         }
 
         setBusinessAddress(fullAddress);
         setShowPostcode(false);
+        setShowModal(false); // Close the modal
     };
 
     const handleAddressSearch = () => {
-        setShowPostcode(true);
+        setShowModal(true);
+    };
+    const [showModal, setShowModal] = useState(false);
+    const navigateToStep1 = useNavigate();
+    const navigateToStep2 = useNavigate();
+
+    const handlePreviousStep = () => {
+        navigateToStep1("/make-reward/goodsinfo");
     };
 
+    const handleNextStep = () => {
+        navigateToStep2("#");
+    };
     return (
         <>
         <div className="investMake-wrapper">
@@ -113,27 +126,32 @@ const MakeReward5 = () => {
             <br/>
             <br/>
 
-            {/* 주소 찾기 버튼 */}
-            <button onClick={handleAddressSearch}>주소 찾기</button>
 
-            {/* DaumPostcode 컴포넌트 */}
-            {showPostcode ? (
-                <div className="post-code">
-                    <DaumPostcode onComplete={handleComplete} />
-                </div>
-            ) : null}
             <p className="custom-font-sub-title">
                 <b>사업자 주소를 선택해 주세요(개인일 경우 신분증 상의 주소)</b>
             </p>
-            우편번호  <input type="text" className="input-box" style={{width:"30%"}}/>
-            주소 <input
+
+            <input
                 type="text"
                 name="businessAddress"
                 className="input-box"
                 value={businessAddress}
                 readOnly
             />
-            상세주소 <input type="text" className="input-box"/>
+            {/* 주소 찾기 버튼 */}
+            <button onClick={handleAddressSearch} className="address-button">주소 찾기</button>
+
+            {/* DaumPostcode 컴포넌트 */}
+            {showModal && (
+                <Modal
+                    title="주소 찾기"
+                    visible={showModal}
+                    onCancel={() => setShowModal(false)}
+                    footer={null}
+                >
+                    <DaumPostcode onComplete={handleComplete} />
+                </Modal>
+            )}
             <br/>
             <br/>
             <br/>
@@ -265,8 +283,8 @@ const MakeReward5 = () => {
             </div>
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-                <button className="investMake-prev-button"> 이전 단계 </button>
-                <button className="investMake-next-button"> 저장하기 </button>
+                <button className="investMake-prev-button" onClick={handlePreviousStep}> 이전 단계 </button>
+                <button className="investMake-next-button" onClick={handleNextStep}> 저장하기 </button>
             </div>
             <div className="button-botoom-margin"></div>
 

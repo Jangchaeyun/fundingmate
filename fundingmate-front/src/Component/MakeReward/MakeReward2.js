@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward2.css";
 import "./MakeRewardCommon.css";
 
@@ -91,6 +92,19 @@ const MakeReward2 = () => {
     const handleAddButtonClick = () => {
         setShowDeleteButton(true);
     };
+
+    const navigateToStep1 = useNavigate();
+    const navigateToStep2 = useNavigate();
+
+    const handlePreviousStep = () => {
+        navigateToStep1("/make-reward/basicinfo");
+    };
+
+    const handleNextStep = () => {
+        navigateToStep2("/make-reward/typelist");
+    };
+
+
     return (
         <>
         <div className="investMake-wrapper">
@@ -204,8 +218,8 @@ const MakeReward2 = () => {
 
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
-            <button className="investMake-prev-button"> 이전 단계 </button>
-            <button className="investMake-next-button"> 다음 단계 </button>
+            <button className="investMake-prev-button" onClick={handlePreviousStep}> 이전 단계 </button>
+            <button className="investMake-next-button" onClick={handleNextStep}> 다음 단계 </button>
             </div>
                 <div className="button-botoom-margin"></div>
 

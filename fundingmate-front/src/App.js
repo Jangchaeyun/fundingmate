@@ -69,11 +69,11 @@ function App() {
         />
       </Routes>
     <Routes>
-        <Route exact path="/MakeReward1" element={<MakeReward1 />} />
-        <Route exact path="/MakeReward2" element={<MakeReward2/>} />
-        <Route exact path="/MakeReward3" element={<MakeReward3/>} />
-        <Route exact path="/MakeReward4" element={<MakeReward4/>} />
-        <Route exact path="/MakeReward5" element={<MakeReward5/>} />
+        <Route exact path="/make-reward/basicinfo" element={<MakeReward1 />} />
+        <Route exact path="/make-reward/story" element={<MakeReward2/>} />
+        <Route exact path="/make-reward/typelist" element={<MakeReward3/>} />
+        <Route exact path="/make-reward/goodsinfo" element={<MakeReward4/>} />
+        <Route exact path="/make-reward/hostinfo" element={<MakeReward5/>} />
     </Routes>
     </div>
   );
