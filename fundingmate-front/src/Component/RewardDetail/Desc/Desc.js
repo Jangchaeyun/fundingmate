@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
 import { useNavigate } from "react-router-dom";
+import CompanyModel from "../../Company/CompanyModel";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
   const [isClicked, setIsClicked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   let navigate = useNavigate();
 
   const handleClick = () => {
@@ -16,6 +18,11 @@ const Desc = () => {
       setIsClicked(true);
     }
   };
+
+  const handleCompanyClick = () => {
+    setIsModalVisible(true);
+  };
+
   return (
     <div className="desc">
       <div className="desc_subtitle">
@@ -85,7 +92,7 @@ const Desc = () => {
             <div className="end">23/07/22</div>
             <div className="end">23/07/23</div>
           </div>
-          <div className="company">
+          <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">
               <img src="/assets/imgs/smartboy.jpg" className="boy_img" />
               <div className="company_name">스마트보이</div>
@@ -97,6 +104,9 @@ const Desc = () => {
           </div>
         </div>
       </div>
+      {isModalVisible && (
+        <CompanyModel onClose={() => setIsModalVisible(false)} />
+      )}
     </div>
   );
 };

@@ -59,16 +59,23 @@ input:focus {
 .rew_count {
   width: 150px;
   margin-left: 0%;
+  margin-bottom: 0px;
 }
 
 .rew_content {
-  margin-top: 14px;
-    font-weight: bold;
+  margin-top: -12px;
+  font-weight: bold;
 }
 
 .rew_content_info {
   margin-top: 4px;
   margin-bottom: 15px;
+}
+
+.rew_content_select {
+  margin-bottom: 7px;
+  width: 110px;
+  height: 31px;
 }
 
 .checkout_header {
@@ -132,16 +139,16 @@ input:focus {
 
 .reward_list_title {
   margin-top: 30px;
-    margin-left: 4px;
-    width: 19%;
+  margin-left: 4px;
+  width: 19%;
 }
 
 .reward_add {
   margin-top: 30px;
-    margin-right: 7px;
-    color: var(--main-color);
-    font-weight: 600;
-    margin-left: 73%;
+  margin-right: 7px;
+  color: var(--main-color);
+  font-weight: 600;
+  margin-left: 73%;
 }
 
 .rew_sub_contents {

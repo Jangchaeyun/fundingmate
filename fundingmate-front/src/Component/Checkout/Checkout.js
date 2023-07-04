@@ -43,6 +43,14 @@ const Checkout = () => {
         <div className="rew_content_info">
           실버 커팅볼 스퀘어 체인 여자 팔찌 1개 분량입니다.
         </div>
+        <div className="rew_content_checkoption">
+          <select className="rew_content_select">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
+        </div>
       </div>
       <form className="checkout_form">
         <p className="title">결제자 핸드폰 번호</p>
