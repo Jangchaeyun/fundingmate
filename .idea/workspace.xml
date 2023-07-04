@@ -5,55 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="invest folder">
-      <change afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Company/CompanyModel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Company/CompanyModel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investment/repository/investmentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/notification/repository/notificationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/PaymentList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardOptionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardTypeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardCommentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardOptionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardReplyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardTypeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/service/RewardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/dto/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fundingmate.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/fundingmate-front.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fundingmate-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Category/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Category/Category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckCategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckoutFundCartegory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckoutFundCartegory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/FundCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/FundCategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/FundDetail/Desc/Desc.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/FundDetail/Desc/Desc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/RewardDetail/Desc/Desc.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/RewardDetail/Desc/Desc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Category/Category.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Category/Category.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/Checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/Checkout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/FundPeople.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/FundPeople.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investMake/entity/invest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investment/repository/first.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/Reward.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/RewardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/RewardType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate/src/test/java/com/fund/fundingmate/FundingmateApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/test/java/com/fund/fundingmate/FundingmateApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,8 +53,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "investMake",
     "last_opened_file_path": "D:/yth/springboot-work/intellj/fundingmate",
@@ -221,7 +178,7 @@
       <workItem from="1687846283684" duration="1338000" />
       <workItem from="1687853960732" duration="978000" />
       <workItem from="1687855013164" duration="2035000" />
-      <workItem from="1688452357495" duration="193000" />
+      <workItem from="1688452357495" duration="790000" />
     </task>
     <servers />
   </component>

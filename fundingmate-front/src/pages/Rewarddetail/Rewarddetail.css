@@ -10,13 +10,9 @@
   margin-left: 10%;
 }
 
-<<<<<<< HEAD
-/*b {
-=======
 .bold {
->>>>>>> cda73e00febae030b5c4cb71ee14eea13ebd51da
   color: var(--main-color);
-}*/
+}
 
 .desc_title {
   font-size: 15px;
