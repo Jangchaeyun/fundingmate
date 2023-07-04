@@ -3,8 +3,73 @@ import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
+import  DaumPostcode  from 'react-daum-postcode';
 const { RangePicker } = DatePicker;
+
 const MakeReward5 = () => {
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage2, setSelectedImage2] = useState(null);
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                setSelectedImage(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleImageClick = () => {
+        document.getElementById('imageUpload').click();
+    };
+
+    const handleImageUpload2 = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                setSelectedImage2(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleImageClick2 = () => {
+        document.getElementById('imageUpload2').click();
+    };
+
+    const [showPostcode, setShowPostcode] = useState(false);
+    const [businessAddress, setBusinessAddress] = useState('');
+
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = '';
+
+        const { addressType, bname, buildingName } = data;
+        if (addressType === 'R') {
+            if (bname !== '') {
+                extraAddress += bname;
+            }
+            if (buildingName !== '') {
+                extraAddress += `${extraAddress !== '' && ', '}${buildingName}`;
+            }
+            fullAddress += `${extraAddress !== '' ? ` ${extraAddress}` : ''}`;
+        }
+
+        setBusinessAddress(fullAddress);
+        setShowPostcode(false);
+    };
+
+    const handleAddressSearch = () => {
+        setShowPostcode(true);
+    };
 
     return (
         <>
@@ -27,19 +92,48 @@ const MakeReward5 = () => {
             </p>
 
             <div className="ibi-image-upload">
-                <div className="ibi-image-upload-info">
+                <div className="ibi-image-upload-info" onClick={handleImageClick} style={{cursor: 'pointer', width: '35vh', height: '25vh' }}>
+                    {selectedImage ? (
+                        <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%', objectFit: 'cover'}} />
+                    ) : (
+                        <>
                     <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px", cursor:"pointer"}}/></div>
                     이미지 추가하기
+                        </>
+                    )}
                 </div>
             </div>
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+            />
             <br/>
             <br/>
 
+            {/* 주소 찾기 버튼 */}
+            <button onClick={handleAddressSearch}>주소 찾기</button>
+
+            {/* DaumPostcode 컴포넌트 */}
+            {showPostcode ? (
+                <div className="post-code">
+                    <DaumPostcode onComplete={handleComplete} />
+                </div>
+            ) : null}
             <p className="custom-font-sub-title">
                 <b>사업자 주소를 선택해 주세요(개인일 경우 신분증 상의 주소)</b>
             </p>
-
-            <input type="text" name="businessAddress" className="input-box"/>
+            우편번호  <input type="text" className="input-box" style={{width:"30%"}}/>
+            주소 <input
+                type="text"
+                name="businessAddress"
+                className="input-box"
+                value={businessAddress}
+                readOnly
+            />
+            상세주소 <input type="text" className="input-box"/>
             <br/>
             <br/>
             <br/>
@@ -103,12 +197,24 @@ const MakeReward5 = () => {
             </p>
 
             <div className="ibi-image-upload">
-                <div className="ibi-image-upload-info">
+                <div className="ibi-image-upload-info"  onClick={handleImageClick2} style={{cursor: 'pointer', width: '35vh', height: '25vh'}}>
+                        {selectedImage2 ? (
+                                <img src={selectedImage2} alt="Selected" style={{ width: '100%', height: '100%', objectFit: 'cover'}} />
+                            ) : (
+                                <>
                     <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px", cursor:"pointer"}}/></div>
                     이미지 추가하기
+                                </>
+                            )}
                 </div>
             </div>
-
+                    <input
+                    type="file"
+                    id="imageUpload2"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                     onChange={handleImageUpload2}
+                />
             <br/>
             <br/>
 
