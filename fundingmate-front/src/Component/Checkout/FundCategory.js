@@ -1,44 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaretRightOutlined } from "@ant-design/icons";
 
-const FundCategory = () => {
-  let navigate = useNavigate();
-  function count(type) {
-    const resultElement = document.getElementById("result");
-    let number = resultElement.innerText;
+const CheckoutFundCartegory = () => {
+  const navigate = useNavigate();
+  const [number, setNumber] = useState(1);
+  const [price, setPrice] = useState(12345);
 
+  const count = (type) => {
     if (type === "plus") {
-      number = parseInt(number) + 1;
+      const updatedNumber = number + 1;
+      setNumber(updatedNumber);
+      setPrice((prevPrice) => prevPrice + 12345);
     } else if (type === "minus") {
-      if (number <= 0) {
-        return; // Return early if number is already 1
+      if (number <= 1) {
+        return;
       }
-      number = number - 1;
+      const updatedNumber = number - 1;
+      setNumber(updatedNumber);
+      setPrice((prevPrice) => prevPrice - 12345);
     }
+  };
 
-    resultElement.innerText = number;
-  }
   return (
     <div>
       <div className="fund_box">
-        <h1 className="fund_box_price">12,345원</h1>
-        <div
-          className="right"
-          onClick={() => {
-            navigate("/fund-checkout/checkout");
-          }}
-        >
-          <CaretRightOutlined />
+        <h1 className="fund_box_price">{price.toLocaleString()}원</h1>
+        <div className="right">
+          <CaretRightOutlined
+            onClick={() => {
+              navigate("/fund-checkout/checkout");
+            }}
+          />
         </div>
         <div className="fund_count_minus_plus">
           <button className="minus" onClick={() => count("minus")}>
             -
           </button>
           <div className="fund_minus_plus_count">
-            <div className="fund_minus_plus_count_number" id="result">
-              1
-            </div>
+            <div className="fund_minus_plus_count_number">{number}</div>
           </div>
           <button className="plus" onClick={() => count("plus")}>
             +
@@ -49,4 +49,4 @@ const FundCategory = () => {
   );
 };
 
-export default FundCategory;
+export default CheckoutFundCartegory;
