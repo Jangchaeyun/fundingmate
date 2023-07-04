@@ -4,9 +4,31 @@ import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 const { RangePicker } = DatePicker;
+
 const MakeReward1 = () => {
     const [inputContent, setInputContent] = useState("");
     const inputMaxLength = 60;
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                setSelectedImage(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleImageClick = () => {
+        document.getElementById('imageUpload').click();
+    };
+
+
     const handleInputChange = (event) => {
         const {value} = event.target;
         if(value.length <= inputMaxLength){
@@ -113,12 +135,26 @@ const MakeReward1 = () => {
             <br/>
 
             <div className="ibi-image-upload">
-                <div className="ibi-image-upload-info">
-                <div style={{marginBottom: "2%"}}><PlusCircleOutlined style={{ fontSize: "25px", cursor:"pointer"}}/></div>
-                    최적 사이즈 740*492px
+                <div className="ibi-image-upload-info" onClick={handleImageClick} style={{cursor: 'pointer', width: '35vh', height: '25vh' }}>
+                    {selectedImage ? (
+                        <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%', objectFit: 'cover'}} />
+                    ) : (
+                        <>
+                            <div style={{ marginBottom: '2%' }}>
+                                <PlusCircleOutlined style={{ fontSize: '25px', cursor: 'pointer' }} />
+                            </div>
+                            최적 사이즈 740*492px
+                        </>
+                    )}
                 </div>
-                </div>
-
+            </div>
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+            />
             <br/>
             <br/>
             <br/>

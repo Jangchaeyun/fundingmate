@@ -24,16 +24,17 @@ const MakeReward3 = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [rewardAvailableCount, setRewardAvailableCount] = useState("");
     const handleRewAdd = () => {
-        setModalOpen(false);
+        setEditingCardIndex(null);
+        setRewardAmount("");
+        setSelectedDate(null);
+        setRewardAvailableCount("");
         setInputContent("");
         setTextareaContent("");
         setShowOption(false);
         setOptionFields([]);
-        setLimitClicked(null); // 리워드 제공 가능 수 초기화
-        setSaClicked(null); // 배송지 필요 여부 초기화
-        setRewardAmount("");
-        setSelectedDate(null);
+        setLimitClicked(null);
 
+        setModalOpen(false);
     };
 
     const handleOk = () => {
@@ -66,7 +67,17 @@ const MakeReward3 = () => {
                 },
             ]);
         }
+        // 모달 닫기 및 상태 초기화
         setModalOpen(false);
+        setEditingCardIndex(null);
+        setRewardAmount("");
+        setSelectedDate(null);
+        setRewardAvailableCount("");
+        setInputContent("");
+        setTextareaContent("");
+        setShowOption(false);
+        setOptionFields([]);
+        setLimitClicked(null);
     };
     const handleCancel = () => {
         setModalOpen(false);
@@ -214,7 +225,7 @@ const MakeReward3 = () => {
                     리워드 내용
                 </p>
                 <div>
-                <textarea type="text" name="rewardContent" className="rew-textarea" value={textareaContent} onChange={handleMaxLengthChange}/>
+                <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={textareaContent} onChange={handleMaxLengthChange}/>
                 <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>
                 </div>
 
@@ -242,14 +253,20 @@ const MakeReward3 = () => {
                     {optionFields.map((field, index)=>(
 
                   <div key={index} >
-                        <p className="custom-font-modal-option-text">
+                       {/* <p className="custom-font-modal-option-text" style={{color:"#BC8700"}}>
                                 옵션{index+1}
-                        </p>
+                        </p>*/}
+                      <div style={{display:'flex', alignItems:'center'}}>
+                          <p style={{fontSize:"13px"}}>옵션명</p>
+                          <p style={{marginLeft:"100px", fontSize:"13px"}}>옵션 값</p>
+                      </div>
                         <div style={{display:'flex', alignItems:'center'}}>
-                            <input type="text" name="rewardOptName" className="reward-opt-names" placeholder="예시)옷 사이즈를 적어주세요 (S, M, L)"/>
+                            <input type="text" name="rewardOptName" className="reward-opt-names" placeholder="예시)사이즈"/>
+                            <input type="text" name="rewardOptCon" className="reward-opt-con" placeholder="예시)S, M, L"  style={{marginLeft:"18px"}}/>
                             <button className="rew-add" onClick={handleAddOption}><PlusSquareOutlined style={{ fontSize: "23px"}} /></button>
                             <button className="rew-delete" onClick={()=>handleDeleteOption(index)}><MinusSquareOutlined style={{ fontSize: "23px"}} /></button>
-                        </div>
+
+                            </div>
                   </div>
                         ))}
                     </>

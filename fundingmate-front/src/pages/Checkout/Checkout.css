@@ -10,6 +10,7 @@
   overflow-x: hidden;
 }
 
+/*
 input {
   border-radius: 5px;
   border: 1px solid var(--grey);
@@ -18,6 +19,7 @@ input {
 input:focus {
   outline: none;
 }
+*/
 
 .rew_check_info {
   background-color: var(--info);

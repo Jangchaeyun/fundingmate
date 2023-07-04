@@ -70,8 +70,9 @@
  /*   margin-top: 10px;*/
    /* width: 350px;*/
     width: 40%;
-    height: 20px;
-
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
 }
 
 .button-top-margin{
@@ -86,7 +87,7 @@
 .investMake-next-button{
     width: 149px;
     height: 34px;
-    border-radius: 7px;
+    border-radius: 5px;
     background: var(--main-color);
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
@@ -99,7 +100,7 @@
 .investMake-prev-button{
     width: 149px;
     height: 34px;
-    border-radius: 7px;
+    border-radius: 5px;
     background: #E0E0E0;
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
@@ -134,8 +135,17 @@
 
 }
 
+.rew-textarea{
+    width: 99%;
+    resize: none;
+    height: 130px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
 :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
     border: 1px solid var(--main-color);
+    border-radius: 5px;
 }
 
 :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
@@ -149,4 +159,7 @@
 }
 :where(.css-dev-only-do-not-override-12upa3x).ant-picker:hover, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
     border-color:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker{
+    border: 1px solid var(--grey);
 }
