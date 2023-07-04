@@ -28,13 +28,13 @@ const Category = () => {
             <div className="category_card">
               <img src="/assets/imgs/category2.png" className="category_img2" />
             </div>
-            <div className="category_name"> 패션/잡화</div>
+            <div className="category_name2"> 패션/잡화</div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="category_card">
               <img src="/assets/imgs/category3.png" className="category_img3" />
             </div>
-            <div className="category_name"> 홈/리빙</div>
+            <div className="category_name3"> 홈/리빙</div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="category_card">
