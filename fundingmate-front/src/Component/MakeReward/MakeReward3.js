@@ -5,6 +5,8 @@ import {PlusOutlined, PlusSquareOutlined,MinusSquareOutlined} from "@ant-design/
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { DatePicker, Space } from 'antd';
+import moment from 'moment';
+import 'moment/locale/ko';
 const MakeReward3 = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [cards, setCards] = useState([]); // 카드 배열 추가
@@ -23,21 +25,57 @@ const MakeReward3 = () => {
     const [rewardAmount, setRewardAmount] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [rewardAvailableCount, setRewardAvailableCount] = useState("");
-    const handleRewAdd = () => {
-        setEditingCardIndex(null);
-        setRewardAmount("");
-        setSelectedDate(null);
-        setRewardAvailableCount("");
-        setInputContent("");
-        setTextareaContent("");
-        setShowOption(false);
-        setOptionFields([]);
-        setLimitClicked(null);
+    // const handleRewAdd = () => {
+    //     setEditingCardIndex(null);
+    //     setRewardAmount("");
+    //     setSelectedDate(null);
+    //     setRewardAvailableCount("");
+    //     setInputContent("");
+    //     setTextareaContent("");
+    //     setShowOption(false);
+    //     setOptionFields([]);
+    //     setLimitClicked(null);
 
-        setModalOpen(false);
-    };
+    //     setModalOpen(false);
+    // };
 
-    const handleOk = () => {
+    const handleRewAdd = (editingIndex) => {
+        if (editingIndex !== null) {
+          const editingCard = cards[editingIndex];
+          setRewardAmount(editingCard.rewardAmount);
+          setSelectedDate(moment(editingCard.expectedDeliveryDate, "YYYY.MM.DD"));
+          setRewardAvailableCount(editingCard.rewardAvailableCount);
+          setInputContent(editingCard.rewardTitle);
+          setTextareaContent(editingCard.rewardContent);
+          setShowOption(editingCard.rewardOptions.length > 0);
+          setOptionFields(
+            editingCard.rewardOptions.map((opt) => ({ rewardOptName: opt }))
+          );
+          setLimitClicked(
+            editingCard.rewardAvailableCount === "무제한"
+              ? "rew-unlimited-button"
+              : "rew-limit-button"
+          );
+          setSaClicked(
+            editingCard.shippingAddressRequired === "배송지 필요"
+              ? "rew-sar-button"
+              : "rew-noSar-button"
+          );
+        } else {
+          setRewardAmount("");
+          setSelectedDate(null);
+          setRewardAvailableCount("");
+          setInputContent("");
+          setTextareaContent("");
+          setShowOption(false);
+          setOptionFields([]);
+          setLimitClicked(null);
+          setSaClicked(null);
+        }
+        setModalOpen(true);
+      };
+      
+     const handleOk = () => {
         if (editingCardIndex !== null) {
             // 수정 중인 카드의 정보 업데이트
             const updatedCards = [...cards];
