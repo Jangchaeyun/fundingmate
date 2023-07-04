@@ -35,4 +35,12 @@ public class    RewardType {
     @ManyToOne
     @JoinColumn(name = "reward_no")
     private Reward reward;
+
+    @OneToOne(mappedBy = "rewardType", cascade = CascadeType.ALL)
+    private RewardOption rewardOption;
+
+    public void setRewardOption(RewardOption rewardOption) {
+        this.rewardOption = rewardOption;
+        rewardOption.setRewardType(this);
+    }
 }
