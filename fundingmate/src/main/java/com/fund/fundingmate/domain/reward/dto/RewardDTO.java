@@ -1,94 +1,50 @@
-package com.fund.fundingmate.domain.reward.entity;
+package com.fund.fundingmate.domain.reward.dto;
 
-import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "Reward")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reward {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RewardDTO {
     private Long rewardNo;
-
     private String projName;
-
     private Integer projTargetAmout;
-
-    private Date projDateStart;
-
-    private Date projDateEnd;
-
+    private LocalDate projDateStart;
+    private LocalDate projDateEnd;
     private String rewardRepImgSavedName;
-
     private String projKeyWord;
-
     private String rewardVideoAddress;
-
     private String rewardContentImgSavedName;
-
     private String projContent;
-
     private String rewardRefundExchangePolicy;
-
     private String rewardContact;
-
     private String rewardEmail;
-
     private String rewardCategory;
-
     private String modelName;
-
     private String countryOfOrigin;
-
     private String manufacturer;
-
     private String asPhoneNumber;
-
     private String rewardIdBusinessLicenseImgSavedName;
-
     private String businessAddress;
-
     private String bank;
-
     private String accNumber;
-
     private String depositorName;
-
     private String rewardBankAccountCopyImgSavedName;
-
-    @Column(nullable = false)
     private String taxBillEmail;
-
-    @Column(nullable = false)
     private String websiteUrl;
-
-    @Column(nullable = false)
     private String facebookUrl;
-
-    @Column(nullable = false)
     private String instagramUrl;
-
-    @Column(nullable = false)
     private String blogUrl;
-
-    @Column(nullable = false)
     private String twitterUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "user_no")
-    private User user;
-
-    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
-    private List<RewardType> rewardTypes;
+    private UserDTO user;
+    private List<RewardTypeDTO> rewardTypes;
 }

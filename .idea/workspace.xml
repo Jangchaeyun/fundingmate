@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="invest folder">
+      <change afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Company/CompanyModel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Company/CompanyModel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investment/repository/investmentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/notification/repository/notificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/PaymentList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/repository/PaymentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardOptionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/dto/RewardTypeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardCommentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardOptionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardReplyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/repository/RewardTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/service/RewardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fundingmate.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/fundingmate-front.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Category/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Category/Category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/Checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckoutFundCartegory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/CheckoutFundCartegory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/FundCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/Checkout/FundCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/FundDetail/Desc/Desc.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/FundDetail/Desc/Desc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/RewardDetail/Desc/Desc.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/RewardDetail/Desc/Desc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Category/Category.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Category/Category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/Checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/Checkout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/FundPeople.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Checkout/FundPeople.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/pages/Rewarddetail/Rewarddetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investMake/entity/invest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/investment/repository/first.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/payment/entity/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/Reward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/RewardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/reward/entity/RewardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/java/com/fund/fundingmate/domain/user/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate/src/test/java/com/fund/fundingmate/FundingmateApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate/src/test/java/com/fund/fundingmate/FundingmateApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5091b603-1e70-4a64-8196-60ab48bdaad7" />
+        <option name="url" value="https://github.com/Jangchaeyun/fundingmate.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2RmDI0ogGkRx5AuMTOpBhMBfP4a" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "investMake",
+    "last_opened_file_path": "D:/yth/springboot-work/intellj/fundingmate",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="DjangoTestsConfigurationType">
+      <module name="fundingmate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="fundingmate" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="fundingmate" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <module name="fundingmate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="fundingmate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="fundingmate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="fundingmate" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="" />
+      <created>1687846279160</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687846279160</updated>
+      <workItem from="1687846283684" duration="1338000" />
+      <workItem from="1687853960732" duration="978000" />
+      <workItem from="1687855013164" duration="2035000" />
+      <workItem from="1688452357495" duration="193000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

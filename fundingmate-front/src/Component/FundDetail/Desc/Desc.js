@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "../../../pages/Funddetail/Funddetail.css";
 import { useNavigate } from "react-router-dom";
+import CompanyModel from "../../Company/CompanyModel";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
   const [isClicked, setIsClicked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   let navigate = useNavigate();
 
   const handleClick = () => {
@@ -16,6 +18,11 @@ const Desc = () => {
       setIsClicked(true);
     }
   };
+
+  const handleCompanyClick = () => {
+    setIsModalVisible(true);
+  };
+
   return (
     <div className="desc">
       <div className="desc_subtitle"></div>
@@ -55,7 +62,7 @@ const Desc = () => {
             <button
               className="fund_btn"
               onClick={() => {
-                navigate("/checkout/check");
+                navigate("/fund-checkout/fundpeople");
               }}
             >
               펀딩하기
@@ -65,7 +72,7 @@ const Desc = () => {
             <button className="proj_good">12명이 관심있어요</button>
             <button className="fund_proj_share">공유하기</button>
           </div>
-          <div className="company">
+          <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">
               <img src="/assets/imgs/smartboy.jpg" className="boy_img" />
               <div className="company_name">스마트보이</div>
@@ -74,6 +81,9 @@ const Desc = () => {
           <div className="info">수익배분은 3%</div>
         </div>
       </div>
+      {isModalVisible && (
+        <CompanyModel onClose={() => setIsModalVisible(false)} />
+      )}
     </div>
   );
 };

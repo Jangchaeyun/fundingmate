@@ -44,10 +44,11 @@ input:focus {
 }
 
 .right {
-  margin-left: 95%;
+  margin-left: 96%;
   font-size: 20px;
   color: var(--main-color);
   cursor: pointer;
+  margin-top: 0%;
 }
 
 .rew_sub_content {
@@ -60,16 +61,23 @@ input:focus {
 .rew_count {
   width: 150px;
   margin-left: 0%;
+  margin-bottom: 0px;
 }
 
 .rew_content {
-  margin-top: 3px;
+  margin-top: -12px;
   font-weight: bold;
 }
 
 .rew_content_info {
   margin-top: 4px;
   margin-bottom: 15px;
+}
+
+.rew_content_select {
+  margin-bottom: 7px;
+  width: 110px;
+  height: 31px;
 }
 
 .checkout_header {
@@ -119,10 +127,13 @@ input:focus {
 }
 
 .checkout_process_text {
-  margin-left: -6%;
-  margin-right: 24%;
+  margin-left: -27px;
+  margin-right: 64px;
 }
 
+.rew_price {
+  margin-top: 0%;
+}
 .reward_list_titles {
   display: flex;
   width: 100%;
@@ -130,15 +141,16 @@ input:focus {
 
 .reward_list_title {
   margin-top: 30px;
-  margin-left: 6px;
+  margin-left: 4px;
+  width: 19%;
 }
 
 .reward_add {
   margin-top: 30px;
-  margin-right: 6px;
+  margin-right: 7px;
   color: var(--main-color);
   font-weight: 600;
-  margin-left: 84.5%;
+  margin-left: 73%;
 }
 
 .rew_sub_contents {
@@ -297,7 +309,7 @@ select:focus {
 .fund_count_minus_plus {
   display: flex;
   width: 50%;
-  margin-bottom: 1%;
+  margin-bottom: 4%;
 }
 
 .minus,
