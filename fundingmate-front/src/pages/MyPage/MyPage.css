@@ -6,16 +6,12 @@
     text-align: center;
   }
 
-.subheader {
-    display: flex;
-    padding: 0.25%;
-    text-align: center;
-    background-color: #FFCE50;
-}
-
 .navbar-nav {
   display: flex;
   justify-content: space-around;
+  padding: 0.25%;
+  text-align: center;
+  background-color: #FFCE50;
 }
 
 .subheader a {
@@ -38,9 +34,32 @@
   color: white;
 }
 
-.form-container {
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 1%;
+  text-align: left;
+  box-sizing: content-box;
+  vertical-align: middle;
+  justify-items: center;
+  width: 1060px;
+  text-indent: 35%;
+}
+
+.profile-image {
+  width: 80px;
+}
+
+.subsection-container {
   display: flex;
-  flex-direction: column;
-  width: 65%;
-  padding: 1%;
+  text-align: center;
+}
+
+.section-subheader {
+  text-align: center;
+  padding: 0.25%;
+}
+
+b {
+  color: black;
 }

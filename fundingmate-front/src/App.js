@@ -22,7 +22,7 @@ function App() {
       <Routes>
         {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
-        <Route exact path="/my-page?type=founder" element={<Founder />} />
+        <Route exact path="/my-page/founder" element={<Founder />} />
       </Routes>
       <Routes>
         <Route exact path="/reward-detail/story" element={<Story />} />
@@ -33,6 +33,7 @@ function App() {
         <Route exact path="/fund" element={<Fund />} />
       </Routes>
       <Routes>
+        
         <Route exact path="/fund-detail/story" element={<FundStory />} />
         <Route exact path="/fund-detail/contact" element={<FundContact />} />
         <Route exact path="/fund-detail/guide" element={<FundGuide />} />
