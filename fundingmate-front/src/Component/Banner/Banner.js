@@ -7,9 +7,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
-
+import SwiperCore, { EffectCoverflow, Autoplay } from "swiper";
 
 function Banner() {
+    SwiperCore.use([Autoplay]);
     return (
         <div className="banner">
             <div className="banner-slide">
@@ -32,7 +33,7 @@ function Banner() {
                                 '<span class="' + totalClass + '">totalClass</span></span>';
                         }
                     }}
-                    autoplay={{delay: 3000, disableOnInteraction: false}}
+                    autoplay={{delay: 2000, disableOnInteraction: false}}
                     loop={true}
 
                 >

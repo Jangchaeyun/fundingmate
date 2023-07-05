@@ -5,9 +5,14 @@ a {
 
 .header {
     height: 100px;
+    border-bottom: 1px solid #eaebed;
+}
+.header-wrap {
     width: 1080px;
     margin: 0 auto;
+    text-align: left;
 }
+
 .hTop {
     display: flex;
     box-sizing: border-box;
@@ -44,6 +49,8 @@ a {
     border: 1px solid #14B8FF;
     border-radius: 20px;
     padding-left: 20px;
+}
+.float-r {
     float: right;
 }
 .nav-search:focus {
@@ -51,10 +58,13 @@ a {
 }
 .nav-search-btn {
     position: relative;
-    right: -660px;
+    right: -670px;
     top: 2px;
     font-size: 20px;
     background-color: white;
     border: none;
     cursor: pointer;
+}
+.searchF {
+    display: contents;
 }

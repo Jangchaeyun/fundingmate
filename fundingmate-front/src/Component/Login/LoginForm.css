@@ -1,6 +1,6 @@
 .loginForm {
     width: 350px;
-    margin: 70px auto 100px;
+    margin: 70px auto
 }
 .l-logo {
     font-size: 20px;
@@ -36,6 +36,7 @@
 .keepChk:checked {
     background: #14B8FF;
     border: none;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
 }
 .keepChkLb {
     position: relative;
@@ -71,6 +72,7 @@
 .socialLogin {
     text-align: center;
     margin: 10px 0;
+    font-size: 14px;
 }
 .socialLogin>a {
     display: inline-block;
@@ -98,18 +100,18 @@
 .googleLogin>img {
     width: 20px;
     position: relative;
-    top: 3px;
+    top: 4px;
     margin-right: 5px;
 }
 .naverLogin>img {
     width: 20px;
     position: relative;
-    top: 3px;
+    top: 4px;
     margin-right: 5px;
 }
 .kakaoLogin>img {
     width: 20px;
     position: relative;
-    top: 3px;
+    top: 4px;
     margin-right: 5px;
 }

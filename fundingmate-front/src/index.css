@@ -13,7 +13,7 @@
   --grey: #9b9b9b;
 }
 
-* {
+body {
   font-family: "SUITE-Regular";
-  /*overflow-x: hidden;*/
+  overflow-x: hidden;
 }
