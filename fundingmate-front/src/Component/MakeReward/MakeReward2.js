@@ -12,9 +12,11 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
+import { nanoid } from 'nanoid';
 const MAX_IMAGES = 15;
 
 const MakeReward2 = () => {
+    const [totInfo, setTotInfo] = useState({inputs:[{ id: nanoid(), url:'' }], images:[], content:''})
     const editorRef = useRef();
     const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
@@ -34,53 +36,36 @@ const MakeReward2 = () => {
     const [showDeleteIcon, setShowDeleteIcon] = useState(false);
     const [images, setImages] = useState([]);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
+
+    const handleImageInit = (event) => {
+        if(event.target.files.length>0)
+            event.target.value = '';
+    }
     const handleImageUpload = (event) => {
-        const files = event.target.files;
-        const newImages = [];
-
-        const uploadImage = (file) => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-
-                reader.onload = (e) => {
-                    const image = {
-                        src: e.target.result,
-                        alt: 'Selected',
-                        style: { width: '100%', height: '100%', objectFit: 'cover' }
-                    };
-                    resolve(image);
+        if(event.target.files && event.target.files[0]) {
+            const reader = new FileReader()
+            // 이미지가 로드가 된 경우
+            reader.onload = e => {
+                const image = {
+                    src: e.target.result,
+                    alt: 'Selected',
+                    style: { width: '100%', height: '100%', objectFit: 'cover' }
                 };
-
-                reader.onerror = (error) => {
-                    reject(error);
-                };
-
-                reader.readAsDataURL(file);
-            });
-        };
-
-        const uploadAllImages = async () => {
-            for (const file of files) {
-                try {
-                    const image = await uploadImage(file);
-                    newImages.push(image);
-                } catch (error) {
-                    console.error('Error uploading image:', error);
-                }
+                setImages([...images, image]);
             }
-            setImages((prevImages) => [...prevImages, ...newImages]);
-        };
-
-        uploadAllImages();
+            // reader가 이미지 읽도록 하기
+            reader.readAsDataURL(event.target.files[0])
+        }
     };
 
-    const handleImageClick = () => {
+    const handleImageClick = (e) => {
         if (images.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
             document.getElementById('imageUpload').click();
         }
     };
 
-    const handleImageDelete = (index) => {
+    const handleImageDelete = (e, index) => {
+        e.stopPropagation();
         setImages((prevImages) => {
             const updatedImages = [...prevImages];
             updatedImages.splice(index, 1);
@@ -97,7 +82,7 @@ const MakeReward2 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/basicinfo");
+        navigateToStep1(`/make-reward/basicinfo/${totInfo}`);
     };
 
     const handleNextStep = () => {
@@ -130,9 +115,9 @@ const MakeReward2 = () => {
                 <b>동영상 주소를 적어주세요</b>
             </p>
             <div className="projMake-video" style={{flexDirection:"column", alignItems: "flex-start"}}>
-                {inputs.map((input, index) => (
+                {totInfo.inputs.map((input, index) => (
                     <div key={input.id} style={{ marginTop: index > 0 ? '10px' : '0' }}>
-                        <input type="text" name="rewardVideoAddress" className="input-box-video"/>
+                        <input type="text" name="rewardVideoAddress" className="input-box-video" value={input.url} onInput={(e)=>totInfo.inputs[index].url=e.target.value}/>
                         <button className="rew-add" onClick={handleAddInput}>
                             <PlusSquareOutlined style={{ fontSize: "23px" }} />
                         </button>
@@ -162,7 +147,7 @@ const MakeReward2 = () => {
                         >
                             <div
                                 className="imi-image-delete"
-                                onClick={() => handleImageDelete(index)}
+                                onClick={(e) => handleImageDelete(e, index)}
                                 style={{ position: 'absolute', top: '5px', right: '5px', zIndex: '1', color: '#fff', fontSize: '15px' , display: showDeleteIcon ? 'block' : 'none' }}
                             >
                                 <MinusCircleOutlined id="imi-image-delete-icon"/>
@@ -191,7 +176,7 @@ const MakeReward2 = () => {
                 id="imageUpload"
                 accept="image/*"
                 style={{ display: 'none' }}
-                onChange={handleImageUpload}
+                onChange={handleImageUpload} onClick={handleImageInit}
             />
             <br/>
             <br/>

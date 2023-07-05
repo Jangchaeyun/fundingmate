@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {/* <Route exact path="/" element={<Main />} /> */}
+        {/*<Route exact path="/" element={<Main />} />*/}
         <Route exact path="/reward" element={<Reward />} />
         <Route exact path="/my-page?type=founder" element={<Founder />} />
       </Routes>
