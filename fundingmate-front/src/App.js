@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from 'react'
 import { Reset } from 'styled-reset'
@@ -33,11 +33,20 @@ import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
+import {Provider} from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import store from './persist-store';
+
+const persister = persistStore(store);
 function App() {
   return (
       <React.Fragment>
           <Reset />
         <div className="App">
+            <Provider store={store}>
+            <PersistGate persistor={persister}>
+                <BrowserRouter>
            <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
@@ -107,6 +116,9 @@ function App() {
               <Route exact path="/MakeReward4" element={<MakeReward4/>} />
               <Route exact path="/MakeReward5" element={<MakeReward5/>} />
           </Routes>
+                </BrowserRouter>
+            </PersistGate>
+            </Provider>
         </div>
       </React.Fragment>
   );

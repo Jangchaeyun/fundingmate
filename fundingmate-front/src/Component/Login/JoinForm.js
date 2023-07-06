@@ -238,7 +238,7 @@ function JoinForm(props) {
                     </p>
                 </div>
                 <input type="submit" value="회원가입" className="joinBtn"/>
-            </form >
+            </form>
         </div>
     );
 }
