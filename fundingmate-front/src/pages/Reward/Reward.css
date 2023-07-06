@@ -6,6 +6,10 @@
   font-weight: 800;
 }
 
+.banner_img {
+  width: 1080px;
+}
+
 .reward {
   margin-bottom: 6%;
 }
@@ -19,6 +23,7 @@
   width: 263px;
   height: 350px;
 }
+
 .reward_cards {
   display: flex;
 }
@@ -31,6 +36,7 @@
   margin-bottom: 3%;
   transition: all 0.2s linear;
   cursor: pointer;
+  margin-left: 0.6%;
 }
 
 .reward_card:hover {
@@ -43,10 +49,12 @@
   height: 151px;
 }
 
-.company_name {
+.com_name {
   margin-left: 2%;
   color: rgba(0, 0, 0, 0.46);
   font-size: 11px;
+  margin-top: 0%;
+  margin-left: 2%;
 }
 
 .reward_name {
@@ -67,14 +75,14 @@
 
 .rate {
   font-size: 13px;
-  margin-left: 17%;
-  margin-top: -1.3%;
+  margin-left: 69%;
+  margin-top: -4.3%;
 }
 
 .d_day {
   font-size: 13px;
-  margin-left: 21%;
-  margin-top: -1.5%;
+  margin-left: 88%;
+  margin-top: -6.5%;
 }
 
 .bell_box {

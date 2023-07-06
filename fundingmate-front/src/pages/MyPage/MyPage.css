@@ -1,0 +1,46 @@
+.mypage-container {
+    display: flex;
+    margin: 2%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+.subheader {
+    display: flex;
+    padding: 0.25%;
+    text-align: center;
+    background-color: #FFCE50;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.subheader a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+.subheader a:hover {
+  color: white;
+}
+
+.section-container {
+  display: flex;
+  padding: 0.25%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #14B8FF;
+  color: white;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 1%;
+}

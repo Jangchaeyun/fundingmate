@@ -1,4 +1,4 @@
-import "../../App.css";
+import Category from "../../Component/Category/Category";
 import Banner from "../../Component/Reward/Banner";
 import Finish from "../../Component/Reward/Finish";
 import Preopen from "../../Component/Reward/Preopen";
@@ -8,6 +8,7 @@ const Reward = () => {
   return (
     <div className="App">
       <Banner />
+      <Category />
       <Rewarding />
       <Preopen />
       <Finish />
