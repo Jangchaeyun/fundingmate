@@ -20,6 +20,7 @@ import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
 import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
+import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 function App() {
   return (
     <div className="App">
@@ -68,13 +69,16 @@ function App() {
           element={<CheckoutComplete />}
         />
       </Routes>
-    <Routes>
-        <Route exact path="/MakeReward1" element={<MakeReward1 />} />
-        <Route exact path="/MakeReward2" element={<MakeReward2/>} />
-        <Route exact path="/MakeReward3" element={<MakeReward3/>} />
-        <Route exact path="/MakeReward4" element={<MakeReward4/>} />
-        <Route exact path="/MakeReward5" element={<MakeReward5/>} />
-    </Routes>
+      <Routes>
+        <Route exact path="/rewardfund" element={<RewardFundMain />} />
+      </Routes>
+      <Routes>
+          <Route exact path="/MakeReward1" element={<MakeReward1 />} />
+          <Route exact path="/MakeReward2" element={<MakeReward2/>} />
+          <Route exact path="/MakeReward3" element={<MakeReward3/>} />
+          <Route exact path="/MakeReward4" element={<MakeReward4/>} />
+          <Route exact path="/MakeReward5" element={<MakeReward5/>} />
+      </Routes>
     </div>
   );
 };
