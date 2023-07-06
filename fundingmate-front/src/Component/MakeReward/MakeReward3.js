@@ -120,7 +120,12 @@ const MakeReward3 = () => {
     const handleCopyCard = (index) => {
         const copiedCard = { ...cards[index] };
         setCards((prevCards) => [...prevCards, copiedCard]);
+
     };
+
+
+
+
     const handleRewDelete = (index) => {
         setCards(prevCards => prevCards.filter((_, i) => i !== index));
     }
@@ -308,7 +313,7 @@ const MakeReward3 = () => {
                     <button  className="make-rew-card-edit-button" onClick={() => {
                         setCard({...cardItem})
                         setEditingCardIndex(index); // 수정 중인 카드의 인덱스 저장
-                        setShowOption(true);
+                      //  setShowOption(true);
                         setModalOpen(true); // 모달 열기
                     }}>수정</button>
                     <button  className="make-rew-card-edit-button make-rew-card-edit-button-delete" onClick={() => handleRewDelete(index)}>삭제</button>
