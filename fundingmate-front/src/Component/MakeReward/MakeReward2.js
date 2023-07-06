@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { Route, useNavigate, useLocation } from "react-router-dom";
 import "./MakeReward2.css";
 import "./MakeRewardCommon.css";
 
@@ -19,13 +19,13 @@ const MakeReward2 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
     const [totInfo, setTotInfo] = useState(preTotInfo);
-   /* const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
-    };*/
+    };
     const editorRef = useRef();
-   /* const onChange = () => {
+    const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
-        console.log(data);}*/
+        console.log(data);}
 
     const handleToastChange = (e) => {
         const data = editorRef.current.getInstance().getHTML();

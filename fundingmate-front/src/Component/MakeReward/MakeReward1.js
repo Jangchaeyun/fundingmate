@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
-import { DatePicker } from 'antd';
+import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 import { nanoid } from 'nanoid';
 const { RangePicker } = DatePicker;
@@ -46,8 +46,8 @@ const MakeReward1 = () => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
     };
 
-   // const [inputContent, setInputContent] = useState("");
- //   const inputMaxLength = 60;
+    const [inputContent, setInputContent] = useState("");
+    const inputMaxLength = 60;
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageUpload = (event) => {

@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React from "react";
 import { Route, useNavigate, useLocation} from "react-router-dom";
 import "./MakeReward3.css";
 import "./MakeRewardCommon.css";
