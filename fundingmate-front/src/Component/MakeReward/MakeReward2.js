@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Route, useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 import "./MakeReward2.css";
 import "./MakeRewardCommon.css";
 
@@ -16,31 +16,49 @@ import { nanoid } from 'nanoid';
 const MAX_IMAGES = 15;
 
 const MakeReward2 = () => {
-    const [totInfo, setTotInfo] = useState({inputs:[{ id: nanoid(), url:'' }], images:[], content:''})
+    const location = useLocation();
+    const preTotInfo = location.state.totInfo;
+    const [totInfo, setTotInfo] = useState(preTotInfo);
+   /* const handleInputChange = (e) => {
+        setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
+    };*/
     const editorRef = useRef();
-    const onChange = () => {
+   /* const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
-        console.log(data);}
+        console.log(data);}*/
+
+    const handleToastChange = (e) => {
+        const data = editorRef.current.getInstance().getHTML();
+        setTotInfo({...totInfo, projContent:data}) ;
+        console.log(data);
+    }
+
 
     const [inputs, setInputs] = useState([{ id: 1 }]);
 
     const handleAddInput = () => {
-        const newId = inputs.length + 1;
+        const newId = nanoid();
         const newInput = { id: newId };
-        setInputs((prevInputs) => [...prevInputs, newInput]);
+        setTotInfo({...totInfo, inputs:[...totInfo.inputs, newInput]})
+        //setInputs((prevInputs) => [...prevInputs, newInput]);
     };
 
     const handleDeleteInput = (id) => {
-        setInputs((prevInputs) => prevInputs.filter((input) => input.id !== id));
+        const delinputs = totInfo.inputs.filter(input => input.id !== id);
+        setTotInfo({...totInfo, inputs:[...delinputs]});
     };
     const [showDeleteIcon, setShowDeleteIcon] = useState(false);
-    const [images, setImages] = useState([]);
+    //const [images, setImages] = useState([]);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
 
     const handleImageInit = (event) => {
         if(event.target.files.length>0)
             event.target.value = '';
     }
+
+    useEffect(()=>{
+        console.log(totInfo);
+    },[]);
     const handleImageUpload = (event) => {
         if(event.target.files && event.target.files[0]) {
             const reader = new FileReader()
@@ -51,26 +69,26 @@ const MakeReward2 = () => {
                     alt: 'Selected',
                     style: { width: '100%', height: '100%', objectFit: 'cover' }
                 };
-                setImages([...images, image]);
+                setTotInfo({...totInfo,  images:[...totInfo.images,image]}) ;
             }
             // reader가 이미지 읽도록 하기
-            reader.readAsDataURL(event.target.files[0])
+            reader.readAsDataURL(event.target.files[0]);
         }
     };
 
     const handleImageClick = (e) => {
-        if (images.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
+        if (totInfo.images.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
             document.getElementById('imageUpload').click();
         }
     };
 
     const handleImageDelete = (e, index) => {
         e.stopPropagation();
-        setImages((prevImages) => {
-            const updatedImages = [...prevImages];
-            updatedImages.splice(index, 1);
-            return updatedImages;
-        });
+
+        const updatedImages = [...totInfo.images];
+        updatedImages.splice(index, 1);
+
+        setTotInfo({...totInfo, images: [...updatedImages]});
         setShowDeleteIcon(false);
     };
 
@@ -82,11 +100,12 @@ const MakeReward2 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1(`/make-reward/basicinfo/${totInfo}`);
+        navigateToStep1("/make-reward/basicinfo/", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
-        navigateToStep2("/make-reward/typelist");
+        //setTotInfo({...totInfo, projContent:editorRef.current.getInstance().getHTML()});
+        navigateToStep2("/make-reward/typelist", {state:{totInfo:totInfo}});
     };
 
 
@@ -117,11 +136,11 @@ const MakeReward2 = () => {
             <div className="projMake-video" style={{flexDirection:"column", alignItems: "flex-start"}}>
                 {totInfo.inputs.map((input, index) => (
                     <div key={input.id} style={{ marginTop: index > 0 ? '10px' : '0' }}>
-                        <input type="text" name="rewardVideoAddress" className="input-box-video" value={input.url} onInput={(e)=>totInfo.inputs[index].url=e.target.value}/>
+                        <input type="text" name="rewardVideoAddress" className="input-box-video" onChange={(e)=>totInfo.inputs[index].url=e.target.value}/>
                         <button className="rew-add" onClick={handleAddInput}>
                             <PlusSquareOutlined style={{ fontSize: "23px" }} />
                         </button>
-                        {input.id !== 1 && (
+                        {index !== 0 && (
                             <button className="rew-delete" onClick={() => handleDeleteInput(input.id)}>
                                 <MinusSquareOutlined style={{ fontSize: "23px" }} />
                             </button>
@@ -135,8 +154,9 @@ const MakeReward2 = () => {
                 <b>이미지를 등록해주세요</b>
             </p>
 
+
             <div className="imi-image" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {images.map((image, index) => (
+                {totInfo.images.map((image, index) => (
                     <div className="imi-image-upload" key={index} style={{ marginTop: '15px' }}>
                         <div
                             className="imi-image-upload-info"
@@ -156,7 +176,7 @@ const MakeReward2 = () => {
                         </div>
                     </div>
                 ))}
-                {images.length < MAX_IMAGES - 1 && (
+                {totInfo.images.length < MAX_IMAGES - 1 && (
                 <div className="imi-image-upload" style={{ marginTop: '15px' }}>
                     <div
                         className="imi-image-upload-info"
@@ -188,7 +208,7 @@ const MakeReward2 = () => {
 
             <div className="edit_wrap">
                 <Editor
-                    initialValue=""
+                    initialValue={totInfo.projContent}
                     previewStyle="vertical"
                     height="600px"
                     hideModeSwitch={true}
@@ -197,6 +217,8 @@ const MakeReward2 = () => {
                     language="ko-KR"
                     ref={editorRef}
                     plugins={[colorSyntax]}
+                    name="projContent"
+                    onChange={handleToastChange}
                 />
             </div>
 

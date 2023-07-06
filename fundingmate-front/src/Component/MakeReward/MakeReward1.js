@@ -1,20 +1,57 @@
 import React, {useState} from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
-import { DatePicker, Space } from 'antd';
+import { DatePicker } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
+import { nanoid } from 'nanoid';
 const { RangePicker } = DatePicker;
 
 const MakeReward1 = () => {
+    const [totInfo, setTotInfo] = useState({
+        rewardCategory: '',
+        projTargetAmount: 0,
+        projName: '',
+        imageFile: null,
+        projKeyword: '',
+        projDateStart: '',
+        projDateEnd: '',
+        inputs: [{id: nanoid(), url: ''}],
+        images: [],
+        projContent: '',
+        cards:[],
+        rewardRefundExchangePolicy: '',
+        rewardContact: '',
+        rewardEmail: '',
+        modelName: '',
+        rewardLaw: '',
+        countryOfOrigin: '',
+        manufacturer: '',
+        asPhonenumber: '',
+        businessAddress: '',
+        bank: '',
+        accNumber: '',
+        depositorName: '',
+        taxBillEmail: '',
+        websiteUrl: '',
+        facebookUrl: '',
+        instagramUrl: '',
+        blogUrl: '',
+        twitterUrl: '',
+        rewardIdBusinessLicenseImgSavedName:null,
+        rewardBankAccountCopyImgSavedName:null
+    })
 
-    const [inputContent, setInputContent] = useState("");
-    const inputMaxLength = 60;
+    const handleInputChange = (e) => {
+        setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
+    };
+
+   // const [inputContent, setInputContent] = useState("");
+ //   const inputMaxLength = 60;
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
-
         if (file) {
             const reader = new FileReader();
 
@@ -23,6 +60,7 @@ const MakeReward1 = () => {
             };
 
             reader.readAsDataURL(file);
+            setTotInfo({...totInfo, imageFile:file}) ;
         }
     };
 
@@ -31,15 +69,10 @@ const MakeReward1 = () => {
     };
 
 
-    const handleInputChange = (event) => {
-        const {value} = event.target;
-        if(value.length <= inputMaxLength){
-            setInputContent(value);
-        }
-    };
     const navigate = useNavigate(); // useNavigate 추가
     const handleNextStep = () => {
-        navigate("/make-reward/story");
+        // navigate('/make-reward/story', { state :{totInfo:totInfo, setTotInfo:setTotInfo }});
+        navigate('/make-reward/story', { state :{totInfo:totInfo}});
     };
 
     return (
@@ -69,7 +102,7 @@ const MakeReward1 = () => {
                 <b>프로젝트의 카테고리를 정해주세요</b>
             </p>
 
-            <select className="makeReward-option">
+            <select className="makeReward-option" name="rewardCategory" onChange={handleInputChange}>
                 <option value="none">카테고리를 선택해주세요.</option>
                 <option value="테크/가전">테크/가전</option>
                 <option value="패션/잡화">패션/잡화</option>
@@ -100,8 +133,8 @@ const MakeReward1 = () => {
                 프로젝트의 핵심 내용을 담을 수 있는 간결한 제목을 정해주세요.
             </p>
             <div>
-            <input type="text" name="projName" className="input-box" value={inputContent} onChange={handleInputChange}/>
-                <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>
+            <input type="text" name="projName" className="input-box" value={totInfo.projName} onChange={handleInputChange}/>
+{/*                <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>*/}
             </div>
             <br/>
             <br/>
@@ -114,7 +147,7 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 최소 100,000원 이상이어야 합니다.
             </p>
-            <input type="text" name="projTargetAmount" className="input-box" placeholder="0"/> &nbsp;원
+            <input type="text" name="projTargetAmount" className="input-box" placeholder="0" value={totInfo.projTargetAmount} onChange={handleInputChange}/> &nbsp;원
 
             <br/>
             <br/>
@@ -124,9 +157,7 @@ const MakeReward1 = () => {
                 <b>프로젝트의 진행 기간을 적어주세요</b>
             </p>
 
-
-                <RangePicker />
-
+            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }}/>
 
             <br/>
             <br/>
@@ -171,7 +202,7 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 <b style={{color:"#E93232"}}>(선택사항)</b> 제목 외에도 키워드 검색 시 검색 결과에 프로젝트가 나타납니다.
             </p>
-            <input type="text" name="pri_keyword" className="input-box" placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
+            <input type="text" name="projKeyword" className="input-box" value={totInfo.projKeyword} onChange={handleInputChange} placeholder="키워드, 키워드, 키워드, 키워드, 키워드"/>
             <div className="button-top-margin"></div>
             <div className="investMake-button-div">
             <button className="investMake-next-button"

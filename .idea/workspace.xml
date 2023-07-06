@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="2023 07 04 18:23 MakeReward3">
+    <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="2023 07 05 18:06 MakeReward3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.css" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward4.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +186,8 @@
       <workItem from="1688453418899" duration="126000" />
       <workItem from="1688453581337" duration="28000" />
       <workItem from="1688453622972" duration="9747000" />
-      <workItem from="1688515596476" duration="26255000" />
+      <workItem from="1688515596476" duration="27009000" />
+      <workItem from="1688603108772" duration="21864000" />
     </task>
     <task id="LOCAL-00001" summary="invest folder">
       <option name="closed" value="true" />
@@ -201,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688462680230</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="2023 07 05 18:06 MakeReward3">
+      <option name="closed" value="true" />
+      <created>1688547978402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688547978402</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +233,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="invest folder" />
     <MESSAGE value="2023 07 04 18:23 MakeReward3" />
-    <option name="LAST_COMMIT_MESSAGE" value="2023 07 04 18:23 MakeReward3" />
+    <MESSAGE value="2023 07 05 18:06 MakeReward3" />
+    <option name="LAST_COMMIT_MESSAGE" value="2023 07 05 18:06 MakeReward3" />
   </component>
 </project>

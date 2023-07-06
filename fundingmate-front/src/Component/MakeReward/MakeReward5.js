@@ -1,14 +1,21 @@
 import React, {useState} from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
-import { DatePicker, Space } from 'antd';
+import { DatePicker } from 'antd';
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
 import  DaumPostcode  from 'react-daum-postcode';
 import { Modal } from 'antd';
-const { RangePicker } = DatePicker;
 
 const MakeReward5 = () => {
+    const location = useLocation();
+    const preTotInfo = location.state.totInfo;
+    const [totInfo, setTotInfo] = useState(preTotInfo);
+
+    const handleInputChange = (e) => {
+        setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
+    };
+
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedImage2, setSelectedImage2] = useState(null);
     const handleImageUpload = (event) => {
@@ -22,6 +29,7 @@ const MakeReward5 = () => {
             };
 
             reader.readAsDataURL(file);
+            setTotInfo({...totInfo, rewardIdBusinessLicenseImgSavedName:file}) ;
         }
     };
 
@@ -40,15 +48,13 @@ const MakeReward5 = () => {
             };
 
             reader.readAsDataURL(file);
+            setTotInfo({...totInfo, rewardBankAccountCopyImgSavedName:file}) ;
         }
     };
 
     const handleImageClick2 = () => {
         document.getElementById('imageUpload2').click();
     };
-
-    const [showPostcode, setShowPostcode] = useState(false);
-    const [businessAddress, setBusinessAddress] = useState("");
 
     const handleComplete = (data) => {
         let fullAddress = data.address;
@@ -65,8 +71,8 @@ const MakeReward5 = () => {
             fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
         }
 
-        setBusinessAddress(fullAddress);
-        setShowPostcode(false);
+        setTotInfo({...totInfo, businessAddress:fullAddress});
+
         setShowModal(false); // Close the modal
     };
 
@@ -78,11 +84,12 @@ const MakeReward5 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/goodsinfo");
+        navigateToStep1("/make-reward/goodsinfo", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
-        navigateToStep2("#");
+        console.log(totInfo);
+        navigateToStep2("/reward-detail/story", {state:{totInfo:totInfo}});
     };
     return (
         <>
@@ -132,10 +139,11 @@ const MakeReward5 = () => {
             </p>
 
             <input
+                onChange={handleInputChange}
                 type="text"
                 name="businessAddress"
                 className="input-box"
-                value={businessAddress}
+                value={totInfo.businessAddress}
                 readOnly
             />
             {/* 주소 찾기 버튼 */}
@@ -171,7 +179,7 @@ const MakeReward5 = () => {
                 <b>은행과 계좌 번호를 적어주세요</b>
             </p>
 
-            <select className="bank-name">
+            <select className="bank-name"  name="bank" onChange={handleInputChange}>
                 <option value="none">은행을 선택해주세요.</option>
                 <option value="산업은행">산업은행</option>
                 <option value="기업은행">기업은행</option>
@@ -200,14 +208,14 @@ const MakeReward5 = () => {
                 <option value="카카오뱅크">카카오뱅크</option>
 
             </select>
-            <input type="text" name="accNumber" className="bank-num" placeholder="계좌 번호를 숫자만 입력해 주세요.(-제외)"/>
+            <input type="text" name="accNumber" value={totInfo.accNumber} onChange={handleInputChange} className="bank-num" placeholder="계좌 번호를 숫자만 입력해 주세요.(-제외)"/>
             <br/>
             <br/>
 
             <p className="custom-font-sub-title">
                 <b>예금주명을 적어주세요</b>
             </p>
-            <input type="text" name="depositorName" className="input-box" placeholder="계좌에 등록된 예금주명과 일치해야 합니다."/>
+            <input type="text" name="depositorName"  value={totInfo.depositorName} onChange={handleInputChange} className="input-box" placeholder="계좌에 등록된 예금주명과 일치해야 합니다."/>
             <br/>
             <br/>
             <p className="custom-font-sub-title">
@@ -240,7 +248,7 @@ const MakeReward5 = () => {
                 <b>세금계산서를 발급 받을 이메일을 적어주세요</b>
             </p>
 
-            <input type="text" name="taxBillEmail" className="input-box"/>
+            <input type="text" name="taxBillEmail"  value={totInfo.taxBillEmail} onChange={handleInputChange} className="input-box"/>
 
             <br/>
             <br/>
@@ -261,23 +269,23 @@ const MakeReward5 = () => {
             <div style={{display:'flex', flexDirection:"column"}}>
                 <div className="sns-address-div">
                     <div className="snsAddress"><IeOutlined /></div>
-                    <input type="text" name="websiteUrl" className="sns-input-box" placeholder="주소를 입력해주세요."/>
+                    <input type="text" name="websiteUrl" value={totInfo.websiteUrl} onChange={handleInputChange} className="sns-input-box" placeholder="주소를 입력해주세요."/>
                 </div>
                 <div className="sns-address-div">
                     <div  className="snsAddress"><FacebookOutlined /></div>
-                    <input type="text" name="facebookUrl" className="sns-input-box" placeholder="주소를 입력해주세요."/>
+                    <input type="text" name="facebookUrl" value={totInfo.facebookUrl} onChange={handleInputChange} className="sns-input-box" placeholder="주소를 입력해주세요."/>
                 </div>
                 <div className="sns-address-div">
                     <div  className="snsAddress"><InstagramOutlined /></div>
-                    <input type="text" name="instagramUrl" className="sns-input-box" placeholder="주소를 입력해주세요."/>
+                    <input type="text" name="instagramUrl" value={totInfo.instagramUrl} onChange={handleInputChange} className="sns-input-box" placeholder="주소를 입력해주세요."/>
                 </div>
                 <div className="sns-address-div">
                     <div  className="snsAddress"><BoldOutlined /></div>
-                    <input type="text" name="blogUrl" className="sns-input-box" placeholder="주소를 입력해주세요."/>
+                    <input type="text" name="blogUrl" value={totInfo.blogUrl} onChange={handleInputChange} className="sns-input-box" placeholder="주소를 입력해주세요."/>
                 </div>
                 <div className="sns-address-div">
                     <div  className="snsAddress"><TwitterOutlined /></div>
-                    <input type="text" name="twitterUrl" className="sns-input-box" placeholder="주소를 입력해주세요."/>
+                    <input type="text" name="twitterUrl" value={totInfo.twitterUrl} onChange={handleInputChange} className="sns-input-box" placeholder="주소를 입력해주세요."/>
                 </div>
 
             </div>

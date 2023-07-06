@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { Route, useNavigate, useLocation} from "react-router-dom";
 import "./MakeReward3.css";
 import "./MakeRewardCommon.css";
 import {PlusOutlined, PlusSquareOutlined,MinusSquareOutlined} from "@ant-design/icons";
@@ -11,8 +11,13 @@ import dayjs from 'dayjs';
 import { nanoid } from 'nanoid';
 
 const MakeReward3 = () => {
+    const location = useLocation();
+    const preTotInfo = location.state.totInfo;
+    const [totInfo, setTotInfo] = useState(preTotInfo);
+
     const today = new Date();
     const todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
     const [modalOpen, setModalOpen] = useState(false);
     const initCard = {rewardAmount:'',rewardAvailableLimit:'',rewardAvailableCount:0,rewardTitle:'',rewardContent:'',rewardDeleverydate:todayDate,rewardShipAddress:'',
                         options: []};
@@ -20,42 +25,13 @@ const MakeReward3 = () => {
     console.log("card.options.length:"+card.options.length);
     const [cards, setCards] = useState([]); // 카드 배열 추가
     const [editingCardIndex, setEditingCardIndex] = useState(null); // 수정 중인 카드의 인덱스
-/*    const initialState = {
-        modalOpen: false,
-        rewardAmount: "",
-        rewardAvailableCount: "",
-        inputContent: "",
-        textareaContent: "",
-        limitClicked: null,
-        saClicked: null,
-        showOption: false,
-        optionFields: [],
-    };*/
-    // const [rewardAmount, setRewardAmount] = useState("");
-    // const [selectedDate, setSelectedDate] = useState(null);
-    // const [rewardAvailableCount, setRewardAvailableCount] = useState("");
-    // const handleRewAdd = () => {
-    //     setEditingCardIndex(null);
-    //     setRewardAmount("");
-    //     setSelectedDate(null);
-    //     setRewardAvailableCount("");
-    //     setInputContent("");
-    //     setTextareaContent("");
-    //     setShowOption(false);
-    //     setOptionFields([]);
-    //     setLimitClicked(null);
-    //
-    //     setModalOpen(false);
-    // };
-
-
 
     const handleOk = () => {
         setModalOpen(false);
         if(editingCardIndex!=null) {  //수정
-            cards[editingCardIndex] = {...card};
+            totInfo.cards[editingCardIndex] = {...card};
         } else { //추가
-            setCards(prevCards => [...prevCards, card]); // 새로운 카드 객체를 배열에 추가
+            setTotInfo({...totInfo, cards:[...totInfo.cards, card]}); // 새로운 카드 객체를 배열에 추가
         }
         console.log(card);
     };
@@ -126,11 +102,12 @@ const MakeReward3 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/story");
+        navigateToStep1("/make-reward/story", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
-        navigateToStep2("/make-reward/goodsinfo");
+        //setTotInfo({...totInfo, cards:[...cards]})
+        navigateToStep2("/make-reward/goodsinfo", {state:{totInfo:totInfo}});
     };
 
     const rewardChange = (e) => {
@@ -236,14 +213,14 @@ const MakeReward3 = () => {
                 </p>
                 <div>
                 <input type="text" name="rewardTitle" className="modal-input-box" value={card.rewardTitle} onChange={rewardChange}/>
-                <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>
+              {/*  <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>*/}
                 </div>
                 <p className="custom-font-modal-sub-title">
                     리워드 내용
                 </p>
                 <div>
                 <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={card.rewardContent} onChange={rewardChange}/>
-                <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>
+   {/*             <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>*/}
                 </div>
 
 
@@ -305,7 +282,7 @@ const MakeReward3 = () => {
                 </div>
 
             </Modal>
-            {cards.map((cardItem, index) => (
+            {totInfo.cards.map((cardItem, index) => (
             <div className="make-rew-card" key={index}>
                 <div className="make-rew-card-div">
                 <div>
