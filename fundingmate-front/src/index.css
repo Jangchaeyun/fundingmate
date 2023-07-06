@@ -15,9 +15,7 @@
   --info: rgba(248, 199, 199, 0.56);
 }
 
-* {
-  width: 1080px;
-  margin: 0 auto;
+body {
   font-family: "SUITE-Regular";
   overflow-x: hidden;
 }

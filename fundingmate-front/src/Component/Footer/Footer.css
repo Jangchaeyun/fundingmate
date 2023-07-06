@@ -1,0 +1,52 @@
+.footer {
+    width: 1080px;
+    height: 100%;
+    border-top: 1px solid #eaebed;
+    margin: 20px auto;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.f-logo {
+    font-size: 20px;
+    margin: 20px 0;
+}
+.f-title {
+    color: #14B8FF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.f-content {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+.f-content>div {
+    margin: 10px 0;
+}
+.footer {
+    width: 1080px;
+    height: 100%;
+    border-top: 1px solid #eaebed;
+    margin: 20px auto;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.f-logo {
+    font-size: 20px;
+    margin: 20px 0;
+}
+.f-title {
+    color: #14B8FF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.f-content {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+.f-content>div {
+    margin: 10px 0;
+}
