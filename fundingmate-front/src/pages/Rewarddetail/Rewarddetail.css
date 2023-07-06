@@ -1,0 +1,456 @@
+.desc {
+  margin-left: 4.5%;
+  overflow-x: hidden;
+}
+
+.desc_subtitle {
+  font-size: 11px;
+  margin-top: 1%;
+  margin-bottom: 0.2%;
+  margin-left: 10%;
+}
+
+.bold {
+  color: var(--main-color);
+}
+
+.desc_title {
+  font-size: 15px;
+  margin-bottom: 0.8%;
+  margin-left: 10%;
+}
+
+.desc_contents {
+  display: flex;
+  margin-left: 10%;
+}
+
+.main_img {
+  width: 490px;
+  height: 300px;
+}
+
+.desc_img {
+  text-align: center;
+}
+.sub_img1 {
+  width: 100px;
+  height: 52.583px;
+  margin-right: 0.7%;
+}
+
+.sub_img2 {
+  width: 100px;
+  height: 52.583px;
+}
+
+.desc_content {
+  width: 100%;
+  margin-left: 3%;
+}
+
+.fund_category {
+  color: var(--main-color);
+  font-size: 13px;
+  margin-bottom: 0.5%;
+}
+
+.fund_price {
+  font-size: 20px;
+}
+
+.rewarding {
+  color: var(--black);
+  font-size: 12px;
+}
+
+.fund_rate {
+  display: flex;
+  width: 48%;
+  margin-left: 0.6%;
+  color: var(--grey);
+  font-size: 12px;
+  margin-top: 2%;
+}
+
+.fund_rate_title {
+  width: 22%;
+  margin-left: 0%;
+  margin-right: 7%;
+}
+
+.fund_rate_per {
+  margin-left: -1%;
+  color: var(--black);
+  margin-right: 6%;
+}
+
+.fund_rate_price {
+  color: var(--black);
+  font-size: 10px;
+  margin-top: 1%;
+  margin-right: -15%;
+}
+
+.fund_date {
+  display: flex;
+  width: 51%;
+  margin-left: 0.6%;
+  color: var(--grey);
+  font-size: 12px;
+  margin-top: 2%;
+}
+
+.fund_date_title {
+  color: var(--grey);
+  margin-left: 0%;
+  margin-right: 4%;
+}
+
+.fund_date_dday {
+  color: var(--black);
+  margin-right: 12%;
+}
+
+.fund_date_enddate {
+  margin-top: 0.4%;
+  margin-left: -7%;
+}
+
+.fund_date_end {
+  color: var(--black);
+  font-size: 10px;
+  margin-right: -15%;
+}
+
+.fund_people {
+  display: flex;
+  width: 58%;
+  margin-left: 0.6%;
+  color: var(--grey);
+  font-size: 12px;
+  margin-top: 2%;
+  justify-content: center;
+  justify-items: center;
+}
+
+.fund_people_title {
+  width: 59%;
+  margin-top: 4%;
+}
+
+.fund_people_count {
+  color: var(--black);
+  width: 43%;
+  margin-left: -16%;
+  margin-top: 4%;
+}
+
+.fund_btn {
+  width: 74%;
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  height: 31px;
+  margin-left: 1%;
+  cursor: pointer;
+}
+
+.proj_share {
+  margin-top: 2%;
+  width: 59%;
+  background-color: var(--white);
+  border: 1px solid #000;
+  font-size: 12px;
+  height: 36px;
+  border-radius: 5px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.proj_share:hover {
+  border: 1px solid #14b8ff;
+  color: #14b8ff;
+}
+
+.circles {
+  display: flex;
+  width: 54%;
+  margin-top: 2%;
+  margin-left: 5.8%;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #fff;
+  margin-right: 25px;
+}
+
+.icon_img {
+  width: 50%;
+  margin-top: 25%;
+  margin-left: 25%;
+}
+
+.schedule {
+  display: flex;
+  width: 50%;
+  margin-top: 1%;
+  margin-left: 4%;
+  font-size: 11px;
+  color: var(--grey);
+  text-align: center;
+}
+
+.end {
+  color: var(--main-color);
+  margin-right: 12%;
+}
+
+.company {
+  border-radius: 5px;
+  border: 1px solid var(--black);
+  width: 58%;
+  height: 41px;
+  margin-top: 2%;
+  margin-left: 0.6%;
+  transition: all 0.4s linear;
+  cursor: pointer;
+}
+
+.contact_box {
+  display: flex;
+  width: 13%;
+}
+
+.company:hover {
+  transform: scale(1.03);
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+}
+
+.company_name {
+  font-size: 12px;
+  color: var(--black);
+  margin-top: 5.5%;
+  margin-left: 11%;
+  transition: all 0.2s linear;
+}
+
+.fund_end_date_title {
+  margin-right: 10%;
+}
+
+.price_date_title {
+  margin-right: 10%;
+}
+
+.company_name:hover {
+  color: var(--main-color);
+}
+
+.name_view {
+  display: flex;
+  margin-top: 1%;
+}
+
+.boy_img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  margin-left: 2.7%;
+  margin-top: 1px;
+}
+
+.info {
+  width: 58%;
+  background-color: var(--info);
+  font-size: 10px;
+  margin-left: 0%;
+  margin-top: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-radius: 5px;
+  padding-left: 1%;
+}
+
+.menu {
+  margin-top: 3%;
+  margin-left: -6%;
+}
+
+.menu_items {
+  display: flex;
+  width: 100%;
+  margin-top: 1%;
+  margin-left: 45%;
+  font-size: 14px;
+  transition: all 0.4s linear;
+}
+
+.active {
+  color: var(--main-color);
+}
+
+.story {
+  transition: all 0.4s linear;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+  margin-left: -4%;
+  margin-right: 6%;
+}
+
+.story:hover {
+  color: var(--main-color);
+}
+
+.contact {
+  transition: all 0.4s linear;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+  margin-left: 30%;
+}
+
+.contact:hover {
+  color: var(--main-color);
+}
+
+.contact_count {
+  color: var(--main-color);
+  margin-left: -0.4%;
+  margin-top: -0.9%;
+  font-size: 9px;
+}
+
+.guide {
+  transition: all 0.4s linear;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+  margin-left: 4%;
+}
+
+.guide:hover {
+  color: var(--main-color);
+}
+
+.story_content {
+  margin-top: 2%;
+  font-size: 13px;
+  margin-left: 17%;
+}
+
+.product_img {
+  width: 100%;
+}
+
+.con {
+  margin-top: 4%;
+  margin-left: 17%;
+}
+
+.con_subtitle {
+  font-size: 14px;
+}
+
+.con_title {
+  color: var(--main-color);
+  margin-top: 1%;
+  font-size: 18px;
+}
+
+.con_info {
+  margin-top: 1%;
+  font-size: 14px;
+}
+
+.con_input {
+  margin-top: 3%;
+  width: 82.5%;
+  height: 73px;
+  border: 1px solid var(--grey);
+  resize: none;
+}
+
+.con_input:focus {
+  outline: none;
+}
+
+.sub {
+  margin-top: 1%;
+  float: right;
+  margin-right: 15.4%;
+  width: 13%;
+  height: 25px;
+  border: 1px solid var(--main-color);
+  justify-content: center;
+  background-color: var(--white);
+  margin-bottom: 2%;
+  cursor: pointer;
+  transition: all 0.4s linear;
+}
+
+.sub:hover {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.con_list {
+  background-color: var(--lightgrey);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-left: 0%;
+  padding-left: 302px;
+  margin-bottom: 2%;
+  margin-top: 5%;
+  width: 49.4%;
+}
+
+.guide_title {
+  margin-top: 3%;
+  padding-bottom: 1%;
+}
+
+.guide_content {
+  font-size: 12px;
+}
+
+.guide_line {
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+.guide_line2 {
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.guide_category {
+  font-size: 13px;
+  margin-bottom: 1%;
+}
+
+.guide_category_info {
+  color: var(--grey);
+  font-size: 12px;
+  margin-bottom: 1%;
+}
+
+.guide_category_info_con {
+  margin-bottom: 1%;
+}
+
+.guide_infos {
+  margin-left: 17%;
+}
+
+.text {
+  text-align: center;
+}
