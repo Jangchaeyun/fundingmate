@@ -1,22 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./JoinForm.css"
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function JoinForm(props) {
+    const [user, setUser] = useState({userid:'',password:'', email:'',name:'',birth:'',tel:''});
+    const changeInput = (e) => {
+        setUser({...user, [e.target.name]:e.target.value});
+    }
+    const submit = (e) => {
+        e.preventDefault();
+        console.log(user)
+        axios.post('http://localhost:8080/join', user)
+            .then(res=> {
+                console.log(res);
+                Swal.fire(res.data);
+                document.location.href="/login";
+            })
+            .catch(err=> {
+                console.log(err);
+                Swal.fire(err.data);
+            })
+    }
     return (
         <div className="joinForm">
             <div className="joinTitle">회원가입</div>
-            <form action="login">
+            <form onSubmit={submit}>
                 <div className="joinwrap">
-                    <input type="text" placeholder="아이디"/>
-                    <input type="password" placeholder="비밀번호"/>
-                    <input type="text" placeholder="비밀번호 확인"/>
-                    <input type="email" placeholder="아이디/비밀번호 찾을 시 확인용 이메일"/>
+                    <input type="text" name="userid" id="userid"  placeholder="아이디" onChange={changeInput}/>
+                    <input type="password" name="password" placeholder="비밀번호" onChange={changeInput}/>
+                    <input type="text" placeholder="비밀번호 확인" onChange={changeInput}/>
+                    <input type="email" name="email" placeholder="아이디/비밀번호 찾을 시 확인용 이메일" onChange={changeInput}/>
                 </div>
                 <div className="joinwrap">
-                    <input type="text" placeholder="이름"/>
-                    <input type="text" placeholder="생년월일 8자리"/>
-                    <input type="text" placeholder="휴대폰 번호 입력 ('-' 제외)"/>
-                    <input type="text" placeholder="인증번호" dis/>
+                    <input type="text" name="name" placeholder="이름" onChange={changeInput}/>
+                    <input type="text" name="birth" placeholder="생년월일 8자리" onChange={changeInput}/>
+                    <input type="text" name="tel" placeholder="휴대폰 번호 입력 ('-' 제외)" onChange={changeInput}/>
+                    <input type="text" placeholder="인증번호" dis />
                     <button value="인증요청" className="authChk">인증요청</button>
                 </div>
                 <div className="joinwrap">
@@ -218,7 +238,7 @@ function JoinForm(props) {
                     </p>
                 </div>
                 <input type="submit" value="회원가입" className="joinBtn"/>
-            </form>
+            </form >
         </div>
     );
 }
