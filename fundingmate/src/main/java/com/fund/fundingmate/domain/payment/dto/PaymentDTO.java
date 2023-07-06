@@ -1,24 +1,18 @@
-package com.fund.fundingmate.domain.payment.entity;
+package com.fund.fundingmate.domain.payment.dto;
 
 import com.fund.fundingmate.domain.user.entity.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "payment")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PaymentDTO {
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_no")
     private User user;
 
     private String cardnumber;
@@ -37,6 +31,5 @@ public class Payment {
 
     private String shippingadress;
 
-    private String shippingaddressdesc;
+    private String shippingadressdesc;
 }
-

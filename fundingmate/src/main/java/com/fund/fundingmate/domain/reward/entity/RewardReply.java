@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.entity;
 
+import com.fund.fundingmate.domain.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,4 +31,8 @@ public class RewardReply {
     @ManyToOne
     @JoinColumn(name = "comm_no")
     private RewardComment comment;
+
+    @ManyToOne
+    @JoinColumn(name = "user_no")
+    private User user;
 }

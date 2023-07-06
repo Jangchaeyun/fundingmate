@@ -98,6 +98,23 @@ const Checkout = () => {
           <option value="1">할부</option>
         </select>
 
+        <p className="title">주소</p>
+        <div className="address_input">
+          <input
+            type="text"
+            className="address"
+            placeholder="배송지 주소"
+            required
+          />
+          <br/>
+          <input
+            type="text"
+            className="addressdesc"
+            placeholder="배송지 상세 주소"
+            required
+          />
+        </div>
+
         <p className="sub_title">정보 동의</p>
         <div className="check_box">
           <label className="check_title">

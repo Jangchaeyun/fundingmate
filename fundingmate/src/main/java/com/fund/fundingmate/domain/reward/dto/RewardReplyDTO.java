@@ -23,4 +23,5 @@ public class RewardReplyDTO {
     private Date repRevisionDate;
     private Long rewardId;
     private Long commentId;
+    private Long userId;
 }

@@ -7,6 +7,7 @@ import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.entity.RewardComment;
 import com.fund.fundingmate.domain.reward.entity.RewardReply;
 import com.fund.fundingmate.domain.reward.repository.RewardCommentRepository;
+import com.fund.fundingmate.domain.reward.repository.RewardReplyRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
@@ -22,14 +23,15 @@ import java.util.Date;
 public class RewardCommentService {
     private final RewardCommentRepository rewardCommentRepository;
     private final UserRepository userRepository;
-
     private final RewardRepository rewardRepository;
+    private final RewardReplyRepository rewardReplyRepository;
 
     @Autowired
-    public RewardCommentService(RewardCommentRepository rewardCommentRepository, UserRepository userRepository, RewardRepository rewardRepository) {
+    public RewardCommentService(RewardCommentRepository rewardCommentRepository, UserRepository userRepository, RewardRepository rewardRepository, RewardReplyRepository rewardReplyRepository) {
         this.rewardCommentRepository = rewardCommentRepository;
         this.userRepository = userRepository;
         this.rewardRepository = rewardRepository;
+        this.rewardReplyRepository = rewardReplyRepository;
     }
 
     public void insertRewardComment(RewardCommentDTO rewardCommentDTO) {
@@ -54,6 +56,25 @@ public class RewardCommentService {
     }
 
     public void insertRewardCommentReply(RewardReplyDTO rewardReplyDTO) {
+        Long rewardId = rewardReplyDTO.getRewardId();
+        Long commentId = rewardReplyDTO.getCommentId();
 
+        Reward reward = rewardRepository.findById(rewardId)
+                .orElseThrow(() -> new IllegalArgumentException("Reward not found with ID: " + rewardId));
+        RewardComment  comment = rewardCommentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
+
+        if(!reward.getUser().getId().equals(comment.getUser().getId())) {
+            throw new IllegalStateException("Only the creator of the Reward to reply to the comment.");
+        }
+
+        RewardReply rewardReply = new RewardReply();
+        rewardReply.setRepContent(rewardReplyDTO.getRepContent());
+        rewardReply.setRepRegistrationDate(new Date());
+        rewardReply.setRepRevisionDate(new Date());
+        rewardReply.setReward(reward);
+        rewardReply.setComment(comment);
+
+        rewardReplyRepository.save(rewardReply);
     }
 }
