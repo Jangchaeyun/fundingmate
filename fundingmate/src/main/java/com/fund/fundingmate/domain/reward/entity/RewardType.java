@@ -16,7 +16,7 @@ import java.util.Date;
 public class    RewardType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rewardTypeNo;
+    private Long id;
 
     private Integer rewardAmount;
 

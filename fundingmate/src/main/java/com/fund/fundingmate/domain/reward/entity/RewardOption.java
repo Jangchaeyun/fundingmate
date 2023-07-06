@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class RewardOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rewardOptNo;
+    private Long id;
 
     private String rewardOptName;
 

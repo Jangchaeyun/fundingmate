@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RewardTypeDTO {
-    private Long rewardTypeNo;
+    private Long id;
     private Integer rewardAmount;
     private Boolean rewardAvailableLimit;
     private Integer rewardAvailableCount;

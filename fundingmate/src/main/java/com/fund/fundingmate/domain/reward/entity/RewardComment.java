@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reward_comment")
@@ -16,11 +17,9 @@ import java.util.Date;
 public class RewardComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comNo;
+    private Long id;
 
-    private String comTitle;
-
-    private String commContent;
+    private String comContent;
 
     private Date comRegistrationDate;
 
@@ -33,4 +32,7 @@ public class RewardComment {
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true) // Add this mapping for replies
+    private List<RewardReply> replies;
 }

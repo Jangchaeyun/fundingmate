@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RewardDTO {
-    private Long rewardNo;
+    private Long id;
     private String projName;
     private Integer projTargetAmout;
     private LocalDate projDateStart;

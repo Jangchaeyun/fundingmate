@@ -10,7 +10,6 @@
   overflow-x: hidden;
 }
 
-/*
 input {
   border-radius: 5px;
   border: 1px solid var(--grey);
@@ -19,7 +18,7 @@ input {
 input:focus {
   outline: none;
 }
-*/
+
 
 .rew_check_info {
   background-color: var(--info);
@@ -237,6 +236,19 @@ input:focus {
 .period {
   width: 65px;
   height: 25px;
+}
+
+.address {
+  width: 270px;
+  height: 25px;
+  padding-left: 5px;
+}
+
+.addressdesc {
+  margin-top: 13px;
+  width: 150px;
+  height: 25px;
+  padding-left: 5px;
 }
 
 select {

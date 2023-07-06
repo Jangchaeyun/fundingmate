@@ -6,37 +6,28 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "invset_people")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment {
+public class InvestPeople {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_no")
     private User user;
 
-    private String cardnumber;
+    private String name;
 
-    private String cardpassword;
+    private String sercuritynumber1;
 
-    private Boolean paymentcode;
+    private String securitynumber2;
 
-    private Integer paymentamount;
+    private String calltype;
 
-    private String payenddate;
-
-    private String birthday;
-
-    private String payperiod;
-
-    private String shippingadress;
-
-    private String shippingaddressdesc;
+    private String callnumber;
 }
-
