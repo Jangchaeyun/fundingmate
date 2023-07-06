@@ -18,7 +18,7 @@ function LoginForm() {
             </form>
             <div className="socialLogin">
                 <a href="" className="googleLogin"><img  src={require("../../assets/images/Login/googleIcon.png")} />구글 로그인</a><br/>
-                <a href="" className="naverLogin"><img  src={require("../../assets/images/Login/naverIcon.webp")} />런닝메이트 로그인</a><br/>
+                <a href="" className="naverLogin"><img  src={require("../../assets/images/Login/naverIcon.webp")} />네이버 로그인</a><br/>
                 <a href="" className="kakaoLogin"><img  src={require("../../assets/images/Login/kakaoIcon.png")} />카카오 로그인</a>
             </div>
             <div className="join">

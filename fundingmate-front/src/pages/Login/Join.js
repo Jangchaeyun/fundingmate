@@ -5,7 +5,7 @@ import Header from "../../Component/Header/Header";
 
 function Join(props) {
     return (
-        <div className="join">
+        <div className="wrap">
             <Header />
             <JoinForm/>
             <CorFooter />

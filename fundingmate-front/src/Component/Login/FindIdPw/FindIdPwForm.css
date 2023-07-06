@@ -1,6 +1,10 @@
 .findIdPwForm {
     width: 350px;
     margin: 150px auto;
+    height: auto;
+    padding-bootom: 60px; /*footer의 높이*/
+    min-height: 400px;
+
 }
 .findIdPwtitle {
     font-size: 30px;

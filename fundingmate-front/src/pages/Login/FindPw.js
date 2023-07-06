@@ -7,7 +7,7 @@ import FindPwForm from "../../Component/Login/FindIdPw/FindPwForm";
 
 function FindIdPw(props) {
     return (
-        <div className="findIdPw">
+        <div className="wrap">
             <Header />
             <FindPwForm />
             <CorFooter />

@@ -5,7 +5,7 @@ import LogoHeader from "../../Component/Header/LogoHeader";
 
 function Login() {
     return (
-        <div className="login">
+        <div className="wrap">
             <LogoHeader />
             <LoginForm />
             <CorFooter />

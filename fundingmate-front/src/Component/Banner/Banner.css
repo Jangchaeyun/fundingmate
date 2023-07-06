@@ -1,5 +1,5 @@
 .banner {
-    height: 400px;
+    /*height: 400px;*/
 }
 .banner-slide {
 }
@@ -38,4 +38,7 @@
 .bannerNav {
     width: 1080px;
     margin: 0 auto;
+}
+.swiper-slide {
+    overflow: hidden;
 }
