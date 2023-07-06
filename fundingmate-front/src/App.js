@@ -4,7 +4,6 @@ import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from 'react'
 import { Reset } from 'styled-reset'
-import Reward from "./Component/Reward/Reward";
 import FindIdPw from "./pages/Login/FindIdPw";
 import Join from "./pages/Login/Join";
 import FindId from "./pages/Login/FindId";
@@ -13,8 +12,6 @@ import FindIdResult from "./pages/Login/FindIdResult";
 import FindPwNext from "./pages/Login/FindPwNext";
 import FindPwResult from "./pages/Login/FindPwResult";
 import Search from "./pages/Home/Search";
-// import Reward from "./Component/Reward/Reward";
-// import Rewarddetail from "./Component/RewardDetail/Rewarddetail";
 import Reward from "./pages/Reward/Reward";
 import Story from "./Component/RewardDetail/Detail/Story";
 import Contact from "./Component/RewardDetail/Detail/Contact";
@@ -34,7 +31,6 @@ import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
 import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
-import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 function App() {
