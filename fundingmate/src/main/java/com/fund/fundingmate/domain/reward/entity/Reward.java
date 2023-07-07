@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class Reward {
 
     private Integer projTargetAmout;
 
-    private Date projDateStart;
+    private LocalDate projDateStart;
 
-    private Date projDateEnd;
+    private LocalDate projDateEnd;
 
     private String rewardRepImgSavedName;
 

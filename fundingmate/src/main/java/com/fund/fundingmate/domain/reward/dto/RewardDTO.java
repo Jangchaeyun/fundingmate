@@ -1,10 +1,7 @@
 package com.fund.fundingmate.domain.reward.dto;
 
 import com.fund.fundingmate.domain.user.dto.UserDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RewardDTO {
     private Long id;
     private String projName;

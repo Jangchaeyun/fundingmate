@@ -2,30 +2,21 @@ package com.fund.fundingmate;
 
 import com.fund.fundingmate.domain.payment.dto.InvestPeopleDTO;
 import com.fund.fundingmate.domain.payment.dto.PaymentDTO;
-import com.fund.fundingmate.domain.payment.entity.InvestPeople;
-import com.fund.fundingmate.domain.payment.entity.Payment;
 import com.fund.fundingmate.domain.payment.repository.InvestPeopleRepository;
 import com.fund.fundingmate.domain.payment.repository.PaymentRepository;
 import com.fund.fundingmate.domain.payment.service.InvestPeopleService;
 import com.fund.fundingmate.domain.payment.service.PaymentService;
 import com.fund.fundingmate.domain.reward.dto.*;
-import com.fund.fundingmate.domain.reward.entity.Reward;
-import com.fund.fundingmate.domain.reward.entity.RewardComment;
-import com.fund.fundingmate.domain.reward.entity.RewardReply;
 import com.fund.fundingmate.domain.reward.repository.RewardCommentRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
-import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.domain.user.entity.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,10 +25,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -102,8 +93,8 @@ class FundingmateApplicationTests {
 		RewardDTO rewardDTO = new RewardDTO();
 		rewardDTO.setProjName("My Project");
 		rewardDTO.setProjTargetAmout(10000);
-		rewardDTO.setProjDateStart(LocalDate.of(2023, 7, 1));
-		rewardDTO.setProjDateEnd(LocalDate.of(2023, 7, 31));
+		rewardDTO.setProjDateStart(LocalDate.of(2023, 6, 6));
+		rewardDTO.setProjDateEnd(LocalDate.of(2023, 7, 6));
 		rewardDTO.setRewardRepImgSavedName("project_image.jpg");
 		rewardDTO.setProjKeyWord("technology, innovation");
 		rewardDTO.setRewardVideoAddress("https://www.youtube.com/watch?v=abcd1234");
@@ -242,5 +233,48 @@ class FundingmateApplicationTests {
 
 		InvestPeopleService investPeopleService = new InvestPeopleService(investPeopleRepository);
 		investPeopleService.createInvestPeople(investPeopleDTO);
+	}
+
+	@Test
+	void selectRewardById() {
+		Long rewardId = 1L;
+
+		try {
+			Map<String, Object> rewardMap = rewardService.getRewardById(rewardId);
+			RewardDTO rewardDTO = (RewardDTO) rewardMap.get("reward");
+			System.out.println(rewardDTO.toString());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Test
+	void findByProjDateEndBefore() {
+		try {
+			List<RewardDTO> rewards = rewardService.getRewardWithProjDateEndBeforeToday();
+			System.out.println(rewards.toString());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Test
+	void findByProjDateEndAfter() {
+		try {
+			List<RewardDTO> rewards = rewardService.getRewardWithProjDateEndBefore();
+			System.out.println(rewards.toString());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Test
+	void findByProjStartAfter() {
+		try {
+			List<RewardDTO> rewards = rewardService.getRewardWithProjDateStartAfter();
+			System.out.println(rewards.toString());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

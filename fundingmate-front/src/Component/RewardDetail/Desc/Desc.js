@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import CompanyModel from "../../Company/CompanyModel";
+import { useParams } from "react-router";
 
 const Desc = () => {
   const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
   const [isClicked, setIsClicked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [rewardDetail, setRewardDetail] = useState({});
   let navigate = useNavigate();
+
+  const { rewardId } = useParams();
+
+  useEffect(() => {
+    submit();
+  }, []);
+
+  const submit = () => {
+    axios
+      .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
+      .then((res) => {
+        setRewardDetail(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleClick = () => {
     if (isClicked) {
@@ -26,7 +46,8 @@ const Desc = () => {
   return (
     <div className="desc">
       <div className="desc_subtitle">
-        해당 프로젝트는<b className="bold">[HandMade]</b>와 함께합니다.
+        해당 프로젝트는<b className="bold">[{rewardDetail.manufacturer}]</b>와
+        함께합니다.
       </div>
       <div className="desc_title">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
       <div className="desc_contents">

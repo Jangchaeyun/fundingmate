@@ -30,7 +30,11 @@ function App() {
         <Route exact path="/my-page?type=founder" element={<Founder />} />
       </Routes>
       <Routes>
-        <Route exact path="/reward-detail/story" element={<Story />} />
+        <Route
+          exact
+          path="/reward-detail/story/:rewardId"
+          element={<Story />}
+        />
         <Route exact path="/reward-detail/contact" element={<Contact />} />
         <Route exact path="/reward-detail/guide" element={<Guide />} />
       </Routes>
@@ -73,14 +77,14 @@ function App() {
         <Route exact path="/rewardfund" element={<RewardFundMain />} />
       </Routes>
       <Routes>
-          <Route exact path="/MakeReward1" element={<MakeReward1 />} />
-          <Route exact path="/MakeReward2" element={<MakeReward2/>} />
-          <Route exact path="/MakeReward3" element={<MakeReward3/>} />
-          <Route exact path="/MakeReward4" element={<MakeReward4/>} />
-          <Route exact path="/MakeReward5" element={<MakeReward5/>} />
+        <Route exact path="/MakeReward1" element={<MakeReward1 />} />
+        <Route exact path="/MakeReward2" element={<MakeReward2 />} />
+        <Route exact path="/MakeReward3" element={<MakeReward3 />} />
+        <Route exact path="/MakeReward4" element={<MakeReward4 />} />
+        <Route exact path="/MakeReward5" element={<MakeReward5 />} />
       </Routes>
     </div>
   );
-};
+}
 
 export default App;
