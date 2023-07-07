@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate , useLocation } from "react-router-dom";
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
@@ -18,6 +18,26 @@ const MakeReward5 = () => {
 
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedImage2, setSelectedImage2] = useState(null);
+
+    useEffect(()=> {
+        let file = totInfo.rewardIdBusinessLicenseImgSavedName;
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setSelectedImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+        file = totInfo.rewardBankAccountCopyImgSavedName;
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setSelectedImage2(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    }, [])
+
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
 
@@ -49,6 +69,7 @@ const MakeReward5 = () => {
 
             reader.readAsDataURL(file);
             setTotInfo({...totInfo, rewardBankAccountCopyImgSavedName:file}) ;
+            console.log(file.src);
         }
     };
 
@@ -179,7 +200,7 @@ const MakeReward5 = () => {
                 <b>은행과 계좌 번호를 적어주세요</b>
             </p>
 
-            <select className="bank-name"  name="bank" onChange={handleInputChange}>
+            <select className="bank-name"  name="bank" onChange={handleInputChange}  value={totInfo.bank}>
                 <option value="none">은행을 선택해주세요.</option>
                 <option value="산업은행">산업은행</option>
                 <option value="기업은행">기업은행</option>

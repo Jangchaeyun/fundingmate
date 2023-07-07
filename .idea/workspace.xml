@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="2023 07 06 17:05 선생님">
+    <list default="true" id="6d36f0b1-bfa8-4f3a-9f29-df6cabb280ac" name="변경" comment="2023 07 06 18:26 MakeReward3.js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" beforeDir="false" afterPath="$PROJECT_DIR$/fundingmate-front/src/Component/MakeReward/MakeReward5.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +184,10 @@
       <workItem from="1688453581337" duration="28000" />
       <workItem from="1688453622972" duration="9747000" />
       <workItem from="1688515596476" duration="27009000" />
-      <workItem from="1688603108772" duration="27863000" />
+      <workItem from="1688603108772" duration="27949000" />
+      <workItem from="1688687978966" duration="786000" />
+      <workItem from="1688688851336" duration="9000" />
+      <workItem from="1688688874551" duration="24989000" />
     </task>
     <task id="LOCAL-00001" summary="invest folder">
       <option name="closed" value="true" />
@@ -223,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688630731006</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2023 07 06 18:26 MakeReward3.js">
+      <option name="closed" value="true" />
+      <created>1688635661986</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688635661986</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +260,7 @@
     <MESSAGE value="2023 07 05 18:06 MakeReward3" />
     <MESSAGE value="2023 07 06 16:41 MakeReward" />
     <MESSAGE value="2023 07 06 17:05 선생님" />
-    <option name="LAST_COMMIT_MESSAGE" value="2023 07 06 17:05 선생님" />
+    <MESSAGE value="2023 07 06 18:26 MakeReward3.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="2023 07 06 18:26 MakeReward3.js" />
   </component>
 </project>

@@ -19,18 +19,18 @@ const MakeReward2 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
     const [totInfo, setTotInfo] = useState(preTotInfo);
+    const [images, setImages] = useState([]);
     const handleInputChange = (e) => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
     };
     const editorRef = useRef();
     const onChange = () => {
         const data = editorRef.current.getInstance().getHTML();
-        console.log(data);}
+    }
 
     const handleToastChange = (e) => {
         const data = editorRef.current.getInstance().getHTML();
         setTotInfo({...totInfo, projContent:data}) ;
-        console.log(data);
     }
 
 
@@ -58,18 +58,35 @@ const MakeReward2 = () => {
 
     useEffect(()=>{
         console.log(totInfo);
+        let imgList = [];
+        for(let file of totInfo.projImages) {
+            const reader = new FileReader()
+            reader.onload = e => {
+                const imageCard = {
+                    src: e.target.result,
+                    alt: 'Selected',
+                    style: { width: '100%', height: '100%', objectFit: 'cover' }
+                };
+                imgList.push(imageCard);
+                setImages([...imgList])
+                console.log(imgList.length);
+            }
+            // reader가 이미지 읽도록 하기
+            reader.readAsDataURL(file);
+        }
     },[]);
     const handleImageUpload = (event) => {
         if(event.target.files && event.target.files[0]) {
             const reader = new FileReader()
             // 이미지가 로드가 된 경우
             reader.onload = e => {
-                const image = {
+                const imageCard = {
                     src: e.target.result,
                     alt: 'Selected',
                     style: { width: '100%', height: '100%', objectFit: 'cover' }
                 };
-                setTotInfo({...totInfo,  images:[...totInfo.images,image]}) ;
+                setImages([...images, imageCard])
+                setTotInfo({...totInfo,  projImages:[...totInfo.projImages,event.target.files[0]]}) ;
             }
             // reader가 이미지 읽도록 하기
             reader.readAsDataURL(event.target.files[0]);
@@ -77,7 +94,7 @@ const MakeReward2 = () => {
     };
 
     const handleImageClick = (e) => {
-        if (totInfo.images.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
+        if (totInfo.projImages.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
             document.getElementById('imageUpload').click();
         }
     };
@@ -85,10 +102,14 @@ const MakeReward2 = () => {
     const handleImageDelete = (e, index) => {
         e.stopPropagation();
 
-        const updatedImages = [...totInfo.images];
+        const updatedImagesFile = [...totInfo.projImages];
+        updatedImagesFile.splice(index, 1);
+
+        const updatedImages = [...images];
         updatedImages.splice(index, 1);
 
-        setTotInfo({...totInfo, images: [...updatedImages]});
+        setImages([...updatedImages]);
+        setTotInfo({...totInfo, projImages: [...updatedImages]});
         setShowDeleteIcon(false);
     };
 
@@ -100,7 +121,7 @@ const MakeReward2 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/basicinfo/", {state:{totInfo:totInfo}});
+        navigateToStep1("/make-reward/basicinfo", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
@@ -136,7 +157,7 @@ const MakeReward2 = () => {
             <div className="projMake-video" style={{flexDirection:"column", alignItems: "flex-start"}}>
                 {totInfo.inputs.map((input, index) => (
                     <div key={input.id} style={{ marginTop: index > 0 ? '10px' : '0' }}>
-                        <input type="text" name="rewardVideoAddress" className="input-box-video" onChange={(e)=>totInfo.inputs[index].url=e.target.value}/>
+                        <input type="text" name="rewardVideoAddress" className="input-box-video" onChange={(e)=>totInfo.inputs[index].url=e.target.value} defaultValue={input.url}/>
                         <button className="rew-add" onClick={handleAddInput}>
                             <PlusSquareOutlined style={{ fontSize: "23px" }} />
                         </button>
@@ -156,7 +177,7 @@ const MakeReward2 = () => {
 
 
             <div className="imi-image" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {totInfo.images.map((image, index) => (
+                {images.map((image, index) => (
                     <div className="imi-image-upload" key={index} style={{ marginTop: '15px' }}>
                         <div
                             className="imi-image-upload-info"
@@ -176,7 +197,7 @@ const MakeReward2 = () => {
                         </div>
                     </div>
                 ))}
-                {totInfo.images.length < MAX_IMAGES - 1 && (
+                {images.length < MAX_IMAGES - 1 && (
                 <div className="imi-image-upload" style={{ marginTop: '15px' }}>
                     <div
                         className="imi-image-upload-info"

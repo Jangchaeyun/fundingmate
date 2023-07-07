@@ -1,49 +1,88 @@
-import React, {useState} from "react";
-import { Route, useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { Route, useNavigate, useLocation } from "react-router-dom";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
 import { DatePicker, Space } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 import { nanoid } from 'nanoid';
+import 'dayjs/locale/zh-cn';
+import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
 const MakeReward1 = () => {
-    const [totInfo, setTotInfo] = useState({
-        rewardCategory: '',
-        projTargetAmount: 0,
-        projName: '',
-        imageFile: null,
-        projKeyword: '',
-        projDateStart: '',
-        projDateEnd: '',
-        inputs: [{id: nanoid(), url: ''}],
-        images: [],
-        projContent: '',
-        cards:[],
-        rewardRefundExchangePolicy: '',
-        rewardContact: '',
-        rewardEmail: '',
-        modelName: '',
-        rewardLaw: '',
-        countryOfOrigin: '',
-        manufacturer: '',
-        asPhonenumber: '',
-        businessAddress: '',
-        bank: '',
-        accNumber: '',
-        depositorName: '',
-        taxBillEmail: '',
-        websiteUrl: '',
-        facebookUrl: '',
-        instagramUrl: '',
-        blogUrl: '',
-        twitterUrl: '',
-        rewardIdBusinessLicenseImgSavedName:null,
-        rewardBankAccountCopyImgSavedName:null
-    })
+    const location = useLocation();
+    console.log("location:"+location.state);
+    const [totInfo, setTotInfo] = useState({});
+
+    useEffect(() => {
+        if(location.state) {
+            setTotInfo({...location.state.totInfo});
+
+            const file = location.state.totInfo.imageFile;
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    setSelectedImage(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+
+        } else {
+            setTotInfo(
+                {
+                    rewardCategory: '',
+                    projTargetAmount: 0,
+                    projName: '',
+                    imageFile: null,
+                    projKeyword: '',
+                    projDateStart: '',
+                    projDateEnd: '',
+                    inputs: [{id: nanoid(), url: ''}],
+                    projImages: [],
+                    projContent: '',
+                    cards:[],
+                    rewardRefundExchangePolicy: '',
+                    rewardContact: '',
+                    rewardEmail: '',
+                    modelName: '',
+                    rewardLaw: '',
+                    countryOfOrigin: '',
+                    manufacturer: '',
+                    asPhonenumber: '',
+                    businessAddress: '',
+                    bank: '',
+                    accNumber: '',
+                    depositorName: '',
+                    taxBillEmail: '',
+                    websiteUrl: '',
+                    facebookUrl: '',
+                    instagramUrl: '',
+                    blogUrl: '',
+                    twitterUrl: '',
+                    rewardIdBusinessLicenseImgSavedName:null,
+                    rewardBankAccountCopyImgSavedName:null
+                }
+            )
+
+        }
+
+
+    }, [])
+
 
     const handleInputChange = (e) => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
+    };
+
+    const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
+    const handleNumInputChange = (e) => {
+    const { name, value } = e.target;
+
+     // 숫자만 입력되도록 검증
+     if (regexPattern.test(value)) {
+    setTotInfo({ ...totInfo, [name]: value });
+        }
     };
 
     const [inputContent, setInputContent] = useState("");
@@ -75,6 +114,7 @@ const MakeReward1 = () => {
         navigate('/make-reward/story', { state :{totInfo:totInfo}});
     };
 
+
     return (
         <>
         <div className="investMake-wrapper">
@@ -102,7 +142,7 @@ const MakeReward1 = () => {
                 <b>프로젝트의 카테고리를 정해주세요</b>
             </p>
 
-            <select className="makeReward-option" name="rewardCategory" onChange={handleInputChange}>
+            <select className="makeReward-option" name="rewardCategory" onChange={handleInputChange} value={totInfo.rewardCategory}>
                 <option value="none">카테고리를 선택해주세요.</option>
                 <option value="테크/가전">테크/가전</option>
                 <option value="패션/잡화">패션/잡화</option>
@@ -147,7 +187,7 @@ const MakeReward1 = () => {
             <p className="custom-font-text">
                 최소 100,000원 이상이어야 합니다.
             </p>
-            <input type="text" name="projTargetAmount" className="input-box" placeholder="0" value={totInfo.projTargetAmount} onChange={handleInputChange}/> &nbsp;원
+            <input type="text" name="projTargetAmount" className="input-box" placeholder="0" value={totInfo.projTargetAmount} onChange={handleNumInputChange}/> &nbsp;원
 
             <br/>
             <br/>
@@ -157,7 +197,7 @@ const MakeReward1 = () => {
                 <b>프로젝트의 진행 기간을 적어주세요</b>
             </p>
 
-            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }}/>
+            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }} showToday={true} allowClear={false} value={[dayjs(totInfo.projDateStart),dayjs(totInfo.projDateEnd)]}/>
 
             <br/>
             <br/>

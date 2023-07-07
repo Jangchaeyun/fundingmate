@@ -118,17 +118,20 @@ const MakeReward3 = () => {
 
     const [copiedCardIndex, setCopiedCardIndex] = useState(null); // 복사된 카드의 인덱스
     const handleCopyCard = (index) => {
-        const copiedCard = { ...cards[index] };
-        setCards((prevCards) => [...prevCards, copiedCard]);
-
+        console.log(totInfo.cards);
+        const copiedCard = { ...totInfo.cards[index] };
+        console.log(copiedCard);
+        setTotInfo({...totInfo, cards:[...totInfo.cards, copiedCard]});
     };
 
 
-
-
     const handleRewDelete = (index) => {
-        setCards(prevCards => prevCards.filter((_, i) => i !== index));
-    }
+        setTotInfo(prevTotInfo => {
+            const updatedCards = [...prevTotInfo.cards];
+            updatedCards.splice(index, 1);
+            return { ...prevTotInfo, cards: updatedCards };
+        });
+    };
 
     return (
         <>
