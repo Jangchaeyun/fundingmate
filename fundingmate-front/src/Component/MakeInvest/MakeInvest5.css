@@ -1,0 +1,60 @@
+.bank-name{
+    width:150px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+.bank-num{
+    width: 50%;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+    margin-left: 20px;
+}
+.snsAddress{
+    font-size: 23px;
+    color: var(--grey);
+
+}
+.sns-input-box {
+     border: none;
+     border-bottom: 1px solid var(--grey);
+     padding: 5px 0;
+     width: 50%;
+     height: 20px;
+    margin-left: 10px;
+     /* Add other styling properties as desired */
+
+ }
+
+.sns-input-box:focus {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--grey);
+}
+.sns-address-div{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    margin-bottom: 20px;
+}
+.address-button{
+    margin-left: 10px;
+    width: 65px;
+    height: 29px;
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    background-color: white;
+    color: var(--main-color);
+    cursor: pointer;
+}
+.address-button:hover{
+    margin-left: 10px;
+    width: 65px;
+    height: 29px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+}

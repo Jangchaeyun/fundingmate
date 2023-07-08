@@ -18,6 +18,11 @@ import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
 import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
+import MakeInvest1 from "./Component/MakeInvest/MakeInvest1";
+import MakeInvest2 from "./Component/MakeInvest/MakeInvest2";
+import MakeInvest3 from "./Component/MakeInvest/MakeInvest3";
+import MakeInvest4 from "./Component/MakeInvest/MakeInvest4";
+import MakeInvest5 from "./Component/MakeInvest/MakeInvest5";
 import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 function App() {
@@ -74,6 +79,11 @@ function App() {
         <Route exact path="/make-reward/typelist" element={<MakeReward3/>} />
         <Route exact path="/make-reward/goodsinfo" element={<MakeReward4/>} />
         <Route exact path="/make-reward/hostinfo" element={<MakeReward5/>} />
+        <Route exact path="/make-invest/basicinfo" element={<MakeInvest1 />} />
+        <Route exact path="/make-invest/moneyinfo" element={<MakeInvest2/>} />
+        <Route exact path="/make-invest/story" element={<MakeInvest3/>} />
+        <Route exact path="/make-invest/typelist" element={<MakeInvest4/>} />
+        <Route exact path="/make-invest/hostinfo" element={<MakeInvest5/>} />
     </Routes>
     </div>
   );
