@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Route, useNavigate, useLocation } from "react-router-dom";
 import "./MakeReward1.css";
 import "./MakeRewardCommon.css";
-import { DatePicker, Space } from 'antd';
+import { DatePicker } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 import { nanoid } from 'nanoid';
 import 'dayjs/locale/zh-cn';
@@ -85,8 +85,6 @@ const MakeReward1 = () => {
         }
     };
 
-    const [inputContent, setInputContent] = useState("");
-    const inputMaxLength = 60;
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageUpload = (event) => {
@@ -110,7 +108,7 @@ const MakeReward1 = () => {
 
     const navigate = useNavigate(); // useNavigate 추가
     const handleNextStep = () => {
-        // navigate('/make-reward/story', { state :{totInfo:totInfo, setTotInfo:setTotInfo }});
+
         navigate('/make-reward/story', { state :{totInfo:totInfo}});
     };
 
@@ -174,7 +172,7 @@ const MakeReward1 = () => {
             </p>
             <div>
             <input type="text" name="projName" className="input-box" value={totInfo.projName} onChange={handleInputChange}/>
-{/*                <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>*/}
+
             </div>
             <br/>
             <br/>

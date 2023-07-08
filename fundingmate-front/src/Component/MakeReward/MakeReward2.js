@@ -94,7 +94,7 @@ const MakeReward2 = () => {
     };
 
     const handleImageClick = (e) => {
-        if (totInfo.projImages.length < MAX_IMAGES) { // Replace MAX_IMAGES with the maximum number of images allowed
+        if (totInfo.projImages.length < MAX_IMAGES) {
             document.getElementById('imageUpload').click();
         }
     };
@@ -125,7 +125,7 @@ const MakeReward2 = () => {
     };
 
     const handleNextStep = () => {
-        //setTotInfo({...totInfo, projContent:editorRef.current.getInstance().getHTML()});
+
         navigateToStep2("/make-reward/typelist", {state:{totInfo:totInfo}});
     };
 

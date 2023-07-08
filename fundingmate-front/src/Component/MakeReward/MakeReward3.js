@@ -5,7 +5,7 @@ import "./MakeRewardCommon.css";
 import {PlusOutlined, PlusSquareOutlined,MinusSquareOutlined} from "@ant-design/icons";
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
-import { DatePicker, Space } from 'antd';
+import { DatePicker } from 'antd';
 import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
 import { nanoid } from 'nanoid';
@@ -55,38 +55,19 @@ const MakeReward3 = () => {
         setSaClicked(isAddress);
     }
 
-    const [textareaContent, setTextareaContent] = useState("");
-    const textareaMaxLength = 400;
-    const handleMaxLengthChange = (event) => {
-        const {value} = event.target;
-        if(value.length <= textareaMaxLength){
-            setTextareaContent(value);
-        }
-    };
-    const [inputContent, setInputContent] = useState("");
-    const inputMaxLength = 60;
-    const handleInputChange = (event) => {
-        const {value} = event.target;
-        if(value.length <= inputMaxLength){
-            setInputContent(value);
-        }
-    };
 
-    const onChange = (date, dateString) => {
-        console.log(date, dateString);
-    };
 
     const [showOption, setShowOption] = useState(false);
     console.log("showOption:"+showOption);
-    const [optionFields, setOptionFields] = useState([]);
+
     const handleShowOptionButtonClick =()=>{
         setCard({...card, options:[{rewardOptName:'', rewardOptCon:''}]});
         setShowOption(true);
-        //handleAddOption();
+
     };
     const handleAddOption = ()=>{
         setCard({...card, options:[...card.options,{id:nanoid(),rewardOptName:'', rewardOptCon:''}]})
-        //setOptionFields([...optionFields,{}]);
+
     };
 
     const handleDeleteOption =(index)=>{
@@ -116,7 +97,7 @@ const MakeReward3 = () => {
     }
 
 
-    const [copiedCardIndex, setCopiedCardIndex] = useState(null); // 복사된 카드의 인덱스
+
     const handleCopyCard = (index) => {
         console.log(totInfo.cards);
         const copiedCard = { ...totInfo.cards[index] };
@@ -163,9 +144,7 @@ const MakeReward3 = () => {
             </p>
 
 
-          {/*  <button className="rew-card-add-button">
-                <PlusOutlined className="rew-card-add-icon" style={{fontSize:"11px", marginRight:"1px"}}/>리워드 추가
-            </button>*/}
+
 
             <Button type="primary"  className="rew-card-add-button" id="rew-card-add-button"
                     icon={<PlusOutlined id="rew-card-add-icon" style={{fontSize:"11px", marginRight:"1px"}}/>}
@@ -175,7 +154,6 @@ const MakeReward3 = () => {
                         setLimitClicked(null);
                         setSaClicked(null);
                         setShowOption(false);
-                        //handleRewAdd();
                         setModalOpen(true);
                     }}>
                 리워드 추가
@@ -228,14 +206,14 @@ const MakeReward3 = () => {
                 </p>
                 <div>
                 <input type="text" name="rewardTitle" className="modal-input-box" value={card.rewardTitle} onChange={rewardChange}/>
-              {/*  <div style={{fontSize:"13px", color:"#939393"}}>{inputMaxLength-inputContent.length}자 남음</div>*/}
+
                 </div>
                 <p className="custom-font-modal-sub-title">
                     리워드 내용
                 </p>
                 <div>
                 <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={card.rewardContent} onChange={rewardChange}/>
-   {/*             <div style={{fontSize:"13px", color:"#939393"}}>{textareaMaxLength-textareaContent.length}자 남음</div>*/}
+
                 </div>
 
 
@@ -261,9 +239,7 @@ const MakeReward3 = () => {
                     {card.options.map((field, index)=>(
 
                   <div key={field.id} id={'optionDiv'+index}>
-                       {/* <p className="custom-font-modal-option-text" style={{color:"#BC8700"}}>
-                                옵션{index+1}
-                        </p>*/}
+
                       <div style={{display:'flex', alignItems:'center'}}>
                           <p style={{fontSize:"13px"}}>옵션명</p>
                           <p style={{marginLeft:"100px", fontSize:"13px"}}>옵션 값</p>
@@ -323,7 +299,6 @@ const MakeReward3 = () => {
                     <button  className="make-rew-card-edit-button" onClick={() => {
                         setCard({...cardItem})
                         setEditingCardIndex(index); // 수정 중인 카드의 인덱스 저장
-                      //  setShowOption(true);
                         setModalOpen(true); // 모달 열기
                     }}>수정</button>
                     <button  className="make-rew-card-edit-button make-rew-card-edit-button-delete" onClick={() => handleRewDelete(index)}>삭제</button>

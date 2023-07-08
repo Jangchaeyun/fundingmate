@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import { useNavigate , useLocation } from "react-router-dom";
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
-import { DatePicker } from 'antd';
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
 import  DaumPostcode  from 'react-daum-postcode';
 import { Modal } from 'antd';
