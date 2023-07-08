@@ -19,7 +19,7 @@ import java.util.List;
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rewardNo;
+    private Long id;
 
     private String projName;
 

@@ -1,14 +1,32 @@
 package com.fund.fundingmate;
 
-import com.fund.fundingmate.domain.reward.dto.RewardDTO;
-import com.fund.fundingmate.domain.reward.dto.RewardOptionDTO;
-import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
+import com.fund.fundingmate.domain.payment.dto.InvestPeopleDTO;
+import com.fund.fundingmate.domain.payment.dto.PaymentDTO;
+import com.fund.fundingmate.domain.payment.entity.InvestPeople;
+import com.fund.fundingmate.domain.payment.entity.Payment;
+import com.fund.fundingmate.domain.payment.repository.InvestPeopleRepository;
+import com.fund.fundingmate.domain.payment.repository.PaymentRepository;
+import com.fund.fundingmate.domain.payment.service.InvestPeopleService;
+import com.fund.fundingmate.domain.payment.service.PaymentService;
+import com.fund.fundingmate.domain.reward.dto.*;
+import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardComment;
+import com.fund.fundingmate.domain.reward.entity.RewardReply;
+import com.fund.fundingmate.domain.reward.repository.RewardCommentRepository;
+import com.fund.fundingmate.domain.reward.repository.RewardRepository;
+import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.domain.user.entity.User;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -16,6 +34,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -26,35 +48,56 @@ class FundingmateApplicationTests {
 	@Autowired
 	private RewardService rewardService;
 
+	@Autowired
+	private RewardCommentService rewardCommentService;
+
+	@Autowired
+	private RewardRepository rewardRepository;
+
+	@Autowired
+	private RewardCommentRepository rewardCommentRepository;
+
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
+
+	@Autowired
+	private InvestPeopleRepository investPeopleRepository;
+
+	@BeforeEach
+	void setup() {
+		MockitoAnnotations.openMocks(this);
+	}
+
 	@Test
 	void insertMember() {
 		User user = new User();
 
-		user.setBirthday("1995/05/14");
-		user.setEmail("yun0708@naver.com");
-		user.setId("yun0708");
-		user.setName("윤태희");
-		user.setNotificationStatus("Y");
-		user.setPassword("198742");
-		user.setTel("010-3345-1589");
-		user.setVitalization(0);
+		user.setBirthday("2000/11/12");
+		user.setEmail("sally1112@naver.com");
+		user.setUserid("sally1112");
+		user.setName("장채리");
+		user.setNotificationStatus("N");
+		user.setPassword("123421");
+		user.setTel("010-1233-2456");
+		user.setVitalization(1);
 
 		userRepository.save(user);
 	}
 
 	@Test
 	void insertReward() {
-		// Create a user for the reward
-		User user = new User();
-		user.setBirthday("1999/07/04");
-		user.setEmail("gee0704@naver.com");
-		user.setId("gee0704");
-		user.setName("지태현");
-		user.setNotificationStatus("Y");
-		user.setPassword("195871");
-		user.setTel("010-1258-9854");
-		user.setVitalization(0);
-		userRepository.save(user);
+		Long targetUserId = 1L;
+
+		Optional<User> userOptional = userRepository.findById(targetUserId);
+		if(userOptional.isEmpty()) {
+			System.out.println("User not found with ID: " + targetUserId);
+			return;
+		}
+
+		User user = userOptional.get();
 
 		RewardDTO rewardDTO = new RewardDTO();
 		rewardDTO.setProjName("My Project");
@@ -106,8 +149,98 @@ class FundingmateApplicationTests {
 		rewardTypeDTOs.add(rewardTypeDTO);
 		rewardDTO.setRewardTypes(rewardTypeDTOs);
 
-		Long userId = user.getUserNo();
+		Long userId = user.getId();
 
 		rewardService.createReward(rewardDTO, userId);
+	}
+
+	@Test
+	void insertRewardComment() {
+		Long rewardId = 1L;
+		Long userId = 1L;
+
+		Optional<User> userOptional = userRepository.findById(userId);
+		if (userOptional.isEmpty()) {
+			System.out.println("User not found with ID: " + userId);
+			return;
+		}
+
+		User user = userOptional.get();
+
+		RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
+		rewardCommentDTO.setComTitle("My Comment Title");
+		rewardCommentDTO.setComContent("My Comment Content");
+
+		RewardDTO rewardDTO = new RewardDTO();
+		rewardDTO.setId(rewardId);
+
+		rewardCommentDTO.setReward(rewardDTO);
+		rewardCommentDTO.setUser(user.toDTO());
+
+		rewardCommentService.insertRewardComment(rewardCommentDTO);
+	}
+
+	@Test
+	void insertRewardCommentReply() {
+		Long rewardId = 1L;
+		Long commentId = 1L;
+
+		RewardReplyDTO rewardReplyDTO = new RewardReplyDTO();
+		rewardReplyDTO.setRepContent("My Reply Content");
+		rewardReplyDTO.setRewardId(rewardId);
+		rewardReplyDTO.setCommentId(commentId);
+
+		rewardCommentService.insertRewardCommentReply(rewardReplyDTO);
+	}
+
+	@Test
+	void insertPayment() {
+		Long targetUserId = 1L;
+
+		Optional<User> userOptional = userRepository.findById(targetUserId);
+		if (userOptional.isEmpty()) {
+			System.out.println("User not found with ID: " + targetUserId);
+			return;
+		}
+
+		User user = userOptional.get();
+
+		PaymentDTO paymentDTO = new PaymentDTO();
+		paymentDTO.setUser(user);
+		paymentDTO.setCardnumber("0123456789012345");
+		paymentDTO.setCardpassword("8765");
+		paymentDTO.setPaymentcode(true);
+		paymentDTO.setPaymentamount(12345678);
+		paymentDTO.setPayenddate("1123");
+		paymentDTO.setBirthday("001112");
+		paymentDTO.setPayperiod("일시불");
+		paymentDTO.setShippingadress("경기도 부천시 상2동 569-3");
+		paymentDTO.setShippingadressdesc("3층");
+
+		paymentService.createPayment(paymentDTO);
+	}
+
+	@Test
+	void insertInvestPeople() {
+		Long targetUserId = 1L;
+
+		Optional<User> userOptional = userRepository.findById(targetUserId);
+		if (userOptional.isEmpty()) {
+			System.out.println("User not found with ID: " + targetUserId);
+			return;
+		}
+
+		User user = userOptional.get();
+
+		InvestPeopleDTO investPeopleDTO = new InvestPeopleDTO();
+		investPeopleDTO.setUser(user);
+		investPeopleDTO.setName("장채리");
+		investPeopleDTO.setSecuritynumber1("001112");
+		investPeopleDTO.setSecuritynumber2("4789535");
+		investPeopleDTO.setCalltype("KT");
+		investPeopleDTO.setCallnumber("01078965841");
+
+		InvestPeopleService investPeopleService = new InvestPeopleService(investPeopleRepository);
+		investPeopleService.createInvestPeople(investPeopleDTO);
 	}
 }

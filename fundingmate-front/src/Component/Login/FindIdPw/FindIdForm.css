@@ -1,0 +1,62 @@
+.findIdform {
+    width: 350px;
+    margin: 70px auto;
+    text-align: center;
+}
+.findTitle {
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+.findwrap-text {
+    margin: 20px;
+}
+.findwrap>input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-width: 1px;
+    margin-top: -1px;
+    padding-left: 20px;
+}
+.findwrap>input::after {
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    content: '';
+}
+.findwrap>input:first-of-type {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.findwrap>input:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.findwrap>p {
+    font-size: 12px;
+    color: #9b9b9b;
+    margin: 5px 0 20px;
+}
+.findSearch {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #14B8FF;
+    color: white;
+    border: none;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+.loginFormBtn {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #14B8FF;
+    color: #14B8FF;
+}

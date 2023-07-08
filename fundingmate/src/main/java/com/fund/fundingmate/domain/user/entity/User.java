@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.user.entity;
 
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,9 +15,9 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userNo;
+    private Long id;
 
-    private String id;
+    private String userid;
 
     private String password;
 
@@ -31,4 +32,11 @@ public class User {
     private String notificationStatus;
 
     private Integer vitalization;
+
+    public UserDTO toDTO() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(this.id);
+        return userDTO;
+    }
+
 }

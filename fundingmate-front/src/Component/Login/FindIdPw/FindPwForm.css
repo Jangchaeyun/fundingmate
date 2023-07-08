@@ -1,0 +1,18 @@
+.findPwForm {
+    width: 350px;
+    margin: 70px auto;
+    text-align: center;
+}
+.findwrap {
+    margin: 20px 0;
+}
+.findIdQ {
+    margin: 20px;
+    font-size: 14px;
+}
+.findIdQText {
+    color: #9b9b9b;
+}
+.findIdSearch {
+    color: #14B8FF;
+}

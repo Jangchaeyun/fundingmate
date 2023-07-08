@@ -52,7 +52,7 @@ public class RewardService {
 
     private User convertToUser(UserDTO userDTO) {
         User user = new User();
-        user.setId(userDTO.getId());
+        user.setUserid(userDTO.getUserid());
         user.setPassword(userDTO.getPassword());
         // Set other properties of User entity from UserDTO
         return user;

@@ -15,17 +15,28 @@ import javax.persistence.*;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long paymentNo;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
 
-    private String paymentType;
+    private String cardnumber;
 
-    private String paymentCode;
+    private String cardpassword;
 
-    private String paymentMethod;
+    private Boolean paymentcode;
 
-    private Integer paymentAmount;
+    private Integer paymentamount;
+
+    private String payenddate;
+
+    private String birthday;
+
+    private String payperiod;
+
+    private String shippingadress;
+
+    private String shippingaddressdesc;
 }
+

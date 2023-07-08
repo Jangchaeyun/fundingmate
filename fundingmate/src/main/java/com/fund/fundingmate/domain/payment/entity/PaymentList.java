@@ -18,7 +18,7 @@ public class PaymentList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_list_no")
-    private Long paymentListNo;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_no")
