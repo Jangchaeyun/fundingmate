@@ -197,8 +197,13 @@ const MakeReward1 = () => {
                 <b>프로젝트의 진행 기간을 적어주세요</b>
             </p>
 
-            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }} showToday={true} allowClear={false} value={[dayjs(totInfo.projDateStart),dayjs(totInfo.projDateEnd)]}/>
-
+         {/*   <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }} showToday={true} allowClear={false} value={[dayjs(totInfo.projDateStart),dayjs(totInfo.projDateEnd)]}/>*/}
+            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, projDateStart:dateStrings[0],projDateEnd:dateStrings[1] }); }} showToday={true} allowClear={false}
+                         value={[
+                totInfo.projDateStart ? dayjs(totInfo.projDateStart) : null,
+                totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null
+            ]}
+                         format="YYYY-MM-DD"/>
             <br/>
             <br/>
             <br/>

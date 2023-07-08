@@ -133,6 +133,13 @@ const MakeReward3 = () => {
         });
     };
 
+    const handleNumInputChange = (e) => {
+        console.log(e);
+        const inputValue = e.target.value;
+        const numericValue = inputValue.replace(/\D/g, ''); // 숫자 이외의 문자 제거
+        setCard({...card, [e.target.name]: numericValue});
+    }
+
     return (
         <>
         <div className="investMake-wrapper">
@@ -190,7 +197,7 @@ const MakeReward3 = () => {
                 </p>
                 <input type="text" name="rewardAmount" id="rew-amount-input" className="modal-input-box" placeholder="0"
                        value={card.rewardAmount}
-                       onChange={rewardChange}
+                       onChange={handleNumInputChange}
                 />&nbsp;원
 
                 <p className="custom-font-modal-sub-title">
@@ -210,7 +217,7 @@ const MakeReward3 = () => {
                 </div>
                         {limitClicked === 1 && (
                             <div style={{display:'flex', alignItems:'center'}}>
-                        <input type="text" name="rewardAvailableCount" className="modal-limit-input-box"  placeholder="0" value={card.rewardAvailableCount} onChange={rewardChange}/>&nbsp;개
+                        <input type="text" name="rewardAvailableCount" className="modal-limit-input-box"  placeholder="0" value={card.rewardAvailableCount} onChange={handleNumInputChange}/>&nbsp;개
                             </div>
                         )}
 

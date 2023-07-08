@@ -16,6 +16,16 @@ const MakeReward5 = () => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
     };
 
+    const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
+    const handleNumInputChange = (e) => {
+        const { name, value } = e.target;
+
+        // 숫자만 입력되도록 검증
+        if (regexPattern.test(value)) {
+            setTotInfo({ ...totInfo, [name]: value });
+        }
+    };
+
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedImage2, setSelectedImage2] = useState(null);
 
@@ -229,7 +239,7 @@ const MakeReward5 = () => {
                 <option value="카카오뱅크">카카오뱅크</option>
 
             </select>
-            <input type="text" name="accNumber" value={totInfo.accNumber} onChange={handleInputChange} className="bank-num" placeholder="계좌 번호를 숫자만 입력해 주세요.(-제외)"/>
+            <input type="text" name="accNumber" value={totInfo.accNumber} onChange={handleNumInputChange} className="bank-num" placeholder="계좌 번호를 숫자만 입력해 주세요.(-제외)"/>
             <br/>
             <br/>
 
