@@ -9,14 +9,14 @@
 
 .close {
   display: flex;
+  cursor: pointer;
 }
 
 .close_btn {
-  margin-left: 436px;
-    margin-top: 3px;
-    font-size: 21px;
-    cursor: pointer;
-    color: var(--grey);
+  margin-left: 476px;
+  margin-top: 3px;
+  font-size: 18px;
+  color: var(--grey);
 }
 
 .company_url {

@@ -1,12 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Desc from "../Desc/Desc";
+import axios from "axios";
 
 const Story = () => {
+  const [reward, setReward] = useState({
+    id: 0,
+    projName: "",
+    projTargetAmout: 0,
+    projDateStart: null,
+    projDateEnd: null,
+    rewardRepImgSavedName: "",
+    projKeyWord: "",
+    rewardVideoAddress: "",
+    rewardContentImgSavedName: "",
+    projContent: "",
+    rewardRefundExchangePolicy: "",
+    rewardContact: "",
+    rewardEmail: "",
+    rewardCategory: "",
+    modelName: "",
+    countryOfOrigin: "",
+    manufacturer: "",
+    asPhoneNumber: "",
+    rewardIdBusinessLicenseImgSavedName: "",
+    businessAddress: "",
+    bank: "",
+    accNumber: "",
+    depositorName: "",
+    rewardBankAccountCopyImgSavedName: "",
+    taxBillEmail: "",
+    websiteUrl: "",
+    facebookUrl: "",
+    instagramUrl: "",
+    blogUrl: "",
+    twitterUrl: "",
+    user: null,
+    rewardTypes: [],
+  });
+
+  const { rewardId } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
+      .then((res) => {
+        setReward(res.data.reward);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="desc">
-      <Desc />
+      <Desc reward={reward} />
       <div className="menu">
         <hr />
         <div className="menu_items">
@@ -25,11 +74,9 @@ const Story = () => {
         </div>
       </div>
       <div className="story_content">
-        안녕하세요!! 저희는 스마트보이입니다~~
-        <br />
-        저희는 피어싱 및 악세사리를 팔고 있습니다.
+        {reward.projContent}
         <div className="product_img">
-          <img src="/assets/imgs/product_img.jpg" className="images" />
+          <img src={reward.rewardContentImgSavedName} className="images" />
         </div>
       </div>
     </div>

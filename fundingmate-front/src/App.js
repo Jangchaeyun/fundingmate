@@ -21,6 +21,7 @@ import MakeReward5 from "./Component/MakeReward/MakeReward5";
 import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
+import Desc from "./Component/RewardDetail/Desc/Desc";
 function App() {
   return (
     <div className="App">
@@ -35,8 +36,16 @@ function App() {
           path="/reward-detail/story/:rewardId"
           element={<Story />}
         />
-        <Route exact path="/reward-detail/contact" element={<Contact />} />
-        <Route exact path="/reward-detail/guide" element={<Guide />} />
+        <Route
+          exact
+          path="/reward-detail/contact/:rewardId"
+          element={<Contact />}
+        />
+        <Route
+          exact
+          path="/reward-detail/guide/:rewardId"
+          element={<Guide />}
+        />
       </Routes>
       <Routes>
         <Route exact path="/fund" element={<Fund />} />

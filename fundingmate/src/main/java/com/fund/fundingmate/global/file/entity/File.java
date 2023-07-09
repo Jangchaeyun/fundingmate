@@ -1,9 +1,12 @@
 package com.fund.fundingmate.global.file.entity;
 
+import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "file")
@@ -17,7 +20,9 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
 
-    private String fileClassfication;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rep_img")
+    private List<Reward> fundingimg;
 
     private String fileSavedName;
 
