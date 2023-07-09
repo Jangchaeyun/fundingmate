@@ -1,0 +1,44 @@
+.banner {
+    /*height: 400px;*/
+}
+.banner-slide {
+}
+.banner-img {
+    width: 100%;
+    height: 400px;
+}
+.banner-slide-swiper>.swiper-button-prev {
+    margin-left: 20px;
+}
+.banner-slide-swiper>.swiper-button-next {
+    margin-right: 20px;
+}
+
+.banner-pagination {
+    border: 1px solid #14B8FF;
+    border-radius: 20px;
+    padding: 5px;
+    display: inline-block;
+    width: 50px;
+}
+.bannerPrevNav, .bannerNextNav {
+    color: #14B8FF;
+    top: 300px;
+    font-size: 30px;
+    z-index: 5;
+}
+.bannerPrevNav {
+    position: absolute;
+}
+.bannerNextNav {
+    float: right;
+    position: relative;
+    top: -202px;
+}
+.bannerNav {
+    width: 1080px;
+    margin: 0 auto;
+}
+.swiper-slide {
+    overflow: hidden;
+}

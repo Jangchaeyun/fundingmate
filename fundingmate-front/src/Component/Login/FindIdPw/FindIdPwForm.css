@@ -1,0 +1,44 @@
+.findIdPwForm {
+    width: 350px;
+    margin: 150px auto;
+    height: auto;
+    padding-bootom: 60px; /*footer의 높이*/
+    min-height: 400px;
+
+}
+.findIdPwtitle {
+    font-size: 30px;
+    margin: 30px 0;
+    text-align: center;
+}
+.findIdPwsearch {
+    margin-bottom: 20px;
+}
+.findIdPwsearch>a {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.mainL {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #14B8FF;
+    border-radius: 10px;
+    margin: 10px 0;
+    color: #14B8FF;
+    text-align: center;
+}
+.linkarrow {
+    float: right;
+    line-height: 40px;
+    margin-right: 20px;
+    color: #9b9b9b;
+}

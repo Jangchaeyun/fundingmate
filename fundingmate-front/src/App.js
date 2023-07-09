@@ -1,4 +1,17 @@
 import "./App.css";
+import Home from "./pages/Home/Home";
+import {Route, Routes} from "react-router-dom";
+import Login from "./pages/Login/Login";
+import * as React from 'react'
+import { Reset } from 'styled-reset'
+import FindIdPw from "./pages/Login/FindIdPw";
+import Join from "./pages/Login/Join";
+import FindId from "./pages/Login/FindId";
+import FindPw from "./pages/Login/FindPw";
+import FindIdResult from "./pages/Login/FindIdResult";
+import FindPwNext from "./pages/Login/FindPwNext";
+import FindPwResult from "./pages/Login/FindPwResult";
+import Search from "./pages/Home/Search";
 import Reward from "./pages/Reward/Reward";
 import Story from "./Component/RewardDetail/Detail/Story";
 import Contact from "./Component/RewardDetail/Detail/Contact";
@@ -18,19 +31,29 @@ import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
 import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
-import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 import Desc from "./Component/RewardDetail/Desc/Desc";
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        {/* <Route exact path="/" element={<Main />} /> */}
-        <Route exact path="/reward" element={<Reward />} />
-        <Route exact path="/my-page?type=founder" element={<Founder />} />
-      </Routes>
-      <Routes>
+      <React.Fragment>
+          <Reset />
+        <div className="App">
+           <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/findIdPw" element={<FindIdPw />} />
+              <Route exact path="/findId" element={<FindId />} />
+              <Route exact path="/findIdResult" element={<FindIdResult />} />
+              <Route exact path="/findPw" element={<FindPw />} />
+              <Route exact path="/findPwNext" element={<FindPwNext />} />
+              <Route exact path="/findPwResult" element={<FindPwResult />} />
+              <Route exact path="/join" element={<Join />} />
+              <Route exact path="/search" element={<Search />} />
+             {/*<Route exact path="/reward" element={<Reward />} />*/}
+             {/*<Route exact path="/reward-detail" element={<Rewarddetail />} />*/}
+           </Routes>
+           <Routes>
         <Route
           exact
           path="/reward-detail/story/:rewardId"
@@ -82,17 +105,18 @@ function App() {
           element={<CheckoutComplete />}
         />
       </Routes>
-      <Routes>
-        <Route exact path="/rewardfund" element={<RewardFundMain />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/MakeReward1" element={<MakeReward1 />} />
-        <Route exact path="/MakeReward2" element={<MakeReward2 />} />
-        <Route exact path="/MakeReward3" element={<MakeReward3 />} />
-        <Route exact path="/MakeReward4" element={<MakeReward4 />} />
-        <Route exact path="/MakeReward5" element={<MakeReward5 />} />
-      </Routes>
-    </div>
+          <Routes>
+            <Route exact path="/rewardfund" element={<RewardFundMain />} />
+          </Routes>
+          <Routes>
+              <Route exact path="/MakeReward1" element={<MakeReward1 />} />
+              <Route exact path="/MakeReward2" element={<MakeReward2/>} />
+              <Route exact path="/MakeReward3" element={<MakeReward3/>} />
+              <Route exact path="/MakeReward4" element={<MakeReward4/>} />
+              <Route exact path="/MakeReward5" element={<MakeReward5/>} />
+          </Routes>
+        </div>
+      </React.Fragment>
   );
 }
 
