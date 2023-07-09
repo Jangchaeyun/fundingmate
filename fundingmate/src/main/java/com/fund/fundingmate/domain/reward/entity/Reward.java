@@ -1,12 +1,14 @@
 package com.fund.fundingmate.domain.reward.entity;
 
 import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.global.file.entity.File;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,17 +27,21 @@ public class Reward {
 
     private Integer projTargetAmout;
 
-    private Date projDateStart;
+    private LocalDate projDateStart;
 
-    private Date projDateEnd;
+    private LocalDate projDateEnd;
 
-    private String rewardRepImgSavedName;
+    @ManyToOne
+    @JoinColumn(name="rep_img")
+    private File repfile;
 
     private String projKeyWord;
 
     private String rewardVideoAddress;
 
-    private String rewardContentImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="con_img")
+    private File confile;
 
     private String projContent;
 
@@ -53,9 +59,13 @@ public class Reward {
 
     private String manufacturer;
 
+    private String rewardLaw;
+
     private String asPhoneNumber;
 
-    private String rewardIdBusinessLicenseImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "business_img")
+    private File businessImg;
 
     private String businessAddress;
 
@@ -65,24 +75,26 @@ public class Reward {
 
     private String depositorName;
 
-    private String rewardBankAccountCopyImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "bank_img")
+    private File bankImg;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String taxBillEmail;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String websiteUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String facebookUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String instagramUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String blogUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String twitterUrl;
 
     @ManyToOne

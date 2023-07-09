@@ -33,6 +33,7 @@ import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
+import Desc from "./Component/RewardDetail/Desc/Desc";
 function App() {
   return (
       <React.Fragment>
@@ -52,51 +53,58 @@ function App() {
              {/*<Route exact path="/reward" element={<Reward />} />*/}
              {/*<Route exact path="/reward-detail" element={<Rewarddetail />} />*/}
            </Routes>
-          <Routes>
-            {/* <Route exact path="/" element={<Main />} /> */}
-            <Route exact path="/reward" element={<Reward />} />
-            <Route exact path="/my-page?type=founder" element={<Founder />} />
-          </Routes>
-          <Routes>
-            <Route exact path="/reward-detail/story" element={<Story />} />
-            <Route exact path="/reward-detail/contact" element={<Contact />} />
-            <Route exact path="/reward-detail/guide" element={<Guide />} />
-          </Routes>
-          <Routes>
-            <Route exact path="/fund" element={<Fund />} />
-          </Routes>
-          <Routes>
-            <Route exact path="/fund-detail/story" element={<FundStory />} />
-            <Route exact path="/fund-detail/contact" element={<FundContact />} />
-            <Route exact path="/fund-detail/guide" element={<FundGuide />} />
-          </Routes>
-          <Routes>
-            <Route exact path="/checkout/check" element={<CheckCategory />} />
-            <Route exact path="/reward-checkout" element={<Checkout />} />
-            <Route
-              exact
-              path="/reward-checkout/complete"
-              element={<CheckoutComplete />}
-            />
-          </Routes>
-          <Routes>
-            <Route
-              exact
-              path="/fund-checkout/fundpeople"
-              element={<FundPeople />}
-            />
-            <Route exact path="/fund-checkout/checkfund" element={<Checkfund />} />
-            <Route
-              exact
-              path="/fund-checkout/checkout"
-              element={<FundCheckout />}
-            />
-            <Route
-              exact
-              path="/fund-checkout/complete"
-              element={<CheckoutComplete />}
-            />
-          </Routes>
+           <Routes>
+        <Route
+          exact
+          path="/reward-detail/story/:rewardId"
+          element={<Story />}
+        />
+        <Route
+          exact
+          path="/reward-detail/contact/:rewardId"
+          element={<Contact />}
+        />
+        <Route
+          exact
+          path="/reward-detail/guide/:rewardId"
+          element={<Guide />}
+        />
+      </Routes>
+      <Routes>
+        <Route exact path="/fund" element={<Fund />} />
+      </Routes>
+      <Routes>
+        <Route exact path="/fund-detail/story" element={<FundStory />} />
+        <Route exact path="/fund-detail/contact" element={<FundContact />} />
+        <Route exact path="/fund-detail/guide" element={<FundGuide />} />
+      </Routes>
+      <Routes>
+        <Route exact path="/checkout/check" element={<CheckCategory />} />
+        <Route exact path="/reward-checkout" element={<Checkout />} />
+        <Route
+          exact
+          path="/reward-checkout/complete"
+          element={<CheckoutComplete />}
+        />
+      </Routes>
+      <Routes>
+        <Route
+          exact
+          path="/fund-checkout/fundpeople"
+          element={<FundPeople />}
+        />
+        <Route exact path="/fund-checkout/checkfund" element={<Checkfund />} />
+        <Route
+          exact
+          path="/fund-checkout/checkout"
+          element={<FundCheckout />}
+        />
+        <Route
+          exact
+          path="/fund-checkout/complete"
+          element={<CheckoutComplete />}
+        />
+      </Routes>
           <Routes>
             <Route exact path="/rewardfund" element={<RewardFundMain />} />
           </Routes>
