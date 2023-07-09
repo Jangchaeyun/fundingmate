@@ -122,8 +122,11 @@ const MakeReward3 = () => {
         setCard({...card, [e.target.name]: numericValue});
     }
 
+
+
     return (
         <>
+
         <div className="investMake-wrapper">
 
             <div className="proj-progress-div">
