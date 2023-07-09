@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
-
+/*ss*/
 const MakeReward1 = () => {
     const location = useLocation();
     console.log("location:"+location.state);
