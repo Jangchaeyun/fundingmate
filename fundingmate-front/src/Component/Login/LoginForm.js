@@ -20,6 +20,7 @@ function LoginForm() {
                 }
             })
             .then(res=> {
+                console.log(res)
                 dispatch({type:"NEWTOKEN", payload:res.data.accessToken})
                 dispatch({type:"USERID", payload:res.data.userid})
 
@@ -28,6 +29,7 @@ function LoginForm() {
                 setCookie('refreshToken',res.data.refreshToken, {
                     url:'/', expires
                 })
+                document.location.href="/";
             })
             .catch(err=> {
                 console.log(err);

@@ -1,7 +1,18 @@
 // components/Layout/Header/Header.tsx
 import "./Header.css"
 import {SearchOutlined} from "@ant-design/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 function Header() {
+    const token = useSelector(state=>state.Authorization);
+    const userid = useSelector(state=>state.UserId);
+
+    const dispatch = useDispatch();
+    const logout = () => {
+        dispatch({type:"NEWTOKEN",payload:''})
+        dispatch({type:"USERID",payload:''})
+        document.location.href="/";
+    }
     return (
         <header className="header">
             <div className="header-wrap">
@@ -10,7 +21,8 @@ function Header() {
                         <a href="/" className="hlogoL">LOGO</a>
                     </span>
                     <span className="hTopMenu">
-                        <span><a href="login">로그인</a></span>
+                        {(token==''||token==undefined) &&<span><a href="login">로그인</a></span>}
+                        <b>{userid}</b>&nbsp;&nbsp;{userid!=''&&<Link onClick={logout}>로그아웃</Link>}
                         <span><a href="">프로젝트 만들기</a></span>
                     </span>
                 </div>

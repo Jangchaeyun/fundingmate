@@ -29,6 +29,8 @@ public class UserServiceImpl implements UserService{
                 .name(userDto.getUsername())
                 .birthday(userDto.getBirthday())
                 .tel(userDto.getTel())
+                .notificationStatus("Y")
+                .vitalization(1)
                 .roles(Collections.singletonList("ROLE_USER"))         //roles는 최초 USER로 설정
                 .build();
 
