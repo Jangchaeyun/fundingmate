@@ -93,10 +93,10 @@ class FundingmateApplicationTests {
 		RewardDTO rewardDTO = new RewardDTO();
 		FileDTO fileDTO = new FileDTO();
 		rewardDTO.setProjName("500병 한정! 와인을 증류하고 오크숙성으로 완성하다! '바야흐로'");
-		rewardDTO.setProjTargetAmout(100000);
+		rewardDTO.setProjTargetAmount(100000);
 		rewardDTO.setProjDateStart(LocalDate.of(2023, 6, 25));
 		rewardDTO.setProjDateEnd(LocalDate.of(2023, 7, 16));
-		rewardDTO.setProjKeyWord("푸드");
+		rewardDTO.setProjKeyword("푸드");
 		rewardDTO.setRewardVideoAddress("https://www.youtube.com/watch?v=9T8aX98xWAc");
 		rewardDTO.setProjContent("충북 영동에 위치한 시나브로 와이너리는 한국와인의 명가로 널리 알려져 있습니다.\n" +
 				"시나브로 와이너리에서 양조한 와인은 독일 베를린 와인 트로피, 대한민국 우리술 품평회 등에서 인정받았습니다. 세계에서 인정하는 와인을 증류하고 오크숙성을 통해 만들어낸 술이 바로 '바야흐로 오크' 입니다.");
@@ -125,7 +125,7 @@ class FundingmateApplicationTests {
 		FileDTO businessImgDTO = new FileDTO();
 		businessImgDTO.setFileSavedName("business-license-receipt.jpg");
 		businessImgDTO.setFileOriginalName("business-license-receipt.jpg");
-		businessImgDTO.setFilePath("/path/to/business-license-receipt.jpg");
+		businessImgDTO.setFilePath("/business-license-receipt.jpg");
 		businessImgDTO.setFileSize("123456");
 		businessImgDTO.setFileRegistrationDate(new Date());
 
@@ -135,7 +135,7 @@ class FundingmateApplicationTests {
 		FileDTO bankImgDTO = new FileDTO();
 		bankImgDTO.setFileSavedName("bank_account_copy_image.jpg");
 		bankImgDTO.setFileOriginalName("bank_account_copy_image.jpg");
-		bankImgDTO.setFilePath("/path/to/bank_account_copy_image.jpg");
+		bankImgDTO.setFilePath("/bank_account_copy_image.jpg");
 		bankImgDTO.setFileSize("789012");
 		bankImgDTO.setFileRegistrationDate(new Date());
 
@@ -143,23 +143,23 @@ class FundingmateApplicationTests {
 
 		// Rep File Image
 		FileDTO repImgDTO = new FileDTO();
-		repImgDTO.setFileSavedName("repfile.jpg");
-		repImgDTO.setFileOriginalName("repfile.jpg");
-		repImgDTO.setFilePath("/path/to/repfile.jpg");
+		repImgDTO.setFileSavedName("rewardprj1.png");
+		repImgDTO.setFileOriginalName("rewardprj1.jpg");
+		repImgDTO.setFilePath("/rewardprj1.jpg");
 		repImgDTO.setFileSize("345678");
 		repImgDTO.setFileRegistrationDate(new Date());
 
-		rewardDTO.setRepfile(repImgDTO);
+		rewardDTO.setRepFile(repImgDTO);
 
 		// Con File Image
 		FileDTO conImgDTO = new FileDTO();
-		conImgDTO.setFileSavedName("confile.jpg");
-		conImgDTO.setFileOriginalName("confile.jpg");
-		conImgDTO.setFilePath("/path/to/confile.jpg");
+		conImgDTO.setFileSavedName("rewardprj1-2.png");
+		conImgDTO.setFileOriginalName("rewardprj1-2.png");
+		conImgDTO.setFilePath("/ewardprj1-2.jpg");
 		conImgDTO.setFileSize("901234");
 		conImgDTO.setFileRegistrationDate(new Date());
 
-		rewardDTO.setConfile(conImgDTO);
+		rewardDTO.setConFile(conImgDTO);
 
 
 		rewardDTO.setTaxBillEmail("sinabro_wine@naver.com");

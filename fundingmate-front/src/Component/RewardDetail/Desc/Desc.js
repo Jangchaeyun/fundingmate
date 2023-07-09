@@ -6,7 +6,7 @@ import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
 
 const Desc = ({ reward }) => {
-  const [imageSrc, setImageSrc] = useState({reward.rewardRepImgSavedName});
+  const [imageSrc, setImageSrc] = useState("");
   const [isClicked, setIsClicked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -14,10 +14,10 @@ const Desc = ({ reward }) => {
 
   const handleClick = () => {
     if (isClicked) {
-      setImageSrc({reward.rewardRepImgSavedName});
+      setImageSrc();
       setIsClicked(false);
     } else {
-      setImageSrc({reward.rewardContentImgSavedName});
+      setImageSrc();
       setIsClicked(true);
     }
   };
@@ -31,7 +31,7 @@ const Desc = ({ reward }) => {
       <div className="desc_title">{reward.projName}</div>
       <div className="desc_contents">
         <div className="desc_img">
-          <img src={imageSrc} className="main_img" />
+          <img src={reward.repImg} className="main_img" />
           <img
             src="/assets/imgs/bracelet.jpg"
             className="sub_img1"
@@ -52,7 +52,7 @@ const Desc = ({ reward }) => {
             <div className="fund_rate_title">달성률</div>
             <div className="fund_rate_per">1050%</div>
             <sub className="fund_rate_price">
-              목표 금액 {reward.projTargetAmout}원
+              목표 금액 {reward.projTargetAmount}원
             </sub>
           </div>
           <div className="fund_date">

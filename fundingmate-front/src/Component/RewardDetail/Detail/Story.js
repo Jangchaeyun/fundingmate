@@ -8,13 +8,13 @@ const Story = () => {
   const [reward, setReward] = useState({
     id: 0,
     projName: "",
-    projTargetAmout: 0,
+    projTargetAmount: 0,
     projDateStart: null,
     projDateEnd: null,
-    rewardRepImgSavedName: "",
-    projKeyWord: "",
+    repFile: null,
+    projKeyword: "",
     rewardVideoAddress: "",
-    rewardContentImgSavedName: "",
+    conFile: null,
     projContent: "",
     rewardRefundExchangePolicy: "",
     rewardContact: "",
@@ -23,13 +23,14 @@ const Story = () => {
     modelName: "",
     countryOfOrigin: "",
     manufacturer: "",
+    rewardLaw: "",
     asPhoneNumber: "",
-    rewardIdBusinessLicenseImgSavedName: "",
+    businessImg: null,
     businessAddress: "",
     bank: "",
     accNumber: "",
     depositorName: "",
-    rewardBankAccountCopyImgSavedName: "",
+    bankImg: null,
     taxBillEmail: "",
     websiteUrl: "",
     facebookUrl: "",
@@ -57,7 +58,7 @@ const Story = () => {
     <div className="desc">
       <Desc reward={reward} />
       <div className="menu">
-        <hr />
+        <hr className="menu_hr" />
         <div className="menu_items">
           <Link className="story active" to={"/reward-detail/story"}>
             스토리
@@ -76,7 +77,14 @@ const Story = () => {
       <div className="story_content">
         {reward.projContent}
         <div className="product_img">
-          <img src={reward.rewardContentImgSavedName} className="images" />
+          <div className="product_img">
+            {reward.conFile && (
+              <img
+                src={`http://localhost:8090/img/${reward.conFile.fileSavedName}`}
+                className="images"
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
