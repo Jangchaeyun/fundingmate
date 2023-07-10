@@ -97,7 +97,7 @@ const Desc = ({ reward }) => {
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
             <div className="end2">{moment(reward.projDateEnd).subtract(1, 'day').format("YYYY-MM-DD")}</div>
-            <div className="end3">2023-07-25</div>
+            <div className="end3">{reward.deliveryDate}</div>
           </div>
           <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">

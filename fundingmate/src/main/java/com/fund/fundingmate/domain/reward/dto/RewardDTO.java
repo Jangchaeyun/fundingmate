@@ -20,6 +20,7 @@ public class RewardDTO {
     private Integer projTargetAmount;
     private LocalDate projDateStart;
     private LocalDate projDateEnd;
+    private LocalDate deliveryDate;
     private FileDTO repFile;
     private String projKeyword;
     private String rewardVideoAddress;

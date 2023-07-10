@@ -11,6 +11,7 @@ const Story = () => {
     projTargetAmount: 0,
     projDateStart: null,
     projDateEnd: null,
+    deliveryDate: null,
     repFile: null,
     projKeyword: "",
     rewardVideoAddress: "",
