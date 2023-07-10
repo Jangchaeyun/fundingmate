@@ -31,6 +31,12 @@ import MakeReward2 from "./Component/MakeReward/MakeReward2";
 import MakeReward3 from "./Component/MakeReward/MakeReward3";
 import MakeReward4 from "./Component/MakeReward/MakeReward4";
 import MakeReward5 from "./Component/MakeReward/MakeReward5";
+import MakeInvest1 from "./Component/MakeInvest/MakeInvest1";
+import MakeInvest2 from "./Component/MakeInvest/MakeInvest2";
+import MakeInvest3 from "./Component/MakeInvest/MakeInvest3";
+import MakeInvest4 from "./Component/MakeInvest/MakeInvest4";
+import MakeInvest5 from "./Component/MakeInvest/MakeInvest5";
+import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 import Desc from "./Component/RewardDetail/Desc/Desc";
@@ -113,12 +119,17 @@ function App() {
           <Route exact path="/rewardfund" element={<RewardFundMain />} />
         </Routes>
         <Routes>
-          <Route exact path="/MakeReward1" element={<MakeReward1 />} />
-          <Route exact path="/MakeReward2" element={<MakeReward2 />} />
-          <Route exact path="/MakeReward3" element={<MakeReward3 />} />
-          <Route exact path="/MakeReward4" element={<MakeReward4 />} />
-          <Route exact path="/MakeReward5" element={<MakeReward5 />} />
-        </Routes>
+        <Route exact path="/make-reward/basicinfo" element={<MakeReward1 />} />
+        <Route exact path="/make-reward/story" element={<MakeReward2/>} />
+        <Route exact path="/make-reward/typelist" element={<MakeReward3/>} />
+        <Route exact path="/make-reward/goodsinfo" element={<MakeReward4/>} />
+        <Route exact path="/make-reward/hostinfo" element={<MakeReward5/>} />
+        <Route exact path="/make-invest/basicinfo" element={<MakeInvest1 />} />
+        <Route exact path="/make-invest/moneyinfo" element={<MakeInvest2/>} />
+        <Route exact path="/make-invest/story" element={<MakeInvest3/>} />
+        <Route exact path="/make-invest/typelist" element={<MakeInvest4/>} />
+        <Route exact path="/make-invest/hostinfo" element={<MakeInvest5/>} />
+      </Routes>
       </div>
     </React.Fragment>
   );

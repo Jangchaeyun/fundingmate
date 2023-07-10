@@ -1,0 +1,165 @@
+
+.investMake-wrapper{
+    max-width: 1080px;
+    overflow-x: hidden;
+    margin: 0 auto;
+    padding: 0;
+
+}
+.proj-progress-div {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+.proj-progress {
+    border: 1px solid #e4e4e4;
+    color: var(--grey);
+    background: #fff;
+}
+.proj-progress-ing{
+    border: 1px solid;
+    border-color: transparent;
+    background: var(--sub-color);
+    color:#ffffff;
+}
+.proj-progress-common{
+    width: 21px;
+    height: 20px;
+    border-radius: 20px;
+    margin-right: 1%; /* 사이 간격 */
+    margin-left: 0; /* 왼쪽 간격 없애기 */
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+
+}
+
+.proj-progress-line{
+    position: relative;
+}
+
+.proj-progress-line::after {
+    position: absolute;
+    left: 100%;
+    content: '';
+    width: 15px;
+    height: 1px;
+    background-color: #CCCCCC;
+    z-index: -1;
+}
+
+
+
+
+.custom-font-title{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.custom-font-sub-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.custom-font-text{
+    font-size: 16px;
+    color: #343434;
+}
+.input-box{
+ /*   margin-top: 10px;*/
+   /* width: 350px;*/
+    width: 40%;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
+.button-top-margin{
+    margin-bottom: 10%;
+}
+
+
+.button-botoom-margin{
+    margin-bottom: 15%;
+}
+
+.investMake-next-button{
+    width: 149px;
+    height: 34px;
+    border-radius: 5px;
+    background: var(--main-color);
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    color:#ffffff;
+    cursor: pointer;
+    border: none;
+}
+
+.investMake-prev-button{
+    width: 149px;
+    height: 34px;
+    border-radius: 5px;
+    background: #E0E0E0;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    color:#939393;
+    cursor: pointer;
+    margin-right: 1%;
+    border: none;
+}
+.investMake-button-div {
+    display: flex;
+    justify-content: center;
+}
+
+.rew-add{
+    margin-left: 3px;
+
+    cursor: pointer;
+    border: none;
+    background: white;
+    color:#CCCCCC;
+
+}
+
+.rew-delete{
+    margin-left: -6px;
+
+    cursor: pointer;
+    border: none;
+    background: white;
+    color:#CCCCCC;
+
+}
+
+.rew-textarea{
+    width: 99%;
+    resize: none;
+    height: 130px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+}
+
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
+    background:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-dropdown .ant-picker-today-btn{
+    color: var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
+    border-color:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker:hover, :where(.css-dev-only-do-not-override-12upa3x).ant-picker-focused{
+    border-color:var(--main-color);
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-picker{
+    border: 1px solid var(--grey);
+}

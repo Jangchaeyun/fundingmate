@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Route, useNavigate, useLocation } from "react-router-dom";
-import "./MakeReward1.css";
-import "./MakeRewardCommon.css";
+import "./MakeInvest1.css";
+import "./MakeInvestCommon.css";
 import { DatePicker } from 'antd';
 import {PlusCircleOutlined} from "@ant-design/icons";
 import { nanoid } from 'nanoid';
@@ -9,7 +9,7 @@ import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
-const MakeReward1 = () => {
+const MakeInvest1 = () => {
     const location = useLocation();
     console.log("location:"+location.state);
     const [totInfo, setTotInfo] = useState({});
@@ -109,7 +109,7 @@ const MakeReward1 = () => {
     const navigate = useNavigate(); // useNavigate 추가
     const handleNextStep = () => {
 
-        navigate('/make-reward/story', { state :{totInfo:totInfo}});
+        navigate('/make-invest/moneyinfo', { state :{totInfo:totInfo}});
     };
 
 
@@ -257,4 +257,4 @@ const MakeReward1 = () => {
         </>
     );
 };
-export default MakeReward1;
+export default MakeInvest1;

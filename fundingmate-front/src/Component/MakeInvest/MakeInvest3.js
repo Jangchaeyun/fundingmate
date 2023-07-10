@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Route, useNavigate, useLocation } from "react-router-dom";
-import "./MakeReward2.css";
-import "./MakeRewardCommon.css";
+import "./MakeInvest3.css";
+import "./MakeInvestCommon.css";
 
 import {PlusCircleOutlined, PlusSquareOutlined, MinusCircleOutlined, MinusSquareOutlined} from "@ant-design/icons";
 
@@ -15,7 +15,7 @@ import '@toast-ui/editor/dist/i18n/ko-kr';
 import { nanoid } from 'nanoid';
 const MAX_IMAGES = 15;
 
-const MakeReward2 = () => {
+const MakeInvest3 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
     const [totInfo, setTotInfo] = useState(preTotInfo);
@@ -121,12 +121,12 @@ const MakeReward2 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/basicinfo", {state:{totInfo:totInfo}});
+        navigateToStep1("/make-invest/moneyinfo", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
 
-        navigateToStep2("/make-reward/typelist", {state:{totInfo:totInfo}});
+        navigateToStep2("/make-invest/typelist", {state:{totInfo:totInfo}});
     };
 
 
@@ -136,8 +136,8 @@ const MakeReward2 = () => {
 
             <div className="proj-progress-div">
                 <div className="proj-progress proj-progress-common proj-progress-line">1</div>
-                <div className="proj-progress-ing proj-progress-common proj-progress-line">2</div>
-                <div className="proj-progress proj-progress-common proj-progress-line">3</div>
+                <div className="proj-progress proj-progress-common proj-progress-line">2</div>
+                <div className="proj-progress-ing proj-progress-common proj-progress-line">3</div>
                 <div className="proj-progress proj-progress-common proj-progress-line">4</div>
                 <div className="proj-progress proj-progress-common">5</div>
             </div>
@@ -255,4 +255,4 @@ const MakeReward2 = () => {
         </>
     );
 };
-export default MakeReward2;
+export default MakeInvest3;
