@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -66,11 +67,11 @@ public class RewardService {
         reward.setBusinessImg(businessImg);
         businessImg = fileRepository.save(businessImg);
 
-        File repImg = converToFile(rewardDTO.getRepfile());
+        File repImg = converToFile(rewardDTO.getRepFile());
         reward.setRepfile(repImg);
         repImg = fileRepository.save(repImg);
 
-        File conImg = converToFile(rewardDTO.getConfile());
+        File conImg = converToFile(rewardDTO.getConFile());
         reward.setConfile(conImg);
         conImg = fileRepository.save(conImg);
 
@@ -110,10 +111,7 @@ public class RewardService {
 
         File file = new File();
         file.setFileId(fileDTO.getFileId());
-        file.setFileSavedName(fileDTO.getFileSavedName());
-        file.setFileOriginalName(fileDTO.getFileOriginalName());
-        file.setFilePath(fileDTO.getFilePath());
-        file.setFileSize(fileDTO.getFileSize());
+        file.setFileName(fileDTO.getFileName());
         file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
         return file;
     }
@@ -121,20 +119,20 @@ public class RewardService {
     private Reward convertToReward(RewardDTO rewardDTO) {
         Reward reward = new Reward();
         reward.setProjName(rewardDTO.getProjName());
-        reward.setProjTargetAmout(rewardDTO.getProjTargetAmout());
+        reward.setProjTargetAmount(rewardDTO.getProjTargetAmount());
         reward.setProjDateStart(rewardDTO.getProjDateStart());
         reward.setProjDateEnd(rewardDTO.getProjDateEnd());
 
-        FileDTO repFileDTO = rewardDTO.getRepfile();
+        FileDTO repFileDTO = rewardDTO.getRepFile();
         if (repFileDTO != null) {
             File repFile = converToFile(repFileDTO);
             reward.setRepfile(repFile);
         }
 
-        reward.setProjKeyWord(rewardDTO.getProjKeyWord());
+        reward.setProjKeyWord(rewardDTO.getProjKeyword());
         reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
 
-        FileDTO confileDTO = rewardDTO.getConfile();
+        FileDTO confileDTO = rewardDTO.getRepFile();
         if (confileDTO != null) {
             File confile = converToFile(confileDTO);
             reward.setConfile(confile);
@@ -174,7 +172,11 @@ public class RewardService {
         reward.setInstagramUrl(rewardDTO.getInstagramUrl());
         reward.setBlogUrl(rewardDTO.getBlogUrl());
         reward.setTwitterUrl(rewardDTO.getTwitterUrl());
-        reward.setUser(rewardDTO.getUser());
+        UserDTO userDTO = rewardDTO.getUser();
+        if (userDTO != null) {
+            User user = convertToUser(userDTO);
+            reward.setUser(user);
+        }
 
         List<RewardType> rewardTypes = convertToRewardType(rewardDTO.getRewardTypes());
         reward.setRewardTypes(rewardTypes);
@@ -216,24 +218,24 @@ public class RewardService {
         RewardDTO rewardDTO = new RewardDTO();
         rewardDTO.setId(reward.getId());
         rewardDTO.setProjName(reward.getProjName());
-        rewardDTO.setProjTargetAmout(reward.getProjTargetAmout());
+        rewardDTO.setProjTargetAmount(reward.getProjTargetAmount());
         rewardDTO.setRewardLaw(reward.getRewardLaw());
         rewardDTO.setProjDateStart(reward.getProjDateStart());
         rewardDTO.setProjDateEnd(reward.getProjDateEnd());
 
         if (reward.getRepfile() != null) {
             FileDTO repFileDTO = new FileDTO();
-            repFileDTO.setFileSavedName(reward.getRepfile().getFileSavedName());
-            rewardDTO.setRepfile(repFileDTO);
+            repFileDTO.setFileName(reward.getRepfile().getFileName());
+            rewardDTO.setRepFile(repFileDTO);
         }
 
-        rewardDTO.setProjKeyWord(reward.getProjKeyWord());
+        rewardDTO.setProjKeyword(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
 
         if (reward.getConfile() != null) {
             FileDTO confileDTO = new FileDTO();
-            confileDTO.setFileSavedName(reward.getConfile().getFileSavedName());
-            rewardDTO.setConfile(confileDTO);
+            confileDTO.setFileName(reward.getConfile().getFileName());
+            rewardDTO.setConFile(confileDTO);
         }
 
         rewardDTO.setProjContent(reward.getProjContent());
@@ -248,7 +250,7 @@ public class RewardService {
 
         if (reward.getBusinessImg() != null) {
             FileDTO businessImgDTO = new FileDTO();
-            businessImgDTO.setFileSavedName(reward.getBusinessImg().getFileSavedName());
+            businessImgDTO.setFileName(reward.getBusinessImg().getFileName());
             rewardDTO.setBusinessImg(businessImgDTO);
         }
 
@@ -259,7 +261,7 @@ public class RewardService {
 
         if (reward.getBankImg() != null) {
             FileDTO bankImgDTO = new FileDTO();
-            bankImgDTO.setFileSavedName(reward.getBankImg().getFileSavedName());
+            bankImgDTO.setFileName(reward.getBankImg().getFileName());
             rewardDTO.setBankImg(bankImgDTO);
         }
 

@@ -4,23 +4,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
+import moment from "moment";
 
 const Desc = ({ reward }) => {
-  const [imageSrc, setImageSrc] = useState({reward.rewardRepImgSavedName});
+  const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
   const [isClicked, setIsClicked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  let navigate = useNavigate();
+  const getRemainingDays = () => {
+    const endDate = moment(reward.projDateEnd);
+    const today = moment();
+    const remainingDays = endDate.diff(today, "days")
+    return remainingDays;
+  }
 
-  const handleClick = () => {
-    if (isClicked) {
-      setImageSrc({reward.rewardRepImgSavedName});
-      setIsClicked(false);
-    } else {
-      setImageSrc({reward.rewardContentImgSavedName});
-      setIsClicked(true);
-    }
-  };
+  const getYesterDay = () => {
+    const endDate = moment(reward.projDateEnd);
+    const today = moment().startOf("day"); // Start of today
+    const remainingDays = endDate.diff(today, "days") - 1; // Subtract 1 to exclude today
+    return remainingDays;
+  }
+
+  let navigate = useNavigate();
 
   const handleCompanyClick = () => {
     setIsModalVisible(true);
@@ -31,16 +36,16 @@ const Desc = ({ reward }) => {
       <div className="desc_title">{reward.projName}</div>
       <div className="desc_contents">
         <div className="desc_img">
-          <img src={imageSrc} className="main_img" />
+          <img src={`http://localhost:8090/img/${imageSrc}`} className="main_img" />
           <img
-            src="/assets/imgs/bracelet.jpg"
-            className="sub_img1"
-            onClick={handleClick}
-          />
+            src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+            className="sub_img2" id={reward.repFile.fileName}
+           onClick={(e)=>setImageSrc(reward.repFile.fileName)}
+          /> 
           <img
-            src="/assets/imgs/bracelet2.jpg"
-            className="sub_img2"
-            onClick={handleClick}
+            src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+            className="sub_img1" id={reward.conFile.fileName}
+            onClick={(e)=>setImageSrc(reward.conFile.fileName)}
           />
         </div>
         <div className="desc_content">
@@ -52,12 +57,12 @@ const Desc = ({ reward }) => {
             <div className="fund_rate_title">달성률</div>
             <div className="fund_rate_per">1050%</div>
             <sub className="fund_rate_price">
-              목표 금액 {reward.projTargetAmout}원
+              목표 금액 {reward.projTargetAmount}원
             </sub>
           </div>
           <div className="fund_date">
             <div className="fund_date_title">남은기간</div>
-            <div className="fund_date_dday">11일</div>
+            <div className="fund_date_dday">{getRemainingDays() + 1}일</div>
             <sub className="fund_date_end">{reward.projDateEnd} 종료</sub>
           </div>
           <div className="fund_people">
@@ -91,7 +96,7 @@ const Desc = ({ reward }) => {
           </div>
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
-            <div className="end2">2023-07-22</div>
+            <div className="end2">{moment(reward.projDateEnd).subtract(1, 'day').format("YYYY-MM-DD")}</div>
             <div className="end3">2023-07-25</div>
           </div>
           <div className="company" onClick={handleCompanyClick}>

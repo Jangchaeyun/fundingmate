@@ -25,7 +25,7 @@ public class Reward {
 
     private String projName;
 
-    private Integer projTargetAmout;
+    private Integer projTargetAmount;
 
     private LocalDate projDateStart;
 

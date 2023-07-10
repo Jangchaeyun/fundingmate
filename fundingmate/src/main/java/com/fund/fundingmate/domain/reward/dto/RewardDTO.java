@@ -1,30 +1,29 @@
 package com.fund.fundingmate.domain.reward.dto;
 
 import com.fund.fundingmate.domain.user.dto.UserDTO;
-import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.dto.FileDTO;
-import com.fund.fundingmate.global.file.entity.File;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class RewardDTO {
     private Long id;
     private String projName;
-    private String projKeyWord;
-    private Integer projTargetAmout;
+    private Integer projTargetAmount;
     private LocalDate projDateStart;
     private LocalDate projDateEnd;
+    private FileDTO repFile;
+    private String projKeyword;
     private String rewardVideoAddress;
-    private FileDTO repfile;
-    private FileDTO confile;
+    private FileDTO conFile;
     private String projContent;
     private String rewardRefundExchangePolicy;
     private String rewardContact;
@@ -47,6 +46,6 @@ public class RewardDTO {
     private String instagramUrl;
     private String blogUrl;
     private String twitterUrl;
-    private User user;
+    private UserDTO user;
     private List<RewardTypeDTO> rewardTypes;
 }

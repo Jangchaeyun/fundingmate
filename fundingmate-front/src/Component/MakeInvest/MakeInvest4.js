@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, useNavigate, useLocation} from "react-router-dom";
-import "./MakeReward3.css";
-import "./MakeRewardCommon.css";
+import "./MakeInvest4.css";
+import "./MakeInvestCommon.css";
 import {PlusOutlined, PlusSquareOutlined,MinusSquareOutlined} from "@ant-design/icons";
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
 import { nanoid } from 'nanoid';
 
-const MakeReward3 = () => {
+const MakeInvest4 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
     const [totInfo, setTotInfo] = useState(preTotInfo);
@@ -83,12 +83,12 @@ const MakeReward3 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/story", {state:{totInfo:totInfo}});
+        navigateToStep1("/make-invest/story", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
         //setTotInfo({...totInfo, cards:[...cards]})
-        navigateToStep2("/make-reward/goodsinfo", {state:{totInfo:totInfo}});
+        navigateToStep2("/make-invest/hostinfo", {state:{totInfo:totInfo}});
     };
 
     const rewardChange = (e) => {
@@ -128,8 +128,8 @@ const MakeReward3 = () => {
             <div className="proj-progress-div">
                 <div className="proj-progress proj-progress-common proj-progress-line">1</div>
                 <div className="proj-progress proj-progress-common proj-progress-line">2</div>
-                <div className="proj-progress-ing proj-progress-common proj-progress-line">3</div>
-                <div className="proj-progress proj-progress-common proj-progress-line">4</div>
+                <div className="proj-progress proj-progress-common proj-progress-line">3</div>
+                <div className="proj-progress-ing proj-progress-common proj-progress-line">4</div>
                 <div className="proj-progress proj-progress-common">5</div>
             </div>
 
@@ -319,4 +319,4 @@ const MakeReward3 = () => {
         </>
     );
 };
-export default MakeReward3;
+export default MakeInvest4;

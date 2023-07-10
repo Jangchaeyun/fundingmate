@@ -1,6 +1,7 @@
 .desc {
-  margin-left: 4.5%;
+  margin-left: 8.5%;
   overflow-x: hidden;
+  width: 1080px;
 }
 
 .desc_subtitle {
@@ -15,8 +16,8 @@
 }
 
 .desc_title {
-  font-size: 15px;
-  margin-bottom: 0.8%;
+  font-size: 21px;
+  margin-bottom: 1.8%;
   margin-top: 10px;
   margin-left: 10%;
 }
@@ -181,6 +182,7 @@
   width: 100%;
   margin-top: 2%;
   text-align: center;
+  margin-left: 1.5%;
 }
 
 .circle1 {
@@ -189,7 +191,7 @@
   border-radius: 50px;
   border: 1px solid #000;
   background: #fff;
-  margin-right: 50px;
+  margin-right: 14%;
 }
 
 .circle2 {
@@ -198,7 +200,7 @@
   border-radius: 50px;
   border: 1px solid #000;
   background: #fff;
-  margin-right: 46px;
+  margin-right: 14%;
 }
 
 .circle3 {
@@ -220,7 +222,7 @@
   display: flex;
   width: 100%;
   margin-top: 1%;
-  margin-left: 5%;
+  margin-left: 8%;
   font-size: 11px;
   color: var(--grey);
   text-align: center;
@@ -228,17 +230,17 @@
 
 .end1 {
   color: var(--main-color);
-  margin-left: -7.6%;
+  margin-left: -8.5%;
 }
 
 .end2 {
   color: var(--main-color);
-  margin-left: 7%;
+  margin-left: 9%;
 }
 
 .end3 {
   color: var(--main-color);
-  margin-left: 7%;
+  margin-left: 8.4%;
 }
 .company {
   border-radius: 5px;
@@ -265,25 +267,30 @@
 .company_name {
   font-size: 12px;
   color: var(--black);
-  margin-top: 5.5%;
+  margin-top: 3.5%;
   margin-left: 11%;
   transition: all 0.2s linear;
 }
 
 .fund_end_date_title {
-  margin-left: -6%;
+  margin-left: -7%;
 }
 
 .price_date_title {
-  margin-left: 11%;
+  margin-left: 12%;
 }
 
 .send_date_title {
-  margin-left: 11%;
+  margin-left: 12%;
 }
 
 .company_name:hover {
   color: var(--main-color);
+}
+
+.menu_hr {
+  margin-left: 19%;
+  width: 1080px;
 }
 
 .name_view {
@@ -299,15 +306,15 @@
 }
 
 .info {
-  width: 58%;
+  width: 259px;
   background-color: var(--info);
   font-size: 10px;
-  margin-left: 0%;
+  margin-left: 0.5%;
   margin-top: 2%;
   padding-top: 1%;
   padding-bottom: 1%;
   border-radius: 5px;
-  padding-left: 1%;
+  padding-left: 5px;
 }
 
 .menu {
@@ -319,7 +326,7 @@
   display: flex;
   width: 100%;
   margin-top: 1%;
-  margin-left: 45%;
+  margin-left: 50%;
   font-size: 14px;
   transition: all 0.4s linear;
 }
@@ -376,10 +383,13 @@
   margin-top: 2%;
   font-size: 13px;
   line-height: 20px;
+  margin-left: 20%;
+  margin-right: 10%;
 }
 
 .product_img {
   width: 100%;
+  margin-top: 2%;
 }
 
 .con {

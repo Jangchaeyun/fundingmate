@@ -8,13 +8,13 @@ const Story = () => {
   const [reward, setReward] = useState({
     id: 0,
     projName: "",
-    projTargetAmout: 0,
+    projTargetAmount: 0,
     projDateStart: null,
     projDateEnd: null,
-    rewardRepImgSavedName: "",
-    projKeyWord: "",
+    repFile: null,
+    projKeyword: "",
     rewardVideoAddress: "",
-    rewardContentImgSavedName: "",
+    conFile: null,
     projContent: "",
     rewardRefundExchangePolicy: "",
     rewardContact: "",
@@ -23,13 +23,14 @@ const Story = () => {
     modelName: "",
     countryOfOrigin: "",
     manufacturer: "",
+    rewardLaw: "",
     asPhoneNumber: "",
-    rewardIdBusinessLicenseImgSavedName: "",
+    businessImg: null,
     businessAddress: "",
     bank: "",
     accNumber: "",
     depositorName: "",
-    rewardBankAccountCopyImgSavedName: "",
+    bankImg: null,
     taxBillEmail: "",
     websiteUrl: "",
     facebookUrl: "",
@@ -39,6 +40,7 @@ const Story = () => {
     user: null,
     rewardTypes: [],
   });
+  const [viewDesc, setViewDesc] = useState(false);
 
   const { rewardId } = useParams();
 
@@ -46,7 +48,9 @@ const Story = () => {
     axios
       .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
       .then((res) => {
+        console.log(res.data)
         setReward(res.data.reward);
+        setViewDesc(true);
       })
       .catch((err) => {
         console.log(err);
@@ -55,9 +59,9 @@ const Story = () => {
 
   return (
     <div className="desc">
-      <Desc reward={reward} />
+      {viewDesc && <Desc reward={reward} />}
       <div className="menu">
-        <hr />
+        <hr className="menu_hr" />
         <div className="menu_items">
           <Link className="story active" to={"/reward-detail/story"}>
             스토리
@@ -75,9 +79,15 @@ const Story = () => {
       </div>
       <div className="story_content">
         {reward.projContent}
-        <div className="product_img">
-          <img src={reward.rewardContentImgSavedName} className="images" />
-        </div>
+          <div className="product_img">
+
+            {reward.conFile && (
+              <img
+                src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+                className="images"
+              />
+            )}
+          </div>
       </div>
     </div>
   );

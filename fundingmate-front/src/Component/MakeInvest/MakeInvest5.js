@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate , useLocation } from "react-router-dom";
-import "./MakeReward5.css";
-import "./MakeRewardCommon.css";
+import "./MakeInvest5.css";
+import "./MakeInvestCommon.css";
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
 import  DaumPostcode  from 'react-daum-postcode';
 import { Modal } from 'antd';
 
-const MakeReward5 = () => {
+const MakeInvest5 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
     const [totInfo, setTotInfo] = useState(preTotInfo);
@@ -114,7 +114,7 @@ const MakeReward5 = () => {
     const navigateToStep2 = useNavigate();
 
     const handlePreviousStep = () => {
-        navigateToStep1("/make-reward/goodsinfo", {state:{totInfo:totInfo}});
+        navigateToStep1("/make-invest/typelist", {state:{totInfo:totInfo}});
     };
 
     const handleNextStep = () => {
@@ -330,4 +330,4 @@ const MakeReward5 = () => {
         </>
     );
 };
-export default MakeReward5;
+export default MakeInvest5;
