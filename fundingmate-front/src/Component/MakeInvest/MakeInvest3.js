@@ -227,6 +227,28 @@ const MakeInvest3 = () => {
                 <b>프로젝트 스토리를 적어주세요</b>
             </p>
 
+            <p className="custom-font-text" style={{fontSize:"12px", marginTop:"17px"}}>
+                <b>아이템 소개</b>
+            </p>
+            <textarea type="text" name="investItemIntro" className="rew-textarea" value={totInfo.investItemIntro} onChange={handleInputChange}/>
+            <br/>
+            <p className="custom-font-text" style={{fontSize:"12px", marginTop:"15px"}}>
+                <b>아이템의 사업성</b>
+            </p>
+            <textarea type="text" name="investItemBusinessValue" className="rew-textarea" value={totInfo.investItemBusinessValue} onChange={handleInputChange}/>
+            <br/>
+            <p className="custom-font-text" style={{fontSize:"12px", marginTop:"15px"}}>
+                <b>아이템의 가치</b>
+            </p>
+            <textarea type="text" name="investItemValue" className="rew-textarea" value={totInfo.investItemValue} onChange={handleInputChange}/>
+            <br/>
+            <p className="custom-font-text" style={{fontSize:"12px", marginTop:"15px"}}>
+                <b>아이템의 기대효과</b>
+            </p>
+            <textarea type="text" name="investItemBenefit" className="rew-textarea" value={totInfo.investItemBenefit} onChange={handleInputChange}/>
+            <br/>
+            <br/>
+            <br/>
             <div className="edit_wrap">
                 <Editor
                     initialValue={totInfo.projContent}

@@ -169,7 +169,7 @@ const MakeReward3 = () => {
 
                 cancelText="취소"
                 okButtonProps={{ style: { backgroundColor: "var(--main-color)", fontFamily:  "SUITE-Regular" } }}
-                cancelButtonProps={{ style: { fontFamily:  "SUITE-Regular" } }}
+                cancelButtonProps={{  id: 'rew-modal-custom-cancel-button'}}
                 id="makereward_modal"
             >
                 <p className="custom-font-modal-sub-title">
