@@ -1,5 +1,7 @@
 package com.fund.fundingmate.domain.reward.controller;
 
+import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
+import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.entity.File;
@@ -31,6 +33,9 @@ public class RewardController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private RewardCommentService rewardCommentService;
+
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
         try {
@@ -45,35 +50,28 @@ public class RewardController {
     }
 
     @GetMapping("/reward-detail/contact/{rewardId}")
-    public ResponseEntity<Map<String, Object>> rewardDetailContact(@PathVariable Long rewardId) {
-        try {
-            String userId = (String) session.getAttribute("userId");
-            System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
-            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<RewardCommentDTO> rewardDetailContact(@PathVariable("rewardId") Long rewardId) {
+        RewardCommentDTO rewardCommentDTO = rewardCommentService.getRewardCommentByRewardId(rewardId);
+
+        if (rewardCommentDTO == null) {
+            return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok(rewardCommentDTO);
     }
 
-    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {
         try {
-
-            // Construct the file path based on the fileOriginalName
             String filePath = UPLOAD_DIRECTORY + "/" + fileOriginalName;
 
-            // Read the file from the server
             Path imagePath = Paths.get(filePath);
             byte[] fileBytes = Files.readAllBytes(imagePath);
 
-            // Set the content type of the response
             response.setContentType("image/*");
 
-            // Write the file content to the response output stream
             response.getOutputStream().write(fileBytes);
             response.getOutputStream().flush();
         } catch (IOException e) {

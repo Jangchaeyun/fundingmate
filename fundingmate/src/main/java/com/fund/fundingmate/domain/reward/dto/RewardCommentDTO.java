@@ -8,9 +8,8 @@ import java.util.Date;
 @Data
 public class RewardCommentDTO {
     private Long id;
-    private String comTitle;
     private String comContent;
-    private Date comRegistration;
+    private Date comRegistrationDate;
     private Date comRevisionDate;
     private RewardDTO reward;
     private UserDTO user;

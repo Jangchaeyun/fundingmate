@@ -33,6 +33,6 @@ public class RewardComment {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true) // Add this mapping for replies
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RewardReply> replies;
 }

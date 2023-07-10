@@ -124,8 +124,8 @@
 }
 
 .fund_con_list {
-  margin-top: 2%;
-  border: 1px solid var(--lightgrey);
+  margin-top: 8%;
+  border: 1px solid var(--grey);
   width: 84.8%;
   margin-left: 0%;
 }
@@ -145,7 +145,7 @@
   width: 70px;
   height: 25px;
   margin-bottom: 1%;
-  margin-left: 89%;
+  margin-left: 90%;
   background-color: var(--white);
   border: 1px solid var(--main-color);
   cursor: pointer;

@@ -388,8 +388,8 @@
 
 .product_img {
   width: 100%;
-    margin-top: 2%;
-    text-align: center;
+  margin-top: 2%;
+  text-align: center;
 }
 
 .con {
@@ -494,4 +494,23 @@
 
 .text {
   text-align: center;
+}
+
+.reward_con_list {
+  margin-top: 8%;
+  border: 1px solid var(--grey);
+  width: 84.8%;
+  margin-left: 0%;
+}
+
+.reward_con_name {
+  margin-top: 1%;
+  margin-left: 2%;
+  font-size: 13px;
+}
+
+.reward_con_content {
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-bottom: 2%;
 }

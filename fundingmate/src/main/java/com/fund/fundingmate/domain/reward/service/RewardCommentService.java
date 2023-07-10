@@ -34,6 +34,22 @@ public class RewardCommentService {
         this.rewardReplyRepository = rewardReplyRepository;
     }
 
+    public RewardCommentDTO getRewardCommentByRewardId(Long rewardId) {
+        RewardComment rewardComment = rewardCommentRepository.findByRewardId(rewardId);
+
+        if (rewardComment == null) {
+            return null;
+        }
+
+        RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
+        rewardCommentDTO.setId(rewardComment.getId());
+        rewardCommentDTO.setComContent(rewardComment.getComContent());
+        rewardCommentDTO.setComRegistrationDate(rewardComment.getComRegistrationDate());
+        rewardCommentDTO.setComRevisionDate(rewardComment.getComRevisionDate());
+
+        return rewardCommentDTO;
+    }
+
     public void insertRewardComment(RewardCommentDTO rewardCommentDTO) {
         RewardDTO rewardDTO = rewardCommentDTO.getReward();
         UserDTO userDTO = rewardCommentDTO.getUser();

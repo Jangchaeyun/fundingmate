@@ -49,7 +49,7 @@ const Story = () => {
     axios
       .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setReward(res.data.reward);
         setViewDesc(true);
       })
@@ -64,11 +64,14 @@ const Story = () => {
       <div className="menu">
         <hr className="menu_hr" />
         <div className="menu_items">
-          <Link className="story active" to={"/reward-detail/story"}>
+          <Link
+            className="story active"
+            to={"/reward-detail/story/${rewardId}"}
+          >
             스토리
           </Link>
           <div className="contact_box">
-            <Link className="contact" to={"/reward-detail/contact"}>
+            <Link className="contact" to={`/reward-detail/contact/${rewardId}`}>
               문의
             </Link>
             <div className="contact_count">0</div>
@@ -80,15 +83,14 @@ const Story = () => {
       </div>
       <div className="story_content">
         {reward.projContent}
-          <div className="product_img">
-
-            {reward.conFile && (
-              <img
-                src={`http://localhost:8090/img/${reward.conFile.fileName}`}
-                className="images"
-              />
-            )}
-          </div>
+        <div className="product_img">
+          {reward.conFile && (
+            <img
+              src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+              className="images"
+            />
+          )}
+        </div>
       </div>
     </div>
   );

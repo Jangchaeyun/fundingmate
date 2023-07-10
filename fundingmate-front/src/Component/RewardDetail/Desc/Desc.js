@@ -8,22 +8,14 @@ import moment from "moment";
 
 const Desc = ({ reward }) => {
   const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
-  const [isClicked, setIsClicked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getRemainingDays = () => {
     const endDate = moment(reward.projDateEnd);
     const today = moment();
-    const remainingDays = endDate.diff(today, "days")
+    const remainingDays = endDate.diff(today, "days");
     return remainingDays;
-  }
-
-  const getYesterDay = () => {
-    const endDate = moment(reward.projDateEnd);
-    const today = moment().startOf("day"); // Start of today
-    const remainingDays = endDate.diff(today, "days") - 1; // Subtract 1 to exclude today
-    return remainingDays;
-  }
+  };
 
   let navigate = useNavigate();
 
@@ -36,16 +28,21 @@ const Desc = ({ reward }) => {
       <div className="desc_title">{reward.projName}</div>
       <div className="desc_contents">
         <div className="desc_img">
-          <img src={`http://localhost:8090/img/${imageSrc}`} className="main_img" />
+          <img
+            src={`http://localhost:8090/img/${imageSrc}`}
+            className="main_img"
+          />
           <img
             src={`http://localhost:8090/img/${reward.repFile.fileName}`}
-            className="sub_img2" id={reward.repFile.fileName}
-           onClick={(e)=>setImageSrc(reward.repFile.fileName)}
-          /> 
+            className="sub_img2"
+            id={reward.repFile.fileName}
+            onClick={(e) => setImageSrc(reward.repFile.fileName)}
+          />
           <img
             src={`http://localhost:8090/img/${reward.conFile.fileName}`}
-            className="sub_img1" id={reward.conFile.fileName}
-            onClick={(e)=>setImageSrc(reward.conFile.fileName)}
+            className="sub_img1"
+            id={reward.conFile.fileName}
+            onClick={(e) => setImageSrc(reward.conFile.fileName)}
           />
         </div>
         <div className="desc_content">
@@ -96,7 +93,11 @@ const Desc = ({ reward }) => {
           </div>
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
-            <div className="end2">{moment(reward.projDateEnd).subtract(1, 'day').format("YYYY-MM-DD")}</div>
+            <div className="end2">
+              {moment(reward.projDateEnd)
+                .subtract(1, "day")
+                .format("YYYY-MM-DD")}
+            </div>
             <div className="end3">{reward.deliveryDate}</div>
           </div>
           <div className="company" onClick={handleCompanyClick}>
