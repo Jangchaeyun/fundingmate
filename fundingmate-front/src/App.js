@@ -16,13 +16,17 @@ import FundPeople from "./Component/Checkout/FundPeople";
 import Checkfund from "./Component/Checkout/Checkfund";
 import FundCheckout from "./Component/Checkout/FundCheckout";
 import Founder from "./pages/MyPage/Founder";
+import Investor from "./pages/MyPage/Investor";
 function App() {
   return (
     <div className="App">
       <Routes>
         {/* <Route exact path="/" element={<Main />} /> */}
         <Route exact path="/reward" element={<Reward />} />
+      </Routes>
+      <Routes>
         <Route exact path="/my-page/founder" element={<Founder />} />
+        <Route exact path="/my-page/investor" element={<Investor />} />
       </Routes>
       <Routes>
         <Route exact path="/reward-detail/story" element={<Story />} />
@@ -33,7 +37,7 @@ function App() {
         <Route exact path="/fund" element={<Fund />} />
       </Routes>
       <Routes>
-        
+
         <Route exact path="/fund-detail/story" element={<FundStory />} />
         <Route exact path="/fund-detail/contact" element={<FundContact />} />
         <Route exact path="/fund-detail/guide" element={<FundGuide />} />
