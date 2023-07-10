@@ -36,7 +36,6 @@ import MakeInvest2 from "./Component/MakeInvest/MakeInvest2";
 import MakeInvest3 from "./Component/MakeInvest/MakeInvest3";
 import MakeInvest4 from "./Component/MakeInvest/MakeInvest4";
 import MakeInvest5 from "./Component/MakeInvest/MakeInvest5";
-import { Route, Routes } from "react-router-dom";
 import Founder from "./pages/MyPage/Founder";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 import Desc from "./Component/RewardDetail/Desc/Desc";

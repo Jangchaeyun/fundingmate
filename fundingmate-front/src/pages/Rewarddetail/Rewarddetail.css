@@ -1,7 +1,7 @@
 .desc {
-  margin-left: 8.5%;
   overflow-x: hidden;
   width: 1080px;
+  margin: 0 auto;
 }
 
 .desc_subtitle {
@@ -319,7 +319,7 @@
 
 .menu {
   margin-top: 3%;
-  margin-left: -6%;
+  margin-left: -24%;
 }
 
 .menu_items {
@@ -383,13 +383,14 @@
   margin-top: 2%;
   font-size: 13px;
   line-height: 20px;
-  margin-left: 20%;
-  margin-right: 10%;
+  margin-left: 7%;
+  margin-right: 8%;
 }
 
 .product_img {
   width: 100%;
-  margin-top: 2%;
+    margin-top: 2%;
+    text-align: center;
 }
 
 .con {
