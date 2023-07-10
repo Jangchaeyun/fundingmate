@@ -43,7 +43,7 @@ function App() {
   return (
 
       <React.Fragment>
-          <Reset />
+
         <div className="App">
            <Routes>
               <Route exact path="/" element={<Home />} />
