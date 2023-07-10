@@ -14,17 +14,22 @@ import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.dto.FileDTO;
-import com.fund.fundingmate.global.file.entity.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -56,6 +61,12 @@ class FundingmateApplicationTests {
 
 	@Autowired
 	private InvestPeopleRepository investPeopleRepository;
+
+	@Autowired
+	private FileService fileService;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@BeforeEach
 	void setup() {
@@ -121,45 +132,6 @@ class FundingmateApplicationTests {
 		rewardDTO.setAccNumber("1234-5678-9012-3456");
 		rewardDTO.setDepositorName("이근용");
 
-		// Business License Image
-		FileDTO businessImgDTO = new FileDTO();
-		businessImgDTO.setFileSavedName("business-license-receipt.jpg");
-		businessImgDTO.setFileOriginalName("business-license-receipt.jpg");
-		businessImgDTO.setFilePath("/business-license-receipt.jpg");
-		businessImgDTO.setFileSize("123456");
-		businessImgDTO.setFileRegistrationDate(new Date());
-
-		rewardDTO.setBusinessImg(businessImgDTO);
-
-		// Bank Account Copy Image
-		FileDTO bankImgDTO = new FileDTO();
-		bankImgDTO.setFileSavedName("bank_account_copy_image.jpg");
-		bankImgDTO.setFileOriginalName("bank_account_copy_image.jpg");
-		bankImgDTO.setFilePath("/bank_account_copy_image.jpg");
-		bankImgDTO.setFileSize("789012");
-		bankImgDTO.setFileRegistrationDate(new Date());
-
-		rewardDTO.setBankImg(bankImgDTO);
-
-		// Rep File Image
-		FileDTO repImgDTO = new FileDTO();
-		repImgDTO.setFileSavedName("rewardprj1.png");
-		repImgDTO.setFileOriginalName("rewardprj1.jpg");
-		repImgDTO.setFilePath("/rewardprj1.jpg");
-		repImgDTO.setFileSize("345678");
-		repImgDTO.setFileRegistrationDate(new Date());
-
-		rewardDTO.setRepFile(repImgDTO);
-
-		// Con File Image
-		FileDTO conImgDTO = new FileDTO();
-		conImgDTO.setFileSavedName("rewardprj1-2.png");
-		conImgDTO.setFileOriginalName("rewardprj1-2.png");
-		conImgDTO.setFilePath("/ewardprj1-2.jpg");
-		conImgDTO.setFileSize("901234");
-		conImgDTO.setFileRegistrationDate(new Date());
-
-		rewardDTO.setConFile(conImgDTO);
 
 
 		rewardDTO.setTaxBillEmail("sinabro_wine@naver.com");
@@ -187,6 +159,34 @@ class FundingmateApplicationTests {
 
 		rewardTypeDTOs.add(rewardTypeDTO);
 		rewardDTO.setRewardTypes(rewardTypeDTOs);
+
+		MultipartFile repFile = new MockMultipartFile("rewardprj1.png", "rewardprj1.png", "image/png", new byte[0]);
+		MultipartFile conFile = new MockMultipartFile("rewardprj1-2.png", "rewardprj1-2.png", "image/png", new byte[0]);
+		MultipartFile businessImg = new MockMultipartFile("business-license-receipt.jpg", "business-license-receipt.jpg", "image/jpg", new byte[0]);
+		MultipartFile bankImg = new MockMultipartFile("bank_account_copy_image.jpg", "bank_account_copy_image.jpg", "image/jpg", new byte[0]);
+
+		try {
+			// Save each file and set the corresponding field in the rewardDTO
+			com.fund.fundingmate.global.file.entity.File savedRepFile = fileService.saveFile(null, repFile);
+			rewardDTO.setRepFile(modelMapper.map(savedRepFile, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedConFile = fileService.saveFile(null, conFile);
+			rewardDTO.setConFile(modelMapper.map(savedConFile, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedBusinessImg = fileService.saveFile(null, businessImg);
+			rewardDTO.setBusinessImg(modelMapper.map(savedBusinessImg, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedBankImg = fileService.saveFile(null, bankImg);
+			rewardDTO.setBankImg(modelMapper.map(savedBankImg, FileDTO.class));
+
+			rewardDTO.getRepFile().setFileName(repFile.getOriginalFilename());
+			rewardDTO.getConFile().setFileName(conFile.getOriginalFilename());
+			rewardDTO.getBusinessImg().setFileName(businessImg.getOriginalFilename());
+			rewardDTO.getBankImg().setFileName(bankImg.getOriginalFilename());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		Long userId = user.getId();
 

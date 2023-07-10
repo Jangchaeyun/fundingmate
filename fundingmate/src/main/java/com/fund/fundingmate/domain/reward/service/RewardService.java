@@ -111,9 +111,7 @@ public class RewardService {
 
         File file = new File();
         file.setFileId(fileDTO.getFileId());
-        file.setFileSavedName(fileDTO.getFileSavedName());
-        file.setFileOriginalName(fileDTO.getFileOriginalName());
-        file.setFileSize(fileDTO.getFileSize());
+        file.setFileName(fileDTO.getFileName());
         file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
         return file;
     }
@@ -227,7 +225,7 @@ public class RewardService {
 
         if (reward.getRepfile() != null) {
             FileDTO repFileDTO = new FileDTO();
-            repFileDTO.setFileSavedName(reward.getRepfile().getFileSavedName());
+            repFileDTO.setFileName(reward.getRepfile().getFileName());
             rewardDTO.setRepFile(repFileDTO);
         }
 
@@ -236,7 +234,7 @@ public class RewardService {
 
         if (reward.getConfile() != null) {
             FileDTO confileDTO = new FileDTO();
-            confileDTO.setFileSavedName(reward.getConfile().getFileSavedName());
+            confileDTO.setFileName(reward.getConfile().getFileName());
             rewardDTO.setConFile(confileDTO);
         }
 
@@ -252,7 +250,7 @@ public class RewardService {
 
         if (reward.getBusinessImg() != null) {
             FileDTO businessImgDTO = new FileDTO();
-            businessImgDTO.setFileSavedName(reward.getBusinessImg().getFileSavedName());
+            businessImgDTO.setFileName(reward.getBusinessImg().getFileName());
             rewardDTO.setBusinessImg(businessImgDTO);
         }
 
@@ -263,7 +261,7 @@ public class RewardService {
 
         if (reward.getBankImg() != null) {
             FileDTO bankImgDTO = new FileDTO();
-            bankImgDTO.setFileSavedName(reward.getBankImg().getFileSavedName());
+            bankImgDTO.setFileName(reward.getBankImg().getFileName());
             rewardDTO.setBankImg(bankImgDTO);
         }
 

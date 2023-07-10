@@ -40,6 +40,7 @@ const Story = () => {
     user: null,
     rewardTypes: [],
   });
+  const [viewDesc, setViewDesc] = useState(false);
 
   const { rewardId } = useParams();
 
@@ -47,7 +48,9 @@ const Story = () => {
     axios
       .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
       .then((res) => {
+        console.log(res.data)
         setReward(res.data.reward);
+        setViewDesc(true);
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +59,7 @@ const Story = () => {
 
   return (
     <div className="desc">
-      <Desc reward={reward} />
+      {viewDesc && <Desc reward={reward} />}
       <div className="menu">
         <hr className="menu_hr" />
         <div className="menu_items">
@@ -76,16 +79,15 @@ const Story = () => {
       </div>
       <div className="story_content">
         {reward.projContent}
-        <div className="product_img">
           <div className="product_img">
+
             {reward.conFile && (
               <img
-                src={`http://localhost:8090/img/${reward.conFile.fileSavedName}`}
+                src={`http://localhost:8090/img/${reward.conFile.fileName}`}
                 className="images"
               />
             )}
           </div>
-        </div>
       </div>
     </div>
   );

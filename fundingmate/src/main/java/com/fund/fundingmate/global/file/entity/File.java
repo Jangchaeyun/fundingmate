@@ -20,18 +20,16 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
     private List<Reward> fundingimg;
 
-    private String fileSavedName;
-
-    private String filePath;
-
-    private String fileOriginalName;
-
-    private String fileSize;
-
+    private String fileName;
+//
+//    private String filePath;
+//
+//    private String fileOriginalName;
+//
+//    private String fileSize;
+//
     private Date fileRegistrationDate;
-
 }

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,23 +44,26 @@ public class RewardController {
         }
     }
 
+    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {
         try {
-            File file = fileService.getFileByOriginalName(fileOriginalName);
-            if (file != null && file.getFilePath() != null) {
-                Path filePath = Paths.get(file.getFilePath());
-                if (Files.exists(filePath)) {
-                    response.setContentType("image/jpeg/jpg/png");
-                    Files.copy(filePath, response.getOutputStream());
-                    response.getOutputStream().flush();
-                } else {
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                }
-            } else {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            }
-        } catch (Exception e) {
+
+            // Construct the file path based on the fileOriginalName
+            String filePath = UPLOAD_DIRECTORY + "/" + fileOriginalName;
+
+            // Read the file from the server
+            Path imagePath = Paths.get(filePath);
+            byte[] fileBytes = Files.readAllBytes(imagePath);
+
+            // Set the content type of the response
+            response.setContentType("image/*");
+
+            // Write the file content to the response output stream
+            response.getOutputStream().write(fileBytes);
+            response.getOutputStream().flush();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

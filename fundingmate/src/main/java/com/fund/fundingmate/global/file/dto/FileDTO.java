@@ -13,9 +13,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class FileDTO {
     private Long fileId;
-    private String fileSavedName;
-    private String fileOriginalName;
-    private String filePath;
-    private String fileSize;
+    private String fileName;
+//    private String fileSavedName;
+//    private String fileOriginalName;
+//    private String filePath;
+//    private String fileSize;
     private Date fileRegistrationDate;
 }
