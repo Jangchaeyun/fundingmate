@@ -166,9 +166,11 @@ const MakeReward3 = () => {
                 onCancel={handleCancel}
                 width={655}
                 okText={editingCardIndex !== null ? '수정' : '추가'} //
-                cancelText="취소"
-                okButtonProps={{ style: { backgroundColor: "var(--main-color)" } }}
 
+                cancelText="취소"
+                okButtonProps={{ style: { backgroundColor: "var(--main-color)", fontFamily:  "SUITE-Regular" } }}
+                cancelButtonProps={{ style: { fontFamily:  "SUITE-Regular" } }}
+                id="makereward_modal"
             >
                 <p className="custom-font-modal-sub-title">
                     리워드 금액

@@ -4,8 +4,12 @@
     overflow-x: hidden;
     margin: 0 auto;
     padding: 0;
-
 }
+
+input, button, textarea, select {
+    font-family: "SUITE-Regular";
+}
+
 .proj-progress-div {
     display: flex;
     justify-content: flex-end; /* 오른쪽 정렬 */

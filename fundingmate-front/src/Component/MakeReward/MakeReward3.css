@@ -11,6 +11,7 @@
     margin-top: 8%;
     cursor: pointer;
     background: white;
+    font-family: "SUITE-Regular";
 }
 #rew-card-add-button:hover {
     background-color: var(--main-color);
@@ -88,6 +89,11 @@
     margin-bottom: 10px;
     font-weight: 600;
     margin-top: 4%;
+    font-family: "SUITE-Regular";
+}
+
+#makereward_modal {
+    font-family: "SUITE-Regular";
 }
 
 .rew-unlimited{
