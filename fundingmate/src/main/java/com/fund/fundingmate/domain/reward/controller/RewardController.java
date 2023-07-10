@@ -31,12 +31,25 @@ public class RewardController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("/reward-detail/story/{rewardJd}")
-    public ResponseEntity<Map<String, Object>> rewardDetail(@PathVariable Long rewardJd) {
+    @GetMapping("/reward-detail/story/{rewardId}")
+    public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardJd);
+            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
+            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/reward-detail/contact/{rewardId}")
+    public ResponseEntity<Map<String, Object>> rewardDetailContact(@PathVariable Long rewardId) {
+        try {
+            String userId = (String) session.getAttribute("userId");
+            System.out.println("rewardDetail: " + userId);
+            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
             return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

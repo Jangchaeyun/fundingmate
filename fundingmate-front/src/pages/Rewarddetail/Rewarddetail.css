@@ -106,7 +106,7 @@
 .fund_date_title {
   color: var(--grey);
   margin-left: 0%;
-  margin-right: 4%;
+  margin-right: 9%;
 }
 
 .fund_date_dday {
@@ -144,7 +144,7 @@
 .fund_people_count {
   color: var(--black);
   width: 43%;
-  margin-left: -16%;
+  margin-left: -14%;
   margin-top: 4%;
 }
 
@@ -289,7 +289,6 @@
 }
 
 .menu_hr {
-  margin-left: 19%;
   width: 1080px;
 }
 
@@ -326,7 +325,7 @@
   display: flex;
   width: 100%;
   margin-top: 1%;
-  margin-left: 50%;
+  margin-left: 529px;
   font-size: 14px;
   transition: all 0.4s linear;
 }
@@ -384,7 +383,7 @@
   font-size: 13px;
   line-height: 20px;
   margin-left: 7%;
-  margin-right: 8%;
+  margin-right: 153px;
 }
 
 .product_img {
