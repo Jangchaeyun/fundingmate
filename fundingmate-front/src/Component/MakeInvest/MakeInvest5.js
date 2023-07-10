@@ -192,6 +192,14 @@ const MakeInvest5 = () => {
             )}
             <br/>
             <br/>
+            <p className="custom-font-sub-title">
+                <b>문의받을 이메일 주소를 입력해 주세요</b>
+            </p>
+            <input type="text" name="investEmail" className="input-box" value={totInfo.investEmail} onChange={handleInputChange}/>
+
+
+            <br/>
+            <br/>
             <br/>
             <br/>
             <p className="custom-font-title">
