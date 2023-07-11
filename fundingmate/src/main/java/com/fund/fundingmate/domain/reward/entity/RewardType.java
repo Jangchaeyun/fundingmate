@@ -13,10 +13,10 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RewardType {
+public class    RewardType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rewardTypeNo;
+    private Long id;
 
     private Integer rewardAmount;
 
@@ -35,4 +35,12 @@ public class RewardType {
     @ManyToOne
     @JoinColumn(name = "reward_no")
     private Reward reward;
+
+    @OneToOne(mappedBy = "rewardType", cascade = CascadeType.ALL)
+    private RewardOption rewardOption;
+
+    public void setRewardOption(RewardOption rewardOption) {
+        this.rewardOption = rewardOption;
+        rewardOption.setRewardType(this);
+    }
 }

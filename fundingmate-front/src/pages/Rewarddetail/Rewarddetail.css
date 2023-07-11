@@ -1,22 +1,24 @@
 .desc {
-  margin-left: 4.5%;
   overflow-x: hidden;
+  width: 1080px;
+  margin: 0 auto;
 }
 
 .desc_subtitle {
   font-size: 11px;
   margin-top: 1%;
-  margin-bottom: 0.2%;
+  margin-bottom: 10px;
   margin-left: 10%;
 }
 
-b {
+.bold {
   color: var(--main-color);
 }
 
 .desc_title {
-  font-size: 15px;
-  margin-bottom: 0.8%;
+  font-size: 21px;
+  margin-bottom: 1.8%;
+  margin-top: 10px;
   margin-left: 10%;
 }
 
@@ -177,41 +179,69 @@ b {
 
 .circles {
   display: flex;
-  width: 54%;
+  width: 100%;
   margin-top: 2%;
-  margin-left: 5.8%;
+  text-align: center;
+  margin-left: 1.5%;
 }
 
-.circle {
+.circle1 {
   width: 40px;
   height: 40px;
   border-radius: 50px;
   border: 1px solid #000;
   background: #fff;
-  margin-right: 25px;
+  margin-right: 14%;
+}
+
+.circle2 {
+  width: 39px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #fff;
+  margin-right: 14%;
+}
+
+.circle3 {
+  width: 39px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #fff;
+  margin-right: 46px;
 }
 
 .icon_img {
   width: 50%;
   margin-top: 25%;
-  margin-left: 25%;
+  margin-left: 3%;
 }
 
 .schedule {
   display: flex;
-  width: 50%;
+  width: 100%;
   margin-top: 1%;
-  margin-left: 4%;
+  margin-left: 8%;
   font-size: 11px;
   color: var(--grey);
   text-align: center;
 }
 
-.end {
+.end1 {
   color: var(--main-color);
-  margin-right: 12%;
+  margin-left: -8.5%;
 }
 
+.end2 {
+  color: var(--main-color);
+  margin-left: 9%;
+}
+
+.end3 {
+  color: var(--main-color);
+  margin-left: 8.4%;
+}
 .company {
   border-radius: 5px;
   border: 1px solid var(--black);
@@ -237,21 +267,30 @@ b {
 .company_name {
   font-size: 12px;
   color: var(--black);
-  margin-top: 5.5%;
+  margin-top: 3.5%;
   margin-left: 11%;
   transition: all 0.2s linear;
 }
 
 .fund_end_date_title {
-  margin-right: 10%;
+  margin-left: -7%;
 }
 
 .price_date_title {
-  margin-right: 10%;
+  margin-left: 12%;
+}
+
+.send_date_title {
+  margin-left: 12%;
 }
 
 .company_name:hover {
   color: var(--main-color);
+}
+
+.menu_hr {
+  margin-left: 19%;
+  width: 1080px;
 }
 
 .name_view {
@@ -259,36 +298,35 @@ b {
   margin-top: 1%;
 }
 
-.boy_img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50px;
+.people_img {
+  width: 33px;
+  height: 30px;
   margin-left: 2.7%;
-  margin-top: 1px;
+  margin-top: 3px;
 }
 
 .info {
-  width: 58%;
+  width: 259px;
   background-color: var(--info);
   font-size: 10px;
-  margin-left: 0%;
+  margin-left: 0.5%;
   margin-top: 2%;
   padding-top: 1%;
   padding-bottom: 1%;
   border-radius: 5px;
-  padding-left: 1%;
+  padding-left: 5px;
 }
 
 .menu {
   margin-top: 3%;
-  margin-left: -6%;
+  margin-left: -24%;
 }
 
 .menu_items {
   display: flex;
   width: 100%;
   margin-top: 1%;
-  margin-left: 45%;
+  margin-left: 50%;
   font-size: 14px;
   transition: all 0.4s linear;
 }
@@ -344,11 +382,15 @@ b {
 .story_content {
   margin-top: 2%;
   font-size: 13px;
-  margin-left: 17%;
+  line-height: 20px;
+  margin-left: 7%;
+  margin-right: 8%;
 }
 
 .product_img {
   width: 100%;
+    margin-top: 2%;
+    text-align: center;
 }
 
 .con {

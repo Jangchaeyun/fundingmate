@@ -1,0 +1,30 @@
+.ibi-image-upload{
+/*    width: 350px;*/
+    width: 35vh;
+    height: 25vh;
+   /* height: 250px;*/
+    border: 1px solid var(--grey);
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+
+}
+
+
+.ibi-image-upload-info{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    flex-direction: column;
+/*    margin-top:28%;*/
+    font-size: 15px;
+}
+
+.makeReward-option{
+  /*  width: 350px;*/
+    width: 40%;
+    height: 28px;
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+}
+

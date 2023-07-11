@@ -1,14 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Desc from "../Desc/Desc";
+import axios from "axios";
 
 const Story = () => {
+  const [reward, setReward] = useState({
+    id: 0,
+    projName: "",
+    projTargetAmount: 0,
+    projDateStart: null,
+    projDateEnd: null,
+    repFile: null,
+    projKeyword: "",
+    rewardVideoAddress: "",
+    conFile: null,
+    projContent: "",
+    rewardRefundExchangePolicy: "",
+    rewardContact: "",
+    rewardEmail: "",
+    rewardCategory: "",
+    modelName: "",
+    countryOfOrigin: "",
+    manufacturer: "",
+    rewardLaw: "",
+    asPhoneNumber: "",
+    businessImg: null,
+    businessAddress: "",
+    bank: "",
+    accNumber: "",
+    depositorName: "",
+    bankImg: null,
+    taxBillEmail: "",
+    websiteUrl: "",
+    facebookUrl: "",
+    instagramUrl: "",
+    blogUrl: "",
+    twitterUrl: "",
+    user: null,
+    rewardTypes: [],
+  });
+  const [viewDesc, setViewDesc] = useState(false);
+
+  const { rewardId } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
+      .then((res) => {
+        console.log(res.data)
+        setReward(res.data.reward);
+        setViewDesc(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="desc">
-      <Desc />
+      {viewDesc && <Desc reward={reward} />}
       <div className="menu">
-        <hr />
+        <hr className="menu_hr" />
         <div className="menu_items">
           <Link className="story active" to={"/reward-detail/story"}>
             스토리
@@ -25,12 +78,16 @@ const Story = () => {
         </div>
       </div>
       <div className="story_content">
-        안녕하세요!! 저희는 스마트보이입니다~~
-        <br />
-        저희는 피어싱 및 악세사리를 팔고 있습니다.
-        <div className="product_img">
-          <img src="/assets/imgs/product_img.jpg" className="images" />
-        </div>
+        {reward.projContent}
+          <div className="product_img">
+
+            {reward.conFile && (
+              <img
+                src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+                className="images"
+              />
+            )}
+          </div>
       </div>
     </div>
   );

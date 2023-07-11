@@ -1,55 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import CompanyModel from "../../Company/CompanyModel";
+import { useParams } from "react-router";
+import moment from "moment";
 
-const Desc = () => {
-  const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
+const Desc = ({ reward }) => {
+  const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
   const [isClicked, setIsClicked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const getRemainingDays = () => {
+    const endDate = moment(reward.projDateEnd);
+    const today = moment();
+    const remainingDays = endDate.diff(today, "days")
+    return remainingDays;
+  }
+
+  const getYesterDay = () => {
+    const endDate = moment(reward.projDateEnd);
+    const today = moment().startOf("day"); // Start of today
+    const remainingDays = endDate.diff(today, "days") - 1; // Subtract 1 to exclude today
+    return remainingDays;
+  }
+
   let navigate = useNavigate();
 
-  const handleClick = () => {
-    if (isClicked) {
-      setImageSrc("/assets/imgs/bracelet.jpg");
-      setIsClicked(false);
-    } else {
-      setImageSrc("/assets/imgs/bracelet2.jpg");
-      setIsClicked(true);
-    }
+  const handleCompanyClick = () => {
+    setIsModalVisible(true);
   };
+
   return (
     <div className="desc">
-      <div className="desc_subtitle">
-        해당 프로젝트는<b>[HandMade]</b>와 함께합니다.
-      </div>
-      <div className="desc_title">실버 커팅볼 스퀘어 체인 여자 팔찌</div>
+      <div className="desc_title">{reward.projName}</div>
       <div className="desc_contents">
         <div className="desc_img">
-          <img src={imageSrc} className="main_img" />
+          <img src={`http://localhost:8090/img/${imageSrc}`} className="main_img" />
           <img
-            src="/assets/imgs/bracelet.jpg"
-            className="sub_img1"
-            onClick={handleClick}
-          />
+            src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+            className="sub_img2" id={reward.repFile.fileName}
+           onClick={(e)=>setImageSrc(reward.repFile.fileName)}
+          /> 
           <img
-            src="/assets/imgs/bracelet2.jpg"
-            className="sub_img2"
-            onClick={handleClick}
+            src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+            className="sub_img1" id={reward.conFile.fileName}
+            onClick={(e)=>setImageSrc(reward.conFile.fileName)}
           />
         </div>
         <div className="desc_content">
           <div className="fund_category">리워드</div>
           <div className="fund_price">
-            12,345원 <b className="rewarding">펀딩중</b>
+            9,130,000원 <b className="rewarding">펀딩중</b>
           </div>
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
             <div className="fund_rate_per">1050%</div>
-            <sub className="fund_rate_price">목표 금액 10,0000원</sub>
+            <sub className="fund_rate_price">
+              목표 금액 {reward.projTargetAmount}원
+            </sub>
           </div>
           <div className="fund_date">
             <div className="fund_date_title">남은기간</div>
-            <div className="fund_date_dday">11일</div>
-            <sub className="fund_date_end">2023.07.13 종료</sub>
+            <div className="fund_date_dday">{getRemainingDays() + 1}일</div>
+            <sub className="fund_date_end">{reward.projDateEnd} 종료</sub>
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
@@ -57,7 +71,7 @@ const Desc = () => {
             <button
               className="fund_btn"
               onClick={() => {
-                navigate("/fund-checkout/fundpeople");
+                navigate("/checkout/check");
               }}
             >
               펀딩하기
@@ -65,13 +79,13 @@ const Desc = () => {
           </div>
           <button className="proj_share">프로젝트 공유하기</button>
           <div className="circles">
-            <div className="circle">
+            <div className="circle1">
               <img src="/assets/imgs/calendar.png" className="icon_img" />
             </div>
-            <div className="circle">
+            <div className="circle2">
               <img src="/assets/imgs/credit.png" className="icon_img" />
             </div>
-            <div className="circle">
+            <div className="circle3">
               <img src="/assets/imgs/delivery.png" className="icon_img" />
             </div>
           </div>
@@ -81,14 +95,14 @@ const Desc = () => {
             <div className="send_date_title">발송 예정일</div>
           </div>
           <div className="schedule">
-            <div className="end">23/07/13</div>
-            <div className="end">23/07/22</div>
-            <div className="end">23/07/23</div>
+            <div className="end1">{reward.projDateEnd}</div>
+            <div className="end2">{moment(reward.projDateEnd).subtract(1, 'day').format("YYYY-MM-DD")}</div>
+            <div className="end3">2023-07-25</div>
           </div>
-          <div className="company">
+          <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">
-              <img src="/assets/imgs/smartboy.jpg" className="boy_img" />
-              <div className="company_name">스마트보이</div>
+              <img src="/assets/imgs/people.png" className="people_img" />
+              <div className="company_name">{reward.manufacturer}</div>
             </div>
           </div>
           <div className="info">
@@ -97,6 +111,12 @@ const Desc = () => {
           </div>
         </div>
       </div>
+      {isModalVisible && (
+        <CompanyModel
+          reward={reward}
+          onClose={() => setIsModalVisible(false)}
+        />
+      )}
     </div>
   );
 };

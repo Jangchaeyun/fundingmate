@@ -1,10 +1,10 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
+import "swiper/components/pagination/pagination.min.css";
 import "../../pages/Reward/Reward.css";
 
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
@@ -34,7 +34,7 @@ const Banner = () => {
         {items.map((item, idx) => {
           return (
             <SwiperSlide key={idx}>
-              <img src={item.src}  className="banner_img"/>
+              <img src={item.src} className="banner_img" />
             </SwiperSlide>
           );
         })}

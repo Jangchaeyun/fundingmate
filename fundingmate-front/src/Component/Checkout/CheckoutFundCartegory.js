@@ -27,7 +27,9 @@ const CheckoutFundCartegory = () => {
           navigate("/reward-checkout/complete");
         }}
       >
-        <h1 className="fund_box_price">12,345원</h1>
+        <h1 className="fund_box_price" id="price">
+          12,345원
+        </h1>
         <div className="right">
           <CaretRightOutlined />
         </div>

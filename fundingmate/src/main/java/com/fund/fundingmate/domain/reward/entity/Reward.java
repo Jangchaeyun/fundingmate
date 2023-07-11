@@ -1,13 +1,16 @@
 package com.fund.fundingmate.domain.reward.entity;
 
 import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.global.file.entity.File;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Reward")
@@ -18,23 +21,27 @@ import java.util.Date;
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rewardNo;
+    private Long id;
 
     private String projName;
 
-    private Integer projTargetAmout;
+    private Integer projTargetAmount;
 
-    private Date projDateStart;
+    private LocalDate projDateStart;
 
-    private Date projDateEnd;
+    private LocalDate projDateEnd;
 
-    private String rewardRepImgSavedName;
+    @ManyToOne
+    @JoinColumn(name="rep_img")
+    private File repfile;
 
     private String projKeyWord;
 
     private String rewardVideoAddress;
 
-    private String rewardContentImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="con_img")
+    private File confile;
 
     private String projContent;
 
@@ -52,9 +59,13 @@ public class Reward {
 
     private String manufacturer;
 
+    private String rewardLaw;
+
     private String asPhoneNumber;
 
-    private String rewardIdBusinessLicenseImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "business_img")
+    private File businessImg;
 
     private String businessAddress;
 
@@ -64,64 +75,32 @@ public class Reward {
 
     private String depositorName;
 
-    private String rewardBankAccountCopyImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "bank_img")
+    private File bankImg;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String taxBillEmail;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String websiteUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String facebookUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String instagramUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String blogUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String twitterUrl;
 
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Reward{" +
-                "rewardNo=" + rewardNo +
-                ", projName='" + projName + '\'' +
-                ", projTargetAmout=" + projTargetAmout +
-                ", projDateStart=" + projDateStart +
-                ", projDateEnd=" + projDateEnd +
-                ", rewardRepImgSavedName='" + rewardRepImgSavedName + '\'' +
-                ", projKeyWord='" + projKeyWord + '\'' +
-                ", rewardVideoAddress='" + rewardVideoAddress + '\'' +
-                ", rewardContentImgSavedName='" + rewardContentImgSavedName + '\'' +
-                ", projContent='" + projContent + '\'' +
-                ", rewardRefundExchangePolicy='" + rewardRefundExchangePolicy + '\'' +
-                ", rewardContact='" + rewardContact + '\'' +
-                ", rewardEmail='" + rewardEmail + '\'' +
-                ", rewardCategory='" + rewardCategory + '\'' +
-                ", modelName='" + modelName + '\'' +
-                ", countryOfOrigin='" + countryOfOrigin + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", asPhoneNumber='" + asPhoneNumber + '\'' +
-                ", rewardIdBusinessLicenseImgSavedName='" + rewardIdBusinessLicenseImgSavedName + '\'' +
-                ", businessAddress='" + businessAddress + '\'' +
-                ", bank='" + bank + '\'' +
-                ", accNumber='" + accNumber + '\'' +
-                ", depositorName='" + depositorName + '\'' +
-                ", rewardBankAccountCopyImgSavedName='" + rewardBankAccountCopyImgSavedName + '\'' +
-                ", taxBillEmail='" + taxBillEmail + '\'' +
-                ", websiteUrl='" + websiteUrl + '\'' +
-                ", facebookUrl='" + facebookUrl + '\'' +
-                ", instagramUrl='" + instagramUrl + '\'' +
-                ", blogUrl='" + blogUrl + '\'' +
-                ", twitterUrl='" + twitterUrl + '\'' +
-                ", user=" + user +
-                '}';
-    }
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    private List<RewardType> rewardTypes;
 }
