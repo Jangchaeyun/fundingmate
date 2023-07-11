@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,17 +51,17 @@ public class RewardController {
     }
 
     @GetMapping("/reward-detail/contact/{rewardId}")
-    public ResponseEntity<RewardCommentDTO> rewardDetailContact(@PathVariable("rewardId") Long rewardId) {
-        RewardCommentDTO rewardCommentDTO = rewardCommentService.getRewardCommentByRewardId(rewardId);
+    public ResponseEntity<List<RewardCommentDTO>> rewardDetailContact(@PathVariable("rewardId") Long rewardId) {
+        List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(rewardId);
 
-        if (rewardCommentDTO == null) {
+        if (rewardComments.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(rewardCommentDTO);
+        return ResponseEntity.ok(rewardComments);
     }
 
-    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {

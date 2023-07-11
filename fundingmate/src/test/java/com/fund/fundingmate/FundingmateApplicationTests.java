@@ -208,7 +208,9 @@ class FundingmateApplicationTests {
 		User user = userOptional.get();
 
 		RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
-		rewardCommentDTO.setComContent("My Comment Content");
+		rewardCommentDTO.setComContent("My Comment Content2");
+		rewardCommentDTO.setComRegistrationDate(LocalDate.now());
+		rewardCommentDTO.setComRevisionDate(LocalDate.now());
 
 		RewardDTO rewardDTO = new RewardDTO();
 		rewardDTO.setId(rewardId);

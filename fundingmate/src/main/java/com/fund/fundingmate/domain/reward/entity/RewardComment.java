@@ -4,6 +4,7 @@ import com.fund.fundingmate.domain.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class RewardComment {
 
     private String comContent;
 
-    private Date comRegistrationDate;
+    private LocalDate comRegistrationDate;
 
-    private Date comRevisionDate;
+    private LocalDate comRevisionDate;
 
     @ManyToOne
     @JoinColumn(name = "reward_no")

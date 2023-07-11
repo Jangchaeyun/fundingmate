@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Contact = () => {
+  const { rewardId } = useParams();
   const [reward, setReward] = useState({
     id: 0,
     projName: "",
@@ -45,14 +46,17 @@ const Contact = () => {
     id: 0,
     comContent: "",
     comRegistrationDate: null,
-    conRevisionDate: null,
-    reward: null,
-    user: null,
+    comRevisionDate: null,
+    reward: {
+      id: 0,
+    },
+    user: {
+      id: 0,
+      name: "",
+    },
     replies: [],
-  });
+  })
   const [viewDesc, setViewDesc] = useState(false);
-
-  const { rewardId } = useParams();
 
   useEffect(() => {
     axios
@@ -61,32 +65,21 @@ const Contact = () => {
         console.log(res.data);
         setReward(res.data.reward);
         setViewDesc(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    axios
-      .get(`http://localhost:8090/reward-detail/contact/${rewardId}`)
-      .then((res) => {
-        console.log(res.data);
-        setRewardComment(res.data.rewardComment);
+        axios
+          .get(`http://localhost:8090/reward-detail/contact/${rewardId}`)
+          .then((res) => {
+            console.log(res.data);
+            setRewardComment(res.data);
+            // setRewardComments(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  const renderComments = () => {
-    return rewardComment.replies.map((reply) => (
-      <div className="reward_con_list" key={reply.id}>
-        <div className="reward_con_name">
-          {reply.user.userName} | {reply.comRegistrationDate}
-        </div>
-        <div className="reward_con_content">{reply.comContent}</div>
-        <button className="del_sub">삭제</button>
-      </div>
-    ));
-  };
 
   return (
     <div className="desc">
@@ -120,10 +113,15 @@ const Contact = () => {
         <button type="submit" className="sub">
           문의하기
         </button>
+        <div className="reward_con_list" key={rewardComment.id}>
+          <div className="reward_con_name">
+            {rewardComment.user.name} | {rewardComment.comRegistrationDate}
+          </div>
+          <div className="reward_con_content">{rewardComment.comContent}</div>
+          <button className="del_sub">삭제</button>
+        </div>
+          {/* <div className="con_list">등록된 문의가 없습니다.</div> */}
 
-        {/* <div className="con_list">등록된 문의가 없습니다.</div> */}
-
-        {renderComments()}
       </div>
     </div>
   );

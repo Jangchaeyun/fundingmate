@@ -133,7 +133,7 @@ public class RewardService {
         reward.setProjKeyWord(rewardDTO.getProjKeyword());
         reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
 
-        FileDTO confileDTO = rewardDTO.getRepFile();
+        FileDTO confileDTO = rewardDTO.getConFile();
         if (confileDTO != null) {
             File confile = converToFile(confileDTO);
             reward.setConfile(confile);
