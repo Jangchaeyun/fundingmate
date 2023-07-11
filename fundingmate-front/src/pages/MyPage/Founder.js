@@ -32,77 +32,77 @@ function Founder() {
                     <div className="section-container">
                         <h4>설정</h4>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    <h3>기본 정보</h3>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>이름: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>이메일: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="email" />&nbsp;&nbsp;
-                                        <Button type="submit">확인</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group >
-                                        <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="address" />&nbsp;&nbsp;
-                                        <Button type="submit">검색</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group >
-                                        <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="phone" />&nbsp;&nbsp;
-                                        <Button type="submit" >인증</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><br></br></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>비밀번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="password" />
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>비밀번호 확인: </Form.Label>&nbsp;
-                                        <Form.Control type="password" />&nbsp;&nbsp;
-                                        <Button type="submit">변경</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table >
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h3>기본 정보</h3>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group>
+                                            <Form.Label>이름: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="text" />
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group>
+                                            <Form.Label>이메일: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="email" />&nbsp;&nbsp;
+                                            <Button type="submit">확인</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group >
+                                            <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="address" />&nbsp;&nbsp;
+                                            <Button type="submit">검색</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group >
+                                            <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="phone" />&nbsp;&nbsp;
+                                            <Button type="submit" >인증</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><br></br></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group>
+                                            <Form.Label>비밀번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="password" />
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group>
+                                            <Form.Label>비밀번호 확인: </Form.Label>&nbsp;
+                                            <Form.Control type="password" />&nbsp;&nbsp;
+                                            <Button type="submit">변경</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table >
                 </div>
             )}
 

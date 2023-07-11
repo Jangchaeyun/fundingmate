@@ -8,6 +8,20 @@ import Button from 'react-bootstrap/Button';
 
 function Investor() {
     const [activeSection, setActiveSection] = useState('my-settings');
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+
+        const fileInput = document.querySelector('input[type="file"]');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Send the formData to the server or perform any other required actions
+            console.log(formData);
+        }
+    };
 
     return (
         <>
@@ -112,59 +126,21 @@ function Investor() {
                     <div className="section-container">
                         <h4>투자 정보</h4>
                     </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>사업자번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>기업명: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />&nbsp;&nbsp;
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>대표자: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />&nbsp;&nbsp;
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label>업종: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />&nbsp;&nbsp;
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group >
-                                        <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="address" />&nbsp;&nbsp;
-                                        <Button type="submit">검색</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <Form.Group >
-                                        <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="phone" />&nbsp;&nbsp;
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table >
+                    <Form onSubmit={handleFormSubmit}>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <Form.Group>
+                                            <Form.Label>사업자등록증/주민등록증 업로드: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="file" accept=".jpg, .png, .pdf, .gif, .tif, .bmp" />
+                                            <Button type="submit">확인</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table >
+                    </Form>
                 </div>
             )}
 
