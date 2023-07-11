@@ -2,6 +2,8 @@ package com.fund.fundingmate.domain.investment.repository;
 
 import com.fund.fundingmate.domain.investment.entity.Investment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface investmentRepository extends JpaRepository<Investment, Long> {
+@Repository
+public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 }

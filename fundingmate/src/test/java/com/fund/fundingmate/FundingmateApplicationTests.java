@@ -1,5 +1,9 @@
 package com.fund.fundingmate;
 
+import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
+import com.fund.fundingmate.domain.investment.entity.Investment;
+import com.fund.fundingmate.domain.investment.repository.InvestmentRepository;
+import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.domain.payment.dto.InvestPeopleDTO;
 import com.fund.fundingmate.domain.payment.dto.PaymentDTO;
 import com.fund.fundingmate.domain.payment.repository.InvestPeopleRepository;
@@ -57,10 +61,16 @@ class FundingmateApplicationTests {
 	private PaymentService paymentService;
 
 	@Autowired
+	private  InvestmentService investmentService;
+
+	@Autowired
 	private PaymentRepository paymentRepository;
 
 	@Autowired
 	private InvestPeopleRepository investPeopleRepository;
+
+	@Autowired
+	private InvestmentRepository investmentRepository;
 
 	@Autowired
 	private FileService fileService;
@@ -325,4 +335,93 @@ class FundingmateApplicationTests {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Test
+	public void insertInvest(){
+/*		InvestmentDTO investmentDTO = new InvestmentDTO(1, 1L, "Category", "Project Name", 10000, new Date(), new Date(), "Image Name", "Image Name", new Date(), new Date(), 5, new Date(), "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method");
+		try {
+			InvestmentService.createInvest(investmentDTO, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+	/*	Investment investment = Investment.builder().userNo(1)
+				.investNo(1L)
+				.investCategory("Category")
+				.investProjName("Project Name")
+				.investTargetAmount(10000)
+				.investProjDateStart(new Date())
+				.investProjDateEnd(new Date())
+				.investRepImgSavedName("Image Name")
+				.investProjKeyword("Keyword")
+				.useOfFunds("Funds Usage")
+				.useOfFundsDateStart(new Date())
+				.useOfFundsDateEnd(new Date())
+				.rateOfReturn(5)
+				.expectedPaymentDate(new Date())
+				.repaymentMethod("Payment Method")
+				.investVideoUrl("Video URL")
+				.investContentImgSavedName("Content Image Name")
+				.investItemIntro("Item Introduction")
+				.investItemBusinessValue("Business Value")
+				.investItemValue("Item Value")
+				.investItemBenefit("Item Benefit")
+				.investProjContent("Project Content")
+				.investIdBusinessLicenseImgSavedName("License Image Name")
+				.taxBillEmail("Tax Bill Email")
+				.websiteUrl("Website URL")
+				.facebookUrl("Facebook URL")
+				.instagramUrl("Instagram URL")
+				.blogUrl("Blog URL")
+				.twitterUrl("Twitter URL")
+				.build();*/
+
+		Long userId = 1L;
+
+		Optional<User> userOptional = userRepository.findById(userId);
+		if(userOptional.isEmpty()) {
+			System.out.println("User not found with ID: " + userId);
+			return;
+		}
+
+		User user = userOptional.get();
+
+		InvestmentDTO investmentDto = new InvestmentDTO();
+		investmentDto.setInvestNo(12345L);
+		investmentDto.setInvestCategory("테스트 카테고리");
+		investmentDto.setInvestProjName("테스트 프로젝트");
+		investmentDto.setInvestTargetAmount(10000);
+		investmentDto.setInvestProjDateStart(new Date());
+		investmentDto.setInvestProjDateEnd(new Date());
+		investmentDto.setInvestRepImgSavedName("테스트 이미지.jpg");
+		investmentDto.setInvestProjKeyword("테스트 키워드");
+		investmentDto.setUseOfFunds("테스트 자금 사용");
+		investmentDto.setUseOfFundsDateStart(new Date());
+		investmentDto.setUseOfFundsDateEnd(new Date());
+		investmentDto.setRateOfReturn(5);
+		investmentDto.setExpectedPaymentDate(new Date());
+		investmentDto.setRepaymentMethod("테스트 상환 방법");
+		investmentDto.setInvestVideoUrl("테스트 비디오 URL");
+		investmentDto.setInvestContentImgSavedName("테스트 내용 이미지.jpg");
+		investmentDto.setInvestItemIntro("테스트 투자 항목 소개");
+		investmentDto.setInvestItemBusinessValue("테스트 투자 항목 비즈니스 가치");
+		investmentDto.setInvestItemValue("테스트 투자 항목 가치");
+		investmentDto.setInvestItemBenefit("테스트 투자 항목 혜택");
+		investmentDto.setInvestProjContent("테스트 프로젝트 내용");
+		investmentDto.setInvestIdBusinessLicenseImgSavedName("테스트 사업자 등록증 이미지.jpg");
+		investmentDto.setBusinessAddress("테스트 사업장 주소");
+		investmentDto.setInvestEmail("test@example.com");
+		investmentDto.setBank("테스트 은행");
+		investmentDto.setAccNumber("1234567890");
+		investmentDto.setDepositorName("테스트 예금주명");
+		investmentDto.setInvestBankAccountCopyImgSavedName("테스트 계좌 복사 이미지.jpg");
+		investmentDto.setTaxBillEmail("test@example.com");
+		investmentDto.setWebsiteUrl("테스트 웹사이트 URL");
+		investmentDto.setFacebookUrl("테스트 페이스북 URL");
+		investmentDto.setInstagramUrl("테스트 인스타그램 URL");
+		investmentDto.setBlogUrl("테스트 블로그 URL");
+		investmentDto.setTwitterUrl("테스트 트위터 URL");
+
+		investmentService.createInvestment(investmentDto, userId);
+	}
+
 }
