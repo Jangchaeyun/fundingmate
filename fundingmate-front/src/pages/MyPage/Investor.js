@@ -5,9 +5,23 @@ import Navbar from 'react-bootstrap/Navbar';
 import './MyPage.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { notification } from 'antd';
 
 function Investor() {
     const [activeSection, setActiveSection] = useState('my-settings');
+    const [hasNotifications, setHasNotifications] = useState(false);
+    const handleNotificationImageClick = () => {
+        if (hasNotifications) {
+        //   api.open({
+        //     message: '',
+        //   });
+        } else {
+          notification.info({
+            message: '알림이 없습니다.'
+          });
+        }
+      };
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
@@ -26,6 +40,15 @@ function Investor() {
     return (
         <>
             {/* header */}
+            <div className="section-container">
+                <img
+                    src={hasNotifications ? "/assets/imgs/notifications_new.png" : "/assets/imgs/notifications_default.png"}
+                    className="notifications"
+                    alt="notifications"
+                    onClick={handleNotificationImageClick}
+                />
+            </div>
+
             <div className="mypage-container">
                 <h1>마이페이지</h1>
             </div>
@@ -47,7 +70,7 @@ function Investor() {
                     <div className="section-container">
                         <h4>설정</h4>
                     </div>
-                    <table>
+                    <table className="my-settings">
                         <thead>
                             <tr>
                                 <th>
@@ -131,9 +154,9 @@ function Investor() {
                             <tbody>
                                 <tr>
                                     <td>
-                                        <Form.Group>
-                                            <Form.Label>사업자등록증/주민등록증 업로드: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="file" accept=".jpg, .png, .pdf, .gif, .tif, .bmp" />
+                                        <Form.Group style={{ textAlign: 'center' }}>
+                                            <Form.Label>사업자/주민등록증 업로드: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="file" accept=".jpg, .png, .pdf, .gif, .tif, .bmp" />&nbsp;&nbsp;
                                             <Button type="submit">확인</Button>
                                         </Form.Group>
                                     </td>
@@ -153,7 +176,7 @@ function Investor() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -170,7 +193,7 @@ function Investor() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -195,7 +218,7 @@ function Investor() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -212,7 +235,7 @@ function Investor() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -237,7 +260,7 @@ function Investor() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -254,7 +277,7 @@ function Investor() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>

@@ -71,11 +71,20 @@ table {
   vertical-align: middle;
   justify-items: center;
   width: 1060px;
+}
+
+.my-settings {
   text-indent: 35%;
 }
 
 .profile-image {
   width: 80px;
+}
+
+.notifications {
+  position: sticky;
+  width: 15px;
+  left: 82%;
 }
 
 .subsection-container {

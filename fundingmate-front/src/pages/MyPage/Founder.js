@@ -5,13 +5,35 @@ import Navbar from 'react-bootstrap/Navbar';
 import './MyPage.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import {notification } from 'antd';
 
 function Founder() {
     const [activeSection, setActiveSection] = useState('my-settings');
+    const [hasNotifications, setHasNotifications] = useState(false);
+    const handleNotificationImageClick = () => {
+        if (hasNotifications) {
+        //   api.open({
+        //     message: '',
+        //   });
+        } else {
+          notification.info({
+            message: '알림이 없습니다.'
+          });
+        }
+      };
 
     return (
         <>
             {/* header */}
+            <div className="section-container">
+                <img
+                    src={hasNotifications ? "/assets/imgs/notifications_new.png" : "/assets/imgs/notifications_default.png"}
+                    className="notifications"
+                    alt="notifications" 
+                    onClick={handleNotificationImageClick}
+                />
+            </div>
+
             <div className="mypage-container">
                 <h1>마이페이지</h1>
             </div>
@@ -32,77 +54,77 @@ function Founder() {
                     <div className="section-container">
                         <h4>설정</h4>
                     </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h3>기본 정보</h3>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group>
-                                            <Form.Label>이름: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="text" />
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group>
-                                            <Form.Label>이메일: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="email" />&nbsp;&nbsp;
-                                            <Button type="submit">확인</Button>
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group >
-                                            <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="address" />&nbsp;&nbsp;
-                                            <Button type="submit">검색</Button>
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group >
-                                            <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="phone" />&nbsp;&nbsp;
-                                            <Button type="submit" >인증</Button>
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><br></br></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group>
-                                            <Form.Label>비밀번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Form.Control type="password" />
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Form.Group>
-                                            <Form.Label>비밀번호 확인: </Form.Label>&nbsp;
-                                            <Form.Control type="password" />&nbsp;&nbsp;
-                                            <Button type="submit">변경</Button>
-                                        </Form.Group>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table >
+                    <table className="my-settings">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h3>기본 정보</h3>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>이름: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="text" />
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>이메일: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="email" />&nbsp;&nbsp;
+                                        <Button type="submit">확인</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group >
+                                        <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="address" />&nbsp;&nbsp;
+                                        <Button type="submit">검색</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group >
+                                        <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="phone" />&nbsp;&nbsp;
+                                        <Button type="submit" >인증</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br></br></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>비밀번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="password" />
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>비밀번호 확인: </Form.Label>&nbsp;
+                                        <Form.Control type="password" />&nbsp;&nbsp;
+                                        <Button type="submit">변경</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table >
                 </div>
             )}
 
@@ -115,7 +137,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -132,7 +154,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -157,7 +179,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -174,7 +196,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -199,7 +221,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -216,7 +238,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list">
+                        <table className="list" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
