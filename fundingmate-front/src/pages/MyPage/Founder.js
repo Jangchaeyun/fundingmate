@@ -19,7 +19,6 @@ function Founder() {
                 <Container>
                     <Nav>
                         <Nav.Link href="#my-settings" onClick={() => setActiveSection('my-settings')}>설정</Nav.Link>
-                        <Nav.Link href="#payment" onClick={() => setActiveSection('payment')}>결제</Nav.Link>
                         <Nav.Link href="#my-projects" onClick={() => setActiveSection('my-projects')}>제작한 프로젝트</Nav.Link>
                         <Nav.Link href="#other-projects" onClick={() => setActiveSection('other-projects')}>참여한 프로젝트</Nav.Link>
                         <Nav.Link href="#following" onClick={() => setActiveSection('following')}>관심 프로젝트</Nav.Link>
@@ -104,26 +103,6 @@ function Founder() {
                             </tr>
                         </tbody>
                     </table >
-                </div>
-            )}
-
-            {activeSection === 'payment' && (
-                <div id="payment">
-                    <div className="section-container">
-                        <h4>결제</h4>
-                    </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <Form.Group>
-                                        <Form.Label> </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             )}
 
