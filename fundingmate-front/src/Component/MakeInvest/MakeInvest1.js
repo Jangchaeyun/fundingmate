@@ -42,14 +42,6 @@ const MakeInvest1 = () => {
                     projImages: [],
                     projContent: '',
                     cards:[],
-                    rewardRefundExchangePolicy: '',
-                    rewardContact: '',
-                    rewardEmail: '',
-                    modelName: '',
-                    rewardLaw: '',
-                    countryOfOrigin: '',
-                    manufacturer: '',
-                    asPhonenumber: '',
                     businessAddress: '',
                     bank: '',
                     accNumber: '',
@@ -61,7 +53,17 @@ const MakeInvest1 = () => {
                     blogUrl: '',
                     twitterUrl: '',
                     rewardIdBusinessLicenseImgSavedName:null,
-                    rewardBankAccountCopyImgSavedName:null
+                    rewardBankAccountCopyImgSavedName:null,
+                    useOfFunds:'',
+                    useOfFundsDateStart:'',
+                    useOfFundsDateEnd:'',
+                    rateOfReturn:0,
+                    expectedPaymentDate:'',
+                    repaymentMethod:'',
+                    investItemIntro:'',
+                    investItemBusinessValue:'',
+                    investItemValue:'',
+                    investItemBenefit:''
                 }
             )
 

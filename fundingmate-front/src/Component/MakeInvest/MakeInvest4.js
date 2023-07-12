@@ -135,18 +135,18 @@ const MakeInvest4 = () => {
 
 
             <p className="custom-font-sub-title">
-                <b>프로젝트 리워드를 구성해주세요</b>
+                <b>프로젝트 투자조건을 구성해주세요</b>
             </p>
 
             <p className="custom-font-text">
-                프로젝트 시작을 위해서는 <b style={{color:"#E93232"}}>최소 1개 이상의 리워드</b>가 있어야 합니다.<br/>
-                배송이 필요한 리워드는 배송비가 포함된 가격을 적어주세요.
+                프로젝트 시작을 위해서는 <b style={{color:"#E93232"}}>최소 1개 이상의 투자조건</b>이 있어야 합니다.
+
             </p>
 
 
 
 
-            <Button type="primary"  className="rew-card-add-button" id="rew-card-add-button"
+            <Button type="primary"  className="invest-card-add-button" id="rew-card-add-button"
                     icon={<PlusOutlined id="rew-card-add-icon" style={{fontSize:"11px", marginRight:"1px"}}/>}
                     onClick={() => {
                         setEditingCardIndex(null);
@@ -156,7 +156,7 @@ const MakeInvest4 = () => {
                         setShowOption(false);
                         setModalOpen(true);
                     }}>
-                리워드 추가
+                투자조건 추가
             </Button>
             <Modal
                 title={<p style={{ fontSize: "25px" }}>리워드 추가</p>}
@@ -167,11 +167,13 @@ const MakeInvest4 = () => {
                 width={655}
                 okText={editingCardIndex !== null ? '수정' : '추가'} //
                 cancelText="취소"
-                okButtonProps={{ style: { backgroundColor: "var(--main-color)" } }}
+                okButtonProps={{ style: { backgroundColor: "var(--main-color)",fontFamily:  "SUITE-Regular"  } }}
 
+                cancelButtonProps={{  id: 'invest-modal-custom-cancel-button'}}
+                id="makereward_modal"
             >
                 <p className="custom-font-modal-sub-title">
-                    리워드 금액
+                    투자 금액
                 </p>
                 <input type="text" name="rewardAmount" id="rew-amount-input" className="modal-input-box" placeholder="0"
                        value={card.rewardAmount}
@@ -179,7 +181,7 @@ const MakeInvest4 = () => {
                 />&nbsp;원
 
                 <p className="custom-font-modal-sub-title">
-                    리워드 제공 가능 수
+                    투자 제공 가능 수
                 </p>
                 <div style={{display:'flex', alignItems:'center'}}>
                 <div className="rew-limit-buttons">
@@ -201,92 +203,17 @@ const MakeInvest4 = () => {
 
                 </div>
 
-                <p className="custom-font-modal-sub-title">
-                    리워드 제목
-                </p>
-                <div>
-                <input type="text" name="rewardTitle" className="modal-input-box" value={card.rewardTitle} onChange={rewardChange}/>
-
-                </div>
-                <p className="custom-font-modal-sub-title">
-                    리워드 내용
-                </p>
-                <div>
-                <textarea type="text" name="rewardContent" className="rew-modal-textarea" value={card.rewardContent} onChange={rewardChange}/>
-
-                </div>
-
-
-                <p className="custom-font-modal-sub-title">
-                    예상 배송일
-                </p>
-
-                <DatePicker style={{width:"240px", height:"30px"}} id="rew-date-picker" showToday={true} allowClear={false} format={'YYYY-MM-DD'} value={dayjs(card.rewardDeleverydate)}
-                             name="rewardDeleverydate"  onChange={(value, dateString) => { setCard({...card, rewardDeleverydate:dateString}); }}
-                />
-
-                <p className="custom-font-modal-sub-title">
-                    리워드 옵션
-                </p>
-
-                {!showOption &&(
-                <button className="rew-option-show-button" onClick={handleShowOptionButtonClick}>
-                    리워드 옵션 추가하기
-                </button>
-                )}
-                {showOption && (
-                    <>
-                    {card.options.map((field, index)=>(
-
-                  <div key={field.id} id={'optionDiv'+index}>
-
-                      <div style={{display:'flex', alignItems:'center'}}>
-                          <p style={{fontSize:"13px"}}>옵션명</p>
-                          <p style={{marginLeft:"100px", fontSize:"13px"}}>옵션 값</p>
-                      </div>
-                        <div style={{display:'flex', alignItems:'center'}} >
-                            <input type="text" name="rewardOptName" className="reward-opt-names" placeholder="예시)사이즈" defaultValue={card.options[index].rewardOptName} onChange={(e)=> {card.options[index].rewardOptName=e.target.value}}/>
-                            <input type="text" name="rewardOptCon" className="reward-opt-con" placeholder="예시)S, M, L"  style={{marginLeft:"18px"}} defaultValue={card.options[index].rewardOptCon} onChange={(e)=> {card.options[index].rewardOptCon=e.target.value}}/>
-                            <button className="rew-add" onClick={handleAddOption}><PlusSquareOutlined style={{ fontSize: "23px"}} /></button>
-                            <button className="rew-delete" onClick={()=>handleDeleteOption(index)}><MinusSquareOutlined style={{ fontSize: "23px"}} /></button>
-
-                            </div>
-                  </div>
-                        ))}
-                    </>
-                )}
-
-                <p className="custom-font-modal-sub-title">
-                    배송지 필요여부
-                </p>
-                <div style={{display:'flex', alignItems:'center'}}>
-                <div className="rew-sa-buttons">
-                    <button className={`rew-sar ${card.rewardShipAddress === 1 ? 'clicked' : ''}`}
-                            id="rew-sar-button"
-                            onClick={()=>handleSaButtonClick(1)}
-                    >배송지 필요</button>
-                    <button className={`rew-noSar ${card.rewardShipAddress===0 ? 'clicked' : ''}`}
-                            id="rew-noSar-button"
-                            onClick={()=>handleSaButtonClick(0)}
-                    >배송지 필요없음</button>
-                </div>
-                </div>
-
             </Modal>
             {totInfo.cards.map((cardItem, index) => (
-            <div className="make-rew-card" key={index}>
-                <div className="make-rew-card-div">
+            <div className="make-invest-card" key={index}>
+                <div className="make-invest-card-div">
                 <div>
                 <div className="make-rew-card-price">{cardItem.rewardAmount}원</div>
                 <div className="make-rew-card-contents">
                     <div className="make-rew-card-count">{cardItem.rewardAvailableLimit==1? '제한':'무제한'}&nbsp;|&nbsp;0개 펀딩</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div className="make-rew-card-date">예상 배송일 {cardItem.rewardDeleverydate}</div>
+
                 </div>
 
-                <div className="make-rew-card-sub-content">{cardItem.rewardTitle}</div>
-                <div className="make-rew-card-sub-content-info">
-                    {cardItem.rewardContent}
-                </div>
                 </div>
                 <div>
                 <div className="make-rew-card-edit-button-div">

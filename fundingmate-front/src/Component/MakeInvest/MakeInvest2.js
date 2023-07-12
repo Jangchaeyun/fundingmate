@@ -50,6 +50,54 @@ const MakeInvest2 = () => {
                 <div className="proj-progress proj-progress-common">5</div>
             </div>
 
+            <p className="custom-font-title">
+                <b>프로젝트 정보</b>
+            </p>
+            <br/>
+            <br/>
+            <p className="custom-font-sub-title">
+                <b>자금용도</b>
+            </p>
+
+            <input type="text" name="useOfFunds" className="input-box" value={totInfo.useOfFunds} onChange={handleInputChange}/>
+            <br/>
+            <br/>
+            <br/>
+            <p className="custom-font-sub-title">
+                <b>자금 사용 기간</b>
+            </p>
+            <RangePicker onChange={(dates, dateStrings) => { setTotInfo({...totInfo, useOfFundsDateStart:dateStrings[0],useOfFundsDateEnd:dateStrings[1] }); }} showToday={true} allowClear={false}
+                         value={[
+                             totInfo.useOfFundsDateStart ? dayjs(totInfo.useOfFundsDateStart) : null,
+                             totInfo.useOfFundsDateEnd ? dayjs(totInfo.useOfFundsDateEnd) : null
+                         ]}
+                         format="YYYY-MM-DD"/>
+            <br/>
+            <br/>
+            <br/>
+            <p className="custom-font-sub-title">
+                <b>수익률</b>
+            </p>
+            <input type="text" name="rateOfReturn" className="input-box" value={totInfo.rateOfReturn} onChange={handleNumInputChange}/>&nbsp;%
+            <br/>
+            <br/>
+            <br/>
+            <p className="custom-font-sub-title">
+                <b>예상 상환 실행일</b>
+            </p>
+
+            <DatePicker style={{width:"240px", height:"30px"}} id="rew-date-picker" showToday={true} allowClear={false} format={'YYYY-MM-DD'} value={totInfo.expectedPaymentDate ? dayjs(totInfo.expectedPaymentDate) : null}
+                        name="expectedPaymentDate"  onChange={(value, dateString) => { setTotInfo({...totInfo,  expectedPaymentDate:dateString}); }}
+            />
+
+            <br/>
+            <br/>
+            <br/>
+            <p className="custom-font-sub-title">
+                <b>상환 방식</b>
+            </p>
+            <input type="text" name="repaymentMethod" className="input-box" value={totInfo.repaymentMethod} onChange={handleInputChange}/>
+
              <div className="button-top-margin"></div>
             <div className="investMake-button-div">
                 <button className="investMake-prev-button" onClick={handlePreviousStep}> 이전 단계 </button>
