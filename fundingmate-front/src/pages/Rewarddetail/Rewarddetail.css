@@ -427,7 +427,7 @@
 .sub {
   margin-top: 1%;
   float: right;
-  margin-right: 15.4%;
+  margin-right: 14.8%;
   width: 13%;
   height: 25px;
   border: 1px solid var(--main-color);
@@ -497,7 +497,8 @@
 }
 
 .reward_con_list {
-  margin-top: 8%;
+  margin-top: 47px;
+  margin-bottom: 7px;
   border: 1px solid var(--grey);
   width: 84.8%;
   margin-left: 0%;
@@ -514,4 +515,31 @@
   margin-left: 2%;
   margin-bottom: 1%;
   font-size: 13px;
+}
+
+.reply_text {
+  margin-left: 2%;
+  width: 85%;
+  height: 20px;
+  border: 1px solid var(--grey);
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.reply_text:focus {
+  outline: none;
+}
+
+.reply_submit {
+  margin-top: 1%;
+  float: right;
+  margin-right: 2.1%;
+  width: 13%;
+  height: 25px;
+  border: 1px solid var(--main-color);
+  justify-content: center;
+  background-color: var(--white);
+  margin-bottom: 2%;
+  cursor: pointer;
+  transition: all 0.4s linear;
 }

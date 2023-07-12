@@ -3,6 +3,8 @@ import "../../../pages/Rewarddetail/Rewarddetail.css";
 import Desc from "../Desc/Desc";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { DeleteOutlined } from "@ant-design/icons";
+import {useSelector} from "react-redux"
 
 const Contact = () => {
   const { rewardId } = useParams();
@@ -42,21 +44,47 @@ const Contact = () => {
     user: null,
     rewardTypes: [],
   });
-  const [rewardComment, setRewardComment] = useState({
-    id: 0,
-    comContent: "",
-    comRegistrationDate: null,
-    comRevisionDate: null,
-    reward: {
-      id: 0,
-    },
-    user: {
-      id: 0,
-      name: "",
-    },
-    replies: [],
-  })
+  const [rewardComments, setRewardComments] = useState([]);
   const [viewDesc, setViewDesc] = useState(false);
+  const [inquiryText, setInquiryText] = useState("");
+  const loggedInUser = 1;
+
+  const submitInquiry = () => {
+    const requestBody = {
+      comContent: inquiryText,
+      reward: {
+        id: reward.id
+      },
+      user: {
+        id: loggedInUser,
+      },
+    };
+  
+    axios
+      .post(`http://localhost:8090/reward-detail/contact/${rewardId}`, requestBody)
+      .then((res) => {
+        console.log(res.data);
+        setInquiryText("");
+        setRewardComments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteComment = (commentId) => {
+    axios
+      .delete(`http://localhost:8090/reward-detail/contact/comment/${commentId}`)
+      .then((res) => {
+        console.log(res.data);
+        setRewardComments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  
 
   useEffect(() => {
     axios
@@ -65,16 +93,15 @@ const Contact = () => {
         console.log(res.data);
         setReward(res.data.reward);
         setViewDesc(true);
-        axios
-          .get(`http://localhost:8090/reward-detail/contact/${rewardId}`)
-          .then((res) => {
-            console.log(res.data);
-            setRewardComment(res.data);
-            // setRewardComments(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get(`http://localhost:8090/reward-detail/contact/${rewardId}`)
+      .then((res) => {
+        console.log(res.data);
+        setRewardComments(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -109,19 +136,32 @@ const Contact = () => {
         <li className="con_info">
           리워드 관련 문의는 댓글에 달아주시면 정확한 답변을 받을 수 있습니다.
         </li>
-        <textarea className="con_input" />
-        <button type="submit" className="sub">
+        <textarea className="con_input" value={inquiryText} onChange={(e) => setInquiryText(e.target.value)}/>
+        <button type="submit" className="sub" onClick={submitInquiry}>
           문의하기
         </button>
-        <div className="reward_con_list" key={rewardComment.id}>
-          <div className="reward_con_name">
-            {rewardComment.user.name} | {rewardComment.comRegistrationDate}
-          </div>
-          <div className="reward_con_content">{rewardComment.comContent}</div>
-          <button className="del_sub">삭제</button>
-        </div>
-          {/* <div className="con_list">등록된 문의가 없습니다.</div> */}
 
+        {rewardComments.length > 0 ? (
+          rewardComments.map((comment) => (
+            <div className="reward_con_list" key={comment.id}>
+              <div className="reward_con_name">
+                {comment.user.name} | {comment.comRegistrationDate}
+              </div>
+              {comment.user.id === loggedInUser && (
+                <div className="del_sub" onClick={() => deleteComment(comment.id)}>
+                  <DeleteOutlined className="delete" />
+                </div>
+              )}
+              <div className="reward_con_content">{comment.comContent}</div>
+               <div className="reward_reply_content">
+                <input type="text" className="reply_text"/>
+                <button className="reply_submit">답장</button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="con_list">등록된 문의가 없습니다.</div>
+        )}
       </div>
     </div>
   );
