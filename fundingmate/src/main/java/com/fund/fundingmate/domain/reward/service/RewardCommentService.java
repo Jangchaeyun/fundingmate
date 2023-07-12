@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +34,8 @@ public class RewardCommentService {
     private final UserRepository userRepository;
     private final RewardRepository rewardRepository;
     private final RewardReplyRepository rewardReplyRepository;
+
+    private RewardCommentDTO rewardCommentDTO;
 
     @Autowired
     public RewardCommentService(RewardCommentRepository rewardCommentRepository, UserRepository userRepository, RewardRepository rewardRepository, RewardReplyRepository rewardReplyRepository) {
@@ -156,15 +159,25 @@ public class RewardCommentService {
     }
 
     public void insertRewardComment(RewardCommentDTO rewardCommentDTO) {
+        if (rewardCommentDTO == null) {
+            throw new IllegalArgumentException("RewardCommentDTO is null");
+        }
+
         RewardDTO rewardDTO = rewardCommentDTO.getReward();
         UserDTO userDTO = rewardCommentDTO.getUser();
 
-        Reward reward = rewardRepository.findById(rewardDTO.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Reward not found with ID: " + rewardDTO.getId()));
+        Optional<Reward> rewardOptional = rewardRepository.findById(rewardDTO.getId());
+        if (rewardOptional.isEmpty()) {
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardDTO.getId());
+        }
+        Reward reward = rewardOptional.get();
 
-        User user = userRepository.findById(userDTO.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userDTO.getId()));
+        Optional<User> userOptional = userRepository.findById(userDTO.getId());
+        if (userOptional.isEmpty()) {
+            throw  new IllegalArgumentException("User not founr with ID: " + userDTO.getId());
+        }
 
+        User user = userOptional.get();
 
         RewardComment rewardComment = new RewardComment();
         rewardComment.setComContent(rewardCommentDTO.getComContent());
@@ -174,6 +187,15 @@ public class RewardCommentService {
         rewardComment.setUser(user);
 
         rewardCommentRepository.save(rewardComment);
+    }
+
+    public void deleteRewardComment(Long commentId) {
+        Optional<RewardComment> rewardCommentOptional = rewardCommentRepository.findById(commentId);
+        if (rewardCommentOptional.isEmpty()) {
+            throw new IllegalArgumentException("Reward Comment not found with ID: " + commentId);
+        }
+        RewardComment rewardComment = rewardCommentOptional.get();
+        rewardCommentRepository.delete(rewardComment);
     }
 
     private List<RewardTypeDTO> mapToRewardTypeDTOList(List<RewardType> rewardTypes) {
@@ -201,7 +223,7 @@ public class RewardCommentService {
 
         Reward reward = rewardRepository.findById(rewardId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward not found with ID: " + rewardId));
-        RewardComment  comment = rewardCommentRepository.findById(commentId)
+        RewardComment comment = rewardCommentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
 
         if(!reward.getUser().getId().equals(comment.getUser().getId())) {

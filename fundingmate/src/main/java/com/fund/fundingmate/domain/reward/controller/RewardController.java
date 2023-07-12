@@ -1,6 +1,7 @@
 package com.fund.fundingmate.domain.reward.controller;
 
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
+import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.global.file.Service.FileService;
@@ -8,9 +9,7 @@ import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +24,7 @@ import java.util.Map;
 
 @RestController
 public class RewardController {
+
     @Autowired
     private RewardService rewardService;
 
@@ -36,6 +36,8 @@ public class RewardController {
 
     @Autowired
     private RewardCommentService rewardCommentService;
+
+    private RewardCommentDTO rewardCommentDTO;
 
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
@@ -61,6 +63,31 @@ public class RewardController {
         return ResponseEntity.ok(rewardComments);
     }
 
+    @PostMapping("/reward-detail/contact/{rewardId}")
+    public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactWrite(@PathVariable("rewardId") Long rewardId, @RequestBody RewardCommentDTO requestBody) {
+       try {
+           rewardCommentService.insertRewardComment(requestBody);
+
+           List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(rewardId);
+           return new ResponseEntity<>(rewardComments, HttpStatus.OK);
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+    }
+    @DeleteMapping("/reward-detail/contact/comment/{commentId}")
+    public ResponseEntity<List<RewardCommentDTO>> deleteRewardComment(@PathVariable("commentId") Long commentId) {
+        try {
+            rewardCommentService.deleteRewardComment(commentId);
+
+            List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(commentId);
+            return new ResponseEntity<>(rewardComments, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
@@ -77,6 +104,19 @@ public class RewardController {
             response.getOutputStream().flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/reward-detail/contact/comment/reply")
+   public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactReply(@RequestBody RewardReplyDTO requestBody) {
+        try {
+            rewardCommentService.insertRewardCommentReply(requestBody);
+
+            List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(requestBody.getRewardId());
+            return new ResponseEntity<>(rewardComments, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

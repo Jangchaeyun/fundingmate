@@ -77,14 +77,14 @@ class FundingmateApplicationTests {
 	void insertMember() {
 		User user = new User();
 
-		user.setBirthday("2000/11/12");
-		user.setEmail("sally1112@naver.com");
-		user.setUserid("sally1112");
-		user.setName("장채윤");
-		user.setNotificationStatus("N");
-		user.setPassword("123421");
-		user.setTel("010-1233-2456");
-		user.setVitalization(1);
+		user.setBirthday("2009/09/15");
+		user.setEmail("kyle0915@naver.com");
+		user.setUserid("kyle0915");
+		user.setName("장예준");
+		user.setNotificationStatus("Y");
+		user.setPassword("852963");
+		user.setTel("010-0915-2009");
+		user.setVitalization(0);
 
 		userRepository.save(user);
 	}
@@ -197,7 +197,7 @@ class FundingmateApplicationTests {
 	@Test
 	void insertRewardComment() {
 		Long rewardId = 1L;
-		Long userId = 1L;
+		Long userId = 3L;
 
 		Optional<User> userOptional = userRepository.findById(userId);
 		if (userOptional.isEmpty()) {
@@ -208,7 +208,7 @@ class FundingmateApplicationTests {
 		User user = userOptional.get();
 
 		RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
-		rewardCommentDTO.setComContent("My Comment Content2");
+		rewardCommentDTO.setComContent("My Comment Content");
 		rewardCommentDTO.setComRegistrationDate(LocalDate.now());
 		rewardCommentDTO.setComRevisionDate(LocalDate.now());
 
