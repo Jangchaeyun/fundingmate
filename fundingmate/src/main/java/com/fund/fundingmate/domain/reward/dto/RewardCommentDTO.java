@@ -1,13 +1,17 @@
 package com.fund.fundingmate.domain.reward.dto;
 
 import com.fund.fundingmate.domain.user.dto.UserDTO;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class RewardCommentDTO {
     private Long id;
     private String comContent;
