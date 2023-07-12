@@ -1,6 +1,8 @@
 package com.fund.fundingmate.domain.investment.entity;
 
 import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.global.file.dto.FileDTO;
+import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +18,7 @@ import java.util.Date;
 public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long investNo;
+    private Long id;
 
     private String investCategory;
 
@@ -27,8 +29,9 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-
-    private String investRepImgSavedName;
+    @ManyToOne
+    @JoinColumn(name="investRepImgSavedName_img")
+    private File investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -46,7 +49,9 @@ public class Investment {
 
     private String investVideoUrl;
 
-    private String investContentImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="investContentImgSavedName_img")
+    private File investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -58,7 +63,9 @@ public class Investment {
 
     private String investProjContent;
 
-    private String investIdBusinessLicenseImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "investIdBusinessLicenseImgSavedName_img")
+    private File investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -70,7 +77,9 @@ public class Investment {
 
     private String depositorName;
 
-    private String investBankAccountCopyImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "investBankAccountCopyImgSavedName_img")
+    private File investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 

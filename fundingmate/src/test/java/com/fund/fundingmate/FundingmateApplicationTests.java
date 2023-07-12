@@ -338,61 +338,27 @@ class FundingmateApplicationTests {
 
 	@Test
 	public void insertInvest(){
-/*		InvestmentDTO investmentDTO = new InvestmentDTO(1, 1L, "Category", "Project Name", 10000, new Date(), new Date(), "Image Name", "Image Name", new Date(), new Date(), 5, new Date(), "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method", "Payment Method");
-		try {
-			InvestmentService.createInvest(investmentDTO, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-	/*	Investment investment = Investment.builder().userNo(1)
-				.investNo(1L)
-				.investCategory("Category")
-				.investProjName("Project Name")
-				.investTargetAmount(10000)
-				.investProjDateStart(new Date())
-				.investProjDateEnd(new Date())
-				.investRepImgSavedName("Image Name")
-				.investProjKeyword("Keyword")
-				.useOfFunds("Funds Usage")
-				.useOfFundsDateStart(new Date())
-				.useOfFundsDateEnd(new Date())
-				.rateOfReturn(5)
-				.expectedPaymentDate(new Date())
-				.repaymentMethod("Payment Method")
-				.investVideoUrl("Video URL")
-				.investContentImgSavedName("Content Image Name")
-				.investItemIntro("Item Introduction")
-				.investItemBusinessValue("Business Value")
-				.investItemValue("Item Value")
-				.investItemBenefit("Item Benefit")
-				.investProjContent("Project Content")
-				.investIdBusinessLicenseImgSavedName("License Image Name")
-				.taxBillEmail("Tax Bill Email")
-				.websiteUrl("Website URL")
-				.facebookUrl("Facebook URL")
-				.instagramUrl("Instagram URL")
-				.blogUrl("Blog URL")
-				.twitterUrl("Twitter URL")
-				.build();*/
 
-		Long userId = 1L;
+		Long targetUserId = 1L;
 
-		Optional<User> userOptional = userRepository.findById(userId);
+		Optional<User> userOptional = userRepository.findById(targetUserId);
 		if(userOptional.isEmpty()) {
-			System.out.println("User not found with ID: " + userId);
+			System.out.println("User not found with ID: " + targetUserId);
 			return;
 		}
+
 
 		User user = userOptional.get();
 
 		InvestmentDTO investmentDto = new InvestmentDTO();
-		investmentDto.setInvestNo(12345L);
+		FileDTO fileDTO = new FileDTO();
+
 		investmentDto.setInvestCategory("테스트 카테고리");
 		investmentDto.setInvestProjName("테스트 프로젝트");
 		investmentDto.setInvestTargetAmount(10000);
 		investmentDto.setInvestProjDateStart(new Date());
 		investmentDto.setInvestProjDateEnd(new Date());
-		investmentDto.setInvestRepImgSavedName("테스트 이미지.jpg");
+	//	investmentDto.setInvestRepImgSavedName("테스트 이미지.jpg");
 		investmentDto.setInvestProjKeyword("테스트 키워드");
 		investmentDto.setUseOfFunds("테스트 자금 사용");
 		investmentDto.setUseOfFundsDateStart(new Date());
@@ -401,25 +367,54 @@ class FundingmateApplicationTests {
 		investmentDto.setExpectedPaymentDate(new Date());
 		investmentDto.setRepaymentMethod("테스트 상환 방법");
 		investmentDto.setInvestVideoUrl("테스트 비디오 URL");
-		investmentDto.setInvestContentImgSavedName("테스트 내용 이미지.jpg");
+	//	investmentDto.setInvestContentImgSavedName("테스트 내용 이미지.jpg");
 		investmentDto.setInvestItemIntro("테스트 투자 항목 소개");
 		investmentDto.setInvestItemBusinessValue("테스트 투자 항목 비즈니스 가치");
 		investmentDto.setInvestItemValue("테스트 투자 항목 가치");
 		investmentDto.setInvestItemBenefit("테스트 투자 항목 혜택");
 		investmentDto.setInvestProjContent("테스트 프로젝트 내용");
-		investmentDto.setInvestIdBusinessLicenseImgSavedName("테스트 사업자 등록증 이미지.jpg");
+	//	investmentDto.setInvestIdBusinessLicenseImgSavedName("테스트 사업자 등록증 이미지.jpg");
 		investmentDto.setBusinessAddress("테스트 사업장 주소");
 		investmentDto.setInvestEmail("test@example.com");
 		investmentDto.setBank("테스트 은행");
 		investmentDto.setAccNumber("1234567890");
 		investmentDto.setDepositorName("테스트 예금주명");
-		investmentDto.setInvestBankAccountCopyImgSavedName("테스트 계좌 복사 이미지.jpg");
+	//	investmentDto.setInvestBankAccountCopyImgSavedName("테스트 계좌 복사 이미지.jpg");
 		investmentDto.setTaxBillEmail("test@example.com");
 		investmentDto.setWebsiteUrl("테스트 웹사이트 URL");
 		investmentDto.setFacebookUrl("테스트 페이스북 URL");
 		investmentDto.setInstagramUrl("테스트 인스타그램 URL");
 		investmentDto.setBlogUrl("테스트 블로그 URL");
 		investmentDto.setTwitterUrl("테스트 트위터 URL");
+		MultipartFile investRepImgSavedName = new MockMultipartFile("rewardprj1.png", "rewardprj1.png", "image/png", new byte[0]);
+		MultipartFile investContentImgSavedName = new MockMultipartFile("rewardprj1-2.png", "rewardprj1-2.png", "image/png", new byte[0]);
+		MultipartFile investIdBusinessLicenseImgSavedName = new MockMultipartFile("business-license-receipt.jpg", "business-license-receipt.jpg", "image/jpg", new byte[0]);
+		MultipartFile investBankAccountCopyImgSavedName = new MockMultipartFile("bank_account_copy_image.jpg", "bank_account_copy_image.jpg", "image/jpg", new byte[0]);
+
+		try {
+			// Save each file and set the corresponding field in the rewardDTO
+			com.fund.fundingmate.global.file.entity.File savedInvestRepImgSavedName = fileService.saveFile(null, investRepImgSavedName);
+			investmentDto.setInvestRepImgSavedName(modelMapper.map(savedInvestRepImgSavedName, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedInvestContentImgSavedName = fileService.saveFile(null, investContentImgSavedName);
+			investmentDto.setInvestContentImgSavedName(modelMapper.map(savedInvestContentImgSavedName, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedInvestIdBusinessLicenseImgSavedName = fileService.saveFile(null, investIdBusinessLicenseImgSavedName);
+			investmentDto.setInvestIdBusinessLicenseImgSavedName(modelMapper.map(savedInvestIdBusinessLicenseImgSavedName, FileDTO.class));
+
+			com.fund.fundingmate.global.file.entity.File savedInvestBankAccountCopyImgSavedName = fileService.saveFile(null, investBankAccountCopyImgSavedName);
+			investmentDto.setInvestBankAccountCopyImgSavedName(modelMapper.map(savedInvestBankAccountCopyImgSavedName, FileDTO.class));
+
+			investmentDto.getInvestRepImgSavedName().setFileName(investRepImgSavedName.getOriginalFilename());
+			investmentDto.getInvestContentImgSavedName().setFileName(investContentImgSavedName.getOriginalFilename());
+			investmentDto.getInvestIdBusinessLicenseImgSavedName().setFileName(investIdBusinessLicenseImgSavedName.getOriginalFilename());
+			investmentDto.getInvestBankAccountCopyImgSavedName().setFileName(investBankAccountCopyImgSavedName.getOriginalFilename());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Long userId = user.getId();
 
 		investmentService.createInvestment(investmentDto, userId);
 	}

@@ -1,6 +1,7 @@
 package com.fund.fundingmate.domain.investment.dto;
 
 import com.fund.fundingmate.domain.user.dto.UserDTO;
+import com.fund.fundingmate.global.file.dto.FileDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentDTO {
-    private Long investNo;
+    private Long id;
 
     private String investCategory;
 
@@ -25,7 +26,7 @@ public class InvestmentDTO {
 
     private Date investProjDateEnd;
 
-    private String investRepImgSavedName;
+    private FileDTO investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -43,7 +44,7 @@ public class InvestmentDTO {
 
     private String investVideoUrl;
 
-    private String investContentImgSavedName;
+    private FileDTO investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -55,7 +56,7 @@ public class InvestmentDTO {
 
     private String investProjContent;
 
-    private String investIdBusinessLicenseImgSavedName;
+    private FileDTO investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -67,7 +68,7 @@ public class InvestmentDTO {
 
     private String depositorName;
 
-    private String investBankAccountCopyImgSavedName;
+    private FileDTO investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 
