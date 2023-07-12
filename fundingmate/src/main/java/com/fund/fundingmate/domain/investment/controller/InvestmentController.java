@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public class InvestmentController {
-    /*@PostMapping("/investment-detail/contact/{investmentId}")
+    //이거 참고해서 컨트롤러 만들기
+    @PostMapping("/investment-detail/contact/{investmentId}")
     public InvestmentEntity<InvestmentDTO> rewardDetailContactWrite(@PathVariable("investmentId") Long investmentId, @RequestBody RewardCommentDTO requestBody) {
         try {
             rewardCommentService.insertRewardComment(requestBody);
@@ -25,5 +26,4 @@ public class InvestmentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-*/
 }
