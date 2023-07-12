@@ -1,6 +1,8 @@
 package com.fund.fundingmate.domain.investment.entity;
 
 import com.fund.fundingmate.domain.user.entity.User;
+import com.fund.fundingmate.global.file.dto.FileDTO;
+import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +18,7 @@ import java.util.Date;
 public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long investNo;
+    private Long id;
 
     private String investCategory;
 
@@ -27,8 +29,9 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-
-    private String investRepImgSavedName;
+    @ManyToOne
+    @JoinColumn(name="investRepImgSavedName_img")
+    private File investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -46,7 +49,9 @@ public class Investment {
 
     private String investVideoUrl;
 
-    private String investContentImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="investContentImgSavedName_img")
+    private File investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -58,7 +63,9 @@ public class Investment {
 
     private String investProjContent;
 
-    private String investIdBusinessLicenseImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "investIdBusinessLicenseImgSavedName_img")
+    private File investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -70,7 +77,9 @@ public class Investment {
 
     private String depositorName;
 
-    private String investBankAccountCopyImgSavedName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "investBankAccountCopyImgSavedName_img")
+    private File investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 
@@ -88,8 +97,51 @@ public class Investment {
 
     @Column(nullable = false)
     private String twitterUrl;
-
+/*        @Column(name = "user_no")
+        private Integer userNo;*/
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
+
+
+   /* @Builder
+    public Investment(Long investNo, String investCategory, String investProjName, Integer investTargetAmount, Date investProjDateStart, Date investProjDateEnd,
+                      String investRepImgSavedName, String investProjKeyword,String useOfFunds, Date useOfFundsDateStart, Date useOfFundsDateEnd,
+                      Integer rateOfReturn,Date expectedPaymentDate,  String repaymentMethod,String investVideoUrl, String investContentImgSavedName,
+                      String investItemIntro, String investItemBusinessValue, String investItemValue, String investItemBenefit,
+                      String investProjContent, String investIdBusinessLicenseImgSavedName,String taxBillEmail,
+                      String websiteUrl, String facebookUrl,  String instagramUrl, String blogUrl,String twitterUrl , Integer userNo,User user ){
+        this.investNo = investNo;
+        this.investCategory = investCategory;
+        this.investProjName = investProjName;
+        this.investTargetAmount = investTargetAmount;
+        this.investProjDateStart = investProjDateStart;
+        this.investProjDateEnd = investProjDateEnd;
+        this.investRepImgSavedName = investRepImgSavedName;
+        this.investProjKeyword = investProjKeyword;
+        this.useOfFunds = useOfFunds;
+        this.useOfFundsDateStart = useOfFundsDateStart;
+        this.useOfFundsDateEnd = useOfFundsDateEnd;
+        this.rateOfReturn = rateOfReturn;
+        this.expectedPaymentDate = expectedPaymentDate;
+        this.repaymentMethod = repaymentMethod;
+        this.investVideoUrl = investVideoUrl;
+        this.investContentImgSavedName = investContentImgSavedName;
+        this.investItemIntro = investItemIntro;
+        this.investItemBusinessValue = investItemBusinessValue;
+        this.investItemValue = investItemValue;
+        this.investItemBenefit = investItemBenefit;
+        this.investProjContent = investProjContent;
+        this.investIdBusinessLicenseImgSavedName = investIdBusinessLicenseImgSavedName;
+        this.taxBillEmail = taxBillEmail;
+        this.websiteUrl = websiteUrl;
+        this.facebookUrl = facebookUrl;
+        this.instagramUrl = instagramUrl;
+        this.blogUrl = blogUrl;
+        this.twitterUrl = twitterUrl;
+        this.userNo = userNo;
+        this.user=user;
+    }
+*/
+
 }
