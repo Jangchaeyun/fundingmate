@@ -107,6 +107,7 @@ class FundingmateApplicationTests {
 		rewardDTO.setProjTargetAmount(100000);
 		rewardDTO.setProjDateStart(LocalDate.of(2023, 6, 25));
 		rewardDTO.setProjDateEnd(LocalDate.of(2023, 7, 16));
+		rewardDTO.setDeliveryDate(LocalDate.of(2023, 7, 25));
 		rewardDTO.setProjKeyword("푸드");
 		rewardDTO.setRewardVideoAddress("https://www.youtube.com/watch?v=9T8aX98xWAc");
 		rewardDTO.setProjContent("충북 영동에 위치한 시나브로 와이너리는 한국와인의 명가로 널리 알려져 있습니다.\n" +
@@ -207,8 +208,9 @@ class FundingmateApplicationTests {
 		User user = userOptional.get();
 
 		RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
-		rewardCommentDTO.setComTitle("My Comment Title");
-		rewardCommentDTO.setComContent("My Comment Content");
+		rewardCommentDTO.setComContent("My Comment Content2");
+		rewardCommentDTO.setComRegistrationDate(LocalDate.now());
+		rewardCommentDTO.setComRevisionDate(LocalDate.now());
 
 		RewardDTO rewardDTO = new RewardDTO();
 		rewardDTO.setId(rewardId);

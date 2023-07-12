@@ -19,7 +19,7 @@ import java.util.Date;
 public class FileService {
     private final FileRepository fileRepository;
 
-    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @Autowired
     public FileService(FileRepository fileRepository) {
@@ -41,31 +41,6 @@ public class FileService {
         savedFile.setFileRegistrationDate(new Date());
 
         return savedFile;
-//        String fileSavedName = genetateUniqueFileName(multipartFile.getOriginalFilename());
-//        String folderPath = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload/";
-//        java.io.File folder = new java.io.File(folderPath);
-//        if (!folder.exists()) {
-//            folder.mkdirs();
-//        }
-//
-//        String filePath = folderPath + fileSavedName;
-//
-//        Path targetLocation = Path.of(filePath);
-//        Files.copy(multipartFile.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-//
-//        File file = new File();
-//        file.setFileSavedName(fileSavedName);
-//        file.setFileOriginalName(multipartFile.getOriginalFilename());
-//        file.setFileSize(formatFileSize(multipartFile.getSize()));
-//        file.setFilePath(filePath);
-//        file.setFileRegistrationDate(new Date());
-//
-//        return fileRepository.save(file);
-//    }
-//
-//    public void writeFileToResponse(File file, HttpServletResponse response) throws IOException {
-//        Path filePath = Path.of(file.getFilePath());
-//        Files.copy(filePath, response.getOutputStream());
     }
 
 

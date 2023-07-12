@@ -1,16 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../pages/Rewarddetail/Rewarddetail.css";
 import Desc from "../Desc/Desc";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 const Contact = () => {
+  const { rewardId } = useParams();
+  const [reward, setReward] = useState({
+    id: 0,
+    projName: "",
+    projTargetAmount: 0,
+    projDateStart: null,
+    projDateEnd: null,
+    deliveryDate: null,
+    repFile: null,
+    projKeyword: "",
+    rewardVideoAddress: "",
+    conFile: null,
+    projContent: "",
+    rewardRefundExchangePolicy: "",
+    rewardContact: "",
+    rewardEmail: "",
+    rewardCategory: "",
+    modelName: "",
+    countryOfOrigin: "",
+    manufacturer: "",
+    rewardLaw: "",
+    asPhoneNumber: "",
+    businessImg: null,
+    businessAddress: "",
+    bank: "",
+    accNumber: "",
+    depositorName: "",
+    bankImg: null,
+    taxBillEmail: "",
+    websiteUrl: "",
+    facebookUrl: "",
+    instagramUrl: "",
+    blogUrl: "",
+    twitterUrl: "",
+    user: null,
+    rewardTypes: [],
+  });
+  const [rewardComment, setRewardComment] = useState({
+    id: 0,
+    comContent: "",
+    comRegistrationDate: null,
+    comRevisionDate: null,
+    reward: {
+      id: 0,
+    },
+    user: {
+      id: 0,
+      name: "",
+    },
+    replies: [],
+  })
+  const [viewDesc, setViewDesc] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
+      .then((res) => {
+        console.log(res.data);
+        setReward(res.data.reward);
+        setViewDesc(true);
+        axios
+          .get(`http://localhost:8090/reward-detail/contact/${rewardId}`)
+          .then((res) => {
+            console.log(res.data);
+            setRewardComment(res.data);
+            // setRewardComments(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="desc">
-      <Desc />
+      {viewDesc && <Desc reward={reward} />}
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <Link className="story" to={"/reward-detail/story"}>
+          <Link className="story" to={`/reward-detail/story/${rewardId}`}>
             스토리
           </Link>
           <div className="contact_box">
@@ -36,8 +113,15 @@ const Contact = () => {
         <button type="submit" className="sub">
           문의하기
         </button>
+        <div className="reward_con_list" key={rewardComment.id}>
+          <div className="reward_con_name">
+            {rewardComment.user.name} | {rewardComment.comRegistrationDate}
+          </div>
+          <div className="reward_con_content">{rewardComment.comContent}</div>
+          <button className="del_sub">삭제</button>
+        </div>
+          {/* <div className="con_list">등록된 문의가 없습니다.</div> */}
 
-        <div className="con_list">등록된 문의가 없습니다.</div>
       </div>
     </div>
   );

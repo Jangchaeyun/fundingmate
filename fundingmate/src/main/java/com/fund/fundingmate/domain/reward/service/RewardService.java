@@ -122,6 +122,7 @@ public class RewardService {
         reward.setProjTargetAmount(rewardDTO.getProjTargetAmount());
         reward.setProjDateStart(rewardDTO.getProjDateStart());
         reward.setProjDateEnd(rewardDTO.getProjDateEnd());
+        reward.setDeliveryDate(rewardDTO.getDeliveryDate());
 
         FileDTO repFileDTO = rewardDTO.getRepFile();
         if (repFileDTO != null) {
@@ -132,7 +133,7 @@ public class RewardService {
         reward.setProjKeyWord(rewardDTO.getProjKeyword());
         reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
 
-        FileDTO confileDTO = rewardDTO.getRepFile();
+        FileDTO confileDTO = rewardDTO.getConFile();
         if (confileDTO != null) {
             File confile = converToFile(confileDTO);
             reward.setConfile(confile);

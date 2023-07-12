@@ -11,7 +11,7 @@ const CompanyModel = ({ reward, onClose }) => {
   return (
     <div className="company_model">
       <div className="close">
-        <h2>{reward.manufacturer}</h2>
+        <h3>{reward.manufacturer}</h3>
         <CloseOutlined className="close_btn" onClick={onClose} />
       </div>
       <p>{reward.businessAddress}</p>

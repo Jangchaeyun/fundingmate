@@ -31,6 +31,8 @@ public class Reward {
 
     private LocalDate projDateEnd;
 
+    private LocalDate deliveryDate;
+
     @ManyToOne
     @JoinColumn(name="rep_img")
     private File repfile;
