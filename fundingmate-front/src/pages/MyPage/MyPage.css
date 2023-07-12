@@ -1,21 +1,45 @@
-.mypage-container {
-    display: flex;
-    margin: 2%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
 
-.subheader {
-    display: flex;
-    padding: 0.25%;
-    text-align: center;
-    background-color: #FFCE50;
+:root {
+  --main-color: #14b8ff;
+  --black: #000;
+  --sub-color: #ffce50;
+  --grey: #9b9b9b;
+  --white: white;
+  --info: rgba(248, 199, 199, 0.56);
+  --lightgrey: #f5f5f5;
+}
+
+* {
+  font-family: "SUITE-Regular";
+  /* overflow-x: hidden; */
+}
+
+body {
+  margin: 0 auto;
+  width: 1080px;
+}
+
+
+.mypage-container {
+  display: flex;
+  margin: 2%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .navbar-nav {
   display: flex;
   justify-content: space-around;
+  padding: 0.25%;
+  text-align: center;
+  background-color: #FFCE50;
 }
 
 .subheader a {
@@ -38,9 +62,41 @@
   color: white;
 }
 
-.form-container {
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 1%;
+  text-align: left;
+  box-sizing: content-box;
+  vertical-align: middle;
+  justify-items: center;
+  width: 1060px;
+}
+
+.my-settings {
+  text-indent: 35%;
+}
+
+.profile-image {
+  width: 80px;
+}
+
+.notifications {
+  position: sticky;
+  width: 15px;
+  left: 82%;
+}
+
+.subsection-container {
   display: flex;
-  flex-direction: column;
-  width: 65%;
-  padding: 1%;
+  text-align: center;
+}
+
+.section-subheader {
+  text-align: center;
+  padding: 0.25%;
+}
+
+b {
+  color: black;
 }

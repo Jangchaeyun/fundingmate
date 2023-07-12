@@ -1,5 +1,5 @@
 .rew-card-add-button{
-    width: 90px;
+    width: 95px;
     height: 25px;
     border: 1px solid var(--main-color);
     border-radius: 5px;
@@ -94,6 +94,13 @@
 
 #makereward_modal {
     font-family: "SUITE-Regular";
+}
+#rew-modal-custom-cancel-button{
+    font-family: "SUITE-Regular";
+}
+#rew-modal-custom-cancel-button:hover{
+    border: 1px solid var(--main-color);
+    color:var(--main-color);
 }
 
 .rew-unlimited{
