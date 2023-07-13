@@ -90,4 +90,6 @@ public class InvestmentDTO {
     private Integer userNo;*/
     private UserDTO user;
     private List<InvestTypeDTO> investTypes;
+
+
 }

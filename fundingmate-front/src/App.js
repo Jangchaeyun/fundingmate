@@ -79,7 +79,11 @@ function App() {
           <Route exact path="/fund" element={<Fund />} />
         </Routes>
         <Routes>
-          <Route exact path="/fund-detail/story" element={<FundStory />} />
+          <Route
+            exact
+            path="/fund-detail/story/:investmentId"
+            element={<FundStory />}
+          />
           <Route exact path="/fund-detail/contact" element={<FundContact />} />
           <Route exact path="/fund-detail/guide" element={<FundGuide />} />
         </Routes>
@@ -118,17 +122,33 @@ function App() {
           <Route exact path="/rewardfund" element={<RewardFundMain />} />
         </Routes>
         <Routes>
-        <Route exact path="/make-reward/basicinfo" element={<MakeReward1 />} />
-        <Route exact path="/make-reward/story" element={<MakeReward2/>} />
-        <Route exact path="/make-reward/typelist" element={<MakeReward3/>} />
-        <Route exact path="/make-reward/goodsinfo" element={<MakeReward4/>} />
-        <Route exact path="/make-reward/hostinfo" element={<MakeReward5/>} />
-        <Route exact path="/make-invest/basicinfo" element={<MakeInvest1 />} />
-        <Route exact path="/make-invest/moneyinfo" element={<MakeInvest2/>} />
-        <Route exact path="/make-invest/story" element={<MakeInvest3/>} />
-        <Route exact path="/make-invest/typelist" element={<MakeInvest4/>} />
-        <Route exact path="/make-invest/hostinfo" element={<MakeInvest5/>} />
-      </Routes>
+          <Route
+            exact
+            path="/make-reward/basicinfo"
+            element={<MakeReward1 />}
+          />
+          <Route exact path="/make-reward/story" element={<MakeReward2 />} />
+          <Route exact path="/make-reward/typelist" element={<MakeReward3 />} />
+          <Route
+            exact
+            path="/make-reward/goodsinfo"
+            element={<MakeReward4 />}
+          />
+          <Route exact path="/make-reward/hostinfo" element={<MakeReward5 />} />
+          <Route
+            exact
+            path="/make-invest/basicinfo"
+            element={<MakeInvest1 />}
+          />
+          <Route
+            exact
+            path="/make-invest/moneyinfo"
+            element={<MakeInvest2 />}
+          />
+          <Route exact path="/make-invest/story" element={<MakeInvest3 />} />
+          <Route exact path="/make-invest/typelist" element={<MakeInvest4 />} />
+          <Route exact path="/make-invest/hostinfo" element={<MakeInvest5 />} />
+        </Routes>
       </div>
     </React.Fragment>
   );

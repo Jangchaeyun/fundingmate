@@ -1,7 +1,6 @@
 package com.fund.fundingmate.domain.investment.controller;
 
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
-import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.global.file.Service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,20 +69,40 @@ public class InvestmentController {
        }
    }
 */
-   @PostMapping("/create")
+  /* @PostMapping("/make-invest/create")
    public ResponseEntity<String> createInvestment(@RequestBody InvestmentDTO investmentDTO , @RequestParam("userId") Long userId) {
        try {
            investmentService.createInvestment(investmentDTO, userId);
            // investmentService.getInvestmentById(investmentId);
            // service인베스트먼트 아이디..셀렉트문... 인티져형으로// 프로젝트 넘버 (서비스)
-           return ResponseEntity.ok("투자가 성공적으로 생성되었습니다.");
+           *//*return ResponseEntity.ok("투자가 성공적으로 생성되었습니다.");*//*
+           return ResponseEntity.status(HttpStatus.CREATED).body("Investment created successfully");
+
 
        } catch (Exception e) {
            e.printStackTrace();
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
-   }
-    @GetMapping("/reward-detail/story/{investmentId}")
+   }*/
+
+    @PostMapping("/make-invest/hostinfo")
+    public ResponseEntity<InvestmentDTO> createInvestment(@RequestBody InvestmentDTO investmentDTO , @RequestParam("userId") Long userId) {
+        try {
+            investmentService.createInvestment(investmentDTO, userId);
+
+            InvestmentDTO createdInvestment = (InvestmentDTO) investmentService.getInvestmentById(investmentDTO.getId()); // 예시: 생성된 투자 정보 조회
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @GetMapping("/invest-detail/story/{investmentId}")
     public ResponseEntity<Map<String, Object>> getInvestmentById(@PathVariable("investmentId") Long investmentId) {
         try {
             Map<String, Object> result = investmentService.getInvestmentById(investmentId);
