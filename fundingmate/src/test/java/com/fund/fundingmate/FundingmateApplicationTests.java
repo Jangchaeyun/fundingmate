@@ -1,7 +1,6 @@
 package com.fund.fundingmate;
 
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
-import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.investment.repository.InvestmentRepository;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.domain.payment.dto.InvestPeopleDTO;
@@ -11,7 +10,6 @@ import com.fund.fundingmate.domain.payment.repository.PaymentRepository;
 import com.fund.fundingmate.domain.payment.service.InvestPeopleService;
 import com.fund.fundingmate.domain.payment.service.PaymentService;
 import com.fund.fundingmate.domain.reward.dto.*;
-import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.repository.RewardCommentRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
@@ -32,7 +30,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -61,7 +58,7 @@ class FundingmateApplicationTests {
 	private PaymentService paymentService;
 
 	@Autowired
-	private  InvestmentService investmentService;
+	private InvestmentService investmentService;
 
 	@Autowired
 	private PaymentRepository paymentRepository;

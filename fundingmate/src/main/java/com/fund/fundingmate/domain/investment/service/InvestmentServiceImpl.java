@@ -3,9 +3,6 @@ package com.fund.fundingmate.domain.investment.service;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.investment.repository.InvestmentRepository;
-import com.fund.fundingmate.domain.reward.dto.RewardDTO;
-import com.fund.fundingmate.domain.reward.entity.Reward;
-import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
@@ -16,8 +13,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -35,7 +30,6 @@ public class InvestmentServiceImpl implements InvestmentService {
 
     @Autowired
     private FileRepository fileRepository;
-
 
     @Override
     public void createInvestment(InvestmentDTO investmentDTO, Long userId) {
