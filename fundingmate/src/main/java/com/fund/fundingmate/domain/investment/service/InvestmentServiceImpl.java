@@ -245,11 +245,11 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-    public Map<String, Object> getRewardById(Long rewardJd) {
+    public Map<String, Object> getInvestmentById(Long investmentId) {
         Map<String, Object> map = new HashMap<>();
-        Optional<Investment> oInvestment = investmentRepository.findById(rewardJd);
+        Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
         if (oInvestment.isEmpty()) {
-            throw new IllegalArgumentException("Reward not found with ID: " + rewardJd);
+            throw new IllegalArgumentException("Reward not found with ID: " + investmentId);
         }
         Investment investment = oInvestment.get();
         map.put("investment", modelMapper.map(investment, InvestmentDTO.class));

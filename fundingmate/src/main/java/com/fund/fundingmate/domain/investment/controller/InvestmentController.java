@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @RestController
 public class InvestmentController {
@@ -42,16 +43,54 @@ public class InvestmentController {
 
             // Investment 엔티티를 저장
             investmentService.saveInvestment(investment);*/
-    @PostMapping("/investment-detail/contact/{investmentId}")
+ /*   @PostMapping("/investment-detail/contact/{investmentId}")
     public ResponseEntity<String> createInvestment( @PathVariable("investmentId") Long userId,  @RequestBody InvestmentDTO investmentDTO) {
         try {
-            Investment investment = investmentService.createInvestment(investmentDTO, userId);
-           /* return new ResponseEntity<InvestmentDTO>(investment, HttpStatus.OK);*/
+            investmentService.createInvestment(investmentDTO, userId);
+            return new ResponseEntity<InvestmentDTO>(investment, HttpStatus.OK);//inve~
             return ResponseEntity.ok().body(new InvestmentDTO(investment));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 
+        }
+    }*/
+/*
+   @PostMapping("/create")
+   public ResponseEntity<Integer> createInvestment(@RequestBody InvestmentDTO investmentDTO) {
+       try {
+           investmentService.createInvestment(investmentDTO, userId);
+           investmentService.getInvestmentById(investmentId);
+           //service인베스트먼트 아이디..셀렉트문... 인티져형으로// 프로젝트 넘버 (서비스)
+           return new ResponseEntity<Integer>(investmentId, HttpStatus.OK);
+
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
+   }
+*/
+   @PostMapping("/create")
+   public ResponseEntity<String> createInvestment(@RequestBody InvestmentDTO investmentDTO , @RequestParam("userId") Long userId) {
+       try {
+           investmentService.createInvestment(investmentDTO, userId);
+           // investmentService.getInvestmentById(investmentId);
+           // service인베스트먼트 아이디..셀렉트문... 인티져형으로// 프로젝트 넘버 (서비스)
+           return ResponseEntity.ok("투자가 성공적으로 생성되었습니다.");
+
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
+   }
+    @GetMapping("/reward-detail/story/{investmentId}")
+    public ResponseEntity<Map<String, Object>> getInvestmentById(@PathVariable("investmentId") Long investmentId) {
+        try {
+            Map<String, Object> result = investmentService.getInvestmentById(investmentId);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
