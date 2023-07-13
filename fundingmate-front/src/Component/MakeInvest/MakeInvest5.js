@@ -5,7 +5,7 @@ import "./MakeInvestCommon.css";
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
 import  DaumPostcode  from 'react-daum-postcode';
 import { Modal } from 'antd';
-
+import axios from 'axios';
 const MakeInvest5 = () => {
     const location = useLocation();
     const preTotInfo = location.state.totInfo;
@@ -118,8 +118,16 @@ const MakeInvest5 = () => {
     };
 
     const handleNextStep = () => {
-        console.log(totInfo);
-        navigateToStep2("/reward-detail/story", {state:{totInfo:totInfo}});
+       // console.log(totInfo);
+        axios.post('/api/saveData', totInfo) // 액시오 요청 보내기
+            .then((response) => {
+                console.log(response.data); // 요청 성공 시 처리할 로직
+                alert("프로젝트가 등록되었습니다");
+        navigateToStep2("/fund-detail/story", {state:{totInfo:totInfo}});
+            })
+            .catch((error) => {
+                console.error(error); // 요청 실패 시 처리할 로직
+            });
     };
     return (
         <>

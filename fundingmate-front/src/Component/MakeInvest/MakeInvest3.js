@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Route, useNavigate, useLocation } from "react-router-dom";
 import "./MakeInvest3.css";
 import "./MakeInvestCommon.css";
-
+import axios from 'axios';
 import {PlusCircleOutlined, PlusSquareOutlined, MinusCircleOutlined, MinusSquareOutlined} from "@ant-design/icons";
 
 
@@ -125,8 +125,14 @@ const MakeInvest3 = () => {
     };
 
     const handleNextStep = () => {
-
-        navigateToStep2("/make-invest/typelist", {state:{totInfo:totInfo}});
+        axios
+            .post('/make-invest/story', totInfo) // 서버의 API 엔드포인트에 맞게 경로와 데이터를 수정해야 합니다.
+            .then((response) => {
+                navigateToStep2("/make-invest/typelist", { state: { totInfo: totInfo } });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
 

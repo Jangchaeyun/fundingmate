@@ -5,6 +5,7 @@ import "./MakeInvestCommon.css";
 import { DatePicker } from 'antd';
 import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
+import axios from 'axios';
 const { RangePicker } = DatePicker;
 
 const MakeInvest2 = () => {
@@ -34,8 +35,14 @@ const MakeInvest2 = () => {
     };
 
     const handleNextStep = () => {
-
+        axios
+            .post('/make-invest/moneyinfo', totInfo) // 서버의 API 엔드포인트에 맞게 경로와 데이터를 수정해야 합니다.
+            .then((response) => {
         navigateToStep2("/make-invest/story", {state:{totInfo:totInfo}});
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
 
