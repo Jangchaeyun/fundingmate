@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import java.util.Date;
@@ -18,16 +19,17 @@ public class InvestmentDTO {
 
     private String investCategory;
 
+    @JsonProperty("projName")
     private String investProjName;
-
+    @JsonProperty("projTargetAmount")
     private Integer investTargetAmount;
-
+    @JsonProperty("projDateStart")
     private Date investProjDateStart;
-
+    @JsonProperty("projDateEnd")
     private Date investProjDateEnd;
-
+    @JsonProperty("imageFile")
     private FileDTO investRepImgSavedName;
-
+    @JsonProperty("projKeyword")
     private String investProjKeyword;
 
     private String useOfFunds;
@@ -41,9 +43,9 @@ public class InvestmentDTO {
     private Date expectedPaymentDate;
 
     private String repaymentMethod;
-
+    @JsonProperty("inputs")
     private String investVideoUrl;
-
+    @JsonProperty("projImages")
     private FileDTO investContentImgSavedName;
 
     private String investItemIntro;
@@ -53,9 +55,9 @@ public class InvestmentDTO {
     private String investItemValue;
 
     private String investItemBenefit;
-
+    @JsonProperty("projContent")
     private String investProjContent;
-
+    @JsonProperty("rewardIdBusinessLicenseImgSavedName")
     private FileDTO investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
@@ -67,7 +69,7 @@ public class InvestmentDTO {
     private String accNumber;
 
     private String depositorName;
-
+    @JsonProperty("rewardBankAccountCopyImgSavedName")
     private FileDTO investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;

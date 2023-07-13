@@ -19,10 +19,9 @@ const MakeInvest4 = () => {
     const todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
     const [modalOpen, setModalOpen] = useState(false);
-    const initCard = {rewardAmount:'',rewardAvailableLimit:'',rewardAvailableCount:0,rewardTitle:'',rewardContent:'',rewardDeleverydate:todayDate,rewardShipAddress:'',
-                        options: []};
+    const initCard = {rewardAmount:'',rewardAvailableLimit:'',rewardAvailableCount:0};
     const [card, setCard] = useState({...initCard});
-    console.log("card.options.length:"+card.options.length);
+   // console.log("card.options.length:"+card.options.length);
     const [cards, setCards] = useState([]); // 카드 배열 추가
     const [editingCardIndex, setEditingCardIndex] = useState(null); // 수정 중인 카드의 인덱스
 
