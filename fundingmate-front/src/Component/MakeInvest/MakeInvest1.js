@@ -63,7 +63,8 @@ const MakeInvest1 = () => {
                     investItemIntro:'',
                     investItemBusinessValue:'',
                     investItemValue:'',
-                    investItemBenefit:''
+                    investItemBenefit:'',
+                    investEmail:''
                 }
             )
 
