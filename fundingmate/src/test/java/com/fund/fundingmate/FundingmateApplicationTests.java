@@ -10,6 +10,7 @@ import com.fund.fundingmate.domain.payment.repository.PaymentRepository;
 import com.fund.fundingmate.domain.payment.service.InvestPeopleService;
 import com.fund.fundingmate.domain.payment.service.PaymentService;
 import com.fund.fundingmate.domain.reward.dto.*;
+import com.fund.fundingmate.domain.investment.dto.*;
 import com.fund.fundingmate.domain.reward.repository.RewardCommentRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
@@ -383,6 +384,22 @@ class FundingmateApplicationTests {
 		investmentDto.setInstagramUrl("테스트 인스타그램 URL");
 		investmentDto.setBlogUrl("테스트 블로그 URL");
 		investmentDto.setTwitterUrl("테스트 트위터 URL");
+
+
+		// Create reward type DTOs
+		List<InvestTypeDTO> investTypeDTOs = new ArrayList<>();
+		InvestTypeDTO investTypeDTO = new InvestTypeDTO();
+		investTypeDTO.setInvestAmount(500);
+		investTypeDTO.setInvestLimit(true);
+		investTypeDTO.setInvestLimitCount(5);
+
+		// Set other properties of the rewardTypeDTO
+
+
+		investTypeDTOs.add(investTypeDTO);
+		investmentDto.setInvestTypes(investTypeDTOs);
+
+
 		MultipartFile investRepImgSavedName = new MockMultipartFile("rewardprj1.png", "rewardprj1.png", "image/png", new byte[0]);
 		MultipartFile investContentImgSavedName = new MockMultipartFile("rewardprj1-2.png", "rewardprj1-2.png", "image/png", new byte[0]);
 		MultipartFile investIdBusinessLicenseImgSavedName = new MockMultipartFile("business-license-receipt.jpg", "business-license-receipt.jpg", "image/jpg", new byte[0]);

@@ -1,19 +1,26 @@
 package com.fund.fundingmate.domain.investment.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "invest_type")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvestType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long investOptNo;
+    private Long id;
 
-    private String investAmount;
+    private Integer investAmount;
 
-    private String investLimit;
+    private Boolean investLimit;
 
-    private String investLimitCount;
+    private Integer investLimitCount;
 
     @ManyToOne
     @JoinColumn(name = "invest_no")

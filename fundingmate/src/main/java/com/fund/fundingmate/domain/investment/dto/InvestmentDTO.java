@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.investment.dto;
 
+import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -86,4 +89,5 @@ public class InvestmentDTO {
 /*
     private Integer userNo;*/
     private UserDTO user;
+    private List<InvestTypeDTO> investTypes;
 }

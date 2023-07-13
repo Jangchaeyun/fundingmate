@@ -1,9 +1,11 @@
 package com.fund.fundingmate.domain.investment.service;
 
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
+import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.investment.repository.InvestmentRepository;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
+import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.global.file.Repository.FileRepository;
@@ -13,7 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.*;
 @Service
 @Transactional
 public class InvestmentServiceImpl implements InvestmentService {
@@ -61,6 +63,17 @@ public class InvestmentServiceImpl implements InvestmentService {
         investment.setInvestRepImgSavedName(investRepImgSavedName);
         investment.setInvestContentImgSavedName(investContentImgSavedName);
 
+        investment.setUser(user);
+
+        investmentRepository.save(investment);
+    }
+
+
+    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
+        User user = convertToUser(userDTO);
+        userRepository.save(user);
+
+        Investment investment = convertToInvestment(investmentDTO);
         investment.setUser(user);
 
         investmentRepository.save(investment);
@@ -150,11 +163,100 @@ public class InvestmentServiceImpl implements InvestmentService {
             User user = convertToUser(userDTO);
             investment.setUser(user);
         }
-
+        List<InvestType> investTypes = convertToInvestType(investmentDTO.getInvestTypes());
+        investment.setInvestTypes(investTypes);
 
         return investment;
     }
 
 
+    private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+        List<InvestType> investTypes = new ArrayList<>();
+        for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
+            InvestType investType = new InvestType();
+            investType.setInvestAmount(investTypeDTO.getInvestAmount());
+            investType.setInvestLimit(investTypeDTO.getInvestLimit());
+            investType.setInvestLimitCount(investTypeDTO.getInvestLimitCount());
 
-}
+            investTypes.add(investType);
+        }
+        return investTypes;
+    }
+    private InvestmentDTO convertToInvestDTO(Investment investment) {
+        InvestmentDTO investmentDTO = new InvestmentDTO();
+        investmentDTO.setId(investment.getId());
+        investmentDTO.setInvestProjName(investment.getInvestProjName());
+        investmentDTO.setInvestTargetAmount(investment.getInvestTargetAmount());
+        investmentDTO.setInvestProjDateStart(investment.getInvestProjDateStart());
+        investmentDTO.setInvestProjDateEnd(investment.getInvestProjDateEnd());
+
+        if (investment.getInvestBankAccountCopyImgSavedName () != null) {
+            FileDTO ibacisnFileDTO = new FileDTO();
+            ibacisnFileDTO.setFileName(investment.getInvestBankAccountCopyImgSavedName().getFileName());
+            investmentDTO.setInvestBankAccountCopyImgSavedName(ibacisnFileDTO);
+        }
+
+        investmentDTO.setInvestProjKeyword(investment.getInvestProjKeyword());
+        investmentDTO.setUseOfFunds(investment.getUseOfFunds());
+
+        if (investment.getInvestContentImgSavedName() != null) {
+            FileDTO iiblisnDTO  = new FileDTO();
+            iiblisnDTO.setFileName(investment.getInvestContentImgSavedName().getFileName());
+            investmentDTO.setInvestContentImgSavedName(iiblisnDTO);
+        }
+
+        investmentDTO.setUseOfFundsDateStart(investment.getUseOfFundsDateStart());
+        investmentDTO.setUseOfFundsDateEnd(investment.getUseOfFundsDateEnd());
+        investmentDTO.setRateOfReturn(investment.getRateOfReturn());
+        investmentDTO.setExpectedPaymentDate(investment.getExpectedPaymentDate());
+        investmentDTO.setRepaymentMethod(investment.getRepaymentMethod());
+        investmentDTO.setInvestVideoUrl(investment.getInvestVideoUrl());
+        investmentDTO.setInvestItemIntro(investment.getInvestItemIntro());
+        investmentDTO.setInvestItemBusinessValue(investment.getInvestItemBusinessValue());
+        investmentDTO.setInvestItemValue(investment.getInvestItemValue());
+        investmentDTO.setInvestItemBenefit(investment.getInvestItemBenefit());
+        investmentDTO.setInvestProjContent(investment.getInvestProjContent());
+
+        if (investment.getInvestRepImgSavedName() != null) {
+            FileDTO irisnDTO  = new FileDTO();
+            irisnDTO .setFileName(investment.getInvestRepImgSavedName().getFileName());
+            investmentDTO.setInvestRepImgSavedName(irisnDTO );
+        }
+
+        investmentDTO.setBusinessAddress(investment.getBusinessAddress());
+        investmentDTO.setBank(investment.getBank());
+        investmentDTO.setAccNumber(investment.getAccNumber());
+        investmentDTO.setDepositorName(investment.getDepositorName());
+
+        if (investment.getInvestContentImgSavedName() != null) {
+            FileDTO ciisnDTO  = new FileDTO();
+            ciisnDTO .setFileName(investment.getInvestContentImgSavedName().getFileName());
+            investmentDTO.setInvestContentImgSavedName(ciisnDTO );
+        }
+
+        investmentDTO.setTaxBillEmail(investment.getTaxBillEmail());
+        investmentDTO.setWebsiteUrl(investment.getWebsiteUrl());
+        investmentDTO.setFacebookUrl(investment.getFacebookUrl());
+        investmentDTO.setInstagramUrl(investment.getInstagramUrl());
+        investmentDTO.setBlogUrl(investment.getBlogUrl());
+        investmentDTO.setTwitterUrl(investment.getTwitterUrl());
+
+        return investmentDTO;
+    }
+
+
+    public Map<String, Object> getRewardById(Long rewardJd) {
+        Map<String, Object> map = new HashMap<>();
+        Optional<Investment> oInvestment = investmentRepository.findById(rewardJd);
+        if (oInvestment.isEmpty()) {
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardJd);
+        }
+        Investment investment = oInvestment.get();
+        map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
+        return map;
+    }
+
+
+
+    }
+
