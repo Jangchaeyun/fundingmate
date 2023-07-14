@@ -24,7 +24,12 @@
   height: 350px;
 }
 
-.reward_cards {
+/* .reward_cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reward_card_row {
   display: flex;
 }
 
@@ -37,6 +42,33 @@
   transition: all 0.2s linear;
   cursor: pointer;
   margin-left: 0.6%;
+} */
+
+.reward_card_row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.reward_card {
+  border-radius: 5px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  width: 250px;
+  height: 275px;
+  margin-bottom: 3%;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  margin-right: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(0% - 19.2%);
+}
+
+.reward_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .reward_card:hover {
@@ -45,26 +77,26 @@
 
 .reward_img {
   border-radius: 5px 5px 0px 0px;
-  width: 263px;
-  height: 151px;
+  width: 250px;
+  height: 152px;
 }
 
 .com_name {
   margin-left: 2%;
   color: rgba(0, 0, 0, 0.46);
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 0%;
   margin-left: 2%;
 }
 
 .reward_name {
   margin-left: 2%;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .reward_detail {
   margin-left: 2%;
-  margin-top: 24%;
+  margin-top: 44px;
 }
 
 .price {
@@ -87,7 +119,7 @@
 
 .bell_box {
   display: flex;
-  width: 261px;
+  width: 250px;
   height: 36px;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.18);

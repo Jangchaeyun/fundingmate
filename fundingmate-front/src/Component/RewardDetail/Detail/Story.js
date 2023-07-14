@@ -5,6 +5,7 @@ import Desc from "../Desc/Desc";
 import axios from "axios";
 
 const Story = () => {
+  const [viewDesc, setViewDesc] = useState(false);
   const [reward, setReward] = useState({
     id: 0,
     projName: "",
@@ -41,8 +42,6 @@ const Story = () => {
     user: null,
     rewardTypes: [],
   });
-  const [viewDesc, setViewDesc] = useState(false);
-
   const { rewardId } = useParams();
 
   useEffect(() => {
@@ -66,7 +65,7 @@ const Story = () => {
         <div className="menu_items">
           <Link
             className="story active"
-            to={"/reward-detail/story/${rewardId}"}
+            to={`/reward-detail/story/${rewardId}`}
           >
             스토리
           </Link>
@@ -76,7 +75,7 @@ const Story = () => {
             </Link>
             <div className="contact_count">0</div>
           </div>
-          <Link className="guide" to={"/reward-detail/guide"}>
+          <Link className="guide" to={`/reward-detail/guide/${rewardId}`}>
             안내
           </Link>
         </div>

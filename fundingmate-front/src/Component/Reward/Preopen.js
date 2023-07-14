@@ -13,7 +13,7 @@ const Preopen = () => {
   return (
     <div className="reward">
       <p className="reward_title">사전 공개</p>
-      <div class="rewarding_proj">
+      <div className="rewarding_proj">
         곧 오픈할 프로젝트들을 가장 먼저 만나보세요.
       </div>
       <div className="reward_cards">

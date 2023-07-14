@@ -4,6 +4,7 @@ import com.fund.fundingmate.domain.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,9 +21,9 @@ public class RewardReply {
 
     private String repContent;
 
-    private Date repRegistrationDate;
+    private LocalDate repRegistrationDate;
 
-    private Date repRevisionDate;
+    private LocalDate repRevisionDate;
 
     @ManyToOne
     @JoinColumn(name = "reward_no")

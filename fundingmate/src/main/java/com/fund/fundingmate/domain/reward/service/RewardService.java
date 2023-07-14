@@ -304,12 +304,11 @@ public class RewardService {
                 .collect(Collectors.toList());
     }
 
-    public List<RewardDTO> getRewardWithProjDateStartAfter() {
-        List<Reward> rewards = rewardFindRepository.findRewardDatesAfter();
+    public List<RewardDTO> getRewardWithProjDateStartEndBetween() {
+        List<Reward> rewards = rewardFindRepository.findRewardsBetweenDates();
 
         return rewards.stream()
                 .map(reward -> modelMapper.map(reward, RewardDTO.class))
                 .collect(Collectors.toList());
     }
-
 }

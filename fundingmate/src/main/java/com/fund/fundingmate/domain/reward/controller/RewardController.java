@@ -1,11 +1,14 @@
 package com.fund.fundingmate.domain.reward.controller;
 
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
+import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
+import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.entity.File;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class RewardController {
@@ -39,8 +43,24 @@ public class RewardController {
 
     private RewardCommentDTO rewardCommentDTO;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
+        try {
+            String userId = (String) session.getAttribute("userId");
+            System.out.println("rewardDetail: " + userId);
+            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
+            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/reward-detail/guide/{rewardId}")
+    public ResponseEntity<Map<String, Object>> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
@@ -108,7 +128,7 @@ public class RewardController {
     }
 
     @PostMapping("/reward-detail/contact/comment/reply")
-   public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactReply(@RequestBody RewardReplyDTO requestBody) {
+    public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactReply(@RequestBody RewardReplyDTO requestBody) {
         try {
             rewardCommentService.insertRewardCommentReply(requestBody);
 
@@ -117,6 +137,28 @@ public class RewardController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/reward-detail/contact/comment/reply/{commentId}") // 경로 오타 수정
+    public ResponseEntity<List<RewardReplyDTO>> rewardDetailCommentReplies(@PathVariable("commentId") Long commentId) {
+        try {
+            List<RewardReplyDTO> replies = rewardCommentService.getRewardCommentReplies(commentId);
+            return ResponseEntity.ok(replies);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/reward-detail/find/rewarding")
+    public ResponseEntity<List<RewardDTO>> rewardingFind() {
+        try {
+           List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateStartEndBetween();
+            return ResponseEntity.ok(rewardingRewards);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
