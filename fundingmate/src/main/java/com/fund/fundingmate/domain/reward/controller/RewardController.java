@@ -85,16 +85,17 @@ public class RewardController {
 
     @PostMapping("/reward-detail/contact/{rewardId}")
     public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactWrite(@PathVariable("rewardId") Long rewardId, @RequestBody RewardCommentDTO requestBody) {
-       try {
-           rewardCommentService.insertRewardComment(requestBody);
+        try {
+            rewardCommentService.insertRewardComment(requestBody);
 
-           List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(rewardId);
-           return new ResponseEntity<>(rewardComments, HttpStatus.OK);
-       } catch (Exception e) {
-           e.printStackTrace();
-           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-       }
+            List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(rewardId);
+            return new ResponseEntity<>(rewardComments, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
     @DeleteMapping("/reward-detail/contact/comment/{commentId}")
     public ResponseEntity<List<RewardCommentDTO>> deleteRewardComment(@PathVariable("commentId") Long commentId) {
         try {
@@ -108,7 +109,7 @@ public class RewardController {
         }
     }
 
-    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {
@@ -154,11 +155,58 @@ public class RewardController {
     @GetMapping("/reward-detail/find/rewarding")
     public ResponseEntity<List<RewardDTO>> rewardingFind() {
         try {
-           List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateStartEndBetween();
+            List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateStartEndBetween();
             return ResponseEntity.ok(rewardingRewards);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/reward/find/rewarding/more")
+    public ResponseEntity<List<RewardDTO>> rewardingFindmore(@RequestParam int startIndex, @RequestParam int endIndex) {
+        try {
+            List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateStartEndBetween();
+            int totalRewards = rewardingRewards.size();
+            if (startIndex >= totalRewards) {
+                return ResponseEntity.ok().body(null);
+            } else {
+                endIndex = Math.min(endIndex, totalRewards);
+                List<RewardDTO> nextRewards = rewardingRewards.subList(startIndex, endIndex);
+                return ResponseEntity.ok(nextRewards);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/reward/find/prereward")
+    public ResponseEntity<List<RewardDTO>> prerewardFind() {
+        try {
+            List<RewardDTO> prerewardRewards = rewardService.getRewardWithProjDateEndBeforeToday();
+            return ResponseEntity.ok(prerewardRewards);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/reward/find/finishreward/more")
+    public ResponseEntity<List<RewardDTO>> finishrewardFindmore(@RequestParam int startIndex, @RequestParam int endIndex) {
+        try {
+            List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateEndBefore();
+            int totalRewards = rewardingRewards.size();
+            if (startIndex >= totalRewards) {
+                return ResponseEntity.ok().body(null);
+            } else {
+                endIndex = Math.min(endIndex, totalRewards);
+                List<RewardDTO> nextRewards = rewardingRewards.subList(startIndex, endIndex);
+                return ResponseEntity.ok(nextRewards);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
