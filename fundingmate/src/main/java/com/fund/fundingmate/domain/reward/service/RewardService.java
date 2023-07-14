@@ -289,7 +289,7 @@ public class RewardService {
     }
 
     public List<RewardDTO> getRewardWithProjDateEndBeforeToday() {
-        List<Reward> rewards = rewardFindRepository.findRewardsBetweenDates();
+        List<Reward> rewards = rewardFindRepository.findRewardDatesAfter();
 
         return rewards.stream()
                 .map(reward -> modelMapper.map(reward, RewardDTO.class))

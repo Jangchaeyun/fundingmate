@@ -95,14 +95,15 @@
 }
 
 .reward_detail {
-  margin-left: 2%;
-  margin-top: 44px;
+  margin-left: 6px;
+  margin-top: 38px;
 }
 
 .price {
   color: #14b8ff;
   font-size: 13px;
   font-weight: 400px;
+  margin-bottom: -15px;
 }
 
 .rate {
@@ -113,8 +114,8 @@
 
 .d_day {
   font-size: 13px;
-  margin-left: 88%;
-  margin-top: -6.5%;
+  margin-left: 85.2%;
+  margin-top: -6.4%;
 }
 
 .bell_box {
@@ -125,6 +126,7 @@
   border: 1px solid rgba(0, 0, 0, 0.18);
   font-size: 13px;
   justify-content: center;
+  margin-top: 20px;
   justify-items: center;
   align-items: center;
   align-content: center;
@@ -158,4 +160,9 @@
 
 .reward-more:hover {
   transform: scale(1.01);
+}
+
+.open {
+  margin-left: 135px;
+  color: var(--main-color);
 }

@@ -321,7 +321,7 @@ class FundingmateApplicationTests {
 	@Test
 	void findByProjStartAfter() {
 		try {
-			List<RewardDTO> rewards = rewardService.getRewardWithProjDateStartAfter();
+			List<RewardDTO> rewards = rewardService.getRewardWithProjDateStartEndBetween();
 			System.out.println(rewards.toString());
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
