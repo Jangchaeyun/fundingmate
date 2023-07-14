@@ -1,11 +1,14 @@
 package com.fund.fundingmate.domain.reward.controller;
 
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
+import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
+import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.entity.File;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class RewardController {
@@ -38,6 +42,9 @@ public class RewardController {
     private RewardCommentService rewardCommentService;
 
     private RewardCommentDTO rewardCommentDTO;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
@@ -144,4 +151,14 @@ public class RewardController {
         }
     }
 
+    @GetMapping("/reward-detail/find/rewarding")
+    public ResponseEntity<List<RewardDTO>> rewardingFind() {
+        try {
+           List<RewardDTO> rewardingRewards = rewardService.getRewardWithProjDateStartEndBetween();
+            return ResponseEntity.ok(rewardingRewards);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
