@@ -19,7 +19,7 @@ const MakeInvest1 = () => {
     if (location.state) {
       setTotInfo({ ...location.state.totInfo });
 
-      const file = location.state.totInfo.imageFile;
+      const file = location.state.totInfo.investRepImgSavedName;
       if (file) {
         const reader = new FileReader();
 
@@ -31,15 +31,16 @@ const MakeInvest1 = () => {
     } else {
       setTotInfo({
         rewardCategory: "",
-        projTargetAmount: 0,
-        projName: "",
-        imageFile: null,
-        projKeyword: "",
-        projDateStart: "",
-        projDateEnd: "",
-        inputs: [{ id: nanoid(), url: "" }],
-        projImages: [],
-        projContent: "",
+        investTargetAmount: 0,
+        investProjName: "",
+        investRepImgSavedName: null,
+        investProjKeyword: "",
+        investProjDateStart: "",
+        investProjDateEnd: "",
+        // investVideoUrl: [{ id: nanoid(), url: "" }],
+        investVideoUrl: "",
+        investContentImgSavedName: [],
+        investProjContent: "",
         cards: [],
         businessAddress: "",
         bank: "",
@@ -51,8 +52,8 @@ const MakeInvest1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        rewardIdBusinessLicenseImgSavedName: null,
-        rewardBankAccountCopyImgSavedName: null,
+        investIdBusinessLicenseImgSavedName: null,
+        investBankAccountCopyImgSavedName: null,
         useOfFunds: "",
         useOfFundsDateStart: "",
         useOfFundsDateEnd: "",
@@ -63,7 +64,7 @@ const MakeInvest1 = () => {
         investItemBusinessValue: "",
         investItemValue: "",
         investItemBenefit: "",
-        investEmail: "",
+        investEmail: ""
       });
     }
   }, []);
@@ -94,7 +95,7 @@ const MakeInvest1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, imageFile: file });
+      setTotInfo({ ...totInfo, investRepImgSavedName: file });
     }
   };
 
@@ -189,9 +190,9 @@ const MakeInvest1 = () => {
         <div>
           <input
             type="text"
-            name="projName"
+            name="investProjName"
             className="input-box"
-            value={totInfo.projName}
+            value={totInfo.investProjName}
             onChange={handleInputChange}
           />
         </div>
@@ -204,10 +205,10 @@ const MakeInvest1 = () => {
         <p className="custom-font-text">최소 100,000원 이상이어야 합니다.</p>
         <input
           type="text"
-          name="projTargetAmount"
+          name="investTargetAmount"
           className="input-box"
           placeholder="0"
-          value={totInfo.projTargetAmount}
+          value={totInfo.investTargetAmount}
           onChange={handleNumInputChange}
         />{" "}
         &nbsp;원
@@ -221,15 +222,17 @@ const MakeInvest1 = () => {
           onChange={(dates, dateStrings) => {
             setTotInfo({
               ...totInfo,
-              projDateStart: dateStrings[0],
-              projDateEnd: dateStrings[1],
+              investProjDateStart: dateStrings[0],
+              investProjDateEnd: dateStrings[1]
             });
           }}
           showToday={true}
           allowClear={false}
           value={[
-            totInfo.projDateStart ? dayjs(totInfo.projDateStart) : null,
-            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null,
+            totInfo.investProjDateStart
+              ? dayjs(totInfo.investProjDateStart)
+              : null,
+            totInfo.investProjDateEnd ? dayjs(totInfo.investProjDateEnd) : null
           ]}
           format="YYYY-MM-DD"
         />
@@ -288,9 +291,9 @@ const MakeInvest1 = () => {
         </p>
         <input
           type="text"
-          name="projKeyword"
+          name="investProjKeyword"
           className="input-box"
-          value={totInfo.projKeyword}
+          value={totInfo.investProjKeyword}
           onChange={handleInputChange}
           placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />

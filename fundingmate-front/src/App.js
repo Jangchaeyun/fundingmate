@@ -79,11 +79,7 @@ function App() {
           <Route exact path="/fund" element={<Fund />} />
         </Routes>
         <Routes>
-          <Route
-            exact
-            path="/fund-detail/story/:investmentId"
-            element={<FundStory />}
-          />
+          <Route exact path="/fund-detail/story" element={<FundStory />} />
           <Route exact path="/fund-detail/contact" element={<FundContact />} />
           <Route exact path="/fund-detail/guide" element={<FundGuide />} />
         </Routes>

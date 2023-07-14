@@ -8,7 +8,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -38,7 +38,7 @@ const MakeInvest5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.rewardIdBusinessLicenseImgSavedName;
+    let file = totInfo.investIdBusinessLicenseImgSavedName;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -46,7 +46,7 @@ const MakeInvest5 = () => {
       };
       reader.readAsDataURL(file);
     }
-    file = totInfo.rewardBankAccountCopyImgSavedName;
+    file = totInfo.investBankAccountCopyImgSavedName;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -67,7 +67,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
+      setTotInfo({ ...totInfo, investIdBusinessLicenseImgSavedName: file });
     }
   };
 
@@ -86,7 +86,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, investBankAccountCopyImgSavedName: file });
       console.log(file.src);
     }
   };
@@ -125,22 +125,29 @@ const MakeInvest5 = () => {
   const handlePreviousStep = () => {
     navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
   };
-
+  const [userId, setUserId] = useState(null);
   const handleNextStep = () => {
     console.log(totInfo);
     axios
-      .post("/make-invest/hostinfo", totInfo) // 액시오 요청 보내기
+      .post("http://localhost:8090/make-invest/hostinfo", totInfo, {
+        params: { userId: 1 }
+      }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
         alert("프로젝트가 등록되었습니다");
-        navigateToStep2(`/fund-detail/story/${investmentId}`, {
-          state: { totInfo: totInfo },
+        navigateToStep2("/fund-detail/story", {
+          state: { totInfo: totInfo }
         });
       })
       .catch((error) => {
         console.error(error); // 요청 실패 시 처리할 로직
       });
   };
+
+  // navigateToStep2(`/fund-detail/story/${investmentId}`, {
+  //   state: { totInfo: totInfo }
+  // });
+
   return (
     <>
       <div className="investMake-wrapper">

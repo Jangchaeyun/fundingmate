@@ -95,7 +95,7 @@ const MakeInvest2 = () => {
             setTotInfo({
               ...totInfo,
               useOfFundsDateStart: dateStrings[0],
-              useOfFundsDateEnd: dateStrings[1],
+              useOfFundsDateEnd: dateStrings[1]
             });
           }}
           showToday={true}
@@ -104,7 +104,7 @@ const MakeInvest2 = () => {
             totInfo.useOfFundsDateStart
               ? dayjs(totInfo.useOfFundsDateStart)
               : null,
-            totInfo.useOfFundsDateEnd ? dayjs(totInfo.useOfFundsDateEnd) : null,
+            totInfo.useOfFundsDateEnd ? dayjs(totInfo.useOfFundsDateEnd) : null
           ]}
           format="YYYY-MM-DD"
         />

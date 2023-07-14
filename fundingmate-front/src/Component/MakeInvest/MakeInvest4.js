@@ -5,7 +5,7 @@ import "./MakeInvestCommon.css";
 import {
   PlusOutlined,
   PlusSquareOutlined,
-  MinusSquareOutlined,
+  MinusSquareOutlined
 } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { useState } from "react";
@@ -25,9 +25,9 @@ const MakeInvest4 = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const initCard = {
-    rewardAmount: "",
-    rewardAvailableLimit: "",
-    rewardAvailableCount: 0,
+    investAmount: "",
+    investLimit: "",
+    investLimitCount: 0
   };
   const [card, setCard] = useState({ ...initCard });
   // console.log("card.options.length:"+card.options.length);
@@ -52,7 +52,7 @@ const MakeInvest4 = () => {
 
   const [limitClicked, setLimitClicked] = useState(null);
   const handleLimitButtonClick = (isLimit) => {
-    setCard({ ...card, rewardAvailableLimit: isLimit });
+    setCard({ ...card, investLimit: isLimit });
     setLimitClicked(isLimit);
   };
 
@@ -74,8 +74,8 @@ const MakeInvest4 = () => {
       ...card,
       options: [
         ...card.options,
-        { id: nanoid(), rewardOptName: "", rewardOptCon: "" },
-      ],
+        { id: nanoid(), rewardOptName: "", rewardOptCon: "" }
+      ]
     });
   };
 
@@ -202,8 +202,8 @@ const MakeInvest4 = () => {
           okButtonProps={{
             style: {
               backgroundColor: "var(--main-color)",
-              fontFamily: "SUITE-Regular",
-            },
+              fontFamily: "SUITE-Regular"
+            }
           }}
           cancelButtonProps={{ id: "invest-modal-custom-cancel-button" }}
           id="makereward_modal"
@@ -211,11 +211,11 @@ const MakeInvest4 = () => {
           <p className="custom-font-modal-sub-title">투자 금액</p>
           <input
             type="text"
-            name="rewardAmount"
+            name="investAmount"
             id="rew-amount-input"
             className="modal-input-box"
             placeholder="0"
-            value={card.rewardAmount}
+            value={card.investAmount}
             onChange={handleNumInputChange}
           />
           &nbsp;원
@@ -224,7 +224,7 @@ const MakeInvest4 = () => {
             <div className="rew-limit-buttons">
               <button
                 className={`rew-unlimited ${
-                  card.rewardAvailableLimit === 0 ? "clicked" : ""
+                  card.investLimit === 0 ? "clicked" : ""
                 }`}
                 id="rew-unlimited-button"
                 onClick={() => handleLimitButtonClick(0)}
@@ -233,7 +233,7 @@ const MakeInvest4 = () => {
               </button>
               <button
                 className={`rew-limit ${
-                  card.rewardAvailableLimit === 1 ? "clicked" : ""
+                  card.investLimit === 1 ? "clicked" : ""
                 }`}
                 id="rew-limit-button"
                 onClick={() => handleLimitButtonClick(1)}
@@ -245,10 +245,10 @@ const MakeInvest4 = () => {
               <div style={{ display: "flex", alignItems: "center" }}>
                 <input
                   type="text"
-                  name="rewardAvailableCount"
+                  name="investLimitCount"
                   className="modal-limit-input-box"
                   placeholder="0"
-                  value={card.rewardAvailableCount}
+                  value={card.investLimitCount}
                   onChange={handleNumInputChange}
                 />
                 &nbsp;개
@@ -261,11 +261,11 @@ const MakeInvest4 = () => {
             <div className="make-invest-card-div">
               <div>
                 <div className="make-rew-card-price">
-                  {cardItem.rewardAmount}원
+                  {cardItem.investAmount}원
                 </div>
                 <div className="make-rew-card-contents">
                   <div className="make-rew-card-count">
-                    {cardItem.rewardAvailableLimit == 1 ? "제한" : "무제한"}
+                    {cardItem.investLimit == 1 ? "제한" : "무제한"}
                     &nbsp;|&nbsp;0개 펀딩
                   </div>
                   &nbsp;&nbsp;&nbsp;&nbsp;

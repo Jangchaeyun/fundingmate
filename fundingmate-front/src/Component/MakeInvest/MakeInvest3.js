@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
   PlusSquareOutlined,
   MinusCircleOutlined,
-  MinusSquareOutlined,
+  MinusSquareOutlined
 } from "@ant-design/icons";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -34,7 +34,7 @@ const MakeInvest3 = () => {
 
   const handleToastChange = (e) => {
     const data = editorRef.current.getInstance().getHTML();
-    setTotInfo({ ...totInfo, projContent: data });
+    setTotInfo({ ...totInfo, investProjContent: data });
   };
 
   const [inputs, setInputs] = useState([{ id: 1 }]);
@@ -42,13 +42,16 @@ const MakeInvest3 = () => {
   const handleAddInput = () => {
     const newId = nanoid();
     const newInput = { id: newId };
-    setTotInfo({ ...totInfo, inputs: [...totInfo.inputs, newInput] });
+    setTotInfo({
+      ...totInfo,
+      investVideoUrl: [...totInfo.investVideoUrl, newInput]
+    });
     //setInputs((prevInputs) => [...prevInputs, newInput]);
   };
 
   const handleDeleteInput = (id) => {
-    const delinputs = totInfo.inputs.filter((input) => input.id !== id);
-    setTotInfo({ ...totInfo, inputs: [...delinputs] });
+    const delinputs = totInfo.investVideoUrl.filter((input) => input.id !== id);
+    setTotInfo({ ...totInfo, investVideoUrl: [...delinputs] });
   };
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
   //const [images, setImages] = useState([]);
@@ -61,13 +64,13 @@ const MakeInvest3 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.projImages) {
+    for (let file of totInfo.investContentImgSavedName) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         imgList.push(imageCard);
         setImages([...imgList]);
@@ -85,12 +88,15 @@ const MakeInvest3 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
-          projImages: [...totInfo.projImages, event.target.files[0]],
+          investContentImgSavedName: [
+            ...totInfo.investContentImgSavedName,
+            event.target.files[0]
+          ]
         });
       };
       // reader가 이미지 읽도록 하기
@@ -99,7 +105,7 @@ const MakeInvest3 = () => {
   };
 
   const handleImageClick = (e) => {
-    if (totInfo.projImages.length < MAX_IMAGES) {
+    if (totInfo.investContentImgSavedName.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -107,14 +113,14 @@ const MakeInvest3 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.projImages];
+    const updatedImagesFile = [...totInfo.investContentImgSavedName];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, projImages: [...updatedImages] });
+    setTotInfo({ ...totInfo, investContentImgSavedName: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 
@@ -179,17 +185,26 @@ const MakeInvest3 = () => {
         >
           <b>동영상 주소를 적어주세요</b>
         </p>
-        <div
+        <input
+          type="text"
+          name="investVideoUrl"
+          className="input-box-video"
+          onChange={handleInputChange}
+          value={totInfo.investVideoUrl}
+        />
+        {/* <div
           className="projMake-video"
           style={{ flexDirection: "column", alignItems: "flex-start" }}
         >
-          {totInfo.inputs.map((input, index) => (
+          {totInfo.investVideoUrl.map((input, index) => (
             <div key={input.id} style={{ marginTop: index > 0 ? "10px" : "0" }}>
               <input
                 type="text"
-                name="rewardVideoAddress"
+                name="investVideoUrl"
                 className="input-box-video"
-                onChange={(e) => (totInfo.inputs[index].url = e.target.value)}
+                onChange={(e) =>
+                  (totInfo.investVideoUrl[index].url = e.target.value)
+                }
                 defaultValue={input.url}
               />
               <button className="rew-add" onClick={handleAddInput}>
@@ -205,7 +220,7 @@ const MakeInvest3 = () => {
               )}
             </div>
           ))}
-        </div>
+        </div> */}
         <br />
 
         <p
@@ -242,7 +257,7 @@ const MakeInvest3 = () => {
                     zIndex: "1",
                     color: "#fff",
                     fontSize: "15px",
-                    display: showDeleteIcon ? "block" : "none",
+                    display: showDeleteIcon ? "block" : "none"
                   }}
                 >
                   <MinusCircleOutlined id="imi-image-delete-icon" />
@@ -263,7 +278,7 @@ const MakeInvest3 = () => {
                     style={{
                       fontSize: "15px",
                       cursor: "pointer",
-                      marginRight: "3px",
+                      marginRight: "3px"
                     }}
                   />
                 </div>
@@ -350,7 +365,7 @@ const MakeInvest3 = () => {
         <br />
         <div className="edit_wrap">
           <Editor
-            initialValue={totInfo.projContent}
+            initialValue={totInfo.investProjContent}
             previewStyle="vertical"
             height="600px"
             hideModeSwitch={true}
@@ -359,7 +374,7 @@ const MakeInvest3 = () => {
             language="ko-KR"
             ref={editorRef}
             plugins={[colorSyntax]}
-            name="projContent"
+            name="investProjContent"
             onChange={handleToastChange}
           />
         </div>
