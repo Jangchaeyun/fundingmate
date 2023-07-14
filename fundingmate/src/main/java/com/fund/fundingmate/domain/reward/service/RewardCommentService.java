@@ -154,7 +154,10 @@ public class RewardCommentService {
         rewardReplyDTO.setId(rewardReply.getId());
         rewardReplyDTO.setRepContent(rewardReply.getRepContent());
         rewardReplyDTO.setRepRegisterationDate(rewardReply.getRepRegistrationDate());
-        rewardReplyDTO.setRepRegisterationDate(rewardReply.getRepRegistrationDate());
+        rewardReplyDTO.setRepRevisionDate(rewardReply.getRepRevisionDate());
+        rewardReplyDTO.setRewardId(rewardReply.getReward().getId());
+        rewardReplyDTO.setCommentId(rewardReply.getComment().getId());
+        rewardReplyDTO.setUserId(rewardReply.getUser().getId());
         return rewardReplyDTO;
     }
 
@@ -220,23 +223,34 @@ public class RewardCommentService {
     public void insertRewardCommentReply(RewardReplyDTO rewardReplyDTO) {
         Long rewardId = rewardReplyDTO.getRewardId();
         Long commentId = rewardReplyDTO.getCommentId();
+        Long userId = rewardReplyDTO.getUserId();
 
         Reward reward = rewardRepository.findById(rewardId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward not found with ID: " + rewardId));
         RewardComment comment = rewardCommentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
 
-        if(!reward.getUser().getId().equals(comment.getUser().getId())) {
+        if(!reward.getUser().getId().equals(user.getId())) {
             throw new IllegalStateException("Only the creator of the Reward to reply to the comment.");
         }
 
         RewardReply rewardReply = new RewardReply();
         rewardReply.setRepContent(rewardReplyDTO.getRepContent());
-        rewardReply.setRepRegistrationDate(new Date());
-        rewardReply.setRepRevisionDate(new Date());
+        rewardReply.setRepRegistrationDate(LocalDate.now());
+        rewardReply.setRepRevisionDate(LocalDate.now());
         rewardReply.setReward(reward);
         rewardReply.setComment(comment);
+        rewardReply.setUser(user);
 
         rewardReplyRepository.save(rewardReply);
+    }
+
+    public List<RewardReplyDTO> getRewardCommentReplies(Long commentId) {
+        RewardComment rewardComment = rewardCommentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
+
+        return mapToRewardReplyDTOList(rewardComment.getReplies());
     }
 }

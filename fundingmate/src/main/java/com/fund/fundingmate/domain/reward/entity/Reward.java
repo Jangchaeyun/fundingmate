@@ -44,9 +44,11 @@ public class Reward {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="con_img")
     private File confile;
-
+    
+    @Column(columnDefinition = "VARCHAR(1000)")
     private String projContent;
 
+    @Column(columnDefinition = "VARCHAR(1000)")
     private String rewardRefundExchangePolicy;
 
     private String rewardContact;
@@ -61,6 +63,7 @@ public class Reward {
 
     private String manufacturer;
 
+    @Column(columnDefinition = "VARCHAR(1000)")
     private String rewardLaw;
 
     private String asPhoneNumber;

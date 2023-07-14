@@ -52,6 +52,19 @@ public class RewardController {
         }
     }
 
+    @GetMapping("/reward-detail/guide/{rewardId}")
+    public ResponseEntity<Map<String, Object>> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
+        try {
+            String userId = (String) session.getAttribute("userId");
+            System.out.println("rewardDetail: " + userId);
+            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
+            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/reward-detail/contact/{rewardId}")
     public ResponseEntity<List<RewardCommentDTO>> rewardDetailContact(@PathVariable("rewardId") Long rewardId) {
         List<RewardCommentDTO> rewardComments = rewardCommentService.getRewardCommentsByRewardId(rewardId);
@@ -108,7 +121,7 @@ public class RewardController {
     }
 
     @PostMapping("/reward-detail/contact/comment/reply")
-   public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactReply(@RequestBody RewardReplyDTO requestBody) {
+    public ResponseEntity<List<RewardCommentDTO>> rewardDetailContactReply(@RequestBody RewardReplyDTO requestBody) {
         try {
             rewardCommentService.insertRewardCommentReply(requestBody);
 
@@ -119,4 +132,16 @@ public class RewardController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/reward-detail/contact/comment/reply/{commentId}") // 경로 오타 수정
+    public ResponseEntity<List<RewardReplyDTO>> rewardDetailCommentReplies(@PathVariable("commentId") Long commentId) {
+        try {
+            List<RewardReplyDTO> replies = rewardCommentService.getRewardCommentReplies(commentId);
+            return ResponseEntity.ok(replies);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

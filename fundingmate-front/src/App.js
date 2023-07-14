@@ -3,7 +3,7 @@ import Home from "./pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
-import { Reset } from "styled-reset";
+// import { Reset } from "styled-reset";
 import FindIdPw from "./pages/Login/FindIdPw";
 import Join from "./pages/Login/Join";
 import FindId from "./pages/Login/FindId";
@@ -55,7 +55,7 @@ function App() {
           <Route exact path="/findPwResult" element={<FindPwResult />} />
           <Route exact path="/join" element={<Join />} />
           <Route exact path="/search" element={<Search />} />
-          {/*<Route exact path="/reward" element={<Reward />} />*/}
+          <Route exact path="/reward" element={<Reward />} />
           {/*<Route exact path="/reward-detail" element={<Rewarddetail />} />*/}
         </Routes>
         <Routes>
