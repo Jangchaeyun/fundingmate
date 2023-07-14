@@ -170,7 +170,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-    private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+  /*  private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
         List<InvestType> investTypes = new ArrayList<>();
         for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
             InvestType investType = new InvestType();
@@ -181,7 +181,23 @@ public class InvestmentServiceImpl implements InvestmentService {
             investTypes.add(investType);
         }
         return investTypes;
+    }*/
+
+    private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+        List<InvestType> investTypes = new ArrayList<>();
+        if (investTypeDTOs != null) {
+            for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
+                InvestType investType = new InvestType();
+                investType.setInvestAmount(investTypeDTO.getInvestAmount());
+                investType.setInvestLimit(investTypeDTO.getInvestLimit());
+                investType.setInvestLimitCount(investTypeDTO.getInvestLimitCount());
+
+                investTypes.add(investType);
+            }
+        }
+        return investTypes;
     }
+
     private InvestmentDTO convertToInvestDTO(Investment investment) {
         InvestmentDTO investmentDTO = new InvestmentDTO();
         investmentDTO.setId(investment.getId());

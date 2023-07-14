@@ -13,11 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class InvestTypeDTO {
     private Long id;
-    @JsonProperty("rewardAmount")
+
     private Integer investAmount;
-    @JsonProperty("rewardAvailableLimit")
+
     private Boolean investLimit;
-    @JsonProperty("rewardAvailableCount")
+
     private Integer investLimitCount;
 
     private InvestmentDTO investmentDTO;
