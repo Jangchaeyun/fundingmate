@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,8 +18,6 @@ public class RewardTypeDTO {
     private Integer rewardAvailableCount;
     private String rewardTitle;
     private String rewardContent;
-    private String rewardDeliveryDate;
     private Boolean rewardShipAddress;
-    private RewardDTO reward;
     private RewardOptionDTO rewardOption;
 }

@@ -12,6 +12,6 @@ import lombok.Setter;
 public class RewardOptionDTO {
     private Long id;
     private String rewardOptName;
-    private String RewardOptCon;
+    private String rewardOptCon;
     private RewardTypeDTO rewardType;
 }

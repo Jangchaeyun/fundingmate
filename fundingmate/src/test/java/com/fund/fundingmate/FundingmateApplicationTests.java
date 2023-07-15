@@ -99,7 +99,9 @@ class FundingmateApplicationTests {
 			return;
 		}
 
+
 		User user = userOptional.get();
+
 
 		RewardDTO rewardDTO = new RewardDTO();
 		FileDTO fileDTO = new FileDTO();
@@ -150,6 +152,7 @@ class FundingmateApplicationTests {
 		rewardTypeDTO.setRewardAvailableCount(5);
 		rewardTypeDTO.setRewardTitle("Reward Type 1");
 		rewardTypeDTO.setRewardContent("Reward Type 1 Content");
+		rewardTypeDTO.setReward(rewardDTO);
 		// Set other properties of the rewardTypeDTO
 
 		// Create reward option DTO
@@ -197,7 +200,7 @@ class FundingmateApplicationTests {
 	@Test
 	void insertRewardComment() {
 		Long rewardId = 1L;
-		Long userId = 3L;
+		Long userId = 1L;
 
 		Optional<User> userOptional = userRepository.findById(userId);
 		if (userOptional.isEmpty()) {

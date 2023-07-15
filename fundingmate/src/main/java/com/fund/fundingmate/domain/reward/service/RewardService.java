@@ -130,7 +130,7 @@ public class RewardService {
             reward.setRepfile(repFile);
         }
 
-        reward.setProjKeyWord(rewardDTO.getProjKeyword());
+        reward.setProjKeyWord(rewardDTO.getProjKeyWord());
         reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
 
         FileDTO confileDTO = rewardDTO.getConFile();
@@ -194,12 +194,10 @@ public class RewardService {
             rewardType.setRewardAvailableCount(rewardTypeDTO.getRewardAvailableCount());
             rewardType.setRewardTitle(rewardTypeDTO.getRewardTitle());
             rewardType.setRewardContent(rewardTypeDTO.getRewardContent());
-            rewardType.setRewardDeliveryDate(rewardTypeDTO.getRewardDeliveryDate());
             rewardType.setRewardShipAddress(rewardTypeDTO.getRewardShipAddress());
 
-            RewardOptionDTO rewardOptionDTO = rewardTypeDTO.getRewardOption();
-            RewardOption rewardOption = convertToRewardOption(rewardOptionDTO);
-            rewardType.setRewardOption(rewardOption);
+            List<RewardOption> rewardOptions = convertToRewardOptions(rewardTypeDTO.getRewardOption());
+            rewardType.setRewardOptions(rewardOptions);
 
             rewardTypes.add(rewardType);
         }
@@ -209,11 +207,15 @@ public class RewardService {
 
     private RewardOption convertToRewardOption(RewardOptionDTO rewardOptionDTO) {
         RewardOption rewardOption = new RewardOption();
-
         rewardOption.setRewardOptName(rewardOptionDTO.getRewardOptName());
         rewardOption.setGetRewardOptCon(rewardOptionDTO.getRewardOptCon());
         return rewardOption;
     }
+
+    private List<RewardOption> convertToRewardOptions(RewardOptionDTO rewardOptionDTO) {
+        return Collections.singletonList(convertToRewardOption(rewardOptionDTO));
+    }
+
 
     private RewardDTO convertToRewardDTO(Reward reward) {
         RewardDTO rewardDTO = new RewardDTO();
@@ -230,7 +232,7 @@ public class RewardService {
             rewardDTO.setRepFile(repFileDTO);
         }
 
-        rewardDTO.setProjKeyword(reward.getProjKeyWord());
+        rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
 
         if (reward.getConfile() != null) {
@@ -309,6 +311,18 @@ public class RewardService {
 
         return rewards.stream()
                 .map(reward -> modelMapper.map(reward, RewardDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<RewardTypeDTO> getRewardTypesByRewardId(Long rewardId) {
+        Optional<Reward> optionalReward = rewardRepository.findById(rewardId);
+        if (optionalReward.isEmpty()) {
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardId);
+        }
+        Reward reward = optionalReward.get();
+        List<RewardType> rewardTypes = reward.getRewardTypes();
+        return rewardTypes.stream()
+                .map(rewardType -> modelMapper.map(rewardType, RewardTypeDTO.class))
                 .collect(Collectors.toList());
     }
 }

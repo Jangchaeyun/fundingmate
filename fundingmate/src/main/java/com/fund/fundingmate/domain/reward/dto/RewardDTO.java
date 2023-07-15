@@ -20,7 +20,7 @@ public class RewardDTO {
     private LocalDate projDateEnd;
     private LocalDate deliveryDate;
     private FileDTO repFile;
-    private String projKeyword;
+    private String projKeyWord;
     private String rewardVideoAddress;
     private FileDTO conFile;
     private String projContent;

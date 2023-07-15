@@ -106,6 +106,6 @@ public class Reward {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reward")
     private List<RewardType> rewardTypes;
 }

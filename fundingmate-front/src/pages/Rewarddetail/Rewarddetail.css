@@ -44,6 +44,7 @@
 .sub_img2 {
   width: 100px;
   height: 52.583px;
+  margin-right: 10px;
 }
 
 .desc_content {
@@ -451,7 +452,7 @@
   padding-left: 302px;
   margin-bottom: 2%;
   margin-top: 5%;
-  width: 49.4%;
+  width: 463px;
 }
 
 .guide_title {
@@ -490,6 +491,7 @@
 
 .guide_infos {
   margin-left: 17%;
+  margin-right: 192px;
 }
 
 .text {

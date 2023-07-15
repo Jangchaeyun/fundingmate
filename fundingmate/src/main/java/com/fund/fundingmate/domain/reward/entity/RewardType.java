@@ -1,10 +1,13 @@
 package com.fund.fundingmate.domain.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fund.fundingmate.domain.reward.entity.Reward;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reward_type")
@@ -13,7 +16,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class    RewardType {
+public class RewardType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,19 +31,21 @@ public class    RewardType {
 
     private String rewardContent;
 
-    private String rewardDeliveryDate;
 
     private Boolean rewardShipAddress;
 
     @ManyToOne
     @JoinColumn(name = "reward_no")
+    @JsonBackReference
     private Reward reward;
 
-    @OneToOne(mappedBy = "rewardType", cascade = CascadeType.ALL)
-    private RewardOption rewardOption;
+    @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL)
+    private List<RewardOption> rewardOptions;
 
-    public void setRewardOption(RewardOption rewardOption) {
-        this.rewardOption = rewardOption;
-        rewardOption.setRewardType(this);
+    public void setRewardOptions(List<RewardOption> rewardOptions) {
+        this.rewardOptions = rewardOptions;
+        for (RewardOption rewardOption : rewardOptions) {
+            rewardOption.setRewardType(this);
+        }
     }
 }
