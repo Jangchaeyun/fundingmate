@@ -31,7 +31,7 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="investRepImgSavedName_img")
     private File investRepImgSavedName;
 
@@ -51,9 +51,12 @@ public class Investment {
 
     private String investVideoUrl;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+  /*  @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="investContentImgSavedName_img")
-    private File investContentImgSavedName;
+    private List<File> investContentImgSavedName;*/
+
+    @OneToMany(mappedBy = "investContentImgSavedName", cascade = CascadeType.ALL)
+    private List<File> investContentImgSavedName;
 
     private String investItemIntro;
 

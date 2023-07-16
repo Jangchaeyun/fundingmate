@@ -18,5 +18,19 @@ public class FileDTO {
 //    private String fileOriginalName;
 //    private String filePath;
 //    private String fileSize;
+
+    private String fileSavedName;
+    private String fileOriginalName;
+    private String filePath;
+    private String fileSize;
+
     private Date fileRegistrationDate;
+    private byte[] fileData;
+
+    public void setFileData(byte[] fileBytes) {
+    }
+
+    public byte[] getFileData() {
+        return fileData;
+    }
 }

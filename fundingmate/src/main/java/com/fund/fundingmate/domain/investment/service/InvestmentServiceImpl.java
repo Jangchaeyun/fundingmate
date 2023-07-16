@@ -1,5 +1,5 @@
 package com.fund.fundingmate.domain.investment.service;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.investment.entity.Investment;
@@ -15,7 +15,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Base64;
+import java.io.IOException;
 import java.util.*;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 @Service
 @Transactional
 public class InvestmentServiceImpl implements InvestmentService {
@@ -33,7 +42,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     @Autowired
     private FileRepository fileRepository;
 
-    @Override
+   /* @Override
     public void createInvestment(InvestmentDTO investmentDTO, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
@@ -66,10 +75,72 @@ public class InvestmentServiceImpl implements InvestmentService {
         investment.setUser(user);
 
         investmentRepository.save(investment);
+    }*/
+
+
+   /* @Override
+    public void createInvestment(InvestmentDTO investmentDTO, Long userId) {
+        Investment investment = convertToInvestment(investmentDTO);
+
+        // 파일 저장
+        File investRepImgSavedName = convertToFile(investmentDTO.getInvestRepImgSavedName());
+        investRepImgSavedName = fileRepository.save(investRepImgSavedName);
+        investment.setInvestRepImgSavedName(investRepImgSavedName);
+
+        File investIdBusinessLicenseImgSavedName = convertToFile(investmentDTO.getInvestIdBusinessLicenseImgSavedName());
+        investIdBusinessLicenseImgSavedName = fileRepository.save(investIdBusinessLicenseImgSavedName);
+        investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
+
+        File investBankAccountCopyImgSavedName = convertToFile(investmentDTO.getInvestBankAccountCopyImgSavedName());
+        investBankAccountCopyImgSavedName = fileRepository.save(investBankAccountCopyImgSavedName);
+        investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
+
+        List<File> investContentImgSavedNames = new ArrayList<>();
+        for (FileDTO fileDTO : investmentDTO.getInvestContentImgSavedName()) {
+            File investContentImgSavedName = convertToFile(fileDTO);
+            investContentImgSavedName = fileRepository.save(investContentImgSavedName);
+            investContentImgSavedNames.add(investContentImgSavedName);
+        }
+        investment.setInvestContentImgSavedName(investContentImgSavedNames);
+
+
+
+        investmentRepository.save(investment);
+    }*/
+   @Override
+   public void createInvestment(InvestmentDTO investmentDTO, Long userId) throws IOException {
+       Investment investment = convertToInvestment(investmentDTO);
+       MultipartFile investRepImgSavedNameFile = convertToMultipartFile(investmentDTO.getInvestRepImgSavedName());
+       File investRepImgSavedName = convertToFile(investRepImgSavedNameFile);
+       investRepImgSavedName = fileRepository.save(investRepImgSavedName);
+       investment.setInvestRepImgSavedName(investRepImgSavedName);
+
+       // investIdBusinessLicenseImgSavedName 및 investBankAccountCopyImgSavedName에 대해서도 동일한 방식으로 처리
+
+       investmentRepository.save(investment);
+   }
+
+    /*  private MultipartFile convertToMultipartFile(FileDTO fileDTO) throws IOException {
+        if (fileDTO == null) {
+            return null;
+        }
+
+        // MultipartFile 객체 생성
+        InputStream inputStream = new ByteArrayInputStream(fileDTO.getFileData());
+        String filename = fileDTO.getFileName(); // 파일 이름이 문자열로 반환되어야 함
+
+        return new MockMultipartFile(filename, inputStream);
+    }*/
+    private MultipartFile convertToMultipartFile(FileDTO fileDTO) throws IOException {
+        if (fileDTO == null) {
+            return null;
+        }
+
+        // MultipartFile 객체 생성
+        byte[] fileBytes = Base64.getDecoder().decode(fileDTO.getFileData());
+        return new MockMultipartFile(fileDTO.getFileName(), new ByteArrayInputStream(fileBytes));
     }
-
-
-    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
+    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) throws IOException {
         User user = convertToUser(userDTO);
         userRepository.save(user);
 
@@ -87,7 +158,7 @@ public class InvestmentServiceImpl implements InvestmentService {
         return user;
     }
 
-    private File converToFile(FileDTO fileDTO) {
+  /*  private File converToFile(FileDTO fileDTO) {
         if (fileDTO == null) {
             return null;
         }
@@ -98,8 +169,43 @@ public class InvestmentServiceImpl implements InvestmentService {
         file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
         return file;
     }
+*/
+  /*private File convertToFile(MultipartFile multipartFile) throws IOException {
+      if (multipartFile == null) {
+          return null;
+      }
 
-    private Investment convertToInvestment(InvestmentDTO investmentDTO) {
+      File file = new File();
+      file.setFileName(multipartFile.getOriginalFilename());
+      file.setFileRegistrationDate(new Date());
+
+      // java.util.Base64 클래스 사용
+      byte[] fileBytes = Base64.getDecoder().decode(multipartFile.getBytes());
+      file.setFileData(fileBytes);
+
+      return file;
+  }*/
+
+
+    private File convertToFile(MultipartFile multipartFile) throws IOException {
+        if (multipartFile == null) {
+            return null;
+        }
+
+        File file = new File();
+        file.setFileName(multipartFile.getOriginalFilename());
+        file.setFileRegistrationDate(new Date());
+
+        // 파일 데이터를 바이트 배열로 변환하여 설정
+        byte[] fileBytes = multipartFile.getBytes();
+        file.setFileData(fileBytes);
+
+        return file;
+    }
+
+
+
+    private Investment convertToInvestment(InvestmentDTO investmentDTO) throws IOException {
         Investment investment = new Investment();
         investment.setInvestCategory(investmentDTO.getInvestCategory());
         investment.setInvestProjName(investmentDTO.getInvestProjName());
@@ -109,7 +215,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
         FileDTO ibacisnFileDTO = investmentDTO.getInvestBankAccountCopyImgSavedName();
         if (ibacisnFileDTO != null) {
-            File investBankAccountCopyImgSavedName = converToFile(ibacisnFileDTO);
+            File investBankAccountCopyImgSavedName = convertToFile(ibacisnFileDTO);
             investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
         }
 
@@ -118,7 +224,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
         FileDTO iiblisnDTO = investmentDTO.getInvestIdBusinessLicenseImgSavedName();
         if (iiblisnDTO != null) {
-            File investIdBusinessLicenseImgSavedName = converToFile(iiblisnDTO);
+            File investIdBusinessLicenseImgSavedName = convertToFile(iiblisnDTO);
             investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
         }
 
@@ -136,7 +242,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
         FileDTO irisnDTO = investmentDTO.getInvestRepImgSavedName();
         if (irisnDTO != null) {
-            File investRepImgSavedName = converToFile(irisnDTO);
+            File investRepImgSavedName = convertToFile(irisnDTO);
             investment.setInvestRepImgSavedName(investRepImgSavedName);
         }
 
@@ -146,9 +252,13 @@ public class InvestmentServiceImpl implements InvestmentService {
         investment.setAccNumber(investmentDTO.getAccNumber());
         investment.setDepositorName(investmentDTO.getDepositorName());
 
-        FileDTO ciisnDTO = investmentDTO.getInvestContentImgSavedName();
-        if (ciisnDTO != null) {
-            File investContentImgSavedName = converToFile(ciisnDTO);
+        List<FileDTO> investContentImgSavedNameList = investmentDTO.getInvestContentImgSavedName();
+        if (investContentImgSavedNameList != null && !investContentImgSavedNameList.isEmpty()) {
+            List<File> investContentImgSavedName = new ArrayList<>();
+            for (FileDTO fileDTO : investContentImgSavedNameList) {
+                File investContentImg = convertToFile(fileDTO);
+                investContentImgSavedName.add(investContentImg);
+            }
             investment.setInvestContentImgSavedName(investContentImgSavedName);
         }
 
@@ -170,7 +280,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-  /*  private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+    private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
         List<InvestType> investTypes = new ArrayList<>();
         for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
             InvestType investType = new InvestType();
@@ -181,24 +291,25 @@ public class InvestmentServiceImpl implements InvestmentService {
             investTypes.add(investType);
         }
         return investTypes;
-    }*/
-
-    private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
-        List<InvestType> investTypes = new ArrayList<>();
-        if (investTypeDTOs != null) {
-            for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
-                InvestType investType = new InvestType();
-                investType.setInvestAmount(investTypeDTO.getInvestAmount());
-                investType.setInvestLimit(investTypeDTO.getInvestLimit());
-                investType.setInvestLimitCount(investTypeDTO.getInvestLimitCount());
-
-                investTypes.add(investType);
-            }
-        }
-        return investTypes;
     }
 
-    private InvestmentDTO convertToInvestDTO(Investment investment) {
+    private File convertToFile(FileDTO fileDTO) throws IOException {
+        if (fileDTO == null) {
+            return null;
+        }
+
+        File file = new File();
+        file.setFileName(fileDTO.getFileName());
+        file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
+
+        // 파일 데이터를 바이트 배열로 변환하여 설정
+        byte[] fileBytes = Base64.getDecoder().decode(fileDTO.getFileData());
+        file.setFileData(fileBytes);
+
+        return file;
+    }
+
+  /*  private InvestmentDTO convertToInvestDTO(Investment investment) {
         InvestmentDTO investmentDTO = new InvestmentDTO();
         investmentDTO.setId(investment.getId());
         investmentDTO.setInvestProjName(investment.getInvestProjName());
@@ -259,7 +370,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
         return investmentDTO;
     }
-
+*/
 
     public Map<String, Object> getInvestmentById(Long investmentId) {
         Map<String, Object> map = new HashMap<>();

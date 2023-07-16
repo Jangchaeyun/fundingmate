@@ -30,7 +30,7 @@ const MakeInvest1 = () => {
       }
     } else {
       setTotInfo({
-        rewardCategory: "",
+        investCategory: "",
         investTargetAmount: 0,
         investProjName: "",
         investRepImgSavedName: null,
@@ -157,9 +157,9 @@ const MakeInvest1 = () => {
         </p>
         <select
           className="makeReward-option"
-          name="rewardCategory"
+          name="investCategory"
           onChange={handleInputChange}
-          value={totInfo.rewardCategory}
+          value={totInfo.investCategory}
         >
           <option value="none">카테고리를 선택해주세요.</option>
           <option value="테크/가전">테크/가전</option>

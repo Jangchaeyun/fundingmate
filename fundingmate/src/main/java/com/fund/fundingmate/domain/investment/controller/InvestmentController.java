@@ -3,13 +3,25 @@ package com.fund.fundingmate.domain.investment.controller;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.global.file.Service.FileService;
+import com.fund.fundingmate.global.file.dto.FileDTO;
+import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.StandardOpenOption;
+
 import javax.servlet.http.HttpSession;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class InvestmentController {
@@ -85,6 +97,7 @@ public class InvestmentController {
        }
    }*/
 
+/*
     @PostMapping("/make-invest/hostinfo")
     public ResponseEntity<InvestmentDTO> createInvestment(@RequestBody InvestmentDTO investmentDTO , @RequestParam("userId") Long userId) {
         try {
@@ -100,7 +113,77 @@ public class InvestmentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+*/
 
+   /* @PostMapping("/make-invest/hostinfo")
+    public ResponseEntity<InvestmentDTO> createInvestment(@RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
+        try {
+            // Base64 문자열을 List<FileDTO> 객체로 변환하여 설정
+            List<FileDTO> fileDTOList = new ArrayList<>();
+            if (investmentDTO.getInvestContentImgSavedName() != null) {
+                for (FileDTO base64Data : investmentDTO.getInvestContentImgSavedName()) {
+                    if (base64Data.getFileData() != null) {
+                        byte[] fileBytes = Base64.decodeBase64(base64Data.getFileData());
+                        FileDTO fileDTO = new FileDTO();
+                        fileDTO.setFileData(fileBytes);
+                        fileDTOList.add(fileDTO);
+                    }
+                }
+            }
+            investmentDTO.setInvestContentImgSavedName(fileDTOList); // investmentDTO에 파일 정보 설정
+
+            // 개별 파일 처리
+            // 개별 파일 처리
+           *//* MultipartFile investRepImgSavedNameFile = convertToFile(investmentDTO.getInvestRepImgSavedName());
+            File savedInvestRepImgSavedName = fileService.saveFile(null, investRepImgSavedNameFile);
+            investmentDTO.setInvestRepImgSavedName(modelMapper.map(savedInvestRepImgSavedName, FileDTO.class));
+
+            MultipartFile investIdBusinessLicenseImgSavedNameFile = convertToFile(investmentDTO.getInvestIdBusinessLicenseImgSavedName());
+            File savedInvestIdBusinessLicenseImgSavedName = fileService.saveFile(null, investIdBusinessLicenseImgSavedNameFile);
+            investmentDTO.setInvestIdBusinessLicenseImgSavedName(modelMapper.map(savedInvestIdBusinessLicenseImgSavedName, FileDTO.class));
+
+            MultipartFile investBankAccountCopyImgSavedNameFile = convertToFile(investmentDTO.getInvestBankAccountCopyImgSavedName());
+            File savedInvestBankAccountCopyImgSavedName = fileService.saveFile(null, investBankAccountCopyImgSavedNameFile);
+            investmentDTO.setInvestBankAccountCopyImgSavedName(modelMapper.map(savedInvestBankAccountCopyImgSavedName, FileDTO.class));
+*//*
+            investmentService.createInvestment(investmentDTO, userId);
+
+            InvestmentDTO createdInvestment = (InvestmentDTO) investmentService.getInvestmentById(investmentDTO.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+*/
+
+    @PostMapping("/make-invest/hostinfo")
+    public ResponseEntity<InvestmentDTO> createInvestment(@RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
+        try {
+            // Base64 문자열을 List<FileDTO> 객체로 변환하여 설정
+            List<FileDTO> fileDTOList = new ArrayList<>();
+            if (investmentDTO.getInvestContentImgSavedName() != null) {
+                for (FileDTO base64Data : investmentDTO.getInvestContentImgSavedName()) {
+                    if (base64Data.getFileData() != null) {
+                        byte[] fileBytes = Base64.decodeBase64(base64Data.getFileData());
+                        FileDTO fileDTO = new FileDTO();
+                        fileDTO.setFileData(fileBytes);
+                        fileDTOList.add(fileDTO);
+                    }
+                }
+            }
+            investmentDTO.setInvestContentImgSavedName(fileDTOList); // investmentDTO에 파일 정보 설정
+
+            investmentService.createInvestment(investmentDTO, userId);
+
+            Map<String, Object> investmentMap = investmentService.getInvestmentById(investmentDTO.getId());
+            InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @GetMapping("/invest-detail/story/{investmentId}")
     public ResponseEntity<Map<String, Object>> getInvestmentById(@PathVariable("investmentId") Long investmentId) {

@@ -1,6 +1,7 @@
 package com.fund.fundingmate.global.file.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.reward.entity.Reward;
 import lombok.*;
 
@@ -22,6 +23,13 @@ public class File {
 
     @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
     private List<Reward> fundingimg;
+  /*  @ManyToOne(mappedBy = "investContentImgSavedName", cascade = CascadeType.ALL)
+    private Investment investimg;*/
+
+
+    @ManyToOne
+    @JoinColumn(name = "investContentImgSavedName_id")
+    private Investment investContentImgSavedName;
 
     private String fileName;
 //
@@ -31,5 +39,10 @@ public class File {
 //
 //    private String fileSize;
 //
+
+
     private Date fileRegistrationDate;
+
+    public void setFileData(byte[] fileBytes) {
+    }
 }
