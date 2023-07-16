@@ -133,10 +133,25 @@ const MakeInvest5 = () => {
     // const investTypes = [];
     // investTypes = totInfo.cards[0].join(",");
     // console.log(investTypes);
+    const convertToFilesDTO = (files) => {
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
+      }
+
+      return {
+        fileId: null,
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null,
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
+      };
+    };
+
     const requestData = {
       ...totInfo,
       investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
-      //investContentImgSavedName
+      investContentImgSavedName: convertToFilesDTO(
+        totInfo.investContentImgSavedName
+      ), // investContentImgSavedName 필드를 단일 객체로 변환하여 할당
     };
     axios
       .post("http://localhost:8090/make-invest/hostinfo", requestData, {

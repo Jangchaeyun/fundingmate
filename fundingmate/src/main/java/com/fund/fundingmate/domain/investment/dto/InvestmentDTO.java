@@ -19,8 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String investCategory;
@@ -52,7 +51,7 @@ public class InvestmentDTO {
 
     private String investVideoUrl;
 
-    private List<FileDTO> investContentImgSavedName;
+    private FileDTO investContentImgSavedName;
 
     private String investItemIntro;
 

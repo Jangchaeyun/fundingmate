@@ -83,7 +83,7 @@ public class FileService {
 
 
 
-    public List<FileDTO> listSaveFiles(List<MultipartFile> multipartFiles) throws IOException {
+    /*public List<FileDTO> listSaveFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<FileDTO> savedFiles = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             String originalFileName = multipartFile.getOriginalFilename();
@@ -112,11 +112,11 @@ public class FileService {
         }
         return savedFiles;
     }
+*/
 
-
-    private String listGenetateUniqueFileName(String originalFilename) {
+    /*private String listGenetateUniqueFileName(String originalFilename) {
         long timestamp = System.currentTimeMillis();
         return timestamp + "-" + originalFilename;
-    }
+    }*/
 
 }

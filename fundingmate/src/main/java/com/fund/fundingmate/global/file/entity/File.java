@@ -26,10 +26,10 @@ public class File {
   /*  @ManyToOne(mappedBy = "investContentImgSavedName", cascade = CascadeType.ALL)
     private Investment investimg;*/
 
-
+/*
     @ManyToOne
     @JoinColumn(name = "investContentImgSavedName_id")
-    private Investment investContentImgSavedName;
+    private Investment investContentImgSavedName;*/
 
     private String fileName;
 //
@@ -39,15 +39,15 @@ public class File {
 //
 //    private String fileSize;
 //
-private byte[] fileData;
+/*private byte[] fileData;*/
 
     private Date fileRegistrationDate;
-    public void setFileData(byte[] fileData) {
+ /*   public void setFileData(byte[] fileData) {
         this.fileData = fileData;
     }
 
     public byte[] getFileData() {
         return fileData;
-    }
+    }*/
 
 }

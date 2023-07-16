@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public interface InvestmentService {
-   public void createInvestment(InvestmentDTO investmentDto, Long userId) throws IOException;
+/*   public void createInvestment(InvestmentDTO investmentDto, Long userId) throws IOException;
    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) throws IOException;
+   public Map<String, Object> getInvestmentById(Long investmentId);*/
+public void createInvestment(InvestmentDTO investmentDto, Long userId);
+   public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO);
    public Map<String, Object> getInvestmentById(Long investmentId);
-
 }
