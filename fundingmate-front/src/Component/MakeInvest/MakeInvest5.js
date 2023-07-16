@@ -8,7 +8,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined
+  TwitterOutlined,
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -127,16 +127,26 @@ const MakeInvest5 = () => {
   };
   const [userId, setUserId] = useState(null);
   const handleNextStep = () => {
-    console.log(totInfo);
+    // console.log(totInfo);
+    // console.log(totInfo.cards);
+    // console.log(totInfo.cards.join(","));
+    // const investTypes = [];
+    // investTypes = totInfo.cards[0].join(",");
+    // console.log(investTypes);
+    const requestData = {
+      ...totInfo,
+      investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
+      //investContentImgSavedName
+    };
     axios
-      .post("http://localhost:8090/make-invest/hostinfo", totInfo, {
-        params: { userId: 1 }
+      .post("http://localhost:8090/make-invest/hostinfo", requestData, {
+        params: { userId: 1 },
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
         alert("프로젝트가 등록되었습니다");
         navigateToStep2("/fund-detail/story", {
-          state: { totInfo: totInfo }
+          state: { totInfo: totInfo },
         });
       })
       .catch((error) => {
