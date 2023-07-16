@@ -3,21 +3,24 @@ package com.fund.fundingmate.domain.investment.dto;
 import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.global.file.dto.FileDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestmentDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String investCategory;

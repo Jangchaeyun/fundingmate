@@ -39,10 +39,15 @@ public class File {
 //
 //    private String fileSize;
 //
-
+private byte[] fileData;
 
     private Date fileRegistrationDate;
-
-    public void setFileData(byte[] fileBytes) {
+    public void setFileData(byte[] fileData) {
+        this.fileData = fileData;
     }
+
+    public byte[] getFileData() {
+        return fileData;
+    }
+
 }

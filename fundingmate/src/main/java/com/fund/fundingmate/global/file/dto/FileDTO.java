@@ -28,6 +28,7 @@ public class FileDTO {
     private byte[] fileData;
 
     public void setFileData(byte[] fileBytes) {
+        this.fileData = fileBytes;
     }
 
     public byte[] getFileData() {

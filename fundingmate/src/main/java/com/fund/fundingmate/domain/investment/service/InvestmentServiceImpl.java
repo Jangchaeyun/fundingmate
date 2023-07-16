@@ -109,12 +109,13 @@ public class InvestmentServiceImpl implements InvestmentService {
     }*/
    @Override
    public void createInvestment(InvestmentDTO investmentDTO, Long userId) throws IOException {
+       System.out.println("create:"+ investmentDTO);
        Investment investment = convertToInvestment(investmentDTO);
-       MultipartFile investRepImgSavedNameFile = convertToMultipartFile(investmentDTO.getInvestRepImgSavedName());
+ /*      MultipartFile investRepImgSavedNameFile = convertToMultipartFile(investmentDTO.getInvestRepImgSavedName());
        File investRepImgSavedName = convertToFile(investRepImgSavedNameFile);
        investRepImgSavedName = fileRepository.save(investRepImgSavedName);
        investment.setInvestRepImgSavedName(investRepImgSavedName);
-
+*/
        // investIdBusinessLicenseImgSavedName 및 investBankAccountCopyImgSavedName에 대해서도 동일한 방식으로 처리
 
        investmentRepository.save(investment);
@@ -204,8 +205,8 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-
     private Investment convertToInvestment(InvestmentDTO investmentDTO) throws IOException {
+        System.out.println(investmentDTO);
         Investment investment = new Investment();
         investment.setInvestCategory(investmentDTO.getInvestCategory());
         investment.setInvestProjName(investmentDTO.getInvestProjName());
@@ -281,6 +282,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
 
     private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+        System.out.println(investTypeDTOs);
         List<InvestType> investTypes = new ArrayList<>();
         for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
             InvestType investType = new InvestType();
@@ -291,9 +293,10 @@ public class InvestmentServiceImpl implements InvestmentService {
             investTypes.add(investType);
         }
         return investTypes;
+
     }
 
-    private File convertToFile(FileDTO fileDTO) throws IOException {
+  /*  private File convertToFile(FileDTO fileDTO) throws IOException {
         if (fileDTO == null) {
             return null;
         }
@@ -307,8 +310,26 @@ public class InvestmentServiceImpl implements InvestmentService {
         file.setFileData(fileBytes);
 
         return file;
-    }
+    }*/
 
+
+
+    private File convertToFile(FileDTO fileDTO) throws IOException {
+        if (fileDTO == null) {
+            return null;
+        }
+
+        File file = new File();
+        file.setFileName(fileDTO.getFileName());
+        file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
+
+        byte[] fileData = fileDTO.getFileData();
+        if (fileData != null) {
+            file.setFileData(fileData);
+        }
+
+        return file;
+    }
   /*  private InvestmentDTO convertToInvestDTO(Investment investment) {
         InvestmentDTO investmentDTO = new InvestmentDTO();
         investmentDTO.setId(investment.getId());

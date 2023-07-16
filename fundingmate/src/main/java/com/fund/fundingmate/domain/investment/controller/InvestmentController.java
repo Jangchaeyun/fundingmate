@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.investment.controller;
 
+import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.global.file.Service.FileService;
@@ -158,10 +159,14 @@ public class InvestmentController {
 */
 
     @PostMapping("/make-invest/hostinfo")
-    public ResponseEntity<InvestmentDTO> createInvestment(@RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
+    public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
         try {
+
+            System.out.println(investmentDTO);
+            System.out.println(investmentDTO.getInvestTypes());
+
             // Base64 문자열을 List<FileDTO> 객체로 변환하여 설정
-            List<FileDTO> fileDTOList = new ArrayList<>();
+          /*  List<FileDTO> fileDTOList = new ArrayList<>();
             if (investmentDTO.getInvestContentImgSavedName() != null) {
                 for (FileDTO base64Data : investmentDTO.getInvestContentImgSavedName()) {
                     if (base64Data.getFileData() != null) {
@@ -172,7 +177,7 @@ public class InvestmentController {
                     }
                 }
             }
-            investmentDTO.setInvestContentImgSavedName(fileDTOList); // investmentDTO에 파일 정보 설정
+            investmentDTO.setInvestContentImgSavedName(fileDTOList); // investmentDTO에 파일 정보 설정*/
 
             investmentService.createInvestment(investmentDTO, userId);
 
