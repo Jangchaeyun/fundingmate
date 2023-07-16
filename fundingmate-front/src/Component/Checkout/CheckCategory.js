@@ -39,6 +39,10 @@ const CheckCategory = () => {
     }
   };
 
+  const handleCheckoutClick = (rewardTypeId) => {
+    navigate(`/reward-checkout/${rewardId}/${rewardTypeId}`);
+  };
+
   return (
     <div className="rew_check_category checkout">
       <div className="rew_check_header">{reward && reward.projName}</div>
@@ -47,7 +51,9 @@ const CheckCategory = () => {
       <h1 className="rew_title">리워드 선택</h1>
       {rewardTypes.map((rewardType) => (
         <div className="rew_category_card" key={rewardType.id}>
-          <h1 className="rew_price">{rewardType.rewardAmount}원</h1>
+          <h1 className="rew_price">
+            {rewardType.rewardAmount.toLocaleString()}원
+          </h1>
           <div className="rew_sub_content">
             <div className="rew_count">
               {rewardType.rewardAvailableLimit ? "제한" : "무제한"} |
@@ -59,9 +65,7 @@ const CheckCategory = () => {
           </div>
           <div
             className="right"
-            onClick={() => {
-              navigate(`/reward-checkout/${rewardId}`);
-            }}
+            onClick={() => handleCheckoutClick(rewardType.id)}
           >
             <CaretRightOutlined />
           </div>

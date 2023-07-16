@@ -8,6 +8,7 @@ import com.fund.fundingmate.domain.reward.entity.RewardOption;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.repository.RewardFindRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
+import com.fund.fundingmate.domain.reward.repository.RewardTypeRepository;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
@@ -45,6 +46,9 @@ public class RewardService {
 
     @Autowired
     private FileRepository fileRepository;
+
+    @Autowired
+    private RewardTypeRepository rewardTypeRepository;
 
     @Autowired
     public RewardService(RewardRepository rewardRepository, UserRepository userRepository, ModelMapper modelMapper) {
@@ -324,5 +328,13 @@ public class RewardService {
         return rewardTypes.stream()
                 .map(rewardType -> modelMapper.map(rewardType, RewardTypeDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public RewardTypeDTO getRewardTypeById(Long rewardTypeId) {
+        Optional<RewardType> optionalRewardType = rewardTypeRepository.findById(rewardTypeId);
+        if (optionalRewardType.isEmpty()) {
+            throw new IllegalArgumentException("Reward type not found with ID: " + rewardTypeId);
+        }
+        return modelMapper.map(optionalRewardType.get(), RewardTypeDTO.class);
     }
 }

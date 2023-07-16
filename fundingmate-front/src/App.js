@@ -91,7 +91,7 @@ function App() {
           />
           <Route
             exact
-            path="/reward-checkout/:rewardId"
+            path="/reward-checkout/:rewardId/:rewardTypeId"
             element={<Checkout />}
           />
           <Route

@@ -24,13 +24,12 @@ public class PaymentService {
         payment.setId(paymentDTO.getId());
         payment.setCardnumber(paymentDTO.getCardnumber());
         payment.setCardpassword(paymentDTO.getCardpassword());
-        payment.setPaymentcode(paymentDTO.getPaymentcode());
         payment.setPaymentamount(paymentDTO.getPaymentamount());
         payment.setPayenddate(paymentDTO.getPayenddate());
         payment.setBirthday(paymentDTO.getBirthday());
         payment.setPayperiod(paymentDTO.getPayperiod());
         payment.setShippingadress(paymentDTO.getShippingadress());
-        payment.setShippingaddressdesc(paymentDTO.getShippingadressdesc());
+        payment.setShippingaddressdesc(paymentDTO.getShippingaddressdesc());
 
         User user = userRepository.findById(paymentDTO.getUser().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
