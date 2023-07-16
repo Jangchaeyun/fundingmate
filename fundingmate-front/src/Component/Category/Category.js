@@ -1,12 +1,9 @@
 import React from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-import "swiper/components/pagination/pagination.min.css";
-import "swiper/components/scrollbar/scrollbar.min.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "../../pages/Category/Category.css";
 
 const Category = () => {
@@ -17,7 +14,7 @@ const Category = () => {
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={6}
           slidesPerView={10}
-          navigation
+          navigation={true}
         >
           <SwiperSlide>
             <div className="category_card">

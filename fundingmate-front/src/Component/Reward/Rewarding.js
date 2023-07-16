@@ -55,6 +55,10 @@ const Rewarding = () => {
     }
   };
 
+  const handleRewardClick = (rewardId) => {
+    navigate(`/reward-detail/story/${rewardId}`);
+  };
+
   const numVisibleRewards = Math.min(visibleRewards, rewardingRewards.length);
   const visibleRewardCards = rewardingRewards.slice(0, numVisibleRewards);
 
@@ -69,9 +73,7 @@ const Rewarding = () => {
           <div
             className="reward_card"
             key={reward.id}
-            onClick={() => {
-              navigate(`reward-detail/story/${reward.id}`);
-            }}
+            onClick={() => handleRewardClick(reward.id)}
           >
             <img
               src={`http://localhost:8090/img/${reward.repFile.fileName}`}

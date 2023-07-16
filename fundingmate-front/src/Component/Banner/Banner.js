@@ -1,13 +1,17 @@
-import React from "react";
 import "./Banner.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper"; // 추가
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
-import "swiper/components/navigation/navigation.min.css";
-import "swiper/components/pagination/pagination.min.css";
+import {
+  A11y,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Autoplay,
+} from "swiper"; // 추가
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import SwiperCore, { EffectCoverflow, Autoplay } from "swiper";
+import SwiperCore from "swiper";
 
 function Banner() {
   SwiperCore.use([Autoplay]);

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../../pages/Reward/Reward.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Finish = () => {
   const [finishRewards, setFinishRewards] = useState([]);
   const [visibleRewards, setVisibleRewards] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFinishRewards();

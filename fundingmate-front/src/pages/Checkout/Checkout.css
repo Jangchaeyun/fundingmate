@@ -19,7 +19,6 @@ input:focus {
   outline: none;
 }
 
-
 .rew_check_info {
   background-color: var(--info);
   width: 40%;
@@ -47,7 +46,7 @@ input:focus {
   font-size: 20px;
   color: var(--main-color);
   cursor: pointer;
-  margin-top: 0%;
+  margin-bottom: 2%;
 }
 
 .rew_sub_content {
@@ -126,7 +125,7 @@ input:focus {
 }
 
 .checkout_process_text {
-  margin-left: -27px;
+  margin-left: -15px;
   margin-right: 64px;
 }
 

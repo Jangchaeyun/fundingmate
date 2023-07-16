@@ -8,6 +8,7 @@ import com.fund.fundingmate.domain.reward.entity.RewardOption;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.repository.RewardFindRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
+import com.fund.fundingmate.domain.reward.repository.RewardTypeRepository;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
@@ -45,6 +46,9 @@ public class RewardService {
 
     @Autowired
     private FileRepository fileRepository;
+
+    @Autowired
+    private RewardTypeRepository rewardTypeRepository;
 
     @Autowired
     public RewardService(RewardRepository rewardRepository, UserRepository userRepository, ModelMapper modelMapper) {
@@ -130,7 +134,7 @@ public class RewardService {
             reward.setRepfile(repFile);
         }
 
-        reward.setProjKeyWord(rewardDTO.getProjKeyword());
+        reward.setProjKeyWord(rewardDTO.getProjKeyWord());
         reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
 
         FileDTO confileDTO = rewardDTO.getConFile();
@@ -194,12 +198,10 @@ public class RewardService {
             rewardType.setRewardAvailableCount(rewardTypeDTO.getRewardAvailableCount());
             rewardType.setRewardTitle(rewardTypeDTO.getRewardTitle());
             rewardType.setRewardContent(rewardTypeDTO.getRewardContent());
-            rewardType.setRewardDeliveryDate(rewardTypeDTO.getRewardDeliveryDate());
             rewardType.setRewardShipAddress(rewardTypeDTO.getRewardShipAddress());
 
-            RewardOptionDTO rewardOptionDTO = rewardTypeDTO.getRewardOption();
-            RewardOption rewardOption = convertToRewardOption(rewardOptionDTO);
-            rewardType.setRewardOption(rewardOption);
+            List<RewardOption> rewardOptions = convertToRewardOptions(rewardTypeDTO.getRewardOption());
+            rewardType.setRewardOptions(rewardOptions);
 
             rewardTypes.add(rewardType);
         }
@@ -209,11 +211,15 @@ public class RewardService {
 
     private RewardOption convertToRewardOption(RewardOptionDTO rewardOptionDTO) {
         RewardOption rewardOption = new RewardOption();
-
         rewardOption.setRewardOptName(rewardOptionDTO.getRewardOptName());
         rewardOption.setGetRewardOptCon(rewardOptionDTO.getRewardOptCon());
         return rewardOption;
     }
+
+    private List<RewardOption> convertToRewardOptions(RewardOptionDTO rewardOptionDTO) {
+        return Collections.singletonList(convertToRewardOption(rewardOptionDTO));
+    }
+
 
     private RewardDTO convertToRewardDTO(Reward reward) {
         RewardDTO rewardDTO = new RewardDTO();
@@ -230,7 +236,7 @@ public class RewardService {
             rewardDTO.setRepFile(repFileDTO);
         }
 
-        rewardDTO.setProjKeyword(reward.getProjKeyWord());
+        rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
 
         if (reward.getConfile() != null) {
@@ -310,5 +316,25 @@ public class RewardService {
         return rewards.stream()
                 .map(reward -> modelMapper.map(reward, RewardDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public List<RewardTypeDTO> getRewardTypesByRewardId(Long rewardId) {
+        Optional<Reward> optionalReward = rewardRepository.findById(rewardId);
+        if (optionalReward.isEmpty()) {
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardId);
+        }
+        Reward reward = optionalReward.get();
+        List<RewardType> rewardTypes = reward.getRewardTypes();
+        return rewardTypes.stream()
+                .map(rewardType -> modelMapper.map(rewardType, RewardTypeDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public RewardTypeDTO getRewardTypeById(Long rewardTypeId) {
+        Optional<RewardType> optionalRewardType = rewardTypeRepository.findById(rewardTypeId);
+        if (optionalRewardType.isEmpty()) {
+            throw new IllegalArgumentException("Reward type not found with ID: " + rewardTypeId);
+        }
+        return modelMapper.map(optionalRewardType.get(), RewardTypeDTO.class);
     }
 }

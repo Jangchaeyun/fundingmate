@@ -19,8 +19,6 @@ public class PaymentDTO {
 
     private String cardpassword;
 
-    private Boolean paymentcode;
-
     private Integer paymentamount;
 
     private String payenddate;
@@ -31,5 +29,5 @@ public class PaymentDTO {
 
     private String shippingadress;
 
-    private String shippingadressdesc;
+    private String shippingaddressdesc;
 }

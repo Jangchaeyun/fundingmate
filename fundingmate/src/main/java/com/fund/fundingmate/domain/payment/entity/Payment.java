@@ -25,8 +25,6 @@ public class Payment {
 
     private String cardpassword;
 
-    private Boolean paymentcode;
-
     private Integer paymentamount;
 
     private String payenddate;

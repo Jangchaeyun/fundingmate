@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,8 @@ public class RewardOption {
 
     private String getRewardOptCon;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reward_type_no")
+    @JsonManagedReference
     private RewardType rewardType;
 }

@@ -3,7 +3,9 @@ package com.fund.fundingmate.domain.reward.controller;
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
+import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
 import com.fund.fundingmate.global.file.Service.FileService;
@@ -209,4 +211,35 @@ public class RewardController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/reward/rewardcheckout/check/{rewardId}")
+    public ResponseEntity<List<RewardTypeDTO>> getRewardTypesByRewardId(@PathVariable("rewardId") Long rewardId) {
+        try {
+            List<RewardTypeDTO> rewardTypes = rewardService.getRewardTypesByRewardId(rewardId);
+            return ResponseEntity.ok(rewardTypes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/reward/rewardcheckout/checktype/{rewardId}/{rewardTypeId}")
+    public ResponseEntity<RewardTypeDTO> getRewardTypeId(@PathVariable("rewardId") Long rewardId, @PathVariable("rewardTypeId") Long rewardTypeId) {
+        try {
+            RewardTypeDTO rewardType = rewardService.getRewardTypeById(rewardTypeId);
+            if (rewardType != null) {
+                return ResponseEntity.ok(rewardType);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IllegalArgumentException e) {
+            // IllegalArgumentException is thrown when reward type is not found
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            // For any other unexpected exceptions
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

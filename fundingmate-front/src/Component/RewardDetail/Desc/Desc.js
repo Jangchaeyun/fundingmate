@@ -68,7 +68,7 @@ const Desc = ({ reward }) => {
             <button
               className="fund_btn"
               onClick={() => {
-                navigate("/checkout/check");
+                navigate(`/checkout/check/${reward.id}`);
               }}
             >
               펀딩하기

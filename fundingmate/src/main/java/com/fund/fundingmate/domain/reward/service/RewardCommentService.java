@@ -78,7 +78,7 @@ public class RewardCommentService {
         rewardDTO.setProjDateEnd(reward.getProjDateEnd());
         rewardDTO.setDeliveryDate(reward.getDeliveryDate());
         rewardDTO.setRepFile(mapToFileDTO(reward.getRepfile()));
-        rewardDTO.setProjKeyword(reward.getProjKeyWord());
+        rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
         rewardDTO.setConFile(mapToFileDTO(reward.getConfile()));
         rewardDTO.setProjContent(reward.getProjContent());
@@ -212,7 +212,6 @@ public class RewardCommentService {
             rewardTypeDTO.setRewardAvailableCount(rewardType.getRewardAvailableCount());
             rewardTypeDTO.setRewardTitle(rewardType.getRewardTitle());
             rewardTypeDTO.setRewardContent(rewardType.getRewardContent());
-            rewardTypeDTO.setRewardDeliveryDate(rewardType.getRewardDeliveryDate());
             rewardTypeDTO.setRewardShipAddress(rewardType.getRewardShipAddress());
 
             rewardTypeDTOList.add(rewardTypeDTO);
