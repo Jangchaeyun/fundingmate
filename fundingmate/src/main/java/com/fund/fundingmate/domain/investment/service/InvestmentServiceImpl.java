@@ -1,5 +1,4 @@
 package com.fund.fundingmate.domain.investment.service;
-import org.springframework.web.multipart.MultipartFile;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.investment.entity.Investment;
@@ -15,15 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Base64;
-import java.io.IOException;
 import java.util.*;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Service
 @Transactional
@@ -436,22 +428,25 @@ public class InvestmentServiceImpl implements InvestmentService {
        investment.setInvestContentImgSavedName(investContentImgSavedName);
 
        investment.setUser(user);
-
+       for(InvestType investType : investment.getInvestTypes()) {
+           investType.setInvestment(investment);
+       }
+        System.out.println(investment);
        Investment savedInvestment = investmentRepository.save(investment);
 
        return savedInvestment.getId();
    }
 
-    @Override
-    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
-        User user = convertToUser(userDTO);
-        userRepository.save(user);
-
-        Investment investment = convertToInvestment(investmentDTO);
-        investment.setUser(user);
-
-        investmentRepository.save(investment);
-    }
+//    @Override
+//    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
+//        User user = convertToUser(userDTO);
+//        userRepository.save(user);
+//
+//        Investment investment = convertToInvestment(investmentDTO);
+//        investment.setUser(user);
+//
+//        investmentRepository.save(investment);
+//    }
 
     private User convertToUser(UserDTO userDTO) {
         User user = new User();
@@ -551,7 +546,6 @@ public class InvestmentServiceImpl implements InvestmentService {
             investType.setInvestAmount(investTypeDTO.getInvestAmount());
             investType.setInvestLimit(investTypeDTO.getInvestLimit());
             investType.setInvestLimitCount(investTypeDTO.getInvestLimitCount());
-
             investTypes.add(investType);
         }
         return investTypes;

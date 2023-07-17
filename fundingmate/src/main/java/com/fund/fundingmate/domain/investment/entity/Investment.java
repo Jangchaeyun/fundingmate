@@ -7,6 +7,7 @@ import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -111,6 +112,6 @@ public class Investment {
     private User user;
 
     @OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
-    private List<InvestType> investTypes;
+    private List<InvestType> investTypes = new ArrayList<>();
 
 }

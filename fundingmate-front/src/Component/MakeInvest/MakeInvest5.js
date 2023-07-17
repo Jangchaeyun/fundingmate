@@ -184,9 +184,9 @@ const MakeInvest5 = () => {
         console.log(response.data); // 요청 성공 시 처리할 로직
         // const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
-        navigateToStep2("/fund-detail/story", {
-          state: { totInfo: totInfo }
-        });
+        // navigateToStep2("/fund-detail/story", {
+        //   state: { totInfo: totInfo }
+        // });
       })
       .catch((error) => {
         console.error(error); // 요청 실패 시 처리할 로직
