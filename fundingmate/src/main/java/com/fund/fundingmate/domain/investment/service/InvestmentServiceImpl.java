@@ -522,7 +522,8 @@ public class InvestmentServiceImpl implements InvestmentService {
         investment.setAccNumber(investmentDTO.getAccNumber());
         investment.setDepositorName(investmentDTO.getDepositorName());
 
-        FileDTO ciisnDTO = investmentDTO.getInvestContentImgSavedName();
+        //밑에 원래 리스트 안써있었음
+        List<FileDTO> ciisnDTO = investmentDTO.getInvestContentImgSavedName();
         if (ciisnDTO != null) {
             File investContentImgSavedName = converToFile(ciisnDTO);
             investment.setInvestContentImgSavedName(investContentImgSavedName);
