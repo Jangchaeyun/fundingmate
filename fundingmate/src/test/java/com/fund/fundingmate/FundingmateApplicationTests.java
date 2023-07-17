@@ -110,7 +110,7 @@ class FundingmateApplicationTests {
 		rewardDTO.setProjDateStart(LocalDate.of(2023, 6, 25));
 		rewardDTO.setProjDateEnd(LocalDate.of(2023, 7, 16));
 		rewardDTO.setDeliveryDate(LocalDate.of(2023, 7, 25));
-		rewardDTO.setProjKeyword("푸드");
+		rewardDTO.setProjKeyWord("푸드");
 		rewardDTO.setRewardVideoAddress("https://www.youtube.com/watch?v=9T8aX98xWAc");
 		rewardDTO.setProjContent("충북 영동에 위치한 시나브로 와이너리는 한국와인의 명가로 널리 알려져 있습니다.\n" +
 				"시나브로 와이너리에서 양조한 와인은 독일 베를린 와인 트로피, 대한민국 우리술 품평회 등에서 인정받았습니다. 세계에서 인정하는 와인을 증류하고 오크숙성을 통해 만들어낸 술이 바로 '바야흐로 오크' 입니다.");
@@ -253,13 +253,13 @@ class FundingmateApplicationTests {
 		paymentDTO.setUser(user);
 		paymentDTO.setCardnumber("0123456789012345");
 		paymentDTO.setCardpassword("8765");
-		paymentDTO.setPaymentcode(true);
+		paymentDTO.setPayperiod("일시불");
 		paymentDTO.setPaymentamount(12345678);
 		paymentDTO.setPayenddate("1123");
 		paymentDTO.setBirthday("001112");
 		paymentDTO.setPayperiod("일시불");
 		paymentDTO.setShippingadress("경기도 부천시 상2동 569-3");
-		paymentDTO.setShippingadressdesc("3층");
+		paymentDTO.setShippingaddressdesc("3층");
 
 		paymentService.createPayment(paymentDTO);
 	}

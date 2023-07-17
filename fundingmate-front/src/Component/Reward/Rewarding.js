@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../../pages/Reward/Reward.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
 
 const Rewarding = () => {
   const [rewardingRewards, setRewardingRewards] = useState([]);
@@ -26,13 +25,33 @@ const Rewarding = () => {
         }
       );
       const fetchedRewards = response.data;
-      setRewardingRewards(fetchedRewards);
+      const rewardIds = fetchedRewards.map((reward) => reward.id);
+      const paymentAmounts = await getPaymentAmounts(rewardIds);
+      const rewardsWithPayment = fetchedRewards.map((reward, index) => ({
+        ...reward,
+        totalPayment: paymentAmounts[index],
+      }));
+      setRewardingRewards(rewardsWithPayment);
       setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
       console.log(fetchedRewards);
     } catch (error) {
       console.error("Error fetching rewarding rewards:", error);
     }
   };
+
+  const getPaymentAmounts = async (rewardIds) => {
+    try {
+      const response = await axios.get("http://localhost:8090/payment/total-amount", {
+        params: {
+          rewardIds: rewardIds.join(","),
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching payment amounts:", error);
+      return [];
+    }
+  }
 
   const loadMoreRewards = async () => {
     const nextVisibleRewards = visibleRewards + 4;
@@ -83,7 +102,7 @@ const Rewarding = () => {
             <div className="com_name">{reward.manufacturer}</div>
             <div className="reward_name">{reward.projName}</div>
             <div className="reward_detail">
-              <div className="price">12.345원 펀딩</div>
+              <div className="price">{reward.totalPayment !== undefined ? reward.totalPayment.toFixed(3) + "원 펀딩" : "0"}원 펀딩</div>
               <div className="rate">
                 {/* {Math.floor((reward.currentAmount / reward.projTargetAmount) * 100)} */}
                 %

@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.payment.entity;
 
+import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.user.entity.User;
 import lombok.*;
 
@@ -20,6 +21,10 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "reward_no")
+    private Reward reward;
 
     private String cardnumber;
 

@@ -81,12 +81,13 @@ const Checkout = () => {
       payperiod: period,
       shippingadress: address,
       shippingaddressdesc: addressDesc,
+      rewardId: rewardId,
     };
 
     try {
       const response = await axios.post(
         "http://localhost:8090/payment/create",
-        paymentData
+        paymentData, 
       );
       navigate("/reward-checkout/complete");
       console.log(response.data);

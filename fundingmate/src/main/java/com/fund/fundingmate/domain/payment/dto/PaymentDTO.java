@@ -1,10 +1,15 @@
 package com.fund.fundingmate.domain.payment.dto;
 
+import com.fund.fundingmate.domain.reward.dto.RewardDTO;
+import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +18,9 @@ import lombok.Setter;
 public class PaymentDTO {
     private Long id;
 
-    private User user;
+    private UserDTO user;
+
+    private RewardDTO reward;
 
     private String cardnumber;
 
