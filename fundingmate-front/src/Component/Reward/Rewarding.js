@@ -7,11 +7,16 @@ const Rewarding = () => {
   const [rewardingRewards, setRewardingRewards] = useState([]);
   const [visibleRewards, setVisibleRewards] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+  const [paymentAmounts, setPaymentAmounts] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchRewardingRewards();
   }, []);
+
+  useEffect(() => {
+    fetchPaymentAmount();
+  }, [rewardingRewards]);
 
   const fetchRewardingRewards = async () => {
     try {
@@ -24,34 +29,29 @@ const Rewarding = () => {
           },
         }
       );
-      const fetchedRewards = response.data;
-      const rewardIds = fetchedRewards.map((reward) => reward.id);
-      const paymentAmounts = await getPaymentAmounts(rewardIds);
-      const rewardsWithPayment = fetchedRewards.map((reward, index) => ({
-        ...reward,
-        totalPayment: paymentAmounts[index],
-      }));
-      setRewardingRewards(rewardsWithPayment);
-      setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
-      console.log(fetchedRewards);
+
+      setRewardingRewards(response.data);
+      setShowLoadMoreButton(response.data.length >= visibleRewards);
     } catch (error) {
       console.error("Error fetching rewarding rewards:", error);
     }
   };
 
-  const getPaymentAmounts = async (rewardIds) => {
+  const fetchPaymentAmount = async () => {
     try {
-      const response = await axios.get("http://localhost:8090/payment/total-amount", {
-        params: {
-          rewardIds: rewardIds.join(","),
-        },
-      });
-      return response.data;
+      const response = await axios.get(
+        "http://localhost:8090/payment/total-amount",
+        {
+          params: {
+            rewardIds: rewardingRewards.map((reward) => reward.id).join(","),
+          },
+        }
+      );
+      setPaymentAmounts(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
-      return [];
     }
-  }
+  };
 
   const loadMoreRewards = async () => {
     const nextVisibleRewards = visibleRewards + 4;
@@ -102,9 +102,13 @@ const Rewarding = () => {
             <div className="com_name">{reward.manufacturer}</div>
             <div className="reward_name">{reward.projName}</div>
             <div className="reward_detail">
-              <div className="price">{reward.totalPayment !== undefined ? reward.totalPayment.toFixed(3) + "원 펀딩" : "0"}원 펀딩</div>
+              <div className="price">
+                {paymentAmounts[reward.id]?.toLocaleString() || "0"}원 펀딩
+              </div>
               <div className="rate">
-                {/* {Math.floor((reward.currentAmount / reward.projTargetAmount) * 100)} */}
+                {Math.floor(
+                  (paymentAmounts[reward.id] / reward.projTargetAmount) * 100
+                )}
                 %
               </div>
               <div className="d_day">

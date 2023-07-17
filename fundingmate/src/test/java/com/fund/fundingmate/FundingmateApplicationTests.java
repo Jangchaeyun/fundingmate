@@ -152,8 +152,6 @@ class FundingmateApplicationTests {
 		rewardTypeDTO.setRewardAvailableCount(5);
 		rewardTypeDTO.setRewardTitle("Reward Type 1");
 		rewardTypeDTO.setRewardContent("Reward Type 1 Content");
-		rewardTypeDTO.setReward(rewardDTO);
-		// Set other properties of the rewardTypeDTO
 
 		// Create reward option DTO
 		RewardOptionDTO rewardOptionDTO = new RewardOptionDTO();
@@ -250,7 +248,6 @@ class FundingmateApplicationTests {
 		User user = userOptional.get();
 
 		PaymentDTO paymentDTO = new PaymentDTO();
-		paymentDTO.setUser(user);
 		paymentDTO.setCardnumber("0123456789012345");
 		paymentDTO.setCardpassword("8765");
 		paymentDTO.setPayperiod("일시불");

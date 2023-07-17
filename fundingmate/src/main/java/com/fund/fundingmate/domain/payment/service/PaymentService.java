@@ -4,13 +4,18 @@ import com.fund.fundingmate.domain.payment.dto.PaymentDTO;
 import com.fund.fundingmate.domain.payment.entity.Payment;
 import com.fund.fundingmate.domain.payment.repository.PaymentRepository;
 import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.repository.RewardRepository;
+import com.fund.fundingmate.domain.reward.repository.RewardTypeRepository;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PaymentService {
@@ -18,11 +23,14 @@ public class PaymentService {
     private final UserRepository userRepository;
     private final RewardRepository rewardRepository;
 
+    private final RewardTypeRepository rewardTypeRepository;
+
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, UserRepository userRepository, RewardRepository rewardRepository) {
+    public PaymentService(PaymentRepository paymentRepository, UserRepository userRepository, RewardRepository rewardRepository, RewardTypeRepository rewardTypeRepository) {
         this.paymentRepository = paymentRepository;
         this.userRepository = userRepository;
         this.rewardRepository = rewardRepository;
+        this.rewardTypeRepository = rewardTypeRepository;
     }
 
     public void createPayment(PaymentDTO paymentDTO) {
@@ -40,19 +48,33 @@ public class PaymentService {
         User user = userRepository.findById(paymentDTO.getUser().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
-        payment.setUser(user);
+        RewardType rewardType = rewardTypeRepository.findById(paymentDTO.getRewardType().getId())
+                .orElseThrow(() -> new EntityNotFoundException("RewardType not found with ID: " + paymentDTO.getRewardType().getId()));
+        payment.setRewardType(rewardType);
 
-        Long rewardId = paymentDTO.getReward().getId();
-        if (rewardId != null) {
-            Reward reward = rewardRepository.findById(rewardId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid reward ID"));
-            payment.setReward(reward);
-        }
+        payment.setUser(user);
 
         paymentRepository.save(payment);
     }
 
-    public Integer getTotalPaymentAmount(List<Long> rewardIds) {
-        return paymentRepository.getTotalPaymentAmountForRewards(rewardIds);
+
+   public Map<Long, Integer> getTotalPaymentAmount(List<Long> rewardIds) {
+        List<Reward> rewards = rewardRepository.findByIdIn(rewardIds);
+        Map<Long, Integer> totalAmounts = new HashMap<>();
+        for (Reward reward : rewards) {
+            Integer totalAmount = paymentRepository.getTotalPaymentAmountForRewards(reward.getId());
+            totalAmounts.put(reward.getId(), totalAmount);
+        }
+        return totalAmounts;
+   }
+
+    public Map<Long, Integer> getTotalPaymentAmountsForRewards(List<Long> rewardIds) {
+        List<Reward> rewards = rewardRepository.findByIdIn(rewardIds);
+        Map<Long, Integer> totalAmounts = new HashMap<>();
+        for (Reward reward : rewards) {
+            Integer totalAmount = paymentRepository.getTotalPaymentAmountForRewards(reward.getId());
+            totalAmounts.put(reward.getId(), totalAmount);
+        }
+        return totalAmounts;
     }
 }

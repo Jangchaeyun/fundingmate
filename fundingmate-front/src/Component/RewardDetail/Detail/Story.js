@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Story = () => {
   const [viewDesc, setViewDesc] = useState(false);
+  const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
   const [reward, setReward] = useState({
     id: 0,
     projName: "",
@@ -55,11 +56,32 @@ const Story = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [rewardId]);
+
+  const fetchTotalPaymentAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/payment/total-amount?rewardIds=${reward.id}`
+      );
+      const totalAmounts = response.data;
+      setTotalPaymentAmounts(totalAmounts);
+    } catch (error) {
+      console.error("Error fetching total payment amounts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTotalPaymentAmounts();
+  }, [reward.id]);
 
   return (
     <div className="desc">
-      {viewDesc && <Desc reward={reward} />}
+      {viewDesc && reward && (
+        <Desc
+          reward={reward}
+          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0} // Accessing the specific payment amount for the current reward
+        />
+      )}
       <div className="menu">
         <hr className="menu_hr" />
         <div className="menu_items">

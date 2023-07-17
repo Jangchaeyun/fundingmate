@@ -161,6 +161,22 @@
   cursor: pointer;
 }
 
+.funding-closed {
+  width: 74%;
+  background-color: #0064cd;
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  height: 31px;
+  margin-left: 1%;
+  cursor: pointer;
+}
+
+.fund_date_dday {
+  font-weight: bold;
+}
+
 .proj_share {
   margin-top: 2%;
   width: 59%;

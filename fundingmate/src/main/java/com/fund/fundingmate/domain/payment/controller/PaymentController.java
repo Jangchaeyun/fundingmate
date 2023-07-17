@@ -7,20 +7,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PaymentController {
 
-    @Autowired
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     @Autowired
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
+
     @PostMapping("/payment/create")
-    public ResponseEntity<String> createPayment(@RequestBody PaymentDTO paymentDTO, @RequestParam List<Long> rewardIds) {
+    public ResponseEntity<String> createPayment(@RequestBody PaymentDTO paymentDTO) {
         try {
             paymentService.createPayment(paymentDTO);
             return ResponseEntity.ok("Payment created successfully.");
@@ -34,13 +36,14 @@ public class PaymentController {
     }
 
     @GetMapping("/payment/total-amount")
-    public ResponseEntity<Integer> getTotalPaymentAmounts(@RequestParam List<Long> rewardIds) {
+    public ResponseEntity<Map<Long, Integer>> getTotalPaymentAmounts(@RequestParam List<Long> rewardIds) {
         try {
-            Integer totalAmount = paymentService.getTotalPaymentAmount(rewardIds);
-            return ResponseEntity.ok(totalAmount);
+            Map<Long, Integer> totalAmounts = paymentService.getTotalPaymentAmountsForRewards(rewardIds);
+            return ResponseEntity.ok(totalAmounts);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 }

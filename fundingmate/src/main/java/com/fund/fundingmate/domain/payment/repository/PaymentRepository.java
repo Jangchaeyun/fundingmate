@@ -13,4 +13,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query("SELECT coalesce(sum(p.paymentamount), 0) from Payment  p where p.id in (:rewardIds)")
     Integer getTotalPaymentAmountForRewards(@Param("rewardIds") List<Long> rewardIds);
+
+    @Query("SELECT coalesce(sum(p.paymentamount), 0) from Payment p where p.rewardType.id = :rewardTypeId")
+    Integer getTotalPaymentAmountForRewards(@Param("rewardTypeId") Long rewardTypeId);
 }

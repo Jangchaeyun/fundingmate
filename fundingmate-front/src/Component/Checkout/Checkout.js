@@ -17,10 +17,10 @@ const Checkout = () => {
   const [cardEndDate1, setCardEndDate1] = useState("");
   const [cardEndDate2, setCardEndDate2] = useState("");
   const [period, setPeriod] = useState("");
-  const [paymentcode, setPaymentCode] = useState("");
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
   const [addressDesc, setAddressDesc] = useState("");
+  const [paymentamount, setPaymentAmount] = useState(0);
 
   let navigate = useNavigate();
   let { rewardId, rewardTypeId } = useParams();
@@ -50,6 +50,7 @@ const Checkout = () => {
         `http://localhost:8090/reward/rewardcheckout/checktype/${rewardId}/${rewardTypeId}`
       );
       setRewardType(response.data);
+      setPaymentAmount(response.data?.rewardAmount || 0);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -71,28 +72,33 @@ const Checkout = () => {
     const combinedCardEndDate = cardEndDate1.trim() + "/" + cardEndDate2.trim();
 
     const paymentData = {
-      user: { id: 1 }, // replace 1 with the actual user ID you want to use
+      user: {
+        id: 1,
+      },
       cardnumber: combinedCardNum,
       cardpassword: cardPw,
-      paymentcode: paymentcode,
-      paymentamount: rewardType?.rewardAmount || 0,
       payenddate: combinedCardEndDate,
-      birthday: birthday,
       payperiod: period,
+      birthday: birthday,
       shippingadress: address,
       shippingaddressdesc: addressDesc,
-      rewardId: rewardId,
+      rewardType: {
+        id: rewardType ? rewardType.id : null,
+        rewardAmount: rewardType ? rewardType.rewardAmount : 0,
+      },
+      paymentamount: paymentamount,
     };
 
     try {
       const response = await axios.post(
         "http://localhost:8090/payment/create",
-        paymentData, 
+        paymentData
       );
-      navigate("/reward-checkout/complete");
-      console.log(response.data);
+      console.log(response.data); // Assuming the server returns a success message
+      navigate("/reward-checkout/complete"); // Redirect to the success page after successful payment
     } catch (error) {
       console.log(error);
+      // Handle error here, show error message to the user, etc.
     }
   };
 

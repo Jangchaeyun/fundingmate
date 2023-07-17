@@ -1,7 +1,9 @@
 package com.fund.fundingmate.domain.payment.dto;
 
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
+import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import lombok.AllArgsConstructor;
@@ -20,8 +22,6 @@ public class PaymentDTO {
 
     private UserDTO user;
 
-    private RewardDTO reward;
-
     private String cardnumber;
 
     private String cardpassword;
@@ -37,4 +37,6 @@ public class PaymentDTO {
     private String shippingadress;
 
     private String shippingaddressdesc;
+
+    private RewardTypeDTO rewardType;
 }
