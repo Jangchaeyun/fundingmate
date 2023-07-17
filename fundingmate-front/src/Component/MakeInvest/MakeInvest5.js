@@ -126,7 +126,7 @@ const MakeInvest5 = () => {
     navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
   };
   const [userId, setUserId] = useState(null);
-  const { id, ...requestData } = totInfo;
+  // const { id, ...requestData } = totInfo;
   const handleNextStep = () => {
     // console.log(totInfo);
     // console.log(totInfo.cards);
@@ -182,7 +182,7 @@ const MakeInvest5 = () => {
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
-        const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
+        // const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
         navigateToStep2("/fund-detail/story", {
           state: { totInfo: totInfo }
