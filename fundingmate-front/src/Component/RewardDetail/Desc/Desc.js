@@ -6,7 +6,7 @@ import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
 import moment from "moment";
 
-const Desc = ({ reward }) => {
+const Desc = ({ reward, totalPaymentAmount }) => {
   const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -22,6 +22,8 @@ const Desc = ({ reward }) => {
   const handleCompanyClick = () => {
     setIsModalVisible(true);
   };
+
+  const hasProjDateEndPassed = moment(reward.projDateEnd).isBefore(moment());
 
   return (
     <div className="desc">
@@ -48,7 +50,8 @@ const Desc = ({ reward }) => {
         <div className="desc_content">
           <div className="fund_category">리워드</div>
           <div className="fund_price">
-            9,130,000원 <b className="rewarding">펀딩중</b>
+            {totalPaymentAmount.toLocaleString()}원
+            <b className="rewarding">펀딩중</b>
           </div>
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
@@ -59,19 +62,26 @@ const Desc = ({ reward }) => {
           </div>
           <div className="fund_date">
             <div className="fund_date_title">남은기간</div>
-            <div className="fund_date_dday">{getRemainingDays() + 1}일</div>
-            <sub className="fund_date_end">{reward.projDateEnd} 종료</sub>
+            {hasProjDateEndPassed ? (
+              <div className="fund_date_dday">펀딩 종료</div>
+            ) : (
+              <>
+                <div className="fund_date_dday">{getRemainingDays() + 1}일</div>
+                <sub className="fund_date_end">{reward.projDateEnd} 종료</sub>
+              </>
+            )}
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
             <div className="fund_people_count">140명</div>
+
             <button
-              className="fund_btn"
+              className={hasProjDateEndPassed ? "funding-closed" : "fund_btn"}
               onClick={() => {
                 navigate(`/checkout/check/${reward.id}`);
               }}
             >
-              펀딩하기
+              {hasProjDateEndPassed ? "펀딩 종료" : "펀딩하기"}
             </button>
           </div>
           <button className="proj_share">프로젝트 공유하기</button>

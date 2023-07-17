@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.entity.File;
 import lombok.AllArgsConstructor;
@@ -107,5 +108,6 @@ public class Reward {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reward")
+    @JsonManagedReference
     private List<RewardType> rewardTypes;
 }

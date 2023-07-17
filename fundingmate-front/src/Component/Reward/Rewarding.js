@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import "../../pages/Reward/Reward.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
 
 const Rewarding = () => {
   const [rewardingRewards, setRewardingRewards] = useState([]);
   const [visibleRewards, setVisibleRewards] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+  const [paymentAmounts, setPaymentAmounts] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchRewardingRewards();
   }, []);
+
+  useEffect(() => {
+    fetchPaymentAmount();
+  }, [rewardingRewards]);
 
   const fetchRewardingRewards = async () => {
     try {
@@ -25,12 +29,27 @@ const Rewarding = () => {
           },
         }
       );
-      const fetchedRewards = response.data;
-      setRewardingRewards(fetchedRewards);
-      setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
-      console.log(fetchedRewards);
+
+      setRewardingRewards(response.data);
+      setShowLoadMoreButton(response.data.length >= visibleRewards);
     } catch (error) {
       console.error("Error fetching rewarding rewards:", error);
+    }
+  };
+
+  const fetchPaymentAmount = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8090/payment/total-amount",
+        {
+          params: {
+            rewardIds: rewardingRewards.map((reward) => reward.id).join(","),
+          },
+        }
+      );
+      setPaymentAmounts(response.data);
+    } catch (error) {
+      console.error("Error fetching payment amounts:", error);
     }
   };
 
@@ -83,9 +102,13 @@ const Rewarding = () => {
             <div className="com_name">{reward.manufacturer}</div>
             <div className="reward_name">{reward.projName}</div>
             <div className="reward_detail">
-              <div className="price">12.345원 펀딩</div>
+              <div className="price">
+                {paymentAmounts[reward.id]?.toLocaleString() || "0"}원 펀딩
+              </div>
               <div className="rate">
-                {/* {Math.floor((reward.currentAmount / reward.projTargetAmount) * 100)} */}
+                {Math.floor(
+                  (paymentAmounts[reward.id] / reward.projTargetAmount) * 100
+                )}
                 %
               </div>
               <div className="d_day">

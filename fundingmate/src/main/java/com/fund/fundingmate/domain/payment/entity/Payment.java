@@ -1,5 +1,8 @@
 package com.fund.fundingmate.domain.payment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.entity.User;
 import lombok.*;
 
@@ -36,5 +39,10 @@ public class Payment {
     private String shippingadress;
 
     private String shippingaddressdesc;
+
+    @ManyToOne
+    @JoinColumn(name = "reward_type_id")
+    @JsonBackReference
+    private RewardType rewardType;
 }
 
