@@ -417,13 +417,21 @@ public class InvestmentServiceImpl implements InvestmentService {
        investment.setInvestRepImgSavedName(investRepImgSavedName);
        investRepImgSavedName = fileRepository.save(investRepImgSavedName);
 
-       List<FileDTO> investContentImgSavedNameLists = investmentDTO.getInvestContentImgSavedName();
+      /* List<FileDTO> investContentImgSavedNameLists = investmentDTO.getInvestContentImgSavedName();
        File investContentImgSavedName = null;
        for(FileDTO investContentImgSavedNameList:investContentImgSavedNameLists){
            investContentImgSavedName = converToFile(investContentImgSavedNameList);
            investment.setInvestContentImgSavedName(investContentImgSavedName);
            investContentImgSavedName = fileRepository.save(investContentImgSavedName);
-       }
+       }*/
+        List<FileDTO> investContentImgSavedNameList = new ArrayList<>();
+        String[] fileNamesArray = joinedFileNames.split(",");
+        for (String fileName : fileNamesArray) {
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setFileName(fileName);
+            investContentImgSavedNameList.add(fileDTO);
+        }
+
 //       File investContentImgSavedName = converToFile(investmentDTO.getInvestContentImgSavedName());
 //       investment.setInvestContentImgSavedName(investContentImgSavedName);
 //       investContentImgSavedName = fileRepository.save(investContentImgSavedName);
@@ -432,7 +440,9 @@ public class InvestmentServiceImpl implements InvestmentService {
        investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
        investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
        investment.setInvestRepImgSavedName(investRepImgSavedName);
-       investment.setInvestContentImgSavedName(investContentImgSavedName);
+ /*      investment.setInvestContentImgSavedName(investContentImgSavedName);*/
+       /* investment.setInvestContentImgSavedName(investContentImgSavedNames);*/
+        investmentDTO.setInvestContentImgSavedName(investContentImgSavedNameList);
 
        investment.setUser(user);
        for(InvestType investType : investment.getInvestTypes()) {
@@ -473,6 +483,23 @@ public class InvestmentServiceImpl implements InvestmentService {
         file.setFileName(fileDTO.getFileName());
         file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
         return file;
+    }
+
+    private List<File> convertToFileList(List<FileDTO> fileList) {
+        if (fileList == null || fileList.isEmpty()) {
+            return Collections.emptyList();  // 파일이 없으면 빈 리스트 반환하거나 예외를 던질 수도 있습니다.
+        }
+
+        List<File> convertedFiles = new ArrayList<>();
+        for (FileDTO fileDTO : fileList) {
+            File file = new File();
+            file.setFileId(fileDTO.getFileId());
+            file.setFileName(fileDTO.getFileName());
+            file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
+            convertedFiles.add(file);
+        }
+
+        return convertedFiles;
     }
 
     private Investment convertToInvestment(InvestmentDTO investmentDTO) {
@@ -523,9 +550,26 @@ public class InvestmentServiceImpl implements InvestmentService {
         investment.setDepositorName(investmentDTO.getDepositorName());
 
         //밑에 원래 리스트 안써있었음
+       /*
+       FileDTO ciisnDTO = investmentDTO.getInvestContentImgSavedName();
+        if (ciisnDTO != null) {
+            File investContentImgSavedName = convertToFileList(ciisnDTO);
+            investment.setInvestContentImgSavedName(investContentImgSavedName);
+        }*/
+
+     /*   List<FileDTO> ciisnDTO = investmentDTO.getInvestContentImgSavedName();
+        if (ciisnDTO != null) {
+            List<File> investContentImgSavedName = new ArrayList<>();
+            for (FileDTO fileDTO : ciisnDTO) {
+                File file = converToFile(fileDTO);
+                investContentImgSavedName.add(file);
+            }
+            investment.setInvestContentImgSavedName(investContentImgSavedName);
+        }*/
+
         List<FileDTO> ciisnDTO = investmentDTO.getInvestContentImgSavedName();
         if (ciisnDTO != null) {
-            File investContentImgSavedName = converToFile(ciisnDTO);
+            List<File> investContentImgSavedName = convertToFileList(ciisnDTO);
             investment.setInvestContentImgSavedName(investContentImgSavedName);
         }
 
@@ -558,7 +602,7 @@ public class InvestmentServiceImpl implements InvestmentService {
         }
         return investTypes;
     }
-    private InvestmentDTO convertToInvestDTO(Investment investment) {
+    /*private InvestmentDTO convertToInvestDTO(Investment investment) {
         InvestmentDTO investmentDTO = new InvestmentDTO();
         investmentDTO.setId(investment.getId());
         investmentDTO.setInvestProjName(investment.getInvestProjName());
@@ -575,10 +619,23 @@ public class InvestmentServiceImpl implements InvestmentService {
         investmentDTO.setInvestProjKeyword(investment.getInvestProjKeyword());
         investmentDTO.setUseOfFunds(investment.getUseOfFunds());
 
-        if (investment.getInvestContentImgSavedName() != null) {
+      *//*  if (investment.getInvestContentImgSavedName() != null) {
             FileDTO iiblisnDTO  = new FileDTO();
             iiblisnDTO.setFileName(investment.getInvestContentImgSavedName().getFileName());
             investmentDTO.setInvestContentImgSavedName(iiblisnDTO);
+        }
+*//*
+        List<File> investContentImgSavedName = investment.getInvestContentImgSavedName();
+        if (investContentImgSavedName != null && !investContentImgSavedName.isEmpty()) {
+            List<FileDTO> iiblisnDTOList = new ArrayList<>();
+            for (File file : investContentImgSavedName) {
+                FileDTO iiblisnDTO = new FileDTO();
+                iiblisnDTO.setFileName(file.getFileName());
+                // 필요한 다른 파일 정보 설정
+
+                iiblisnDTOList.add(iiblisnDTO);
+            }
+            investmentDTO.setInvestContentImgSavedName(iiblisnDTOList);
         }
 
         investmentDTO.setUseOfFundsDateStart(investment.getUseOfFundsDateStart());
@@ -619,7 +676,7 @@ public class InvestmentServiceImpl implements InvestmentService {
 
         return investmentDTO;
     }
-
+*/
 
  /*   public Map<String, Object> getInvestmentById(Long investmentId) {
         Map<String, Object> map = new HashMap<>();

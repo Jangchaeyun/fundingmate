@@ -57,9 +57,9 @@ public class Investment {
     private List<File> investContentImgSavedName;*/
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="investContentImgSavedName_img")
-    private File  investContentImgSavedName;
+    private List<File>  investContentImgSavedName;
 
     private String investItemIntro;
 
