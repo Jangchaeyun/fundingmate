@@ -417,9 +417,16 @@ public class InvestmentServiceImpl implements InvestmentService {
        investment.setInvestRepImgSavedName(investRepImgSavedName);
        investRepImgSavedName = fileRepository.save(investRepImgSavedName);
 
-       File investContentImgSavedName = converToFile(investmentDTO.getInvestContentImgSavedName());
-       investment.setInvestContentImgSavedName(investContentImgSavedName);
-       investContentImgSavedName = fileRepository.save(investContentImgSavedName);
+       List<FileDTO> investContentImgSavedNameLists = investmentDTO.getInvestContentImgSavedName();
+       File investContentImgSavedName = null;
+       for(FileDTO investContentImgSavedNameList:investContentImgSavedNameLists){
+           investContentImgSavedName = converToFile(investContentImgSavedNameList);
+           investment.setInvestContentImgSavedName(investContentImgSavedName);
+           investContentImgSavedName = fileRepository.save(investContentImgSavedName);
+       }
+//       File investContentImgSavedName = converToFile(investmentDTO.getInvestContentImgSavedName());
+//       investment.setInvestContentImgSavedName(investContentImgSavedName);
+//       investContentImgSavedName = fileRepository.save(investContentImgSavedName);
 
 
        investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
