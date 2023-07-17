@@ -165,23 +165,9 @@ public class InvestmentController {
             System.out.println(investmentDTO);
             System.out.println(investmentDTO.getInvestTypes());
 
-            // Base64 문자열을 List<FileDTO> 객체로 변환하여 설정
-          /*  List<FileDTO> fileDTOList = new ArrayList<>();
-            if (investmentDTO.getInvestContentImgSavedName() != null) {
-                for (FileDTO base64Data : investmentDTO.getInvestContentImgSavedName()) {
-                    if (base64Data.getFileData() != null) {
-                        byte[] fileBytes = Base64.decodeBase64(base64Data.getFileData());
-                        FileDTO fileDTO = new FileDTO();
-                        fileDTO.setFileData(fileBytes);
-                        fileDTOList.add(fileDTO);
-                    }
-                }
-            }
-            investmentDTO.setInvestContentImgSavedName(fileDTOList); // investmentDTO에 파일 정보 설정*/
+            Long savedInvestmentId = investmentService.createInvestment(investmentDTO, userId);
 
-            investmentService.createInvestment(investmentDTO, userId);
-
-            Map<String, Object> investmentMap = investmentService.getInvestmentById(investmentDTO.getId());
+            Map<String, Object> investmentMap = investmentService.getInvestmentById(savedInvestmentId);
             InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
             return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
         } catch (Exception e) {

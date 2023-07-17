@@ -8,7 +8,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -126,6 +126,7 @@ const MakeInvest5 = () => {
     navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
   };
   const [userId, setUserId] = useState(null);
+  const { id, ...requestData } = totInfo;
   const handleNextStep = () => {
     // console.log(totInfo);
     // console.log(totInfo.cards);
@@ -137,11 +138,23 @@ const MakeInvest5 = () => {
       if (files.length === 0) {
         return null; // 빈 배열인 경우 null로 설정
       }
-
       return {
         fileId: null,
         fileName: files[0].name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
+      };
+    };
+
+    const convertToOneFilesDTO = (files) => {
+      if (!files || files.length === 0) {
+        return null; // 파일이 없는 경우 null로 설정
+      }
+
+      return {
+        fileId: null,
+        fileName: files.name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -151,17 +164,28 @@ const MakeInvest5 = () => {
       investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
       investContentImgSavedName: convertToFilesDTO(
         totInfo.investContentImgSavedName
-      ), // investContentImgSavedName 필드를 단일 객체로 변환하여 할당
+      ), // investContentImgSavedName 필드를 배열로 변환하여 할당
+      investRepImgSavedName: convertToOneFilesDTO(
+        totInfo.investRepImgSavedName
+      ),
+      investIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
+        totInfo.investIdBusinessLicenseImgSavedName
+      ),
+      investBankAccountCopyImgSavedName: convertToOneFilesDTO(
+        totInfo.investBankAccountCopyImgSavedName
+      )
     };
+
     axios
       .post("http://localhost:8090/make-invest/hostinfo", requestData, {
-        params: { userId: 1 },
+        params: { userId: 1 }
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
+        const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
         navigateToStep2("/fund-detail/story", {
-          state: { totInfo: totInfo },
+          state: { totInfo: totInfo }
         });
       })
       .catch((error) => {

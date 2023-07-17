@@ -405,7 +405,8 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 */
     @Override
-   public void createInvestment(InvestmentDTO investmentDTO, Long userId) {
+   public Long createInvestment(InvestmentDTO investmentDTO, Long userId) {
+        System.out.println("service"+investmentDTO);
        User user = userRepository.findById(userId)
                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
 
@@ -436,7 +437,9 @@ public class InvestmentServiceImpl implements InvestmentService {
 
        investment.setUser(user);
 
-       investmentRepository.save(investment);
+       Investment savedInvestment = investmentRepository.save(investment);
+
+       return savedInvestment.getId();
    }
 
     @Override
@@ -616,7 +619,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-    public Map<String, Object> getInvestmentById(Long investmentId) {
+ /*   public Map<String, Object> getInvestmentById(Long investmentId) {
         Map<String, Object> map = new HashMap<>();
         Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
         if (oInvestment.isEmpty()) {
@@ -625,8 +628,25 @@ public class InvestmentServiceImpl implements InvestmentService {
         Investment investment = oInvestment.get();
         map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
         return map;
-    }
+    }*/
+ public Map<String, Object> getInvestmentById(Long investmentId) {
+     Map<String, Object> map = new HashMap<>();
 
+     if (investmentId == null) {
+         throw new IllegalArgumentException("Invalid investment ID: null");
+     }
+
+     Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
+
+     if (oInvestment.isEmpty()) {
+         throw new IllegalArgumentException("Investment not found with ID: " + investmentId);
+     }
+
+     Investment investment = oInvestment.get();
+     map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
+
+     return map;
+ }
 
     }
 
