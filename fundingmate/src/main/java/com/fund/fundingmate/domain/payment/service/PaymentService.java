@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,24 +58,20 @@ public class PaymentService {
         paymentRepository.save(payment);
     }
 
-
-   public Map<Long, Integer> getTotalPaymentAmount(List<Long> rewardIds) {
-        List<Reward> rewards = rewardRepository.findByIdIn(rewardIds);
+   public Map<Long, Integer> getTotalPaymentAmountsForSameRewards(List<Long> rewardIds) {
         Map<Long, Integer> totalAmounts = new HashMap<>();
-        for (Reward reward : rewards) {
-            Integer totalAmount = paymentRepository.getTotalPaymentAmountForRewards(reward.getId());
-            totalAmounts.put(reward.getId(), totalAmount);
+        for (Long rewardId: rewardIds) {
+            Integer totalAmount = paymentRepository.getTotalPaymentAmountForRewards(Collections.singletonList(rewardId));
+            totalAmounts.put(rewardId, totalAmount);
         }
         return totalAmounts;
    }
 
-    public Map<Long, Integer> getTotalPaymentAmountsForRewards(List<Long> rewardIds) {
-        List<Reward> rewards = rewardRepository.findByIdIn(rewardIds);
-        Map<Long, Integer> totalAmounts = new HashMap<>();
-        for (Reward reward : rewards) {
-            Integer totalAmount = paymentRepository.getTotalPaymentAmountForRewards(reward.getId());
-            totalAmounts.put(reward.getId(), totalAmount);
-        }
-        return totalAmounts;
+    public Integer countDistinctUserIds() {
+        return paymentRepository.countDistinctUserIds();
+    }
+
+    public Integer countDistinctUserIdsForReward(Long rewardId) {
+        return paymentRepository.countDistinctUserIdsForReward(rewardId);
     }
 }
