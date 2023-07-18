@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import "./JoinForm.css"
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {useLocation, useNavigate} from "react-router-dom";
 
 function JoinForm(props) {
-    const [user, setUser] = useState({userid:'',password:'', email:'',name:'',birthday:'',tel:''});
+    const { state } = useLocation();
+    const [user, setUser] = useState({userid:'',password:'', email:'',name:'',birthday:'',tel:'',snsLogin: state ? state : ''});
     const [check, setCheck] = useState({randomNum:'',checkSMS:''})
+    const navigate = useNavigate();
     const changeInput = (e) => {
         setUser({...user, [e.target.name]:e.target.value});
     }
@@ -19,7 +22,7 @@ function JoinForm(props) {
             .then(res=> {
                 console.log(res);
                 Swal.fire(res.data);
-                document.location.href="/login";
+                navigate("/login");
             })
             .catch(err=> {
                 console.log(err);
@@ -27,15 +30,17 @@ function JoinForm(props) {
             })
     }
     const sendSMS = () => {
-        axios.post("http://localhost:8080/send-one",null,{
-            params:{
-                tel:user.tel
-            }
-        })
-            .then(res => {
-                console.log("front 확인");
-                // check.randomNum = res.data;
-            })
+        alert("sendSMS");
+        document.getElementById("checkSMS").focus();
+        // axios.post("http://localhost:8080/send-one",null,{
+        //     params:{
+        //         tel:user.tel
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log("front 확인");
+        //         // check.randomNum = res.data;
+        //     })
     }
 
     const checkSMS = () => {
@@ -60,7 +65,7 @@ function JoinForm(props) {
                     <input type="text" name="name" placeholder="이름" onChange={changeInput}/>
                     <input type="text" name="birthday" placeholder="생년월일 8자리" onChange={changeInput}/>
                     <input type="text" name="tel" placeholder="휴대폰 번호 입력 ('-' 제외)" onChange={changeInput}/>
-                    <input type="text" name="checkSMS" placeholder="인증번호" onChange={changeChkInput} dis />
+                    <input type="text" name="checkSMS" id="checkSMS" placeholder="인증번호" onChange={changeChkInput} dis />
                     <button type="button" className="authChk" onClick={() => {sendSMS();alert("인증번호 발송 완료!!");}}>인증요청</button>
                     <button type="button" className="checkSMS" onClick={() => {checkSMS();}}>인증번호 확인</button>
                 </div>

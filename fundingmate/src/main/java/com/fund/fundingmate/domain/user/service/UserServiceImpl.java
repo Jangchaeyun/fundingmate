@@ -1,14 +1,18 @@
 package com.fund.fundingmate.domain.user.service;
 
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
-import com.fund.fundingmate.global.config.JwtTokenProvider;
+import com.fund.fundingmate.global.config.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -22,6 +26,15 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     public void join(User userDto){
+        // 현재 날짜 구하기
+        LocalDate now = LocalDate.now();
+
+        // 포맷 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+
+        // 포맷 적용
+        String formatedNow = now.format(formatter);
+
         User user = User.builder()
                 .userid(userDto.getUserid())
                 .password(passwordEncoder.encode(userDto.getPassword()))  //비밀번호 인코딩
@@ -31,7 +44,9 @@ public class UserServiceImpl implements UserService{
                 .tel(userDto.getTel())
                 .notificationStatus("Y")
                 .vitalization(1)
-                .roles(Collections.singletonList("ROLE_USER"))         //roles는 최초 USER로 설정
+                .joinDate(formatedNow)
+                .roles(Collections.singletonList("ROLE_USER"))//roles는 최초 USER로 설정
+                .snsLogin(userDto.getSnsLogin())
                 .build();
 
         userRepository.save(user).getId();
@@ -47,4 +62,14 @@ public class UserServiceImpl implements UserService{
         // 로그인에 성공하면 id, roles 로 토큰 생성 후 반환
         jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
     }
+
+    @Override
+    public void modifyPw(Long id, String password) {
+        Optional<User> ouser = userRepository.findById(id);
+        User user = ouser.get();
+        user.setPassword(passwordEncoder.encode(password));
+
+        userRepository.save(user).getId();
+    }
+
 }

@@ -1,5 +1,6 @@
-package com.fund.fundingmate.global.config;
+package com.fund.fundingmate.global.config.properties;
 
+//import com.fund.fundingmate.global.config.security.JwtAuthenticationIntercepter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,19 +10,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private JwtAuthenticationIntercepter authenticationIntercepter;
+//    @Autowired
+//    private JwtAuthenticationIntercepter authenticationIntercepter;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET","POST","PUT","DELETE");
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationIntercepter);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(authenticationIntercepter);
+//    }
 
 }

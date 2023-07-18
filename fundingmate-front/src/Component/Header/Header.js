@@ -2,16 +2,33 @@
 import "./Header.css"
 import {SearchOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useState} from "react";
 function Header() {
     const token = useSelector(state=>state.Authorization);
     const userid = useSelector(state=>state.UserId);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    const [keyword, setKeyword] = useState(state ? state : '')
     const logout = () => {
         dispatch({type:"NEWTOKEN",payload:''})
         dispatch({type:"USERID",payload:''})
+        // 로컬 스토리지에서 토큰 제거
+        localStorage.removeItem('token');
+
+        // isLoggedIn 상태 변경
+        setIsLoggedIn(false);
+
         document.location.href="/";
+    }
+    const searchSubmit = () => {
+        if(keyword === ''){
+            document.getElementById("keyword").focus();
+            return
+        }
+        navigate("/search",{state:keyword});
     }
     return (
         <header className="header">
@@ -34,10 +51,10 @@ function Header() {
                         <li><a href="">창업정보</a></li>
                         <li><a href="">오픈예정</a></li>
                     </ul>
-                    <form action="search" className="searchF">
-                        <input type="text" className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10"/>
+                    <form onSubmit={searchSubmit} className="searchF">
+                        <input type="text" id="keyword" value={keyword} className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} autoComplete="off"/>
                     </form>
-                    <a href='search' className="nav-search-btn"><SearchOutlined/></a>
+                    <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
                 </nav>
             </div>
 

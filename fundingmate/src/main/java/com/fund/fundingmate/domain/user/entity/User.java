@@ -41,6 +41,16 @@ public class User implements UserDetails {
     private String notificationStatus;
     @Column(name="vitalization")
     private Integer vitalization;
+//    @Column(name="naverlogin")
+//    private String naverLogin;
+//    @Column(name="googlelogin")
+//    private String googleLogin;
+//    @Column(name="kakaologin")
+//    private String kakaoLogin;
+    @Column(name="snslogin")
+    private String snsLogin;
+    @Column(name="join_date")
+    private String joinDate;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

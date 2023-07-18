@@ -1,9 +1,8 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from 'react'
-import { Reset } from 'styled-reset'
 import FindIdPw from "./pages/Login/FindIdPw";
 import Join from "./pages/Login/Join";
 import FindId from "./pages/Login/FindId";
@@ -37,19 +36,34 @@ import {Provider} from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import store from './persist-store';
+import SocialLogin from "./pages/Login/SocialLogin";
+import {useEffect, useState} from "react";
+import {AuthProvider} from "./Component/Login/Auth/AuthContext";
 
 const persister = persistStore(store);
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부를 판단하는 상태 값
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const token = localStorage.getItem('token');
+
+        // 토큰이 있으면 로그인 상태로 설정
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
   return (
       <React.Fragment>
-          <Reset />
+          {/*<Reset />*/}
         <div className="App">
+            <AuthProvider>
             <Provider store={store}>
             <PersistGate persistor={persister}>
                 <BrowserRouter>
            <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/login" element={<Login />} />
+              {/*<Route exact path="/login" element={<Login />} />*/}
+               <Route exact path="/login"  element={isLoggedIn ? <Home /> : <Login />} />
               <Route exact path="/findIdPw" element={<FindIdPw />} />
               <Route exact path="/findId" element={<FindId />} />
               <Route exact path="/findIdResult" element={<FindIdResult />} />
@@ -119,6 +133,7 @@ function App() {
                 </BrowserRouter>
             </PersistGate>
             </Provider>
+            </AuthProvider>
         </div>
       </React.Fragment>
   );
