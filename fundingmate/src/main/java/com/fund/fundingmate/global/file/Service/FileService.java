@@ -1,6 +1,7 @@
 package com.fund.fundingmate.global.file.Service;
 
 import com.fund.fundingmate.global.file.Repository.FileRepository;
+import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,9 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class FileService {
@@ -52,4 +55,5 @@ public class FileService {
     private String formatFileSize(long size) {
         return size + " bytes";
     }
+
 }
