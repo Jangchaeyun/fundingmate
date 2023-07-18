@@ -162,6 +162,7 @@ public class InvestmentController {
     public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
         try {
 
+            System.out.println(userId);
             System.out.println(investmentDTO);
             System.out.println(investmentDTO.getInvestTypes());
 

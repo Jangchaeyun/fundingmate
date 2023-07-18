@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./MakeInvest5.css";
 import "./MakeInvestCommon.css";
 import {
@@ -125,7 +126,8 @@ const MakeInvest5 = () => {
   const handlePreviousStep = () => {
     navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
   };
-  const [userId, setUserId] = useState(null);
+  const userId = useSelector((state) => state.Id);
+  // const [userId, setUserId] = useState(null);
   // const { id, ...requestData } = totInfo;
   const handleNextStep = () => {
     // console.log(totInfo);
