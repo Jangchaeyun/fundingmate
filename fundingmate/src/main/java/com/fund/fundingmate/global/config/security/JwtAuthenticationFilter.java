@@ -1,4 +1,4 @@
-package com.fund.fundingmate.global.config;
+package com.fund.fundingmate.global.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

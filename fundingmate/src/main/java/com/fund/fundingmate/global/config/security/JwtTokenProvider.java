@@ -1,4 +1,4 @@
-package com.fund.fundingmate.global.config;
+package com.fund.fundingmate.global.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
