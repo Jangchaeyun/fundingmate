@@ -48,7 +48,7 @@ function Header() {
             <b>{userid}</b>&nbsp;&nbsp;
             {userid != "" && <Link onClick={logout}>로그아웃</Link>}
             <span>
-              <a href="">프로젝트 만들기</a>
+              <a href="rewardfund">프로젝트 만들기</a>
             </span>
           </span>
         </div>
