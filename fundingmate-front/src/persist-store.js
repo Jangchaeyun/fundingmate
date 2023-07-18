@@ -19,6 +19,7 @@ const reducer = (currentState, action) => {
     switch(action.type) {
         case "NEWTOKEN": newState.Authorization=action.payload; break;
         case "USERID": newState.UserId=action.payload; break;
+        case "ID": newState.Id=action.payload; break;
         default:
     }
     return newState;

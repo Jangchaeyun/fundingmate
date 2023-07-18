@@ -81,6 +81,7 @@ function LoginForm(props) {
                 console.log(res)
                 dispatch({type:"NEWTOKEN", payload:res.data.accessToken})
                 dispatch({type:"USERID", payload:res.data.userid})
+                dispatch({type:"ID", payload:res.data.id})
 
                 const expires = new Date();
                 expires.setDate(expires.getDate()+1);
