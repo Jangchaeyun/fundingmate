@@ -81,42 +81,4 @@ public class FileService {
         return size + " bytes";
     }
 
-
-
-    /*public List<FileDTO> listSaveFiles(List<MultipartFile> multipartFiles) throws IOException {
-        List<FileDTO> savedFiles = new ArrayList<>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            String originalFileName = multipartFile.getOriginalFilename();
-            String fileSavedName = listGenetateUniqueFileName(originalFileName);
-            String filePath = UPLOAD_DIRECTORY + "/" + fileSavedName;
-
-            java.io.File file = new java.io.File(filePath);
-            file.getParentFile().mkdirs();
-
-            Path destination = file.toPath();
-
-            // 파일 저장 로직
-            // multipartFile을 저장하고 필요한 파일 정보를 저장된 File 객체로 설정
-
-            File savedFile = new File();
-            savedFile.setFileName(fileSavedName);
-            savedFile.setFileRegistrationDate(new Date());
-
-            // File 객체를 FileDTO로 변환하여 리스트에 추가
-            FileDTO savedFileDTO = new FileDTO();
-            savedFileDTO.setFileId(savedFile.getFileId());
-            savedFileDTO.setFileName(savedFile.getFileName());
-            savedFileDTO.setFileRegistrationDate(savedFile.getFileRegistrationDate());
-
-            savedFiles.add(savedFileDTO);
-        }
-        return savedFiles;
-    }
-*/
-
-    /*private String listGenetateUniqueFileName(String originalFilename) {
-        long timestamp = System.currentTimeMillis();
-        return timestamp + "-" + originalFilename;
-    }*/
-
 }

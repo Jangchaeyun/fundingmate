@@ -51,7 +51,7 @@ public class InvestmentDTO {
 
     private String investVideoUrl;
 
-    private List<FileDTO> investContentImgSavedName;
+    private FileDTO investContentImgSavedName;
 
     private String investItemIntro;
 
