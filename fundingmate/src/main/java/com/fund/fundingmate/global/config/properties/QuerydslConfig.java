@@ -1,4 +1,4 @@
-package com.fund.fundingmate.config;
+package com.fund.fundingmate.global.config.properties;
 
 import javax.persistence.EntityManager;
 

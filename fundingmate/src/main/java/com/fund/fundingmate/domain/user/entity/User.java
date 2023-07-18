@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.user.entity;
 
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
