@@ -1,23 +1,73 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./JoinForm.css"
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import {useLocation, useNavigate} from "react-router-dom";
 
 function JoinForm(props) {
+    const { state } = useLocation();
+    const [user, setUser] = useState({userid:'',password:'', email:'',name:'',birthday:'',tel:'',snsLogin: state ? state : ''});
+    const [check, setCheck] = useState({randomNum:'',checkSMS:''})
+    const navigate = useNavigate();
+    const changeInput = (e) => {
+        setUser({...user, [e.target.name]:e.target.value});
+    }
+    const changeChkInput = (e) => {
+        setCheck({...check, [e.target.name]:e.target.value});
+    }
+    const submit = (e) => {
+        e.preventDefault();
+        console.log(user)
+        axios.post('http://localhost:8080/join', user)
+            .then(res=> {
+                console.log(res);
+                Swal.fire(res.data);
+                navigate("/login");
+            })
+            .catch(err=> {
+                console.log(err);
+                Swal.fire(err.data);
+            })
+    }
+    const sendSMS = () => {
+        alert("sendSMS");
+        document.getElementById("checkSMS").focus();
+        // axios.post("http://localhost:8080/send-one",null,{
+        //     params:{
+        //         tel:user.tel
+        //     }
+        // })
+        //     .then(res => {
+        //         console.log("front 확인");
+        //         // check.randomNum = res.data;
+        //     })
+    }
+
+    const checkSMS = () => {
+        if (check.randomNum == check.checkSMS) {
+            alert("휴대폰 인증이 정상적으로 완료되었습니다.");
+        } else {
+            alert("인증번호가 올바르지 않습니다.")
+        }
+    }
+
     return (
         <div className="joinForm">
             <div className="joinTitle">회원가입</div>
-            <form action="login">
+            <form onSubmit={submit}>
                 <div className="joinwrap">
-                    <input type="text" placeholder="아이디"/>
-                    <input type="password" placeholder="비밀번호"/>
-                    <input type="text" placeholder="비밀번호 확인"/>
-                    <input type="email" placeholder="아이디/비밀번호 찾을 시 확인용 이메일"/>
+                    <input type="text" name="userid" placeholder="아이디" onChange={changeInput}/>
+                    <input type="password" name="password" placeholder="비밀번호" onChange={changeInput}/>
+                    <input type="password" placeholder="비밀번호 확인" onChange={changeInput}/>
+                    <input type="email" name="email" placeholder="아이디/비밀번호 찾을 시 확인용 이메일" onChange={changeInput}/>
                 </div>
                 <div className="joinwrap">
-                    <input type="text" placeholder="이름"/>
-                    <input type="text" placeholder="생년월일 8자리"/>
-                    <input type="text" placeholder="휴대폰 번호 입력 ('-' 제외)"/>
-                    <input type="text" placeholder="인증번호" dis/>
-                    <button value="인증요청" className="authChk">인증요청</button>
+                    <input type="text" name="name" placeholder="이름" onChange={changeInput}/>
+                    <input type="text" name="birthday" placeholder="생년월일 8자리" onChange={changeInput}/>
+                    <input type="text" name="tel" placeholder="휴대폰 번호 입력 ('-' 제외)" onChange={changeInput}/>
+                    <input type="text" name="checkSMS" id="checkSMS" placeholder="인증번호" onChange={changeChkInput} dis />
+                    <button type="button" className="authChk" onClick={() => {sendSMS();alert("인증번호 발송 완료!!");}}>인증요청</button>
+                    <button type="button" className="checkSMS" onClick={() => {checkSMS();}}>인증번호 확인</button>
                 </div>
                 <div className="joinwrap">
                     <div className="joinChk">
