@@ -7,16 +7,48 @@ const Rewarding = () => {
   const [rewardingRewards, setRewardingRewards] = useState([]);
   const [visibleRewards, setVisibleRewards] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
-  const [paymentAmounts, setPaymentAmounts] = useState({});
+  const [paymentAmountsData, setPaymentAmountsData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchRewardingRewards();
-  }, []);
+    fetchPaymentAmount();
+  }, [visibleRewards]);
 
   useEffect(() => {
-    fetchPaymentAmount();
-  }, [rewardingRewards]);
+    const fetchRewardingRewardsAndPaymentAmount = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8090/reward/find/rewarding/more",
+          {
+            params: {
+              startIndex: 0,
+              endIndex: visibleRewards,
+            },
+          }
+        );
+  
+        setRewardingRewards(response.data);
+        setShowLoadMoreButton(response.data.length >= visibleRewards);
+  
+        // Fetch payment amounts for all rewarding rewards
+        const rewardIds = response.data.map((reward) => reward.id);
+        const paymentResponse = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
+          params: {
+            rewardIds: rewardIds.join(","),
+          },
+        });
+  
+        // Update paymentAmountsData with the new payment amounts
+        setPaymentAmountsData(paymentResponse.data);
+      } catch (error) {
+        console.error("Error fetching rewarding rewards and payment amounts:", error);
+      }
+    };
+  
+    fetchRewardingRewardsAndPaymentAmount();
+  }, [visibleRewards]);
+  
 
   const fetchRewardingRewards = async () => {
     try {
@@ -39,15 +71,13 @@ const Rewarding = () => {
 
   const fetchPaymentAmount = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8090/payment/total-amount",
-        {
-          params: {
-            rewardIds: rewardingRewards.map((reward) => reward.id).join(","),
-          },
-        }
-      );
-      setPaymentAmounts(response.data);
+      const rewardIds = rewardingRewards.map((reward) => reward.id);
+      const response = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
+        params: {
+          rewardIds: rewardIds.join(","),
+        },
+      });
+      setPaymentAmountsData(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
     }
@@ -103,11 +133,13 @@ const Rewarding = () => {
             <div className="reward_name">{reward.projName}</div>
             <div className="reward_detail">
               <div className="price">
-                {paymentAmounts[reward.id]?.toLocaleString() || "0"}원 펀딩
+                {paymentAmountsData[reward.id]
+                ? `${paymentAmountsData[reward.id].toLocaleString()}원 펀딩`
+                : "0원 펀딩"}
               </div>
               <div className="rate">
                 {Math.floor(
-                  (paymentAmounts[reward.id] / reward.projTargetAmount) * 100
+                  (paymentAmountsData[reward.id] / reward.projTargetAmount) * 100
                 )}
                 %
               </div>

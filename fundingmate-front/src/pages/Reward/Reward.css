@@ -163,6 +163,7 @@
 }
 
 .open {
-  margin-left: 53%;
+  margin-left: 135px;
+  font-size: 13px;
   color: var(--main-color);
 }

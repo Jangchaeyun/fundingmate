@@ -35,10 +35,10 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/payment/total-amount")
-    public ResponseEntity<Map<Long, Integer>> getTotalPaymentAmounts(@RequestParam List<Long> rewardIds) {
+    @GetMapping("/payment/total-amount-same-rewards")
+    public ResponseEntity<Map<Long, Integer>> getTotalPaymentAmountsForSaneRewards(@RequestParam List<Long> rewardIds) {
         try {
-            Map<Long, Integer> totalAmounts = paymentService.getTotalPaymentAmountsForRewards(rewardIds);
+            Map<Long, Integer> totalAmounts = paymentService.getTotalPaymentAmountsForSameRewards(rewardIds);
             return ResponseEntity.ok(totalAmounts);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,4 +46,9 @@ public class PaymentController {
         }
     }
 
+    @GetMapping("/person-count/{rewardId}")
+    public ResponseEntity<Integer> getPersonCount(@PathVariable Long rewardId) {
+        Integer distinctUserCount = paymentService.countDistinctUserIdsForReward(rewardId);
+        return ResponseEntity.ok(distinctUserCount);
+    }
 }
