@@ -6,7 +6,7 @@ import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
 import moment from "moment";
 
-const Desc = ({ reward, totalPaymentAmount }) => {
+const Desc = ({ reward, totalPaymentAmount, personCount }) => {
   const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -16,6 +16,7 @@ const Desc = ({ reward, totalPaymentAmount }) => {
     const remainingDays = endDate.diff(today, "days");
     return remainingDays;
   };
+
 
   let navigate = useNavigate();
 
@@ -50,12 +51,14 @@ const Desc = ({ reward, totalPaymentAmount }) => {
         <div className="desc_content">
           <div className="fund_category">리워드</div>
           <div className="fund_price">
-            {totalPaymentAmount.toLocaleString()}원
+            {totalPaymentAmount.toLocaleString()}원&nbsp;
             <b className="rewarding">펀딩중</b>
           </div>
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
-            <div className="fund_rate_per">1050%</div>
+            <div className="fund_rate_per">{Math.floor(
+                  (totalPaymentAmount / reward.projTargetAmount) * 100
+                )}%</div>
             <sub className="fund_rate_price">
               목표 금액 {reward.projTargetAmount}원
             </sub>
@@ -73,8 +76,13 @@ const Desc = ({ reward, totalPaymentAmount }) => {
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
-            <div className="fund_people_count">140명</div>
-
+            <div className="fund_people_count"> 
+            {personCount !== undefined ? (
+              <div className="fund_people_count">{personCount}명</div>
+              ) : (
+                <div className="fund_people_count">Loading...</div>
+              )}
+            </div>
             <button
               className={hasProjDateEndPassed ? "funding-closed" : "fund_btn"}
               onClick={() => {

@@ -111,7 +111,7 @@ public class RewardController {
         }
     }
 
-    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {

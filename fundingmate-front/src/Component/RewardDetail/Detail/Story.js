@@ -43,6 +43,7 @@ const Story = () => {
     user: null,
     rewardTypes: [],
   });
+  const [personCount, setPersonCount] = useState(0);
   const { rewardId } = useParams();
 
   useEffect(() => {
@@ -56,12 +57,18 @@ const Story = () => {
       .catch((err) => {
         console.log(err);
       });
+      
+
+    fetchParticipantCount();
+
   }, [rewardId]);
+
+  
 
   const fetchTotalPaymentAmounts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/payment/total-amount?rewardIds=${reward.id}`
+        `http://localhost:8090/payment/total-amount-same-rewards?rewardIds=${reward.id}`,
       );
       const totalAmounts = response.data;
       setTotalPaymentAmounts(totalAmounts);
@@ -70,16 +77,31 @@ const Story = () => {
     }
   };
 
+  const fetchParticipantCount = async () => {
+    try {
+      const response = await axios.get (
+        `http://localhost:8090/person-count/${rewardId}`
+      );
+      const count = response.data;
+      setPersonCount(count);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
-    fetchTotalPaymentAmounts();
-  }, [reward.id]);
+    if (reward && reward.id) {
+      fetchTotalPaymentAmounts();
+    }
+  }, [reward, totalPaymentAmounts]);
 
   return (
     <div className="desc">
       {viewDesc && reward && (
         <Desc
           reward={reward}
-          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0} // Accessing the specific payment amount for the current reward
+          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
+          personCount= {personCount}
         />
       )}
       <div className="menu">
