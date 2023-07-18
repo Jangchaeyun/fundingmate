@@ -1,12 +1,15 @@
 package com.fund.fundingmate.domain.investment.entity;
 
+import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "investment")
@@ -29,7 +32,7 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="investRepImgSavedName_img")
     private File investRepImgSavedName;
 
@@ -49,9 +52,14 @@ public class Investment {
 
     private String investVideoUrl;
 
+  /*  @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="investContentImgSavedName_img")
+    private List<File> investContentImgSavedName;*/
+
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="investContentImgSavedName_img")
-    private File investContentImgSavedName;
+    private File  investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -103,45 +111,7 @@ public class Investment {
     @JoinColumn(name = "user_no")
     private User user;
 
-
-   /* @Builder
-    public Investment(Long investNo, String investCategory, String investProjName, Integer investTargetAmount, Date investProjDateStart, Date investProjDateEnd,
-                      String investRepImgSavedName, String investProjKeyword,String useOfFunds, Date useOfFundsDateStart, Date useOfFundsDateEnd,
-                      Integer rateOfReturn,Date expectedPaymentDate,  String repaymentMethod,String investVideoUrl, String investContentImgSavedName,
-                      String investItemIntro, String investItemBusinessValue, String investItemValue, String investItemBenefit,
-                      String investProjContent, String investIdBusinessLicenseImgSavedName,String taxBillEmail,
-                      String websiteUrl, String facebookUrl,  String instagramUrl, String blogUrl,String twitterUrl , Integer userNo,User user ){
-        this.investNo = investNo;
-        this.investCategory = investCategory;
-        this.investProjName = investProjName;
-        this.investTargetAmount = investTargetAmount;
-        this.investProjDateStart = investProjDateStart;
-        this.investProjDateEnd = investProjDateEnd;
-        this.investRepImgSavedName = investRepImgSavedName;
-        this.investProjKeyword = investProjKeyword;
-        this.useOfFunds = useOfFunds;
-        this.useOfFundsDateStart = useOfFundsDateStart;
-        this.useOfFundsDateEnd = useOfFundsDateEnd;
-        this.rateOfReturn = rateOfReturn;
-        this.expectedPaymentDate = expectedPaymentDate;
-        this.repaymentMethod = repaymentMethod;
-        this.investVideoUrl = investVideoUrl;
-        this.investContentImgSavedName = investContentImgSavedName;
-        this.investItemIntro = investItemIntro;
-        this.investItemBusinessValue = investItemBusinessValue;
-        this.investItemValue = investItemValue;
-        this.investItemBenefit = investItemBenefit;
-        this.investProjContent = investProjContent;
-        this.investIdBusinessLicenseImgSavedName = investIdBusinessLicenseImgSavedName;
-        this.taxBillEmail = taxBillEmail;
-        this.websiteUrl = websiteUrl;
-        this.facebookUrl = facebookUrl;
-        this.instagramUrl = instagramUrl;
-        this.blogUrl = blogUrl;
-        this.twitterUrl = twitterUrl;
-        this.userNo = userNo;
-        this.user=user;
-    }
-*/
+    @OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
+    private List<InvestType> investTypes = new ArrayList<>();
 
 }
