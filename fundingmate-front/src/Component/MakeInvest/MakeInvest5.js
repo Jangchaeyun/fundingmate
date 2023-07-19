@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from "react";
-import { useNavigate , useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./MakeInvest5.css";
 import "./MakeInvestCommon.css";
 import {PlusCircleOutlined,IeOutlined,FacebookOutlined, InstagramOutlined,BoldOutlined ,TwitterOutlined } from "@ant-design/icons";
@@ -13,6 +14,137 @@ const MakeInvest5 = () => {
 
     const handleInputChange = (e) => {
         setTotInfo({...totInfo, [e.target.name]:e.target.value}) ;
+  const location = useLocation();
+  const preTotInfo = location.state.totInfo;
+  const [totInfo, setTotInfo] = useState(preTotInfo);
+
+  const { investmentId } = useParams();
+
+  const handleInputChange = (e) => {
+    setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
+  };
+
+  const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
+  const handleNumInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // 숫자만 입력되도록 검증
+    if (regexPattern.test(value)) {
+      setTotInfo({ ...totInfo, [name]: value });
+    }
+  };
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage2, setSelectedImage2] = useState(null);
+
+  useEffect(() => {
+    let file = totInfo.investIdBusinessLicenseImgSavedName;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+    file = totInfo.investBankAccountCopyImgSavedName;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage2(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }, []);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+
+      reader.readAsDataURL(file);
+      setTotInfo({ ...totInfo, investIdBusinessLicenseImgSavedName: file });
+    }
+  };
+
+  const handleImageClick = () => {
+    document.getElementById("imageUpload").click();
+  };
+
+  const handleImageUpload2 = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        setSelectedImage2(e.target.result);
+      };
+
+      reader.readAsDataURL(file);
+      setTotInfo({ ...totInfo, investBankAccountCopyImgSavedName: file });
+      console.log(file.src);
+    }
+  };
+
+  const handleImageClick2 = () => {
+    document.getElementById("imageUpload2").click();
+  };
+
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    const { addressType, bname, buildingName } = data;
+    if (addressType === "R") {
+      if (bname !== "") {
+        extraAddress += bname;
+      }
+      if (buildingName !== "") {
+        extraAddress += `${extraAddress !== "" && ", "}${buildingName}`;
+      }
+      fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
+    }
+
+    setTotInfo({ ...totInfo, businessAddress: fullAddress });
+
+    setShowModal(false); // Close the modal
+  };
+
+  const handleAddressSearch = () => {
+    setShowModal(true);
+  };
+  const [showModal, setShowModal] = useState(false);
+  const navigateToStep1 = useNavigate();
+  const navigateToStep2 = useNavigate();
+
+  const handlePreviousStep = () => {
+    navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
+  };
+  const userId = useSelector((state) => state.Id);
+  // const [userId, setUserId] = useState(null);
+  // const { id, ...requestData } = totInfo;
+  const handleNextStep = () => {
+    // console.log(totInfo);
+    // console.log(totInfo.cards);
+    // console.log(totInfo.cards.join(","));
+    // const investTypes = [];
+    // investTypes = totInfo.cards[0].join(",");
+    // console.log(investTypes);
+    const convertToFilesDTO = (files) => {
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
+      }
+      return {
+        fileId: null,
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
+      };
     };
 
     const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
