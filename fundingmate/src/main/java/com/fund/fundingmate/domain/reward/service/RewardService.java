@@ -57,7 +57,7 @@ public class RewardService {
         this.modelMapper = modelMapper;
     }
 
-    public void createReward(RewardDTO rewardDTO, Long userId) {
+    public Long createReward(RewardDTO rewardDTO, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
 
