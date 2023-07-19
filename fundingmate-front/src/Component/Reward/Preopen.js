@@ -19,7 +19,7 @@ const Preopen = () => {
   const fetchPrewardRewards = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8090/reward/find/prereward"
+        "http://localhost:8080/reward/find/prereward"
       );
       setRewards(response.data);
     } catch (error) {
@@ -53,7 +53,7 @@ const Preopen = () => {
                   onClick={() => handleRewardClick(reward.id)}
                 >
                   <img
-                    src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+                    src={`http://localhost:8080/img/${reward.repFile.fileName}`}
                     className="reward_img"
                     alt={reward.rewardName}
                   />
@@ -79,7 +79,7 @@ const Preopen = () => {
           {rewards.map((reward) => (
             <div key={reward.id} className="reward_card">
               <img
-                src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+                src={`http://localhost:8080/img/${reward.repFile.fileName}`}
                 className="reward_img"
                 alt={reward.rewardName}
               />

@@ -18,7 +18,7 @@ const Finish = () => {
   const fetchFinishRewards = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8090/reward/find/finishreward/more",
+        "http://localhost:8080/reward/find/finishreward/more",
         {
           params: {
             startIndex: 0,
@@ -32,11 +32,14 @@ const Finish = () => {
 
       // Fetch payment amounts for all rewarding rewards
       const rewardIds = response.data.map((reward) => reward.id);
-      const paymentResponse = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
-        params: {
-          rewardIds: rewardIds.join(","),
-        },
-      });
+      const paymentResponse = await axios.get(
+        "http://localhost:8080/payment/total-amount-same-rewards",
+        {
+          params: {
+            rewardIds: rewardIds.join(","),
+          },
+        }
+      );
 
       setPaymentAmountsData(paymentResponse.data);
     } catch (error) {
@@ -47,11 +50,14 @@ const Finish = () => {
   const fetchPaymentAmount = async () => {
     try {
       const rewardIds = finishRewards.map((reward) => reward.id);
-      const response = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
-        params: {
-          rewardIds: rewardIds.join(","),
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:8080/payment/total-amount-same-rewards",
+        {
+          params: {
+            rewardIds: rewardIds.join(","),
+          },
+        }
+      );
       setPaymentAmountsData(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
@@ -62,7 +68,7 @@ const Finish = () => {
     const nextVisibleRewards = visibleRewards + 4;
     try {
       const response = await axios.get(
-        "http://localhost:8090/reward/find/finishreward/more",
+        "http://localhost:8080/reward/find/finishreward/more",
         {
           params: {
             startIndex: visibleRewards,
@@ -95,7 +101,7 @@ const Finish = () => {
             onClick={() => handleRewardClick(reward.id)}
           >
             <img
-              src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+              src={`http://localhost:8080/img/${reward.repFile.fileName}`}
               className="reward_img"
               alt={reward.projName}
             />
@@ -106,7 +112,11 @@ const Finish = () => {
                 {paymentAmountsData[reward.id]?.toLocaleString() || "0"}원 펀딩
               </div>
               <div className="rate">
-                {((paymentAmountsData[reward.id] / reward.projTargetAmount) * 100).toFixed(1)}%
+                {(
+                  (paymentAmountsData[reward.id] / reward.projTargetAmount) *
+                  100
+                ).toFixed(1)}
+                %
               </div>
               <div className="d_day">종료</div>
             </div>
