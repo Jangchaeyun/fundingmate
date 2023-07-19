@@ -7,14 +7,11 @@ const Finish = () => {
   const [finishRewards, setFinishRewards] = useState([]);
   const [visibleRewards, setVisibleRewards] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
-  const [paymentAmounts, setPaymentAmounts] = useState({});
+  const [paymentAmountsData, setPaymentAmountsData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchFinishRewards();
-  }, []);
-
-  useEffect(() => {
     fetchPaymentAmount();
   }, [finishRewards]);
 
@@ -32,27 +29,42 @@ const Finish = () => {
       const fetchedRewards = response.data;
       setFinishRewards(fetchedRewards);
       setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
+
+      const rewardIds = response.data.map((reward) => reward.id);
+      const paymentResponse = await axios.get(
+        "http://localhost:8090/payment/total-amount-same-rewards",
+        {
+          params: {
+            rewardIds: rewardIds.join(","),
+          },
+        }
+      );
+
+      setPaymentAmountsData(paymentResponse.data);
     } catch (error) {
-      console.error("Error fetching finish rewards:", error);
+      console.error(
+        "Error fetching rewarding rewards and payment amounts:",
+        error
+      );
     }
   };
 
   const fetchPaymentAmount = async () => {
     try {
+      const rewardIds = finishRewards.map((reward) => reward.id);
       const response = await axios.get(
-        "http://localhost:8090/payment/total-amount",
+        "http://localhost:8090/payment/total-amount-same-rewards",
         {
           params: {
-            rewardIds: finishRewards.map((reward) => reward.id).join(","),
+            rewardIds: rewardIds.join(","),
           },
         }
       );
-      setPaymentAmounts(response.data);
+      setPaymentAmountsData(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
     }
   };
-
   const loadMoreRewards = async () => {
     const nextVisibleRewards = visibleRewards + 4;
     try {
@@ -98,11 +110,14 @@ const Finish = () => {
             <div className="reward_name">{reward.projName}</div>
             <div className="reward_detail">
               <div className="price">
-                {paymentAmounts[reward.id]?.toLocaleString() || "0"}원 펀딩
+                {paymentAmountsData[reward.id]
+                  ? `${paymentAmountsData[reward.id].toLocaleString()}원 펀딩`
+                  : "0원 펀딩"}
               </div>
               <div className="rate">
                 {Math.floor(
-                  (paymentAmounts[reward.id] / reward.projTargetAmount) * 100
+                  (paymentAmountsData[reward.id] / reward.projTargetAmount) *
+                    100
                 )}
                 %
               </div>

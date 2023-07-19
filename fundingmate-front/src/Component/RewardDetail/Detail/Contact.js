@@ -50,6 +50,8 @@ const Contact = () => {
   const loggedInUser = 1;
   const [replyText, setReplyText] = useState({});
   const [replyData, setReplyData] = useState({});
+  const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
+  const [personCount, setPersonCount] = useState(0);
 
   const submitInquiry = () => {
     const requestBody = {
@@ -159,13 +161,49 @@ const Contact = () => {
         console.log(error);
       }
     };
-
+    fetchParticipantCount();
     fetchData();
   }, [rewardId]);
 
+  const fetchTotalPaymentAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+      );
+      const totalAmounts = response.data;
+      setTotalPaymentAmounts(totalAmounts);
+    } catch (error) {
+      console.error("Error fetching total payment amounts:", error);
+    }
+  };
+
+  const fetchParticipantCount = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/person-count/${rewardId}`
+      );
+      const count = response.data;
+      setPersonCount(count);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (reward && reward.id) {
+      fetchTotalPaymentAmounts();
+    }
+  }, [reward, totalPaymentAmounts]);
+
   return (
     <div className="desc">
-      {viewDesc && <Desc reward={reward} />}
+      {viewDesc && (
+        <Desc
+          reward={reward}
+          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
+          personCount={personCount}
+        />
+      )}
       <div className="menu">
         <hr />
         <div className="menu_items">
