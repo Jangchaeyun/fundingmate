@@ -17,6 +17,7 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
     return remainingDays;
   };
 
+
   let navigate = useNavigate();
 
   const handleCompanyClick = () => {
@@ -56,8 +57,7 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
             <div className="fund_rate_per">
-              {Math.floor((totalPaymentAmount / reward.projTargetAmount) * 100)}
-              %
+            {((totalPaymentAmount / reward.projTargetAmount) * 100).toFixed(1)}%
             </div>
             <sub className="fund_rate_price">
               목표 금액 {reward.projTargetAmount.toLocaleString()}원
@@ -76,11 +76,11 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
-            <div className="fund_people_count">
-              {personCount !== undefined ? (
-                <div className="fund_people_count">{personCount}명</div>
+            <div className="fund_people_count"> 
+            {personCount !== undefined ? (
+              <div className="fund_people_count">{personCount}명</div>
               ) : (
-                <div className="fund_people_count">0명</div>
+                <div className="fund_people_count">Loading...</div>
               )}
             </div>
             <button
@@ -112,7 +112,9 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
             <div className="end2">
-              {moment(reward.projDateEnd).add(1, "day").format("YYYY-MM-DD")}
+              {moment(reward.projDateEnd)
+                .subtract(1, "day")
+                .format("YYYY-MM-DD")}
             </div>
             <div className="end3">{reward.deliveryDate}</div>
           </div>
