@@ -1,16 +1,21 @@
 .findIdform {
     width: 350px;
     margin: 70px auto;
-    text-align: center;
+    /*text-align: center;*/
 }
 .findTitle {
     margin: 20px 0;
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
 }
-.findwrap-text {
-    margin: 20px;
+.findwrap {
+    position: relative;
+    margin-bottom: 10px;
 }
+/*.authblank {*/
+/*    margin-top: 5px;*/
+/*}*/
 .findwrap>input {
     box-sizing: border-box;
     display: block;
@@ -34,10 +39,21 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.findwrap>p {
+.findwrapTab {
+    padding: 10px 50px 0 10px;
+    position: relative;
+    cursor: pointer;
+}
+.findwrapTab>p {
     font-size: 12px;
     color: #9b9b9b;
     margin: 5px 0 20px;
+}
+.findwrap-icon {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    color: #9b9b9b;
 }
 .findSearch {
     box-sizing: border-box;
@@ -59,4 +75,31 @@
     line-height: 40px;
     border: 1px solid #14B8FF;
     color: #14B8FF;
+    text-align: center;
+}
+.authChkBtn {
+    position: absolute;
+    top: 79%;
+    right: 10px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #14B8FF;
+    color: #14B8FF;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+.checkSmsBtn {
+    position: relative;
+    top: -35px;
+    right: -240px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #14B8FF;
+    color: #14B8FF;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
 }

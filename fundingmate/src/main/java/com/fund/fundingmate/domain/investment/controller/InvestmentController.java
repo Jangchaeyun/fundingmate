@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.StandardOpenOption;
 
@@ -49,8 +50,8 @@ public class InvestmentController {
         }
     }*/
 
-    /* // InvestmentDTO를 Investment 엔티티로 변환
-     *//*         Investment investment = investmentService.convertToInvestment(investmentDTO);
+   /* // InvestmentDTO를 Investment 엔티티로 변환
+   *//*         Investment investment = investmentService.convertToInvestment(investmentDTO);
 
             // Investment 엔티티를 저장
             investmentService.saveInvestment(investment);*/

@@ -18,5 +18,10 @@ public class FileDTO {
 //    private String fileOriginalName;
 //    private String filePath;
 //    private String fileSize;
+
+
     private Date fileRegistrationDate;
+
+
+
 }
