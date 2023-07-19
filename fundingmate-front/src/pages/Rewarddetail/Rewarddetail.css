@@ -77,22 +77,21 @@
 }
 
 .fund_rate_title {
-  width: 22%;
-  margin-left: 0%;
-  margin-right: 7%;
+  width: 53px;
+  margin-right: 19px;
 }
 
 .fund_rate_per {
-  margin-left: -1%;
+  /* margin-left: 0px; */
   color: var(--black);
-  margin-right: 6%;
+  margin-right: 32px;
 }
 
 .fund_rate_price {
   color: var(--black);
   font-size: 10px;
   margin-top: 1%;
-  margin-right: -15%;
+  margin-right: -15px;
 }
 
 .fund_date {
@@ -101,18 +100,18 @@
   margin-left: 0.6%;
   color: var(--grey);
   font-size: 12px;
-  margin-top: 2%;
+  margin-top: 4%;
 }
 
 .fund_date_title {
   color: var(--grey);
   margin-left: 0%;
-  margin-right: 9%;
+  margin-right: 32px;
 }
 
 .fund_date_dday {
   color: var(--black);
-  margin-right: 12%;
+  margin-right: 37px;
 }
 
 .fund_date_enddate {
@@ -144,13 +143,13 @@
 
 .fund_people_count {
   color: var(--black);
-  width: 43%;
-  margin-left: -14%;
-  margin-top: 4%;
+  width: 36px;
+  margin-left: -17px;
+  margin-top: 4px;
 }
 
 .fund_btn {
-  width: 74%;
+  width: 256px;
   background-color: var(--main-color);
   color: var(--white);
   border: none;
@@ -535,6 +534,20 @@
   font-size: 13px;
 }
 
+.reward_reply_content {
+  display: flex;
+}
+
+.reply_reward_con_name {
+  margin-left: 4%;
+  margin-bottom: 1%;
+}
+
+.reply_reward_con_content {
+  margin-left: 4%;
+  margin-bottom: 1%;
+}
+
 .reply_text {
   margin-left: 2%;
   width: 85%;
@@ -549,10 +562,10 @@
 }
 
 .reply_submit {
-  margin-top: 1%;
   float: right;
-  margin-right: 2.1%;
-  width: 13%;
+  margin-left: 1.1%;
+  width: 76px;
+  border-radius: 5px;
   height: 25px;
   border: 1px solid var(--main-color);
   justify-content: center;

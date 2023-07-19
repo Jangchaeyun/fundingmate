@@ -1,10 +1,12 @@
 package com.fund.fundingmate.domain.user.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
@@ -17,6 +19,4 @@ public class UserDTO {
     private String tel;
     private String notificationStatus;
     private Integer vitalization;
-    private String snsLogin;
-    private String joinDate;
 }

@@ -1,15 +1,10 @@
 package com.fund.fundingmate.domain.investment.entity;
 
-import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.entity.User;
-import com.fund.fundingmate.global.file.dto.FileDTO;
-import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "investment")
@@ -21,7 +16,7 @@ import java.util.List;
 public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long investNo;
 
     private String investCategory;
 
@@ -32,9 +27,8 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investRepImgSavedName_img")
-    private File investRepImgSavedName;
+
+    private String investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -52,14 +46,7 @@ public class Investment {
 
     private String investVideoUrl;
 
-  /*  @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investContentImgSavedName_img")
-    private List<File> investContentImgSavedName;*/
-
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investContentImgSavedName_img")
-    private File  investContentImgSavedName;
+    private String investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -71,9 +58,7 @@ public class Investment {
 
     private String investProjContent;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "investIdBusinessLicenseImgSavedName_img")
-    private File investIdBusinessLicenseImgSavedName;
+    private String investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -85,9 +70,7 @@ public class Investment {
 
     private String depositorName;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "investBankAccountCopyImgSavedName_img")
-    private File investBankAccountCopyImgSavedName;
+    private String investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 
@@ -105,13 +88,8 @@ public class Investment {
 
     @Column(nullable = false)
     private String twitterUrl;
-/*        @Column(name = "user_no")
-        private Integer userNo;*/
+
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;
-
-    @OneToMany(mappedBy = "investment", cascade = CascadeType.ALL)
-    private List<InvestType> investTypes = new ArrayList<>();
-
 }
