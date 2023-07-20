@@ -21,8 +21,9 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
 
-    @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
-    private List<Reward> fundingimg;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reward_id")
+    private Reward reward;
 
     private String fileName;
 //

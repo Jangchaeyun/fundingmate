@@ -19,10 +19,10 @@ public class RewardDTO {
     private LocalDate projDateStart;
     private LocalDate projDateEnd;
     private LocalDate deliveryDate;
-    private FileDTO repFile;
+    private FileDTO rewardContentImgSavedName;
     private String projKeyWord;
     private String rewardVideoAddress;
-    private FileDTO conFile;
+    private FileDTO rewardRepImgSavedName;
     private String projContent;
     private String rewardRefundExchangePolicy;
     private String rewardContact;
@@ -33,12 +33,12 @@ public class RewardDTO {
     private String manufacturer;
     private String rewardLaw;
     private String asPhoneNumber;
-    private FileDTO businessImg;
+    private FileDTO rewardIdBusinessLicenseImgSavedName;
     private String businessAddress;
     private String bank;
     private String accNumber;
     private String depositorName;
-    private FileDTO bankImg;
+    private FileDTO rewardBankAccountCopyImgSavedName;
     private String taxBillEmail;
     private String websiteUrl;
     private String facebookUrl;

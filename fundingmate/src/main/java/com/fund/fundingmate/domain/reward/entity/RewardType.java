@@ -42,7 +42,6 @@ public class RewardType {
     private Reward reward;
 
     @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<RewardOption> rewardOptions;
 
     @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL, orphanRemoval = true)

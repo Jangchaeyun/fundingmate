@@ -10,7 +10,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined
+  TwitterOutlined,
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -35,7 +35,7 @@ const MakeReward5 = () => {
   const handleNumInputChange = (e) => {
     const { name, value } = e.target;
     if (regexPattern.test(value)) {
-      setTotInfo({ ...totInfo, [name]: value });
+      setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
     }
   };
 
@@ -43,28 +43,27 @@ const MakeReward5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.businessImg;
-    if (file) {
+    if (totInfo.businessImg) {
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage(e.target.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(totInfo.businessImg);
     }
-    file = totInfo.bankImg;
-    if (file) {
+    if (totInfo.bankImg) {
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage2(e.target.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(totInfo.bankImg);
     }
-  }, []);
+  }, [totInfo.businessImg, totInfo.bankImg]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
-    if (file) {
+    if (file && file instanceof File) {
+      // Check if it's a valid File object
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -72,13 +71,13 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
+
       setTotInfo((prevTotInfo) => ({
         ...prevTotInfo,
         businessImg: file,
       }));
     }
   };
-  
 
   const handleImageClick = () => {
     document.getElementById("imageUpload").click();
@@ -87,7 +86,8 @@ const MakeReward5 = () => {
   const handleImageUpload2 = (event) => {
     const file = event.target.files[0];
 
-    if (file) {
+    if (file && file instanceof File) {
+      // Check if it's a valid File object
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -95,6 +95,7 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
+
       setTotInfo((prevTotInfo) => ({
         ...prevTotInfo,
         bankImg: file,
@@ -150,7 +151,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files[0].name,
-        fileRegistrationDate: null
+        fileRegistrationDate: null,
       };
     };
 
@@ -158,7 +159,7 @@ const MakeReward5 = () => {
       if (!file) {
         return null;
       }
-  
+
       return {
         fileId: null,
         fileName: file.name,
@@ -175,31 +176,27 @@ const MakeReward5 = () => {
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
         totInfo.businessImg
       ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.bankImg
-      )
+      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(totInfo.bankImg),
     };
 
-    
-
     axios
-    .post("http://localhost:8080/makeReward", requestData, {
-      params: { userId: userId }, // Pass userId as a parameter
-    })
-    .then((response) => {
-      console.log(response.data);
-      alert("프로젝트가 등록되었습니다.");
-      navigateToStep2(`/reward-detail/story/:rewardId`, {
-        state: { totInfo: totInfo },
+      .post("http://localhost:8080/makeReward", requestData, {
+        params: { userId: userId }, // Pass userId as a parameter
+      })
+      .then((response) => {
+        console.log(response.data);
+        alert("프로젝트가 등록되었습니다.");
+        navigateToStep2(`/reward-detail/story/:rewardId`, {
+          state: { totInfo: totInfo },
+        });
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
       });
   };
 
   return (
     <>
-      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">

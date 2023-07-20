@@ -23,6 +23,5 @@ public class RewardOption {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reward_type_no")
-    @JsonManagedReference
     private RewardType rewardType;
 }

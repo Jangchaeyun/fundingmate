@@ -35,7 +35,7 @@ const MakeReward1 = () => {
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        repFile: null,
+        repFile: [],
         projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
@@ -61,8 +61,8 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        businessImg: null,
-        bankImg: null,
+        businessImg: [],
+        bankImg: [],
       });
     }
   }, []);
@@ -93,7 +93,12 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, repFile: file });
+      setTotInfo((prevTotInfo) => ({
+        ...prevTotInfo,
+        businessImg: [
+          { fileId: null, fileName: file.name, fileRegistrationDate: null },
+        ],
+      }));
     }
   };
 
@@ -209,14 +214,14 @@ const MakeReward1 = () => {
             setTotInfo({
               ...totInfo,
               projDateStart: dateStrings[0],
-              projDateEnd: dateStrings[1]
+              projDateEnd: dateStrings[1],
             });
           }}
           showToday={true}
           allowClear={false}
           value={[
             totInfo.projDateStart ? dayjs(totInfo.projDateStart) : null,
-            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null
+            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null,
           ]}
           format="YYYY-MM-DD"
         />
