@@ -35,12 +35,10 @@ public class RewardType {
 
     private String rewardContent;
 
-
     private Boolean rewardShipAddress;
 
     @ManyToOne
-    @JoinColumn(name = "reward_no")
-    @JsonBackReference
+    @JoinColumn(name = "reward_id")
     private Reward reward;
 
     @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL)

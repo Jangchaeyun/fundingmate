@@ -13,7 +13,7 @@ import {
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const MakeReward5 = () => {
   const location = useLocation();
@@ -23,14 +23,13 @@ const MakeReward5 = () => {
   const { rewardId } = useParams();
 
   const handleInputChange = (e) => {
-    setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setTotInfo({ ...totInfo, [name]: value });
   };
 
   const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
   const handleNumInputChange = (e) => {
     const { name, value } = e.target;
-
-    // 숫자만 입력되도록 검증
     if (regexPattern.test(value)) {
       setTotInfo({ ...totInfo, [name]: value });
     }
@@ -128,6 +127,7 @@ const MakeReward5 = () => {
     navigateToStep1("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
   };
 
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.Id);
 
   const handleNextStep = () => {
@@ -158,12 +158,8 @@ const MakeReward5 = () => {
     const requestData = {
       ...totInfo,
       rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(
-        totInfo.rewardContentImgSavedName
-      ),
-      rewardRepImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardRepImgSavedName
-      ),
+      rewardContentImgSavedName: convertToFilesDTO(totInfo.rewardContentImgSavedName),
+      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.rewardRepImgSavedName),
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
         totInfo.rewardIdBusinessLicenseImgSavedName
       ),
@@ -173,19 +169,19 @@ const MakeReward5 = () => {
     };
 
     axios
-      .post("http://localhost:8080/make-reward", requestData, {
-        params: { userId: userId },
-      })
-      .then((response) => {
-        console.log(response.data);
-        alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/:rewardId`, {
-          state: { totInfo: totInfo },
-        });
-      })
-      .catch((error) => {
-        console.error(error);
+    .post("http://localhost:8080/make-reward", requestData, {
+      params: { userId: userId }, // Pass userId as a parameter
+    })
+    .then((response) => {
+      console.log(response.data);
+      alert("프로젝트가 등록되었습니다.");
+      navigateToStep2(`/reward-detail/story/:rewardId`, {
+        state: { totInfo: totInfo },
       });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
 
   return (

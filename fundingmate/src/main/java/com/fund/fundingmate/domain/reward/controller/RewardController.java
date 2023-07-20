@@ -51,18 +51,17 @@ public class RewardController {
     @PostMapping("/make-reward")
     public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId) {
         try {
-            System.out.println(userId);
-            System.out.println(rewardDTO);
-            System.out.println(rewardDTO.getRewardTypes());
-
             Long savedRewardId = rewardService.createReward(rewardDTO, userId);
 
             Map<String, Object> rewardMap = rewardService.getRewardById(savedRewardId);
             RewardDTO createdReward = (RewardDTO) rewardMap.get("reward");
             return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 

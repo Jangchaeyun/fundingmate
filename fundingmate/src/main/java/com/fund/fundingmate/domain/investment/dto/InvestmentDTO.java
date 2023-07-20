@@ -24,7 +24,6 @@ public class InvestmentDTO {
 
     private String investCategory;
 
-
     private String investProjName;
 
     private Integer investTargetAmount;

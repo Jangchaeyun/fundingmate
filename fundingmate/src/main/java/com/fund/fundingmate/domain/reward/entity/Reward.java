@@ -107,7 +107,7 @@ public class Reward {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reward")
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<RewardType> rewardTypes;
 }
