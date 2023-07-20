@@ -94,7 +94,7 @@ const MakeInvest4 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/story", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestStory", { state: { totInfo: totInfo } });
   };
 
   //   const handleNextStep = () => {
@@ -112,7 +112,7 @@ const MakeInvest4 = () => {
 
   const handleNextStep = () => {
     //setTotInfo({...totInfo, cards:[...cards]})
-    navigateToStep2("/make-invest/hostinfo", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeInvestHostinfo", { state: { totInfo: totInfo } });
   };
 
   const rewardChange = (e) => {

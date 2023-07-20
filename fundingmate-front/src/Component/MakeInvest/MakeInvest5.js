@@ -182,7 +182,7 @@ const MakeInvest5 = () => {
     };
 
     axios
-      .post("http://localhost:8080/make-invest/hostinfo", requestData, {
+      .post("http://localhost:8080/makeInvestHostinfo", requestData, {
         params: { userId: userId }
       }) // 액시오 요청 보내기
       .then((response) => {

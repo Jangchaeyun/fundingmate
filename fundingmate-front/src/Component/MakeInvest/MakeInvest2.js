@@ -34,7 +34,7 @@ const MakeInvest2 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/basicinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestBasicinfo", { state: { totInfo: totInfo } });
   };
 
   //   const handleNextStep = () => {
@@ -51,7 +51,7 @@ const MakeInvest2 = () => {
   //   };
 
   const handleNextStep = () => {
-    navigateToStep2("/make-invest/story", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeInvestStory", { state: { totInfo: totInfo } });
   };
 
   return (

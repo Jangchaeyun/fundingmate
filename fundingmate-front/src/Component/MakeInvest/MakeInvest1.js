@@ -122,7 +122,7 @@ const MakeInvest1 = () => {
   //   };
 
   const handleNextStep = () => {
-    navigate("/make-invest/moneyinfo", { state: { totInfo: totInfo } });
+    navigate("/makeInvestMoneyinfo", { state: { totInfo: totInfo } });
   };
 
   return (

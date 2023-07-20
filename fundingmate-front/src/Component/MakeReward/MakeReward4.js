@@ -20,11 +20,11 @@ const MakeReward4 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-reward/typelist", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeRewardTypelist", { state: { totInfo: totInfo } });
   };
 
   const handleNextStep = () => {
-    navigateToStep2("/make-reward/hostinfo", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeRewardHostinfo", { state: { totInfo: totInfo } });
   };
 
   return (

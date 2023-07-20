@@ -99,12 +99,12 @@ const MakeReward3 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-reward/story", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeRewardStory", { state: { totInfo: totInfo } });
   };
 
   const handleNextStep = () => {
     //setTotInfo({...totInfo, cards:[...cards]})
-    navigateToStep2("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
   const rewardChange = (e) => {

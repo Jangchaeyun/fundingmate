@@ -103,7 +103,7 @@ const MakeReward1 = () => {
 
   const navigate = useNavigate(); // useNavigate 추가
   const handleNextStep = () => {
-    navigate("/make-reward/story", { state: { totInfo: totInfo } });
+    navigate("/makeRewardStory", { state: { totInfo: totInfo } });
   };
 
   return (
