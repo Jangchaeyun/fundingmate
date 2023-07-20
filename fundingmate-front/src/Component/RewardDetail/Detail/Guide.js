@@ -15,7 +15,7 @@ const Guide = () => {
     const fetchReward = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8090/reward-detail/guide/${rewardId}`
+          `http://localhost:8080/reward-detail/guide/${rewardId}`
         );
         console.log(response.data);
         setReward(response.data.reward);
@@ -31,7 +31,7 @@ const Guide = () => {
   const fetchTotalPaymentAmounts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
       );
       const totalAmounts = response.data;
       setTotalPaymentAmounts(totalAmounts);
@@ -43,7 +43,7 @@ const Guide = () => {
   const fetchParticipantCount = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/person-count/${rewardId}`
+        `http://localhost:8080/person-count/${rewardId}`
       );
       const count = response.data;
       setPersonCount(count);

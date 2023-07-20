@@ -35,7 +35,7 @@ const Checkout = () => {
   const fetchRewardDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/reward-detail/story/${rewardId}`
+        `http://localhost:8080/reward-detail/story/${rewardId}`
       );
       setReward(response.data.reward);
       console.log(response.data.reward);
@@ -47,7 +47,7 @@ const Checkout = () => {
   const fetchRewardType = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/reward/rewardcheckout/checktype/${rewardId}/${rewardTypeId}`
+        `http://localhost:8080/reward/rewardcheckout/checktype/${rewardId}/${rewardTypeId}`
       );
       setRewardType(response.data);
       setPaymentAmount(response.data?.rewardAmount || 0);
@@ -91,14 +91,13 @@ const Checkout = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8090/payment/create",
+        "http://localhost:8080/payment/create",
         paymentData
       );
-      console.log(response.data); // Assuming the server returns a success message
-      navigate("/reward-checkout/complete"); // Redirect to the success page after successful payment
+      console.log(response.data);
+      navigate("/reward-checkout/complete");
     } catch (error) {
       console.log(error);
-      // Handle error here, show error message to the user, etc.
     }
   };
 

@@ -48,7 +48,7 @@ const Story = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8090/reward-detail/story/${rewardId}`)
+      .get(`http://localhost:8080/reward-detail/story/${rewardId}`)
       .then((res) => {
         console.log(res.data);
         setReward(res.data.reward);
@@ -64,7 +64,7 @@ const Story = () => {
   const fetchTotalPaymentAmounts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
       );
       const totalAmounts = response.data;
       setTotalPaymentAmounts(totalAmounts);
@@ -76,7 +76,7 @@ const Story = () => {
   const fetchParticipantCount = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/person-count/${rewardId}`
+        `http://localhost:8080/person-count/${rewardId}`
       );
       const count = response.data;
       setPersonCount(count);
@@ -125,7 +125,7 @@ const Story = () => {
         <div className="product_img">
           {reward.conFile && (
             <img
-              src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+              src={`http://localhost:8080/img/${reward.conFile.fileName}`}
               className="images"
             />
           )}

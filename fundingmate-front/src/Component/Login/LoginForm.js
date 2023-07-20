@@ -20,15 +20,15 @@ function LoginForm(props) {
     const token = localStorage.getItem("token");
 
     // 토큰이 있으면 로그인 상태로 설정
-    if (token) {
-      navigate("/");
-    }
+    // if (token) {
+    //   navigate("/");
+    // }
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 
     if (code) {
       axios
-        .get(`http://localhost:8090/login/kakao?code=${code}`)
+        .get(`http://localhost:8080/login/kakao?code=${code}`)
         .then((res) => {
           const loginSuccess = res.data.loginSuccess;
           const user = res.data.user;
@@ -46,7 +46,7 @@ function LoginForm(props) {
               expires.setDate(expires.getDate() + 1);
               setCookie("refreshToken", res.data.refreshToken, {
                 url: "/",
-                expires
+                expires,
               });
               // 토큰을 로컬 스토리지에 저장
               storeTokenInLocalStorage(res.data.accessToken);
@@ -71,12 +71,12 @@ function LoginForm(props) {
   const login = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8090/login", null, {
+      .post("http://localhost:8080/login", null, {
         params: {
           id: id,
-          password: password
+          password: password,
           // 'remember-me': true // Remember Me 파라미터를 설정하여 로그인 요청 보냄
-        }
+        },
       })
       .then((res) => {
         console.log(res);
@@ -88,7 +88,7 @@ function LoginForm(props) {
         expires.setDate(expires.getDate() + 1);
         setCookie("refreshToken", res.data.refreshToken, {
           url: "/",
-          expires
+          expires,
         });
         // 토큰을 로컬 스토리지에 저장
         storeTokenInLocalStorage(res.data.accessToken);

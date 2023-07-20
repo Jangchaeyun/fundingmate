@@ -19,7 +19,7 @@ const Rewarding = () => {
     const fetchRewardingRewardsAndPaymentAmount = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8090/reward/find/rewarding/more",
+          "http://localhost:8080/reward/find/rewarding/more",
           {
             params: {
               startIndex: 0,
@@ -27,28 +27,33 @@ const Rewarding = () => {
             },
           }
         );
-  
+
         setRewardingRewards(response.data);
         setShowLoadMoreButton(response.data.length >= visibleRewards);
-  
+
         // Fetch payment amounts for all rewarding rewards
         const rewardIds = response.data.map((reward) => reward.id);
-        const paymentResponse = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
-          params: {
-            rewardIds: rewardIds.join(","),
-          },
-        });
-  
+        const paymentResponse = await axios.get(
+          "http://localhost:8080/payment/total-amount-same-rewards",
+          {
+            params: {
+              rewardIds: rewardIds.join(","),
+            },
+          }
+        );
+
         // Update paymentAmountsData with the new payment amounts
         setPaymentAmountsData(paymentResponse.data);
       } catch (error) {
-        console.error("Error fetching rewarding rewards and payment amounts:", error);
+        console.error(
+          "Error fetching rewarding rewards and payment amounts:",
+          error
+        );
       }
     };
-  
+
     fetchRewardingRewardsAndPaymentAmount();
   }, [visibleRewards]);
-  
 
   const fetchRewardingRewards = async () => {
     try {
@@ -72,11 +77,14 @@ const Rewarding = () => {
   const fetchPaymentAmount = async () => {
     try {
       const rewardIds = rewardingRewards.map((reward) => reward.id);
-      const response = await axios.get("http://localhost:8090/payment/total-amount-same-rewards", {
-        params: {
-          rewardIds: rewardIds.join(","),
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:8080/payment/total-amount-same-rewards",
+        {
+          params: {
+            rewardIds: rewardIds.join(","),
+          },
+        }
+      );
       setPaymentAmountsData(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
@@ -110,7 +118,6 @@ const Rewarding = () => {
 
   const numVisibleRewards = Math.min(visibleRewards, rewardingRewards.length);
   const visibleRewardCards = rewardingRewards.slice(0, numVisibleRewards);
-  
 
   return (
     <div className="rewarding">
@@ -126,7 +133,7 @@ const Rewarding = () => {
             onClick={() => handleRewardClick(reward.id)}
           >
             <img
-              src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+              src={`http://localhost:8080/img/${reward.repFile.fileName}`}
               className="reward_img"
               alt={reward.projName}
             />
@@ -135,11 +142,15 @@ const Rewarding = () => {
             <div className="reward_detail">
               <div className="price">
                 {paymentAmountsData[reward.id]
-                ? `${paymentAmountsData[reward.id].toLocaleString()}원 펀딩`
-                : "0원 펀딩"}
+                  ? `${paymentAmountsData[reward.id].toLocaleString()}원 펀딩`
+                  : "0원 펀딩"}
               </div>
               <div className="rate">
-                {((paymentAmountsData[reward.id] / reward.projTargetAmount) * 100).toFixed(1)}%
+                {(
+                  (paymentAmountsData[reward.id] / reward.projTargetAmount) *
+                  100
+                ).toFixed(1)}
+                %
               </div>
               <div className="d_day">
                 D-
