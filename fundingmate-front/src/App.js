@@ -235,8 +235,8 @@ function App() {
                 {/* 태희 부분 */}
                 {/* My Page */}
                 <Routes>
-                  <Route exact path="/my-page/founder" element={<Founder />} />
-                  <Route exact path="/my-page/investor" element={<Investor />} />
+                  <Route exact path="/myPage/founder" element={<Founder />} />
+                  <Route exact path="/myPage/investor" element={<Investor />} />
                 </Routes>
                 {/* My Page */}
               </BrowserRouter>

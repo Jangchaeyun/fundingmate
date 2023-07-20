@@ -6,6 +6,8 @@ import './MyPage.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { notification } from 'antd';
+import Header from '../../Component/Header/Header';
+import Footer from '../../Component/Footer/Footer';
 
 function Investor() {
     const [activeSection, setActiveSection] = useState('my-settings');
@@ -39,7 +41,7 @@ function Investor() {
 
     return (
         <div className='mypage-body'>
-            {/* header */}
+            <Header />
             <div className="section-container">
                 <img
                     src={hasNotifications ? "/assets/imgs/notifications_new.png" : "/assets/imgs/notifications_default.png"}
@@ -312,6 +314,7 @@ function Investor() {
                     </table>
                 </div >
             )}
+            <Footer />
         </div>
     );
 }
