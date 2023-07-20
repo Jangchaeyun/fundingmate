@@ -20,9 +20,9 @@ function LoginForm(props) {
     const token = localStorage.getItem("token");
 
     // 토큰이 있으면 로그인 상태로 설정
-    if (token) {
-      navigate("/");
-    }
+    // if (token) {
+    //   navigate("/");
+    // }
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 

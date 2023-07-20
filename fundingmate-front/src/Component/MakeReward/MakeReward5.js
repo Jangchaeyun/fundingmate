@@ -157,7 +157,7 @@ const MakeReward5 = () => {
 
     const requestData = {
       ...totInfo,
-      rewardType: totInfo.cards,
+      rewardTypes: totInfo.cards,
       rewardContentImgSavedName: convertToFilesDTO(
         totInfo.rewardContentImgSavedName
       ),

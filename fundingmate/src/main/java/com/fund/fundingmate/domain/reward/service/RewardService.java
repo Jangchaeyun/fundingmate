@@ -88,6 +88,8 @@ public class RewardService {
         reward.setUser(user);
 
         rewardRepository.save(reward);
+
+        return reward.getId();
     }
 
     public void createRewardWithUser(RewardDTO rewardDTO, UserDTO userDTO) {
