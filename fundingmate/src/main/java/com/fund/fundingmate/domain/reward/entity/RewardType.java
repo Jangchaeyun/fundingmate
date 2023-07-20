@@ -54,4 +54,9 @@ public class RewardType {
             rewardOption.setRewardType(this);
         }
     }
+
+    public void addRewardOption(RewardOption rewardOption) {
+        rewardOptions.add(rewardOption);
+        rewardOption.setRewardType(this);
+    }
 }

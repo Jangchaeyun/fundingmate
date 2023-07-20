@@ -28,7 +28,7 @@ const MakeReward5 = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTotInfo({ ...totInfo, [name]: value });
+    setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
   };
 
   const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
@@ -43,7 +43,7 @@ const MakeReward5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.rewardIdBusinessLicenseImgSavedName;
+    let file = totInfo.businessImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -51,7 +51,7 @@ const MakeReward5 = () => {
       };
       reader.readAsDataURL(file);
     }
-    file = totInfo.rewardBankAccountCopyImgSavedName;
+    file = totInfo.bankImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -72,9 +72,13 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
+      setTotInfo((prevTotInfo) => ({
+        ...prevTotInfo,
+        businessImg: file,
+      }));
     }
   };
+  
 
   const handleImageClick = () => {
     document.getElementById("imageUpload").click();
@@ -91,8 +95,10 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
-      console.log(file.src);
+      setTotInfo((prevTotInfo) => ({
+        ...prevTotInfo,
+        bankImg: file,
+      }));
     }
   };
 
@@ -115,7 +121,10 @@ const MakeReward5 = () => {
       fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
     }
 
-    setTotInfo({ ...totInfo, businessAddress: fullAddress });
+    setTotInfo((prevTotInfo) => ({
+      ...prevTotInfo,
+      businessAddress: fullAddress,
+    }));
 
     setShowModal(false); // Close the modal
   };
@@ -131,7 +140,6 @@ const MakeReward5 = () => {
     navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
-  const dispatch = useDispatch();
   const userId = useSelector((state) => state.Id);
 
   const handleNextStep = () => {
@@ -146,34 +154,36 @@ const MakeReward5 = () => {
       };
     };
 
-    const convertToOneFilesDTO = (files) => {
-      if (!files) {
-        // Check if files is null
+    const convertToOneFilesDTO = (file) => {
+      if (!file) {
         return null;
       }
-
+  
       return {
         fileId: null,
-        fileName: files.name,
-        fileRegistrationDate: null
+        fileName: file.name,
+        fileRegistrationDate: null,
+        url: file,
       };
     };
 
     const requestData = {
       ...totInfo,
       rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(totInfo.rewardContentImgSavedName),
-      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.rewardRepImgSavedName),
+      rewardContentImgSavedName: convertToFilesDTO(totInfo.conFile),
+      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.repFile),
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardIdBusinessLicenseImgSavedName
+        totInfo.businessImg
       ),
       rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardBankAccountCopyImgSavedName
+        totInfo.bankImg
       )
     };
 
+    
+
     axios
-    .post("http://localhost:8080/make-reward", requestData, {
+    .post("http://localhost:8080/makeReward", requestData, {
       params: { userId: userId }, // Pass userId as a parameter
     })
     .then((response) => {
