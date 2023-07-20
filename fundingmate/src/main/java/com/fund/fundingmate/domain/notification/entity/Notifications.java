@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Notifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notifationNo;
+    private Long notificationNo;
 
     private String notificationRewards;
 
