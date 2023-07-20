@@ -158,7 +158,7 @@ public class InvestmentController {
     }
 */
 
-    @PostMapping("/make-invest/hostinfo")
+    @PostMapping("/makeInvestHostinfo")
     public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
         try {
 

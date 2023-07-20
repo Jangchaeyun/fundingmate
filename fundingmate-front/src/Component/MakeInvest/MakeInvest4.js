@@ -14,6 +14,8 @@ import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import axios from "axios";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
 const MakeInvest4 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
@@ -92,7 +94,7 @@ const MakeInvest4 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/story", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestStory", { state: { totInfo: totInfo } });
   };
 
   //   const handleNextStep = () => {
@@ -110,7 +112,7 @@ const MakeInvest4 = () => {
 
   const handleNextStep = () => {
     //setTotInfo({...totInfo, cards:[...cards]})
-    navigateToStep2("/make-invest/hostinfo", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeInvestHostinfo", { state: { totInfo: totInfo } });
   };
 
   const rewardChange = (e) => {
@@ -142,6 +144,7 @@ const MakeInvest4 = () => {
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -317,6 +320,7 @@ const MakeInvest4 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };
