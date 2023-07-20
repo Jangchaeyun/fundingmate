@@ -123,7 +123,7 @@ const MakeReward5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
   const handleNextStep = () => {

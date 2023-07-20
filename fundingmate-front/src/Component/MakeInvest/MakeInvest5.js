@@ -127,7 +127,7 @@ const MakeInvest5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestTypelist", { state: { totInfo: totInfo } });
   };
   const userId = useSelector((state) => state.Id);
   // const [userId, setUserId] = useState(null);
