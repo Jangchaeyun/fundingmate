@@ -6,6 +6,9 @@ import { DatePicker } from "antd";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import axios from "axios";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
+
 const { RangePicker } = DatePicker;
 
 const MakeInvest2 = () => {
@@ -53,6 +56,7 @@ const MakeInvest2 = () => {
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -173,6 +177,7 @@ const MakeInvest2 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };
