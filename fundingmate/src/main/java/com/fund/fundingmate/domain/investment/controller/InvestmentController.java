@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 
 import javax.servlet.http.HttpSession;
@@ -35,6 +37,33 @@ public class InvestmentController {
 
     @Autowired
     private HttpSession session;
+
+    /*private static final String UPLOAD_DIRECTORY = "D:/yth/springboot-work/intellj/fundingmate/imgUpload";
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> handleFileUpload(@RequestPart(name = "file") MultipartFile file) {
+        try {
+            String originalFileName = file.getOriginalFilename();
+            String fileSavedName = generateUniqueFileName(originalFileName);
+            String filePath = UPLOAD_DIRECTORY + "/" + fileSavedName;
+
+            java.io.File localFile = new java.io.File(filePath);
+            localFile.getParentFile().mkdirs();
+
+            file.transferTo(localFile);
+
+            return new ResponseEntity<>("File uploaded successfully.", HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Failed to upload file.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private String generateUniqueFileName(String originalFilename) {
+        long timestamp = System.currentTimeMillis();
+        return timestamp + "-" + originalFilename;
+    }*/
+
 
     @PostMapping("/makeInvestHostinfo")
     public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
