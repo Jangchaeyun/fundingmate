@@ -16,7 +16,7 @@ import { Modal } from "antd";
 import axios from "axios";
 import Footer from "../../Component/Footer/Footer";
 import Header from "../../Component/Header/Header";
-
+//
 const MakeInvest5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;

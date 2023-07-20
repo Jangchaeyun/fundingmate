@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+//
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import "./MakeReward5.css";
@@ -10,7 +10,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -19,15 +19,12 @@ import { useSelector } from "react-redux";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
 
-
 const MakeReward5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
 
-
   const { rewardId } = useParams();
-
 
   const handleInputChange = (e) => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
@@ -135,7 +132,6 @@ const MakeReward5 = () => {
     navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
-
   const userId = useSelector((state) => state.Id);
 
   const handleNextStep = () => {
@@ -146,7 +142,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files[0].name,
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
       };
     };
 
@@ -159,7 +155,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files.name,
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
       };
     };
 
@@ -177,18 +173,18 @@ const MakeReward5 = () => {
       ),
       rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
         totInfo.rewardBankAccountCopyImgSavedName
-      ),
+      )
     };
 
     axios
       .post("http://localhost:8080/make-reward", requestData, {
-        params: { userId: userId },
+        params: { userId: userId }
       })
       .then((response) => {
         console.log(response.data);
         alert("프로젝트가 등록되었습니다.");
         navigateToStep2(`/reward-detail/story/:rewardId`, {
-          state: { totInfo: totInfo },
+          state: { totInfo: totInfo }
         });
       })
       .catch((error) => {
@@ -198,7 +194,6 @@ const MakeReward5 = () => {
 
   return (
     <>
-
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -243,7 +238,6 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
-
                 </div>
                 이미지 추가하기
               </>
@@ -385,7 +379,6 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
-
                 </div>
                 이미지 추가하기
               </>
@@ -516,8 +509,6 @@ const MakeReward5 = () => {
       </div>
 
       <CorFooter />
-
-
     </>
   );
 };
