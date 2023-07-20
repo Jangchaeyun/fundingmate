@@ -6,9 +6,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Preopen = () => {
   const [rewards, setRewards] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPrewardRewards();
@@ -17,12 +19,16 @@ const Preopen = () => {
   const fetchPrewardRewards = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8090/reward/find/prereward"
+        "http://localhost:8080/reward/find/prereward"
       );
       setRewards(response.data);
     } catch (error) {
       console.error("Error while fetching prereward rewards", error);
     }
+  };
+
+  const handleRewardClick = (rewardId) => {
+    navigate(`/reward-detail/story/${rewardId}`);
   };
 
   return (
@@ -41,20 +47,19 @@ const Preopen = () => {
           >
             {rewards.map((reward) => (
               <SwiperSlide key={reward.id}>
-                <div className="reward_card">
+                <div
+                  className="reward_card"
+                  key={reward.id}
+                  onClick={() => handleRewardClick(reward.id)}
+                >
                   <img
-                    src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+                    src={`http://localhost:8080/img/${reward.repFile.fileName}`}
                     className="reward_img"
                     alt={reward.rewardName}
                   />
                   <div className="com_name"> {reward.manufacturer}</div>
                   <div className="reward_name">{reward.projName}</div>
                   <div className="reward_detail">
-                    <div className="price">12.345원 펀딩</div>
-                    <div className="rate">
-                      {/* {Math.floor((reward.currentAmount / reward.projTargetAmount) * 100)} */}
-                      %
-                    </div>
                     <div className="d_day">
                       D-
                       {Math.ceil(
@@ -74,7 +79,7 @@ const Preopen = () => {
           {rewards.map((reward) => (
             <div key={reward.id} className="reward_card">
               <img
-                src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+                src={`http://localhost:8080/img/${reward.repFile.fileName}`}
                 className="reward_img"
                 alt={reward.rewardName}
               />

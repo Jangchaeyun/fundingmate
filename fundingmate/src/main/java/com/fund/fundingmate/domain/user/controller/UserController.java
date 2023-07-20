@@ -1,9 +1,9 @@
 package com.fund.fundingmate.domain.user.controller;
 
+import com.fund.fundingmate.domain.user.CustomUserDetailService;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
-import com.fund.fundingmate.domain.user.service.CustomUserDetailService;
 import com.fund.fundingmate.domain.user.service.UserService;
 import com.fund.fundingmate.global.config.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +52,10 @@ public class UserController {
         Map<String, Object> res = new HashMap<>();
         try{
             User user = (User)customUserDetailService.loadUserByUsername(id);
-            Optional<User> userDto = userRepository.findByUserid(user.getUsername());
-            user = userDto.get();
             if(user!=null && passwordEncoder.matches(password, user.getPassword())) {
                 String accessToken = jwtTokenPrivider.createToken(user.getUsername(),user.getRoles());
                 String refreshToken = jwtTokenPrivider.refreshToken(user.getUsername(),user.getRoles());
                 res.put("userid", user.getUsername());
-                res.put("id",user.getId());
                 res.put("accessToken", accessToken);
                 res.put("refreshToken", refreshToken);
                 return new ResponseEntity<Map<String,Object>>(res, HttpStatus.OK);

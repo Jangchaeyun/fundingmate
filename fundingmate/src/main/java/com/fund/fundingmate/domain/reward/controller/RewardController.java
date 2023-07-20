@@ -48,6 +48,24 @@ public class RewardController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @PostMapping("/make-reward")
+    public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId) {
+        try {
+            System.out.println(userId);
+            System.out.println(rewardDTO);
+            System.out.println(rewardDTO.getRewardTypes());
+
+            Long savedRewardId = rewardService.createReward(rewardDTO, userId);
+
+            Map<String, Object> rewardMap = rewardService.getRewardById(savedRewardId);
+            RewardDTO createdReward = (RewardDTO) rewardMap.get("reward");
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
         try {
@@ -111,7 +129,7 @@ public class RewardController {
         }
     }
 
-    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {

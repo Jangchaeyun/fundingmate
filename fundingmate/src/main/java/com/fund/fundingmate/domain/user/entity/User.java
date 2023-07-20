@@ -1,6 +1,5 @@
 package com.fund.fundingmate.domain.user.entity;
 
-import com.fund.fundingmate.domain.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -53,12 +52,6 @@ public class User implements UserDetails {
     @Column(name="join_date")
     private String joinDate;
 
-    public UserDTO toDTO() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(this.id);
-        return userDTO;
-    }
-
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
@@ -77,6 +70,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return userid;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

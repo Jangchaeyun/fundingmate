@@ -1,4 +1,4 @@
-package com.fund.fundingmate.domain.user.service;
+package com.fund.fundingmate.domain.user;
 
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;

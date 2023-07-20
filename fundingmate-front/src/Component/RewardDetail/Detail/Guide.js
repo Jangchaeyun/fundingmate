@@ -8,12 +8,14 @@ const Guide = () => {
   const { rewardId } = useParams();
   const [reward, setReward] = useState({});
   const [viewDesc, setViewDesc] = useState(false);
+  const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
+  const [personCount, setPersonCount] = useState(0);
 
   useEffect(() => {
     const fetchReward = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8090/reward-detail/guide/${rewardId}`
+          `http://localhost:8080/reward-detail/guide/${rewardId}`
         );
         console.log(response.data);
         setReward(response.data.reward);
@@ -22,12 +24,49 @@ const Guide = () => {
         console.log(error);
       }
     };
-
+    fetchParticipantCount();
     fetchReward();
   }, [rewardId]);
+
+  const fetchTotalPaymentAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+      );
+      const totalAmounts = response.data;
+      setTotalPaymentAmounts(totalAmounts);
+    } catch (error) {
+      console.error("Error fetching total payment amounts:", error);
+    }
+  };
+
+  const fetchParticipantCount = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/person-count/${rewardId}`
+      );
+      const count = response.data;
+      setPersonCount(count);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (reward && reward.id) {
+      fetchTotalPaymentAmounts();
+    }
+  }, [reward, totalPaymentAmounts]);
+
   return (
     <div className="desc">
-      {viewDesc && <Desc reward={reward} />}
+      {viewDesc && reward && (
+        <Desc
+          reward={reward}
+          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
+          personCount={personCount}
+        />
+      )}
       <div className="menu">
         <hr />
         <div className="menu_items">

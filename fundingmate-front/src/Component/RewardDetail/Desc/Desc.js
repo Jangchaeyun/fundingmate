@@ -17,7 +17,6 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
     return remainingDays;
   };
 
-
   let navigate = useNavigate();
 
   const handleCompanyClick = () => {
@@ -32,17 +31,17 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
       <div className="desc_contents">
         <div className="desc_img">
           <img
-            src={`http://localhost:8090/img/${imageSrc}`}
+            src={`http://localhost:8080/img/${imageSrc}`}
             className="main_img"
           />
           <img
-            src={`http://localhost:8090/img/${reward.repFile.fileName}`}
+            src={`http://localhost:8080/img/${reward.repFile.fileName}`}
             className="sub_img2"
             id={reward.repFile.fileName}
             onClick={(e) => setImageSrc(reward.repFile.fileName)}
           />
           <img
-            src={`http://localhost:8090/img/${reward.conFile.fileName}`}
+            src={`http://localhost:8080/img/${reward.conFile.fileName}`}
             className="sub_img1"
             id={reward.conFile.fileName}
             onClick={(e) => setImageSrc(reward.conFile.fileName)}
@@ -56,11 +55,14 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           </div>
           <div className="fund_rate">
             <div className="fund_rate_title">달성률</div>
-            <div className="fund_rate_per">{Math.floor(
-                  (totalPaymentAmount / reward.projTargetAmount) * 100
-                )}%</div>
+            <div className="fund_rate_per">
+              {((totalPaymentAmount / reward.projTargetAmount) * 100).toFixed(
+                1
+              )}
+              %
+            </div>
             <sub className="fund_rate_price">
-              목표 금액 {reward.projTargetAmount}원
+              목표 금액 {reward.projTargetAmount.toLocaleString()}원
             </sub>
           </div>
           <div className="fund_date">
@@ -76,9 +78,9 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           </div>
           <div className="fund_people">
             <div className="fund_people_title">참여자수</div>
-            <div className="fund_people_count"> 
-            {personCount !== undefined ? (
-              <div className="fund_people_count">{personCount}명</div>
+            <div className="fund_people_count">
+              {personCount !== undefined ? (
+                <div className="fund_people_count">{personCount}명</div>
               ) : (
                 <div className="fund_people_count">Loading...</div>
               )}

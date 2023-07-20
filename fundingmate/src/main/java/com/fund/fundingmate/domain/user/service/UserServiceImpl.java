@@ -1,6 +1,5 @@
 package com.fund.fundingmate.domain.user.service;
 
-import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.global.config.security.JwtTokenProvider;

@@ -22,7 +22,7 @@ import java.util.List;
 public class FileService {
     private final FileRepository fileRepository;
 
-    private static final String UPLOAD_DIRECTORY = "E:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @Autowired
     public FileService(FileRepository fileRepository) {

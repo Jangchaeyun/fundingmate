@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
 import {
@@ -8,17 +10,24 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined
+  TwitterOutlined,
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+
 
 const MakeReward5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
+
+
+  const { rewardId } = useParams();
+
 
   const handleInputChange = (e) => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
@@ -126,13 +135,70 @@ const MakeReward5 = () => {
     navigateToStep1("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
   };
 
+
+  const userId = useSelector((state) => state.Id);
+
   const handleNextStep = () => {
-    console.log(totInfo);
-    navigateToStep2("/reward-detail/story", { state: { totInfo: totInfo } });
+    const convertToFilesDTO = (files) => {
+      if (!files || files.length === 0) {
+        return null;
+      }
+      return {
+        fileId: null,
+        fileName: files[0].name,
+        fileRegistrationDate: null,
+      };
+    };
+
+    const convertToOneFilesDTO = (files) => {
+      if (!files) {
+        // Check if files is null
+        return null;
+      }
+
+      return {
+        fileId: null,
+        fileName: files.name,
+        fileRegistrationDate: null,
+      };
+    };
+
+    const requestData = {
+      ...totInfo,
+      rewardTypes: totInfo.cards,
+      rewardContentImgSavedName: convertToFilesDTO(
+        totInfo.rewardContentImgSavedName
+      ),
+      rewardRepImgSavedName: convertToOneFilesDTO(
+        totInfo.rewardRepImgSavedName
+      ),
+      rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
+        totInfo.rewardIdBusinessLicenseImgSavedName
+      ),
+      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
+        totInfo.rewardBankAccountCopyImgSavedName
+      ),
+    };
+
+    axios
+      .post("http://localhost:8080/make-reward", requestData, {
+        params: { userId: userId },
+      })
+      .then((response) => {
+        console.log(response.data);
+        alert("프로젝트가 등록되었습니다.");
+        navigateToStep2(`/reward-detail/story/:rewardId`, {
+          state: { totInfo: totInfo },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   return (
     <>
-      <Header />
+
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -177,6 +243,7 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
+
                 </div>
                 이미지 추가하기
               </>
@@ -318,6 +385,7 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
+
                 </div>
                 이미지 추가하기
               </>
@@ -446,7 +514,10 @@ const MakeReward5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+
       <CorFooter />
+
+
     </>
   );
 };
