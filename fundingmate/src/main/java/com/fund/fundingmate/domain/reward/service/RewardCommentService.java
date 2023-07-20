@@ -80,7 +80,7 @@ public class RewardCommentService {
         rewardDTO.setRepFile(mapToFileDTO(reward.getRepfile()));
         rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
-        rewardDTO.setConFile(mapToFileDTO(reward.getConfile()));
+        rewardDTO.setConFile(mapToFileDTO(reward.getConFile()));
         rewardDTO.setProjContent(reward.getProjContent());
         rewardDTO.setRewardRefundExchangePolicy(reward.getRewardRefundExchangePolicy());
         rewardDTO.setRewardContact(reward.getRewardContact());

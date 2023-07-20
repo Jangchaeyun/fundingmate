@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import moment from "moment";
 
 const MakeReward3 = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const MakeReward3 = () => {
     rewardAvailableCount: 0,
     rewardTitle: "",
     rewardContent: "",
-    rewardDeleverydate: todayDate,
+    deliveryDate: todayDate,
     rewardShipAddress: "",
     options: []
   };
@@ -132,6 +133,11 @@ const MakeReward3 = () => {
     const inputValue = e.target.value;
     const numericValue = inputValue.replace(/\D/g, ""); // 숫자 이외의 문자 제거
     setCard({ ...card, [e.target.name]: numericValue });
+  };
+
+  const handleDatePickerChange = (date) => {
+    const formattedDate = date ? date.format("YYYY-MM-DD") : null;
+    setCard((prevCard) => ({ ...prevCard, deliveryDate: formattedDate }));
   };
 
   return (
@@ -279,11 +285,9 @@ const MakeReward3 = () => {
             showToday={true}
             allowClear={false}
             format={"YYYY-MM-DD"}
-            value={dayjs(card.rewardDeleverydate)}
-            name="rewardDeleverydate"
-            onChange={(value, dateString) => {
-              setCard({ ...card, rewardDeleverydate: dateString });
-            }}
+            value={cards.deliveryDate}
+            name="deliveryDate"
+            onChange={handleDatePickerChange}
           />
           <p className="custom-font-modal-sub-title">리워드 옵션</p>
           {!showOption && (
@@ -378,7 +382,7 @@ const MakeReward3 = () => {
                   </div>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <div className="make-rew-card-date">
-                    예상 배송일 {cardItem.rewardDeleverydate}
+                    예상 배송일 {cardItem.deliveryDate}
                   </div>
                 </div>
 

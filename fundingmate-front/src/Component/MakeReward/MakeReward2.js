@@ -42,6 +42,8 @@ const MakeReward2 = () => {
 
   const [inputs, setInputs] = useState([{ id: 1 }]);
 
+
+  
   const handleAddInput = () => {
     const newId = nanoid();
     const newInput = { id: newId };
@@ -64,7 +66,7 @@ const MakeReward2 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.projImages) {
+    for (let file of totInfo.conFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
@@ -90,19 +92,21 @@ const MakeReward2 = () => {
           alt: "Selected",
           style: { width: "100%", height: "100%", objectFit: "cover" }
         };
-        setImages([...images, imageCard]);
+        const updatedImages = [imageCard]; // Create an array with the new image
+        setImages(updatedImages);
         setTotInfo({
           ...totInfo,
-          projImages: [...totInfo.projImages, event.target.files[0]]
+          conFile: [event.target.files[0]] // Create an array with the new file
         });
       };
       // reader가 이미지 읽도록 하기
       reader.readAsDataURL(event.target.files[0]);
     }
   };
+  
 
   const handleImageClick = (e) => {
-    if (totInfo.projImages.length < MAX_IMAGES) {
+    if (totInfo.conFile.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -110,14 +114,14 @@ const MakeReward2 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.projImages];
+    const updatedImagesFile = [...totInfo.conFile];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, projImages: [...updatedImages] });
+    setTotInfo({ ...totInfo, conFile: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 
@@ -135,6 +139,8 @@ const MakeReward2 = () => {
   const handleNextStep = () => {
     navigateToStep2("/makeRewardTypelist", { state: { totInfo: totInfo } });
   };
+
+  
 
   return (
     <>
@@ -170,7 +176,18 @@ const MakeReward2 = () => {
         >
           <b>동영상 주소를 적어주세요</b>
         </p>
-        <div
+
+        <div>
+          <input
+            type="text"
+            name="rewardVideoAddress"
+            className="input-box"
+            value={totInfo.rewardVideoAddress}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        {/* <div
           className="projMake-video"
           style={{ flexDirection: "column", alignItems: "flex-start" }}
         >
@@ -196,7 +213,7 @@ const MakeReward2 = () => {
               )}
             </div>
           ))}
-        </div>
+        </div> */}
         <br />
 
         <p

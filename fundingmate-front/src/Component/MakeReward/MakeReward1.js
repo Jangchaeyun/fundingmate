@@ -35,12 +35,12 @@ const MakeReward1 = () => {
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        imageFile: null,
-        projKeyword: "",
+        repFile: null,
+        projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
         inputs: [{ id: nanoid(), url: "" }],
-        projImages: [],
+        conFile: [],
         projContent: "",
         cards: [],
         rewardRefundExchangePolicy: "",
@@ -50,7 +50,7 @@ const MakeReward1 = () => {
         rewardLaw: "",
         countryOfOrigin: "",
         manufacturer: "",
-        asPhonenumber: "",
+        asPhoneNumber: "",
         businessAddress: "",
         bank: "",
         accNumber: "",
@@ -61,8 +61,8 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        rewardIdBusinessLicenseImgSavedName: null,
-        rewardBankAccountCopyImgSavedName: null
+        businessImg: null,
+        bankImg: null,
       });
     }
   }, []);
@@ -93,7 +93,7 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, imageFile: file });
+      setTotInfo({ ...totInfo, repFile: file });
     }
   };
 
@@ -275,9 +275,9 @@ const MakeReward1 = () => {
         </p>
         <input
           type="text"
-          name="projKeyword"
+          name="projKeyWord"
           className="input-box"
-          value={totInfo.projKeyword}
+          value={totInfo.projKeyWord}
           onChange={handleInputChange}
           placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />

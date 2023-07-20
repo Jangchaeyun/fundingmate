@@ -44,7 +44,7 @@ public class Reward {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="con_img")
-    private File confile;
+    private File conFile;
     
     @Column(columnDefinition = "VARCHAR(1000)")
     private String projContent;
