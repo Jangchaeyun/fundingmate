@@ -19,5 +19,5 @@ public class RewardTypeDTO {
     private String rewardTitle;
     private String rewardContent;
     private Boolean rewardShipAddress;
-    private RewardOptionDTO rewardOption;
+    private RewardOptionDTO rewardOptions;
 }

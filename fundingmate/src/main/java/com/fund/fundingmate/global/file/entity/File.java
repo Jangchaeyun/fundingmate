@@ -24,7 +24,6 @@ public class File {
     @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
     private List<Reward> fundingimg;
 
-
     private String fileName;
 //
 //    private String filePath;
