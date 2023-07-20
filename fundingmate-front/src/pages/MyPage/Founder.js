@@ -27,17 +27,14 @@ function Founder() {
     return (
         <div className='mypage-body'>
             <Header />
-            <div className="section-container">
+            <div className="mypage-container">
+                <h1>마이페이지</h1>
                 <img
                     src={hasNotifications ? "/assets/imgs/notifications_new.png" : "/assets/imgs/notifications_default.png"}
                     className="notifications"
                     alt="notifications" 
                     onClick={handleNotificationImageClick}
                 />
-            </div>
-
-            <div className="mypage-container">
-                <h1>마이페이지</h1>
             </div>
             <Navbar className="subheader">
                 <Container>
