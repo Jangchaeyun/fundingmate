@@ -1,6 +1,8 @@
 import React from "react";
 import "../../pages/RewardFund/RewardFundMain.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
 const RewardFundMain = () => {
   const navigate = useNavigate();
 
@@ -38,10 +40,16 @@ const RewardFundMain = () => {
 
   return (
     <div>
-      <div className="reward_make">
+      <Header />
+      <div
+        className="reward_make"
+        style={{ marginBottom: "200px", marginTop: "35px" }}
+      >
         <h1 className="makerewardfund">프로젝트 만들기</h1>
         <div className="reward_div">
-          <div className="makereward_title">리워드 프로젝트</div>
+          <div className="makereward_title" style={{ marginTop: "50px" }}>
+            리워드 프로젝트
+          </div>
           <img src="/assets/imgs/reward.png" className="makereward" />
           <button
             type="button"
@@ -52,7 +60,9 @@ const RewardFundMain = () => {
           </button>
         </div>
         <div className="fund_div">
-          <div className="makefund_title">투자 프로젝트</div>
+          <div className="makefund_title" style={{ marginTop: "100px" }}>
+            투자 프로젝트
+          </div>
           <img src="/assets/imgs/fund.png" className="makefund" />
           <button
             type="button"
@@ -63,6 +73,7 @@ const RewardFundMain = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
