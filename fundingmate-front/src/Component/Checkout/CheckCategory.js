@@ -18,7 +18,7 @@ const CheckCategory = () => {
   const fetchRewardDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/reward-detail/story/${rewardId}`
+        `http://localhost:8080/reward-detail/story/${rewardId}`
       );
       setReward(response.data.reward);
       console.log(response.data.reward);
@@ -30,7 +30,7 @@ const CheckCategory = () => {
   const fetchRewardTypes = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/reward/rewardcheckout/check/${rewardId}`
+        `http://localhost:8080/reward/rewardcheckout/check/${rewardId}`
       );
       setRewardTypes(response.data);
       console.log(response.data);

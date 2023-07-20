@@ -50,6 +50,8 @@ const Contact = () => {
   const loggedInUser = 1;
   const [replyText, setReplyText] = useState({});
   const [replyData, setReplyData] = useState({});
+  const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
+  const [personCount, setPersonCount] = useState(0);
 
   const submitInquiry = () => {
     const requestBody = {
@@ -64,7 +66,7 @@ const Contact = () => {
 
     axios
       .post(
-        `http://localhost:8090/reward-detail/contact/${rewardId}`,
+        `http://localhost:8080/reward-detail/contact/${rewardId}`,
         requestBody
       )
       .then((res) => {
@@ -80,7 +82,7 @@ const Contact = () => {
   const deleteComment = (commentId) => {
     axios
       .delete(
-        `http://localhost:8090/reward-detail/contact/comment/${commentId}`
+        `http://localhost:8080/reward-detail/contact/comment/${commentId}`
       )
       .then((res) => {
         console.log(res.data);
@@ -102,7 +104,7 @@ const Contact = () => {
     if (reward.user.id === loggedInUser) {
       axios
         .post(
-          `http://localhost:8090/reward-detail/contact/comment/reply`,
+          `http://localhost:8080/reward-detail/contact/comment/reply`,
           requestBody
         )
         .then((res) => {
@@ -124,7 +126,7 @@ const Contact = () => {
   const fetchCommentReplies = (commentId) => {
     axios
       .get(
-        `http://localhost:8090/reward-detail/contact/comment/reply/${commentId}`
+        `http://localhost:8080/reward-detail/contact/comment/reply/${commentId}`
       )
       .then((res) => {
         setReplyData((prevReplyData) => ({
@@ -141,14 +143,14 @@ const Contact = () => {
     const fetchData = async () => {
       try {
         const storyResponse = await axios.get(
-          `http://localhost:8090/reward-detail/story/${rewardId}`
+          `http://localhost:8080/reward-detail/story/${rewardId}`
         );
         console.log(storyResponse.data);
         setReward(storyResponse.data.reward);
         setViewDesc(true);
 
         const contactResponse = await axios.get(
-          `http://localhost:8090/reward-detail/contact/${rewardId}`
+          `http://localhost:8080/reward-detail/contact/${rewardId}`
         );
         console.log(contactResponse.data);
         setRewardComments(contactResponse.data);
@@ -159,13 +161,49 @@ const Contact = () => {
         console.log(error);
       }
     };
-
+    fetchParticipantCount();
     fetchData();
   }, [rewardId]);
 
+  const fetchTotalPaymentAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+      );
+      const totalAmounts = response.data;
+      setTotalPaymentAmounts(totalAmounts);
+    } catch (error) {
+      console.error("Error fetching total payment amounts:", error);
+    }
+  };
+
+  const fetchParticipantCount = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/person-count/${rewardId}`
+      );
+      const count = response.data;
+      setPersonCount(count);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (reward && reward.id) {
+      fetchTotalPaymentAmounts();
+    }
+  }, [reward, totalPaymentAmounts]);
+
   return (
     <div className="desc">
-      {viewDesc && <Desc reward={reward} />}
+      {viewDesc && (
+        <Desc
+          reward={reward}
+          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
+          personCount={personCount}
+        />
+      )}
       <div className="menu">
         <hr />
         <div className="menu_items">

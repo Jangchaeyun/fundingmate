@@ -1,6 +1,5 @@
 package com.fund.fundingmate.domain.user.service;
 
-import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 
 public interface UserService {
