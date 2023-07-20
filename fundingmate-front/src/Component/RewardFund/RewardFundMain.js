@@ -10,7 +10,7 @@ const RewardFundMain = () => {
   };
 
   const handleFundButtonClick = () => {
-    navigateToStep1("/make-invest/basicinfo");
+    navigateToStep2("/make-invest/basicinfo");
   };
 
   return (

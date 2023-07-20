@@ -192,6 +192,7 @@ const MakeInvest5 = () => {
       })
       .catch((error) => {
         console.error(error); // 요청 실패 시 처리할 로직
+        alert("프로젝트를 완성해주세요.");
       });
   };
 
