@@ -191,15 +191,15 @@ const MakeReward5 = () => {
       alert("프로젝트가 등록되었습니다.");
       navigateToStep2(`/reward-detail/story/:rewardId`, {
         state: { totInfo: totInfo },
+      })
+      .catch((error) => {
+        console.error(error)
       });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   };
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">

@@ -6,6 +6,8 @@ import './MyPage.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {notification } from 'antd';
+import Header from '../../Component/Header/Header';
+import Footer from '../../Component/Footer/Footer';
 
 function Founder() {
     const [activeSection, setActiveSection] = useState('my-settings');
@@ -23,19 +25,16 @@ function Founder() {
       };
 
     return (
-        <>
-            {/* header */}
-            <div className="section-container">
+        <div className='mypage-body'>
+            <Header />
+            <div className="mypage-container">
+                <h1>마이페이지</h1>
                 <img
                     src={hasNotifications ? "/assets/imgs/notifications_new.png" : "/assets/imgs/notifications_default.png"}
                     className="notifications"
                     alt="notifications" 
                     onClick={handleNotificationImageClick}
                 />
-            </div>
-
-            <div className="mypage-container">
-                <h1>마이페이지</h1>
             </div>
             <Navbar className="subheader">
                 <Container>
@@ -273,7 +272,8 @@ function Founder() {
                     </table>
                 </div >
             )}
-        </>
+            <Footer />
+        </div>
     );
 }
 
