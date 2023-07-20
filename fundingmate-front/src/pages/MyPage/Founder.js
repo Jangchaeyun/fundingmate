@@ -23,7 +23,7 @@ function Founder() {
       };
 
     return (
-        <>
+        <div className='mypage-body'>
             {/* header */}
             <div className="section-container">
                 <img
@@ -273,7 +273,7 @@ function Founder() {
                     </table>
                 </div >
             )}
-        </>
+        </div>
     );
 }
 

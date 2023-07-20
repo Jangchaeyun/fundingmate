@@ -38,7 +38,7 @@ function Investor() {
     };
 
     return (
-        <>
+        <div className='mypage-body'>
             {/* header */}
             <div className="section-container">
                 <img
@@ -312,7 +312,7 @@ function Investor() {
                     </table>
                 </div >
             )}
-        </>
+        </div>
     );
 }
 
