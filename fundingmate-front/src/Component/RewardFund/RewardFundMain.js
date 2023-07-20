@@ -2,15 +2,38 @@ import React from "react";
 import "../../pages/RewardFund/RewardFundMain.css";
 import { useNavigate, useLocation } from "react-router-dom";
 const RewardFundMain = () => {
-  const navigateToStep1 = useNavigate();
-  const navigateToStep2 = useNavigate();
+  const navigate = useNavigate();
 
   const handleRewardButtonClick = () => {
-    navigateToStep1("/make-reward/basicinfo");
+    // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem("token");
+
+    // 토큰이 없으면 로그인 폼으로 설정
+    if (!token) {
+      navigate("/login");
+    } else {
+      navigate("/makeRewardBasicinfo");
+    }
+    // // Only navigate if the user is logged in
+    // if (isLoggedIn) {
+    //   navigate("/make-reward/basicinfo");
+    // }
   };
 
   const handleFundButtonClick = () => {
-    navigateToStep2("/make-invest/basicinfo");
+    // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem("token");
+
+    // 토큰이 없으면 로그인 폼으로 설정
+    if (!token) {
+      navigate("/login");
+    } else {
+      navigate("/makeInvestBasicinfo");
+    }
+    // Only navigate if the user is logged in
+    // if (isLoggedIn) {
+    //   navigate("/make-invest/basicinfo");
+    // }
   };
 
   return (

@@ -8,6 +8,9 @@ import { nanoid } from "nanoid";
 import axios from "axios";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
+
 const { RangePicker } = DatePicker;
 
 const MakeInvest1 = () => {
@@ -119,11 +122,12 @@ const MakeInvest1 = () => {
   //   };
 
   const handleNextStep = () => {
-    navigate("/make-invest/moneyinfo", { state: { totInfo: totInfo } });
+    navigate("/makeInvestMoneyinfo", { state: { totInfo: totInfo } });
   };
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress-ing proj-progress-common proj-progress-line">
@@ -305,6 +309,7 @@ const MakeInvest1 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };

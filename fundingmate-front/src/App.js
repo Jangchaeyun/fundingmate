@@ -182,52 +182,52 @@ function App() {
                 <Routes>
                   <Route
                     exact
-                    path="/make-reward/basicinfo"
+                    path="/makeRewardBasicinfo"
                     element={<MakeReward1 />}
                   />
                   <Route
                     exact
-                    path="/make-reward/story"
+                    path="/makeRewardStory"
                     element={<MakeReward2 />}
                   />
                   <Route
                     exact
-                    path="/make-reward/typelist"
+                    path="/makeRewardTypelist"
                     element={<MakeReward3 />}
                   />
                   <Route
                     exact
-                    path="/make-reward/goodsinfo"
+                    path="/makeRewardGoodsinfo"
                     element={<MakeReward4 />}
                   />
                   <Route
                     exact
-                    path="/make-reward/hostinfo"
+                    path="/makeRewardHostinfo"
                     element={<MakeReward5 />}
                   />
                   <Route
                     exact
-                    path="/make-invest/basicinfo"
+                    path="/makeInvestBasicinfo"
                     element={<MakeInvest1 />}
                   />
                   <Route
                     exact
-                    path="/make-invest/moneyinfo"
+                    path="/makeInvestMoneyinfo"
                     element={<MakeInvest2 />}
                   />
                   <Route
                     exact
-                    path="/make-invest/story"
+                    path="/makeInvestStory"
                     element={<MakeInvest3 />}
                   />
                   <Route
                     exact
-                    path="/make-invest/typelist"
+                    path="/makeInvestTypelist"
                     element={<MakeInvest4 />}
                   />
                   <Route
                     exact
-                    path="/make-invest/hostinfo"
+                    path="/makeInvestHostinfo"
                     element={<MakeInvest5 />}
                   />
                 </Routes>

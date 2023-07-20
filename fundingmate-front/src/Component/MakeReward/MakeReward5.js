@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+
 import "./MakeReward5.css";
 import "./MakeRewardCommon.css";
 import {
@@ -8,12 +10,14 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import CorFooter from "../../Component/Footer/CorFooter";
+import Header from "../../Component/Header/Header";
 
 const MakeReward5 = () => {
   const location = useLocation();
@@ -124,7 +128,7 @@ const MakeReward5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
   const dispatch = useDispatch();
@@ -138,7 +142,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files[0].name,
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
       };
     };
 
@@ -151,7 +155,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files.name,
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
       };
     };
 
@@ -165,7 +169,7 @@ const MakeReward5 = () => {
       ),
       rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
         totInfo.rewardBankAccountCopyImgSavedName
-      ),
+      )
     };
 
     axios
@@ -499,6 +503,8 @@ const MakeReward5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+
+      <CorFooter />
     </>
   );
 };

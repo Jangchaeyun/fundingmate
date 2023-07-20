@@ -6,6 +6,9 @@ import { DatePicker } from "antd";
 import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import axios from "axios";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
+
 const { RangePicker } = DatePicker;
 
 const MakeInvest2 = () => {
@@ -31,7 +34,7 @@ const MakeInvest2 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/basicinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestBasicinfo", { state: { totInfo: totInfo } });
   };
 
   //   const handleNextStep = () => {
@@ -48,11 +51,12 @@ const MakeInvest2 = () => {
   //   };
 
   const handleNextStep = () => {
-    navigateToStep2("/make-invest/story", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeInvestStory", { state: { totInfo: totInfo } });
   };
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -173,6 +177,7 @@ const MakeInvest2 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -9,11 +9,14 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
 import axios from "axios";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
+
 const MakeInvest5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
@@ -124,7 +127,7 @@ const MakeInvest5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestTypelist", { state: { totInfo: totInfo } });
   };
   const userId = useSelector((state) => state.Id);
   // const [userId, setUserId] = useState(null);
@@ -143,7 +146,7 @@ const MakeInvest5 = () => {
       return {
         fileId: null,
         fileName: files[0].name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -156,7 +159,7 @@ const MakeInvest5 = () => {
       return {
         fileId: null,
         fileName: files.name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -175,19 +178,19 @@ const MakeInvest5 = () => {
       ),
       investBankAccountCopyImgSavedName: convertToOneFilesDTO(
         totInfo.investBankAccountCopyImgSavedName
-      ),
+      )
     };
 
     axios
-      .post("http://localhost:8080/make-invest/hostinfo", requestData, {
-        params: { userId: userId },
+      .post("http://localhost:8080/makeInvestHostinfo", requestData, {
+        params: { userId: userId }
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
         // const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
         navigateToStep2("/fund-detail/story", {
-          state: { totInfo: totInfo },
+          state: { totInfo: totInfo }
         });
       })
       .catch((error) => {
@@ -202,6 +205,7 @@ const MakeInvest5 = () => {
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -528,6 +532,7 @@ const MakeInvest5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };

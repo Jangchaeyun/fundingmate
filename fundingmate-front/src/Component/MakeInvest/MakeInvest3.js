@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
   PlusSquareOutlined,
   MinusCircleOutlined,
-  MinusSquareOutlined,
+  MinusSquareOutlined
 } from "@ant-design/icons";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -17,6 +17,8 @@ import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import { nanoid } from "nanoid";
+import Footer from "../../Component/Footer/Footer";
+import Header from "../../Component/Header/Header";
 const MAX_IMAGES = 15;
 
 const MakeInvest3 = () => {
@@ -44,7 +46,7 @@ const MakeInvest3 = () => {
     const newInput = { id: newId };
     setTotInfo({
       ...totInfo,
-      investVideoUrl: [...totInfo.investVideoUrl, newInput],
+      investVideoUrl: [...totInfo.investVideoUrl, newInput]
     });
     //setInputs((prevInputs) => [...prevInputs, newInput]);
   };
@@ -70,7 +72,7 @@ const MakeInvest3 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         imgList.push(imageCard);
         setImages([...imgList]);
@@ -88,15 +90,15 @@ const MakeInvest3 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
           investContentImgSavedName: [
             ...totInfo.investContentImgSavedName,
-            event.target.files[0],
-          ],
+            event.target.files[0]
+          ]
         });
       };
       // reader가 이미지 읽도록 하기
@@ -132,7 +134,7 @@ const MakeInvest3 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/moneyinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestMoneyinfo", { state: { totInfo: totInfo } });
   };
 
   //   const handleNextStep = () => {
@@ -149,11 +151,12 @@ const MakeInvest3 = () => {
   //   };
 
   const handleNextStep = () => {
-    navigateToStep2("/make-invest/typelist", { state: { totInfo: totInfo } });
+    navigateToStep2("/makeInvestTypelist", { state: { totInfo: totInfo } });
   };
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -257,7 +260,7 @@ const MakeInvest3 = () => {
                     zIndex: "1",
                     color: "#fff",
                     fontSize: "15px",
-                    display: showDeleteIcon ? "block" : "none",
+                    display: showDeleteIcon ? "block" : "none"
                   }}
                 >
                   <MinusCircleOutlined id="imi-image-delete-icon" />
@@ -278,7 +281,7 @@ const MakeInvest3 = () => {
                     style={{
                       fontSize: "15px",
                       cursor: "pointer",
-                      marginRight: "3px",
+                      marginRight: "3px"
                     }}
                   />
                 </div>
@@ -395,6 +398,7 @@ const MakeInvest3 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
+      <Footer />
     </>
   );
 };

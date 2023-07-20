@@ -3,7 +3,7 @@ import "./Header.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function Header() {
   const token = useSelector((state) => state.Authorization);
   const userid = useSelector((state) => state.UserId);
@@ -12,6 +12,7 @@ function Header() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [keyword, setKeyword] = useState(state ? state : "");
+
   const logout = () => {
     dispatch({ type: "NEWTOKEN", payload: "" });
     dispatch({ type: "USERID", payload: "" });
@@ -74,7 +75,6 @@ function Header() {
             <input
               type="text"
               id="keyword"
-              value={keyword}
               className="nav-search float-r"
               placeholder="프로젝트 명/기업 명"
               maxLength="10"
