@@ -31,6 +31,7 @@ const MakeReward2 = () => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
   };
   const editorRef = useRef();
+  
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML();
   };
@@ -66,7 +67,7 @@ const MakeReward2 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.conFile) {
+    for (let file of totInfo.rewardContentImgSavedName) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
@@ -92,11 +93,13 @@ const MakeReward2 = () => {
           alt: "Selected",
           style: { width: "100%", height: "100%", objectFit: "cover" }
         };
-        const updatedImages = [imageCard]; // Create an array with the new image
-        setImages(updatedImages);
+        setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
-          conFile: [event.target.files[0]] // Create an array with the new file
+          rewardContentImgSavedName: [
+            ...totInfo.rewardContentImgSavedName,
+            event.target.files[0]
+          ]
         });
       };
       // reader가 이미지 읽도록 하기
@@ -106,7 +109,7 @@ const MakeReward2 = () => {
   
 
   const handleImageClick = (e) => {
-    if (totInfo.conFile.length < MAX_IMAGES) {
+    if (totInfo.rewardContentImgSavedName.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -114,14 +117,14 @@ const MakeReward2 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.conFile];
+    const updatedImagesFile = [...totInfo.rewardContentImgSavedName];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, conFile: [...updatedImages] });
+    setTotInfo({ ...totInfo, rewardContentImgSavedName: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 
@@ -186,34 +189,6 @@ const MakeReward2 = () => {
             onChange={handleInputChange}
           />
         </div>
-
-        {/* <div
-          className="projMake-video"
-          style={{ flexDirection: "column", alignItems: "flex-start" }}
-        >
-          {totInfo.inputs.map((input, index) => (
-            <div key={input.id} style={{ marginTop: index > 0 ? "10px" : "0" }}>
-              <input
-                type="text"
-                name="rewardVideoAddress"
-                className="input-box-video"
-                onChange={(e) => (totInfo.inputs[index].url = e.target.value)}
-                defaultValue={input.url}
-              />
-              <button className="rew-add" onClick={handleAddInput}>
-                <PlusSquareOutlined style={{ fontSize: "23px" }} />
-              </button>
-              {index !== 0 && (
-                <button
-                  className="rew-delete"
-                  onClick={() => handleDeleteInput(input.id)}
-                >
-                  <MinusSquareOutlined style={{ fontSize: "23px" }} />
-                </button>
-              )}
-            </div>
-          ))}
-        </div> */}
         <br />
 
         <p
@@ -242,6 +217,7 @@ const MakeReward2 = () => {
               >
                 <div
                   className="imi-image-delete"
+        
                   onClick={(e) => handleImageDelete(e, index)}
                   style={{
                     position: "absolute",

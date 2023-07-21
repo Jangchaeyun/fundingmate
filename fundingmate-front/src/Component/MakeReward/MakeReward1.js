@@ -35,14 +35,14 @@ const MakeReward1 = () => {
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        repFile: [],
+        rewardRepImgSavedName: null,
         projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
-        inputs: [{ id: nanoid(), url: "" }],
-        conFile: [],
+        rewardContentImgSavedName: [],
         projContent: "",
         cards: [],
+        rewardVideoAddress: "",
         rewardRefundExchangePolicy: "",
         rewardContact: "",
         rewardEmail: "",
@@ -61,8 +61,8 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        businessImg: [],
-        bankImg: [],
+        rewardIdBusinessLicenseImgSavedName: null,
+        rewardBankAccountCopyImgSavedName: null,
       });
     }
   }, []);
@@ -93,12 +93,7 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo((prevTotInfo) => ({
-        ...prevTotInfo,
-        businessImg: [
-          { fileId: null, fileName: file.name, fileRegistrationDate: null },
-        ],
-      }));
+      setTotInfo({ ...totInfo, rewardRepImgSavedName: file });
     }
   };
 
