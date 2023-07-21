@@ -9,6 +9,7 @@ import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
@@ -32,6 +33,7 @@ const MakeReward1 = () => {
       }
     } else {
       setTotInfo({
+        id: 0,
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
@@ -67,6 +69,18 @@ const MakeReward1 = () => {
     }
   }, []);
 
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleInputChange = (e) => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
   };
@@ -94,6 +108,7 @@ const MakeReward1 = () => {
 
       reader.readAsDataURL(file);
       setTotInfo({ ...totInfo, rewardRepImgSavedName: file });
+      uploadImageToServer(file);
     }
   };
 

@@ -14,10 +14,10 @@ const Story = () => {
     projDateStart: null,
     projDateEnd: null,
     deliveryDate: null,
-    repFile: null,
+    rewardRepImgSavedName: null,
     projKeyword: "",
     rewardVideoAddress: "",
-    conFile: null,
+    rewardContentImgSavedName: [],
     projContent: "",
     rewardRefundExchangePolicy: "",
     rewardContact: "",
@@ -121,11 +121,15 @@ const Story = () => {
         </div>
       </div>
       <div className="story_content">
-        {reward.projContent}
+        {reward && reward.projContent && reward.projContent.trim() !== "" ? (
+          <div dangerouslySetInnerHTML={{ __html: reward.projContent }} />
+        ) : (
+          <div>No content available</div>
+        )}
         <div className="product_img">
-          {reward.conFile && (
+          {reward?.rewardContentImgSavedName.length > 0 && (
             <img
-              src={`http://localhost:8080/img/${reward.conFile.fileName}`}
+              src={`http://localhost:8080/img/${reward.rewardContentImgSavedName[0].fileName}`}
               className="images"
             />
           )}

@@ -61,6 +61,18 @@ const MakeReward5 = () => {
     }
   }, []);
 
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
@@ -73,6 +85,7 @@ const MakeReward5 = () => {
 
       reader.readAsDataURL(file);
       setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
+      uploadImageToServer(file);
     }
   };
 
@@ -141,7 +154,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files[0].name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null
+        fileRegistrationDate: null,
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -154,7 +167,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files.name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null
+        fileRegistrationDate: null,
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -162,12 +175,18 @@ const MakeReward5 = () => {
     const requestData = {
       ...totInfo,
       rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(totInfo.rewardContentImgSavedName),
-      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.rewardRepImgSavedName),
+      rewardContentImgSavedName: convertToFilesDTO(
+        totInfo.rewardContentImgSavedName
+      ),
+      rewardRepImgSavedName: convertToOneFilesDTO(
+        totInfo.rewardRepImgSavedName
+      ),
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
         totInfo.rewardIdBusinessLicenseImgSavedName
       ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(totInfo.rewardBankAccountCopyImgSavedName),
+      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
+        totInfo.rewardBankAccountCopyImgSavedName
+      ),
     };
 
     axios
@@ -176,6 +195,7 @@ const MakeReward5 = () => {
       })
       .then((response) => {
         console.log(response.data);
+        const rewardId = response.data.id;
         alert("프로젝트가 등록되었습니다.");
         navigateToStep2(`/reward-detail/story/${rewardId}`, {
           state: { totInfo: totInfo },
