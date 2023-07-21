@@ -32,8 +32,6 @@ public class Reward {
 
     private LocalDate projDateEnd;
 
-    private LocalDate deliveryDate;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="rewardRepImgSavedName_img")
     private File rewardRepImgSavedName;

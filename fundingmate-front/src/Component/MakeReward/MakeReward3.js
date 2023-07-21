@@ -22,18 +22,14 @@ const MakeReward3 = () => {
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
 
-  const today = new Date();
-  const todayDate =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-
   const [modalOpen, setModalOpen] = useState(false);
   const initCard = {
     rewardAmount: "",
-    rewardAvailableLimit: "",
+    rewardAvailableLimit: 0,
     rewardAvailableCount: 0,
     rewardTitle: "",
     rewardContent: "",
-    deliveryDate: todayDate,
+    deliveryDate: "",
     rewardShipAddress: "",
     options: []
   };
@@ -133,11 +129,6 @@ const MakeReward3 = () => {
     const inputValue = e.target.value;
     const numericValue = inputValue.replace(/\D/g, ""); // 숫자 이외의 문자 제거
     setCard({ ...card, [e.target.name]: numericValue });
-  };
-
-  const handleDatePickerChange = (date) => {
-    const formattedDate = date ? date.format("YYYY-MM-DD") : null;
-    setCard((prevCard) => ({ ...prevCard, deliveryDate: formattedDate }));
   };
 
   return (
@@ -284,10 +275,15 @@ const MakeReward3 = () => {
             id="rew-date-picker"
             showToday={true}
             allowClear={false}
-            format={"YYYY-MM-DD"}
-            value={cards.deliveryDate}
+            format="YYYY-MM-DD"
+            value={card.deliveryDate ? dayjs(card.deliveryDate) : null}
+            onChange={(date, dateStr) => {
+              setCard({
+                ...card,
+                deliveryDate: dateStr,
+              });
+            }}
             name="deliveryDate"
-            onChange={handleDatePickerChange}
           />
           <p className="custom-font-modal-sub-title">리워드 옵션</p>
           {!showOption && (

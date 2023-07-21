@@ -43,27 +43,28 @@ const MakeReward5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    if (totInfo.businessImg) {
+    let file = totInfo.rewardIdBusinessLicenseImgSavedName;
+    if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage(e.target.result);
       };
-      reader.readAsDataURL(totInfo.businessImg);
+      reader.readAsDataURL(file);
     }
-    if (totInfo.bankImg) {
+    file = totInfo.rewardBankAccountCopyImgSavedName;
+    if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage2(e.target.result);
       };
-      reader.readAsDataURL(totInfo.bankImg);
+      reader.readAsDataURL(file);
     }
-  }, [totInfo.businessImg, totInfo.bankImg]);
+  }, []);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
-    if (file && file instanceof File) {
-      // Check if it's a valid File object
+    if (file) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -71,11 +72,7 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-
-      setTotInfo((prevTotInfo) => ({
-        ...prevTotInfo,
-        businessImg: file,
-      }));
+      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
     }
   };
 
@@ -86,8 +83,7 @@ const MakeReward5 = () => {
   const handleImageUpload2 = (event) => {
     const file = event.target.files[0];
 
-    if (file && file instanceof File) {
-      // Check if it's a valid File object
+    if (file) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -95,11 +91,8 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-
-      setTotInfo((prevTotInfo) => ({
-        ...prevTotInfo,
-        bankImg: file,
-      }));
+      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      console.log(file.src);
     }
   };
 
@@ -122,10 +115,7 @@ const MakeReward5 = () => {
       fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
     }
 
-    setTotInfo((prevTotInfo) => ({
-      ...prevTotInfo,
-      businessAddress: fullAddress,
-    }));
+    setTotInfo({ ...totInfo, businessAddress: fullAddress });
 
     setShowModal(false); // Close the modal
   };
@@ -145,38 +135,39 @@ const MakeReward5 = () => {
 
   const handleNextStep = () => {
     const convertToFilesDTO = (files) => {
-      if (!files || files.length === 0) {
-        return null;
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
       }
       return {
         fileId: null,
-        fileName: files[0].name,
-        fileRegistrationDate: null,
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
-    const convertToOneFilesDTO = (file) => {
-      if (!file) {
-        return null;
+    const convertToOneFilesDTO = (files) => {
+      if (!files || files.length === 0) {
+        return null; // 파일이 없는 경우 null로 설정
       }
 
       return {
         fileId: null,
-        fileName: file.name,
-        fileRegistrationDate: null,
-        url: file,
+        fileName: files.name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
     const requestData = {
       ...totInfo,
       rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(totInfo.conFile),
-      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.repFile),
+      rewardContentImgSavedName: convertToFilesDTO(totInfo.rewardContentImgSavedName),
+      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.rewardRepImgSavedName),
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.businessImg
+        totInfo.rewardIdBusinessLicenseImgSavedName
       ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(totInfo.bankImg),
+      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(totInfo.rewardBankAccountCopyImgSavedName),
     };
 
     axios
@@ -186,7 +177,7 @@ const MakeReward5 = () => {
       .then((response) => {
         console.log(response.data);
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/:rewardId`, {
+        navigateToStep2(`/reward-detail/story/${rewardId}`, {
           state: { totInfo: totInfo },
         });
       })

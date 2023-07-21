@@ -35,27 +35,17 @@ public class RewardType {
 
     private String rewardContent;
 
+    private LocalDate deliveryDate;
+
     private Boolean rewardShipAddress;
 
     @ManyToOne
     @JoinColumn(name = "reward_id")
     private Reward reward;
 
-    @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL)
-    private List<RewardOption> rewardOptions;
+//    @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL)
+//    private List<RewardOption> rewardOptions;
 
     @OneToMany(mappedBy = "rewardType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments = new HashSet<>();
-
-    public void setRewardOptions(List<RewardOption> rewardOptions) {
-        this.rewardOptions = rewardOptions;
-        for (RewardOption rewardOption : rewardOptions) {
-            rewardOption.setRewardType(this);
-        }
-    }
-
-    public void addRewardOption(RewardOption rewardOption) {
-        rewardOptions.add(rewardOption);
-        rewardOption.setRewardType(this);
-    }
 }

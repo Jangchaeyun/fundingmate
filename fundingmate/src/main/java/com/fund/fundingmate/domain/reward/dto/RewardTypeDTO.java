@@ -17,8 +17,9 @@ public class RewardTypeDTO {
     private Integer rewardAmount;
     private Boolean rewardAvailableLimit;
     private Integer rewardAvailableCount;
+    private LocalDate deliveryDate;
     private String rewardTitle;
     private String rewardContent;
     private Boolean rewardShipAddress;
-    private List<RewardOptionDTO> rewardOptions;
+//    private List<RewardOptionDTO> rewardOptions;
 }
