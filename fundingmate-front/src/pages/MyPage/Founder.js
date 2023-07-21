@@ -53,7 +53,7 @@ function Founder() {
                     <div className="section-container">
                         <h4>설정</h4>
                     </div>
-                    <table className="my-settings">
+                    <table className="my-settings mypage-table">
                         <thead>
                             <tr>
                                 <th>
@@ -136,7 +136,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -153,7 +153,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -178,7 +178,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -195,7 +195,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -220,7 +220,7 @@ function Founder() {
                         <h4>리워드 펀딩</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -237,7 +237,7 @@ function Founder() {
                         <h4>투자</h4>
                     </div>
                     <div className="subsection-container">
-                        <table className="list" style={{ textAlign: 'center' }}>
+                        <table className="list mypage-table" style={{ textAlign: 'center' }}>
                             <tr>
                                 <td>#</td>
                                 <td>프로젝트</td>
@@ -258,7 +258,7 @@ function Founder() {
                     <div className="section-container" id="other">
                         <h4>기타</h4>
                     </div>
-                    <table style={{ textIndent: 0 }}>
+                    <table className='mypage-table' style={{ textIndent: 0 }}>
                         <tbody>
                             <tr>
                                 <td>
