@@ -32,20 +32,18 @@ public class Reward {
 
     private LocalDate projDateEnd;
 
-    private LocalDate deliveryDate;
-
-    @ManyToOne
-    @JoinColumn(name="rep_img")
-    private File repfile;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="rewardRepImgSavedName_img")
+    private File rewardRepImgSavedName;
 
     private String projKeyWord;
 
     private String rewardVideoAddress;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="con_img")
-    private File conFile;
-    
+    @JoinColumn(name="rewardContentImgSavedName_img")
+    private File rewardContentImgSavedName;
+
     @Column(columnDefinition = "VARCHAR(1000)")
     private String projContent;
 
@@ -70,8 +68,8 @@ public class Reward {
     private String asPhoneNumber;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "business_img")
-    private File businessImg;
+    @JoinColumn(name = "rewardIdBusinessLicenseImgSavedName_img")
+    private File rewardIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -82,8 +80,8 @@ public class Reward {
     private String depositorName;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "bank_img")
-    private File bankImg;
+    @JoinColumn(name = "rewardBankAccountCopyImgSavedName_img")
+    private File rewardBankAccountCopyImgSavedName;
 
     @Column(nullable = true)
     private String taxBillEmail;

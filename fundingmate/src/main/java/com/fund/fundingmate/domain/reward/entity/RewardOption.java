@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "reward_option")
@@ -21,8 +22,6 @@ public class RewardOption {
 
     private String getRewardOptCon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reward_type_no")
-    @JsonManagedReference
-    private RewardType rewardType;
+//    @OneToMany(mappedBy = "rewardOption")
+//    private List<RewardType> rewardTypes;
 }

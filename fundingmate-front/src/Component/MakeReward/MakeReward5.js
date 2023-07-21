@@ -10,7 +10,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined
+  TwitterOutlined,
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -35,7 +35,7 @@ const MakeReward5 = () => {
   const handleNumInputChange = (e) => {
     const { name, value } = e.target;
     if (regexPattern.test(value)) {
-      setTotInfo({ ...totInfo, [name]: value });
+      setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
     }
   };
 
@@ -43,7 +43,7 @@ const MakeReward5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.businessImg;
+    let file = totInfo.rewardIdBusinessLicenseImgSavedName;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -51,7 +51,7 @@ const MakeReward5 = () => {
       };
       reader.readAsDataURL(file);
     }
-    file = totInfo.bankImg;
+    file = totInfo.rewardBankAccountCopyImgSavedName;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -72,13 +72,9 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo((prevTotInfo) => ({
-        ...prevTotInfo,
-        businessImg: file,
-      }));
+      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
     }
   };
-  
 
   const handleImageClick = () => {
     document.getElementById("imageUpload").click();
@@ -95,10 +91,8 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo((prevTotInfo) => ({
-        ...prevTotInfo,
-        bankImg: file,
-      }));
+      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      console.log(file.src);
     }
   };
 
@@ -121,10 +115,7 @@ const MakeReward5 = () => {
       fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
     }
 
-    setTotInfo((prevTotInfo) => ({
-      ...prevTotInfo,
-      businessAddress: fullAddress,
-    }));
+    setTotInfo({ ...totInfo, businessAddress: fullAddress });
 
     setShowModal(false); // Close the modal
   };
@@ -144,62 +135,59 @@ const MakeReward5 = () => {
 
   const handleNextStep = () => {
     const convertToFilesDTO = (files) => {
-      if (!files || files.length === 0) {
-        return null;
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
       }
       return {
         fileId: null,
-        fileName: files[0].name,
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
         fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
-    const convertToOneFilesDTO = (file) => {
-      if (!file) {
-        return null;
+    const convertToOneFilesDTO = (files) => {
+      if (!files || files.length === 0) {
+        return null; // 파일이 없는 경우 null로 설정
       }
-  
+
       return {
         fileId: null,
-        fileName: file.name,
-        fileRegistrationDate: null,
-        url: file,
+        fileName: files.name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
     const requestData = {
       ...totInfo,
       rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(totInfo.conFile),
-      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.repFile),
+      rewardContentImgSavedName: convertToFilesDTO(totInfo.rewardContentImgSavedName),
+      rewardRepImgSavedName: convertToOneFilesDTO(totInfo.rewardRepImgSavedName),
       rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.businessImg
+        totInfo.rewardIdBusinessLicenseImgSavedName
       ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.bankImg
-      )
+      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(totInfo.rewardBankAccountCopyImgSavedName),
     };
 
-    
-
     axios
-    .post("http://localhost:8080/makeReward", requestData, {
-      params: { userId: userId }, // Pass userId as a parameter
-    })
-    .then((response) => {
-      console.log(response.data);
-      alert("프로젝트가 등록되었습니다.");
-      navigateToStep2(`/reward-detail/story/:rewardId`, {
-        state: { totInfo: totInfo },
+      .post("http://localhost:8080/makeReward", requestData, {
+        params: { userId: userId }, // Pass userId as a parameter
+      })
+      .then((response) => {
+        console.log(response.data);
+        alert("프로젝트가 등록되었습니다.");
+        navigateToStep2(`/reward-detail/story/${rewardId}`, {
+          state: { totInfo: totInfo },
+        });
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
       });
   };
 
   return (
     <>
-      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
