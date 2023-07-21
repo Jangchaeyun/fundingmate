@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
   PlusSquareOutlined,
   MinusCircleOutlined,
-  MinusSquareOutlined
+  MinusSquareOutlined,
 } from "@ant-design/icons";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -19,6 +19,7 @@ import "@toast-ui/editor/dist/i18n/ko-kr";
 import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import axios from "axios";
 
 const MAX_IMAGES = 15;
 
@@ -31,7 +32,7 @@ const MakeReward2 = () => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
   };
   const editorRef = useRef();
-  
+
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML();
   };
@@ -43,8 +44,6 @@ const MakeReward2 = () => {
 
   const [inputs, setInputs] = useState([{ id: 1 }]);
 
-
-  
   const handleAddInput = () => {
     const newId = nanoid();
     const newInput = { id: newId };
@@ -73,7 +72,7 @@ const MakeReward2 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" }
+          style: { width: "100%", height: "100%", objectFit: "cover" },
         };
         imgList.push(imageCard);
         setImages([...imgList]);
@@ -83,6 +82,19 @@ const MakeReward2 = () => {
       reader.readAsDataURL(file);
     }
   }, []);
+
+  const uploadImageToServer = async (files) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", files[0]);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleImageUpload = (event) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -91,22 +103,22 @@ const MakeReward2 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" }
+          style: { width: "100%", height: "100%", objectFit: "cover" },
         };
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
           rewardContentImgSavedName: [
             ...totInfo.rewardContentImgSavedName,
-            event.target.files[0]
-          ]
+            event.target.files[0],
+          ],
         });
+        uploadImageToServer(event.target.files);
       };
       // reader가 이미지 읽도록 하기
       reader.readAsDataURL(event.target.files[0]);
     }
   };
-  
 
   const handleImageClick = (e) => {
     if (totInfo.rewardContentImgSavedName.length < MAX_IMAGES) {
@@ -142,8 +154,6 @@ const MakeReward2 = () => {
   const handleNextStep = () => {
     navigateToStep2("/makeRewardTypelist", { state: { totInfo: totInfo } });
   };
-
-  
 
   return (
     <>
@@ -217,7 +227,6 @@ const MakeReward2 = () => {
               >
                 <div
                   className="imi-image-delete"
-        
                   onClick={(e) => handleImageDelete(e, index)}
                   style={{
                     position: "absolute",
@@ -226,7 +235,7 @@ const MakeReward2 = () => {
                     zIndex: "1",
                     color: "#fff",
                     fontSize: "15px",
-                    display: showDeleteIcon ? "block" : "none"
+                    display: showDeleteIcon ? "block" : "none",
                   }}
                 >
                   <MinusCircleOutlined id="imi-image-delete-icon" />
@@ -247,7 +256,7 @@ const MakeReward2 = () => {
                     style={{
                       fontSize: "15px",
                       cursor: "pointer",
-                      marginRight: "3px"
+                      marginRight: "3px",
                     }}
                   />
                 </div>

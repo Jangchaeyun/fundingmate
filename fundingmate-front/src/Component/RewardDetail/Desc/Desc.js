@@ -7,7 +7,9 @@ import { useParams } from "react-router";
 import moment from "moment";
 
 const Desc = ({ reward, totalPaymentAmount, personCount }) => {
-  const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
+  const [imageSrc, setImageSrc] = useState(
+    reward.rewardRepImgSavedName.fileName
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getRemainingDays = () => {
@@ -35,16 +37,18 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
             className="main_img"
           />
           <img
-            src={`http://localhost:8080/img/${reward.repFile.fileName}`}
+            src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
             className="sub_img2"
-            id={reward.repFile.fileName}
-            onClick={(e) => setImageSrc(reward.repFile.fileName)}
+            id={reward.rewardRepImgSavedName.fileName}
+            onClick={(e) => setImageSrc(reward.rewardRepImgSavedName.fileName)}
           />
           <img
-            src={`http://localhost:8080/img/${reward.conFile.fileName}`}
+            src={`http://localhost:8080/img/${reward.rewardContentImgSavedName.fileName}`}
             className="sub_img1"
-            id={reward.conFile.fileName}
-            onClick={(e) => setImageSrc(reward.conFile.fileName)}
+            id={reward.rewardContentImgSavedName.fileName}
+            onClick={(e) =>
+              setImageSrc(reward.rewardContentImgSavedName.fileName)
+            }
           />
         </div>
         <div className="desc_content">
