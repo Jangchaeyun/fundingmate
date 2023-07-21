@@ -23,7 +23,7 @@ public class InvestPeople {
 
     private String name;
 
-    private String sercuritynumber1;
+    private String securitynumber1;
 
     private String securitynumber2;
 
