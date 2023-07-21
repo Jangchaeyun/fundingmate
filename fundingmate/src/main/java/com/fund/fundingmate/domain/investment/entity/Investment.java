@@ -32,9 +32,7 @@ public class Investment {
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investRepImgSavedName_img")
-    private File investRepImgSavedName;
+    private Long investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -57,9 +55,7 @@ public class Investment {
     private List<File> investContentImgSavedName;*/
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investContentImgSavedName_img")
-    private File  investContentImgSavedName;
+    private String  investContentImgSavedName;  //파일번호 목록: 1,2,3
 
     private String investItemIntro;
 
@@ -71,9 +67,7 @@ public class Investment {
 
     private String investProjContent;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "investIdBusinessLicenseImgSavedName_img")
-    private File investIdBusinessLicenseImgSavedName;
+    private Long investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -85,9 +79,7 @@ public class Investment {
 
     private String depositorName;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "investBankAccountCopyImgSavedName_img")
-    private File investBankAccountCopyImgSavedName;
+    private Long investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 

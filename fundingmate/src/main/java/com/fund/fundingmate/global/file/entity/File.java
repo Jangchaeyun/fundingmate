@@ -36,5 +36,8 @@ public class File {
 
     private Date fileRegistrationDate;
 
+    public File(String fileName) {
+        this.fileName = fileName;
+    }
 
 }

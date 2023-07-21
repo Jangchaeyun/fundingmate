@@ -2,6 +2,7 @@ package com.fund.fundingmate.domain.investment.controller;
 
 import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
+import com.fund.fundingmate.domain.investment.dto.InvestmentDTO2;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
 import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.dto.FileDTO;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,18 +68,18 @@ public class InvestmentController {
 
 
     @PostMapping("/makeInvestHostinfo")
-    public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
+//    public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
+//    public ResponseEntity<InvestmentDTO> createInvestment( @ModelAttribute InvestmentDTO2 investmentDTO) {
+    public ResponseEntity<InvestmentDTO> createInvestment( @RequestParam Map<String,Object> param) {
         try {
 
-            System.out.println(userId);
-            System.out.println(investmentDTO);
-            System.out.println(investmentDTO.getInvestTypes());
-
-            Long savedInvestmentId = investmentService.createInvestment(investmentDTO, userId);
-
-            Map<String, Object> investmentMap = investmentService.getInvestmentById(savedInvestmentId);
-            InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
+//
+            Long savedInvestmentId = investmentService.createInvestment(param);
+//
+//            Map<String, Object> investmentMap = investmentService.getInvestmentById(savedInvestmentId);
+//            InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
+//            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

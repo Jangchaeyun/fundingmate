@@ -181,8 +181,70 @@ const MakeInvest5 = () => {
       )
     };
 
+    let formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("investCategory", totInfo.investCategory);
+    formData.append("investTargetAmount", totInfo.investTargetAmount);
+    formData.append("investProjName", totInfo.investProjName);
+    formData.append("investRepImgSavedName", totInfo.investRepImgSavedName);
+    formData.append("investProjKeyword", totInfo.investProjKeyword);
+    formData.append("investProjDateStart", totInfo.investProjDateStart);
+    formData.append("investProjDateEnd", totInfo.investProjDateEnd);
+    formData.append("investVideoUrl", totInfo.investVideoUrl);
+    formData.append(
+      "investContentImgcnt",
+      totInfo.investContentImgSavedName.length
+    );
+    for (let i = 0; i <= totInfo.investContentImgSavedName.length; i++) {
+      formData.append(
+        "investContentImgSavedName" + (i + 1),
+        totInfo.investContentImgSavedName[i]
+      );
+    }
+    formData.append(
+      "investContentImgSavedName",
+      totInfo.investContentImgSavedName
+    );
+    formData.append("investProjContent", totInfo.investProjContent);
+    formData.append("cards", JSON.stringify(totInfo.cards));
+    // formData.append("cards", totInfo.cards);
+    formData.append("businessAddress", totInfo.businessAddress);
+    formData.append("bank", totInfo.bank);
+    formData.append("accNumber", totInfo.accNumber);
+    formData.append("depositorName", totInfo.depositorName);
+    formData.append("taxBillEmail", totInfo.taxBillEmail);
+    formData.append("websiteUrl", totInfo.websiteUrl);
+    formData.append("facebookUrl", totInfo.facebookUrl);
+    formData.append("instagramUrl", totInfo.instagramUrl);
+    formData.append("blogUrl", totInfo.blogUrl);
+    formData.append("twitterUrl", totInfo.twitterUrl);
+    formData.append(
+      "investIdBusinessLicenseImgSavedName",
+      totInfo.investIdBusinessLicenseImgSavedName
+    );
+    formData.append(
+      "investBankAccountCopyImgSavedName",
+      totInfo.investBankAccountCopyImgSavedName
+    );
+    formData.append("useOfFunds", totInfo.useOfFunds);
+    formData.append("useOfFundsDateStart", totInfo.useOfFundsDateStart);
+    formData.append("useOfFundsDateEnd", totInfo.useOfFundsDateEnd);
+    formData.append("rateOfReturn", totInfo.rateOfReturn);
+    formData.append("expectedPaymentDate", totInfo.expectedPaymentDate);
+    formData.append("repaymentMethod", totInfo.repaymentMethod);
+    formData.append("investItemIntro", totInfo.investItemIntro);
+    formData.append("investItemBusinessValue", totInfo.investItemBusinessValue);
+    formData.append("investItemValue", totInfo.investItemValue);
+    formData.append("investItemBenefit", totInfo.investItemBenefit);
+    formData.append("investEmail", totInfo.investEmail);
+
+    //console.log(totInfo);
+    console.log(formData.get("investRepImgSavedName"));
     axios
-      .post("http://localhost:8080/makeInvestHostinfo", requestData, {
+      .post("http://localhost:8080/makeInvestHostinfo", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
         params: { userId: userId }
       }) // 액시오 요청 보내기
       .then((response) => {
