@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface InvestmentService {
 
-public Long createInvestment(InvestmentDTO investmentDto, Long userId);
+public Long createInvestment(Map<String, Object> param) throws Exception;
 
    public Map<String, Object> getInvestmentById(Long investmentId);
 }
