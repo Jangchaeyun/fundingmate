@@ -214,10 +214,6 @@ public class RewardService {
     }
 
     private RewardType convertToSingleRewardType(RewardTypeDTO rewardTypeDTO) {
-        if (rewardTypeDTO == null) {
-            return null;
-        }
-
         RewardType rewardType = new RewardType();
         rewardType.setRewardAmount(rewardTypeDTO.getRewardAmount());
         rewardType.setRewardAvailableLimit(rewardTypeDTO.getRewardAvailableLimit());
@@ -225,11 +221,7 @@ public class RewardService {
         rewardType.setRewardTitle(rewardTypeDTO.getRewardTitle());
         rewardType.setRewardContent(rewardTypeDTO.getRewardContent());
         rewardType.setRewardShipAddress(rewardTypeDTO.getRewardShipAddress());
-
         rewardType.setDeliveryDate(rewardTypeDTO.getDeliveryDate());
-//        List<RewardOptionDTO> rewardOptionDTOs = rewardTypeDTO.getRewardOptions();
-//        List<RewardOption> rewardOptions = convertToRewardOption(rewardOptionDTOs);
-//        rewardType.setRewardOptions(rewardOptions);
 
         return rewardType;
     }

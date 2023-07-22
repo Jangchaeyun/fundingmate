@@ -7,67 +7,39 @@ import axios from "axios";
 const Story = () => {
   const [viewDesc, setViewDesc] = useState(false);
   const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
-  const [reward, setReward] = useState({
-    id: 0,
-    projName: "",
-    projTargetAmount: 0,
-    projDateStart: null,
-    projDateEnd: null,
-    deliveryDate: null,
-    rewardRepImgSavedName: null,
-    projKeyword: "",
-    rewardVideoAddress: "",
-    rewardContentImgSavedName: [],
-    projContent: "",
-    rewardRefundExchangePolicy: "",
-    rewardContact: "",
-    rewardEmail: "",
-    rewardCategory: "",
-    modelName: "",
-    countryOfOrigin: "",
-    manufacturer: "",
-    rewardLaw: "",
-    asPhoneNumber: "",
-    businessImg: null,
-    businessAddress: "",
-    bank: "",
-    accNumber: "",
-    depositorName: "",
-    bankImg: null,
-    taxBillEmail: "",
-    websiteUrl: "",
-    facebookUrl: "",
-    instagramUrl: "",
-    blogUrl: "",
-    twitterUrl: "",
-    user: null,
-    rewardTypes: [],
-  });
+  const [totInfo, setTotInfo] = useState();
   const [personCount, setPersonCount] = useState(0);
+
   const { rewardId } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/reward-detail/story/${rewardId}`)
-      .then((res) => {
-        console.log(res.data);
-        setReward(res.data.reward);
-        setViewDesc(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log("Fetching reward data for rewardId:", rewardId);
+    if (rewardId) {
+      axios
+        .get(`http://localhost:8080/reward-detail/story/${rewardId}`)
+        .then((res) => {
+          console.log(res.data);
+          setTotInfo(res.data);
+          setViewDesc(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setViewDesc(false);
+        });
 
-    fetchParticipantCount();
+      fetchParticipantCount();
+    }
   }, [rewardId]);
 
   const fetchTotalPaymentAmounts = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
-      );
-      const totalAmounts = response.data;
-      setTotalPaymentAmounts(totalAmounts);
+      if (totInfo && totInfo.id) {
+        const response = await axios.get(
+          `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${totInfo.id}`
+        );
+        const totalAmounts = response.data;
+        setTotalPaymentAmounts(totalAmounts);
+      }
     } catch (error) {
       console.error("Error fetching total payment amounts:", error);
     }
@@ -86,19 +58,21 @@ const Story = () => {
   };
 
   useEffect(() => {
-    if (reward && reward.id) {
+    if (totInfo && totInfo.id) {
       fetchTotalPaymentAmounts();
     }
-  }, [reward, totalPaymentAmounts]);
+  }, [totInfo]);
 
   return (
     <div className="desc">
-      {viewDesc && reward && (
-        <Desc
-          reward={reward}
-          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
-          personCount={personCount}
-        />
+      {viewDesc && totInfo && (
+        <div>
+          <Desc
+            reward={totInfo}
+            totalPaymentAmount={totalPaymentAmounts[totInfo.id] || 0}
+            personCount={personCount}
+          />
+        </div>
       )}
       <div className="menu">
         <hr className="menu_hr" />
@@ -121,18 +95,20 @@ const Story = () => {
         </div>
       </div>
       <div className="story_content">
-        {reward && reward.projContent && reward.projContent.trim() !== "" ? (
-          <div dangerouslySetInnerHTML={{ __html: reward.projContent }} />
+        {totInfo && totInfo.projContent && totInfo.projContent.trim() !== "" ? (
+          <div dangerouslySetInnerHTML={{ __html: totInfo.projContent }} />
         ) : (
           <div>No content available</div>
         )}
         <div className="product_img">
-          {reward?.rewardContentImgSavedName.length > 0 && (
-            <img
-              src={`http://localhost:8080/img/${reward.rewardContentImgSavedName[0].fileName}`}
-              className="images"
-            />
-          )}
+          {totInfo?.rewardContentImgSavedName?.length > 0 &&
+            totInfo.rewardContentImgSavedName.map((img, index) => (
+              <img
+                key={index}
+                src={`http://localhost:8080/img/${img.fileName}`}
+                className="images"
+              />
+            ))}
         </div>
       </div>
     </div>

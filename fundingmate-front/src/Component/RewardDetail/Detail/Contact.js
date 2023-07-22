@@ -8,60 +8,28 @@ import { useSelector } from "react-redux";
 
 const Contact = () => {
   const { rewardId } = useParams();
-  const [reward, setReward] = useState({
-    id: 0,
-    projName: "",
-    projTargetAmount: 0,
-    projDateStart: null,
-    projDateEnd: null,
-    deliveryDate: null,
-    repFile: null,
-    projKeyword: "",
-    rewardVideoAddress: "",
-    conFile: null,
-    projContent: "",
-    rewardRefundExchangePolicy: "",
-    rewardContact: "",
-    rewardEmail: "",
-    rewardCategory: "",
-    modelName: "",
-    countryOfOrigin: "",
-    manufacturer: "",
-    rewardLaw: "",
-    asPhoneNumber: "",
-    businessImg: null,
-    businessAddress: "",
-    bank: "",
-    accNumber: "",
-    depositorName: "",
-    bankImg: null,
-    taxBillEmail: "",
-    websiteUrl: "",
-    facebookUrl: "",
-    instagramUrl: "",
-    blogUrl: "",
-    twitterUrl: "",
-    user: null,
-    rewardTypes: [],
-  });
+  const [totInfo, setTotInfo] = useState();
   const [rewardComments, setRewardComments] = useState([]);
   const [viewDesc, setViewDesc] = useState(false);
   const [inquiryText, setInquiryText] = useState("");
-  const loggedInUser = 1;
+  const userId = useSelector((state) => state.userid);
   const [replyText, setReplyText] = useState({});
   const [replyData, setReplyData] = useState({});
   const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
   const [personCount, setPersonCount] = useState(0);
 
   const submitInquiry = () => {
+    if (!totInfo || !totInfo.id) {
+      console.log("Reward data not available yet.");
+      return;
+    }
+
     const requestBody = {
       comContent: inquiryText,
-      reward: {
-        id: reward.id,
+      rewardId: {
+        rewardId: totInfo.id,
       },
-      user: {
-        id: loggedInUser,
-      },
+      userId: userId,
     };
 
     axios
@@ -96,12 +64,12 @@ const Contact = () => {
   const submitReply = (commentId) => {
     const requestBody = {
       repContent: replyText[commentId],
-      rewardId: reward.id,
+      rewardId: totInfo.id,
       commentId: commentId,
-      userId: loggedInUser,
+      userId: userId,
     };
 
-    if (reward.user.id === loggedInUser) {
+    if (totInfo.user.id === userId) {
       axios
         .post(
           `http://localhost:8080/reward-detail/contact/comment/reply`,
@@ -146,8 +114,7 @@ const Contact = () => {
           `http://localhost:8080/reward-detail/story/${rewardId}`
         );
         console.log(storyResponse.data);
-        setReward(storyResponse.data.reward);
-        setViewDesc(true);
+        setTotInfo(storyResponse.data);
 
         const contactResponse = await axios.get(
           `http://localhost:8080/reward-detail/contact/${rewardId}`
@@ -163,12 +130,13 @@ const Contact = () => {
     };
     fetchParticipantCount();
     fetchData();
+    setViewDesc(true);
   }, [rewardId]);
 
   const fetchTotalPaymentAmounts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${reward.id}`
+        `http://localhost:8080/payment/total-amount-same-rewards?rewardIds=${totInfo.id}`
       );
       const totalAmounts = response.data;
       setTotalPaymentAmounts(totalAmounts);
@@ -190,19 +158,21 @@ const Contact = () => {
   };
 
   useEffect(() => {
-    if (reward && reward.id) {
+    if (totInfo && totInfo.id) {
       fetchTotalPaymentAmounts();
     }
-  }, [reward, totalPaymentAmounts]);
+  }, [totInfo]);
 
   return (
     <div className="desc">
-      {viewDesc && (
-        <Desc
-          reward={reward}
-          totalPaymentAmount={totalPaymentAmounts[reward.id] || 0}
-          personCount={personCount}
-        />
+      {viewDesc && totInfo && (
+        <div>
+          <Desc
+            reward={totInfo}
+            totalPaymentAmount={totalPaymentAmounts[totInfo.id] || 0}
+            personCount={personCount}
+          />
+        </div>
       )}
       <div className="menu">
         <hr />
@@ -245,10 +215,10 @@ const Contact = () => {
           rewardComments.map((comment) => (
             <div className="reward_con_list" key={comment.id}>
               <div className="reward_con_name">
-                {comment.user && comment.user.name} | {""}
+                {comment.user.name} | {""}
                 {comment.comRegistrationDate}
               </div>
-              {comment.user && comment.user.id === loggedInUser && (
+              {comment.user && comment.user.id === userId && (
                 <div
                   className="del_sub"
                   onClick={() => deleteComment(comment.id)}
@@ -257,7 +227,7 @@ const Contact = () => {
                 </div>
               )}
               <div className="reward_con_content">{comment.comContent}</div>
-              {reward.user && reward.user.id === loggedInUser && (
+              {totInfo.user && totInfo.user.id === userId && (
                 <div className="reward_reply_content">
                   <input
                     type="text"
@@ -281,7 +251,7 @@ const Contact = () => {
               {replyData[comment.id]?.map((reply) => (
                 <div key={reply.id}>
                   <div className="reply_reward_con_name">
-                    {reward.user.name} | {reply.repRegisterationDate}
+                    {totInfo.user.name} | {reply.repRegisterationDate}
                   </div>
                   <div className="reply_reward_con_content">
                     {reply.repContent}

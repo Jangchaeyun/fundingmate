@@ -18,11 +18,13 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import Story from "../RewardDetail/Detail/Story";
 
 const MakeReward5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
+  const [rewardInfo, setRewardInfo] = useState(null);
 
   const { rewardId } = useParams();
 
@@ -196,10 +198,9 @@ const MakeReward5 = () => {
       .then((response) => {
         console.log(response.data);
         const rewardId = response.data.id;
+        setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/${rewardId}`, {
-          state: { totInfo: totInfo },
-        });
+        navigateToStep2(`/reward-detail/story/${rewardId}`);
       })
       .catch((error) => {
         console.error(error);
@@ -521,7 +522,6 @@ const MakeReward5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-
       <CorFooter />
     </>
   );

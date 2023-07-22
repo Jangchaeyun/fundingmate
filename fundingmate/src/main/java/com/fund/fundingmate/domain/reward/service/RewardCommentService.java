@@ -69,6 +69,16 @@ public class RewardCommentService {
         return  rewardCommentDTO;
     }
 
+    public void updateRewardComment(Long commentId, String updatedContent) {
+        RewardComment rewardComment = rewardCommentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
+
+        rewardComment.setComContent(updatedContent);
+        rewardComment.setComRevisionDate(LocalDate.now());
+
+        rewardCommentRepository.save(rewardComment);
+    }
+
     private RewardDTO mapToRewardDTO(Reward reward) {
         RewardDTO rewardDTO = new RewardDTO();
         rewardDTO.setId(reward.getId());

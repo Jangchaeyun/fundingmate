@@ -44,7 +44,7 @@ public class Reward {
     @JoinColumn(name="rewardContentImgSavedName_img")
     private File rewardContentImgSavedName;
 
-    @Column(columnDefinition = "VARCHAR(1000)")
+    @Column(columnDefinition = "VARCHAR(9000)")
     private String projContent;
 
     @Column(columnDefinition = "VARCHAR(1000)")
