@@ -1,0 +1,15 @@
+package com.fund.fundingmate.domain.mypage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MyPageController {
+    private final MyPageService myPageService;
+
+    @Autowired
+    public MyPageController(MyPageService myPageService) {
+        this.myPageService = myPageService;
+    }
+
+}
