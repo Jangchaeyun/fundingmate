@@ -13,7 +13,7 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getRemainingDays = () => {
-    const endDate = moment(reward.projDateEnd);
+    const endDate = moment(reward?.projDateEnd);
     const today = moment();
     const remainingDays = endDate.diff(today, "days");
     return remainingDays;
@@ -25,7 +25,7 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
     setIsModalVisible(true);
   };
 
-  const hasProjDateEndPassed = moment(reward.projDateEnd).isBefore(moment());
+  const hasProjDateEndPassed = moment(reward?.projDateEnd).isBefore(moment());
 
   return (
     <div className="desc">
@@ -118,11 +118,9 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
             <div className="end2">
-              {moment(reward.projDateEnd)
-                .subtract(1, "day")
-                .format("YYYY-MM-DD")}
+              {moment(reward.projDateEnd).add(1, "day").format("YYYY-MM-DD")}
             </div>
-            <div className="end3">{reward.deliveryDate}</div>
+            <div className="end3">{reward.rewardTypes[0].deliveryDate}</div>
           </div>
           <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">

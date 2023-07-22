@@ -46,7 +46,7 @@ function LoginForm(props) {
               expires.setDate(expires.getDate() + 1);
               setCookie("refreshToken", res.data.refreshToken, {
                 url: "/",
-                expires
+                expires,
               });
               // 토큰을 로컬 스토리지에 저장
               storeTokenInLocalStorage(res.data.accessToken);
@@ -74,9 +74,9 @@ function LoginForm(props) {
       .post("http://localhost:8080/login", null, {
         params: {
           id: id,
-          password: password
+          password: password,
           // 'remember-me': true // Remember Me 파라미터를 설정하여 로그인 요청 보냄
-        }
+        },
       })
       .then((res) => {
         console.log(res);
@@ -88,7 +88,7 @@ function LoginForm(props) {
         expires.setDate(expires.getDate() + 1);
         setCookie("refreshToken", res.data.refreshToken, {
           url: "/",
-          expires
+          expires,
         });
         // 토큰을 로컬 스토리지에 저장
         storeTokenInLocalStorage(res.data.accessToken);
