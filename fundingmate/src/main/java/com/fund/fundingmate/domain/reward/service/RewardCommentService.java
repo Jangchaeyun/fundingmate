@@ -76,11 +76,8 @@ public class RewardCommentService {
         rewardDTO.setProjTargetAmount(reward.getProjTargetAmount());
         rewardDTO.setProjDateStart(reward.getProjDateStart());
         rewardDTO.setProjDateEnd(reward.getProjDateEnd());
-        rewardDTO.setDeliveryDate(reward.getDeliveryDate());
-        rewardDTO.setRepFile(mapToFileDTO(reward.getRepfile()));
         rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
-        rewardDTO.setConFile(mapToFileDTO(reward.getConfile()));
         rewardDTO.setProjContent(reward.getProjContent());
         rewardDTO.setRewardRefundExchangePolicy(reward.getRewardRefundExchangePolicy());
         rewardDTO.setRewardContact(reward.getRewardContact());
@@ -91,12 +88,10 @@ public class RewardCommentService {
         rewardDTO.setManufacturer(reward.getManufacturer());
         rewardDTO.setRewardLaw(reward.getRewardLaw());
         rewardDTO.setAsPhoneNumber(reward.getAsPhoneNumber());
-        rewardDTO.setBusinessImg(mapToFileDTO(reward.getBusinessImg()));
         rewardDTO.setBusinessAddress(reward.getBusinessAddress());
         rewardDTO.setBank(reward.getBank());
         rewardDTO.setAccNumber(reward.getAccNumber());
         rewardDTO.setDepositorName(reward.getDepositorName());
-        rewardDTO.setBankImg(mapToFileDTO(reward.getBankImg()));
         rewardDTO.setTaxBillEmail(reward.getTaxBillEmail());
         rewardDTO.setWebsiteUrl(reward.getWebsiteUrl());
         rewardDTO.setFacebookUrl(reward.getFacebookUrl());
@@ -105,6 +100,12 @@ public class RewardCommentService {
         rewardDTO.setTwitterUrl(reward.getTwitterUrl());
         rewardDTO.setUser(mapToUserDTO(reward.getUser()));
         rewardDTO.setRewardTypes(mapToRewardTypeDTOList(reward.getRewardTypes()));
+
+        rewardDTO.setRewardRepImgSavedName(mapToFileDTO(reward.getRewardRepImgSavedName()));
+        rewardDTO.setRewardContentImgSavedName(mapToFileDTO(reward.getRewardContentImgSavedName()));
+        rewardDTO.setRewardIdBusinessLicenseImgSavedName(mapToFileDTO(reward.getRewardIdBusinessLicenseImgSavedName()));
+        rewardDTO.setRewardBankAccountCopyImgSavedName(mapToFileDTO(reward.getRewardBankAccountCopyImgSavedName()));
+
         return rewardDTO;
     }
 
@@ -113,6 +114,16 @@ public class RewardCommentService {
 
         return rewardComments.stream()
                 .map(this::mapToRewardCommentDTO)
+                .collect(Collectors.toList());
+    }
+
+    private List<FileDTO> mapToFileDTOList(List<File> files) {
+        if (files == null) {
+            return null;
+        }
+
+        return files.stream()
+                .map(this::mapToFileDTO)
                 .collect(Collectors.toList());
     }
 

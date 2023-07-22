@@ -40,7 +40,7 @@
   color: white;
 }
 
-table {
+.mypage-table {
   border-spacing: 0;
   border-collapse: collapse;
   margin: 1%;
@@ -61,8 +61,8 @@ table {
 
 .notifications {
   position: sticky;
-  width: 15px;
-  left: 82%;
+  width: 25px;
+  left: 75%;
 }
 
 .subsection-container {
@@ -73,8 +73,4 @@ table {
 .section-subheader {
   text-align: center;
   padding: 0.25%;
-}
-
-b {
-  color: black;
 }

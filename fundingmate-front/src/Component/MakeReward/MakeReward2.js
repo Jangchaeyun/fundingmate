@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
   PlusSquareOutlined,
   MinusCircleOutlined,
-  MinusSquareOutlined
+  MinusSquareOutlined,
 } from "@ant-design/icons";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -19,6 +19,7 @@ import "@toast-ui/editor/dist/i18n/ko-kr";
 import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import axios from "axios";
 
 const MAX_IMAGES = 15;
 
@@ -31,6 +32,7 @@ const MakeReward2 = () => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
   };
   const editorRef = useRef();
+
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML();
   };
@@ -64,13 +66,13 @@ const MakeReward2 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.projImages) {
+    for (let file of totInfo.rewardContentImgSavedName) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" }
+          style: { width: "100%", height: "100%", objectFit: "cover" },
         };
         imgList.push(imageCard);
         setImages([...imgList]);
@@ -80,6 +82,19 @@ const MakeReward2 = () => {
       reader.readAsDataURL(file);
     }
   }, []);
+
+  const uploadImageToServer = async (files) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", files[0]);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleImageUpload = (event) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -88,13 +103,17 @@ const MakeReward2 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" }
+          style: { width: "100%", height: "100%", objectFit: "cover" },
         };
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
-          projImages: [...totInfo.projImages, event.target.files[0]]
+          rewardContentImgSavedName: [
+            ...totInfo.rewardContentImgSavedName,
+            event.target.files[0],
+          ],
         });
+        uploadImageToServer(event.target.files);
       };
       // reader가 이미지 읽도록 하기
       reader.readAsDataURL(event.target.files[0]);
@@ -102,7 +121,7 @@ const MakeReward2 = () => {
   };
 
   const handleImageClick = (e) => {
-    if (totInfo.projImages.length < MAX_IMAGES) {
+    if (totInfo.rewardContentImgSavedName.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -110,14 +129,14 @@ const MakeReward2 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.projImages];
+    const updatedImagesFile = [...totInfo.rewardContentImgSavedName];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, projImages: [...updatedImages] });
+    setTotInfo({ ...totInfo, rewardContentImgSavedName: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 
@@ -170,32 +189,15 @@ const MakeReward2 = () => {
         >
           <b>동영상 주소를 적어주세요</b>
         </p>
-        <div
-          className="projMake-video"
-          style={{ flexDirection: "column", alignItems: "flex-start" }}
-        >
-          {totInfo.inputs.map((input, index) => (
-            <div key={input.id} style={{ marginTop: index > 0 ? "10px" : "0" }}>
-              <input
-                type="text"
-                name="rewardVideoAddress"
-                className="input-box-video"
-                onChange={(e) => (totInfo.inputs[index].url = e.target.value)}
-                defaultValue={input.url}
-              />
-              <button className="rew-add" onClick={handleAddInput}>
-                <PlusSquareOutlined style={{ fontSize: "23px" }} />
-              </button>
-              {index !== 0 && (
-                <button
-                  className="rew-delete"
-                  onClick={() => handleDeleteInput(input.id)}
-                >
-                  <MinusSquareOutlined style={{ fontSize: "23px" }} />
-                </button>
-              )}
-            </div>
-          ))}
+
+        <div>
+          <input
+            type="text"
+            name="rewardVideoAddress"
+            className="input-box"
+            value={totInfo.rewardVideoAddress}
+            onChange={handleInputChange}
+          />
         </div>
         <br />
 
@@ -233,7 +235,7 @@ const MakeReward2 = () => {
                     zIndex: "1",
                     color: "#fff",
                     fontSize: "15px",
-                    display: showDeleteIcon ? "block" : "none"
+                    display: showDeleteIcon ? "block" : "none",
                   }}
                 >
                   <MinusCircleOutlined id="imi-image-delete-icon" />
@@ -254,7 +256,7 @@ const MakeReward2 = () => {
                     style={{
                       fontSize: "15px",
                       cursor: "pointer",
-                      marginRight: "3px"
+                      marginRight: "3px",
                     }}
                   />
                 </div>

@@ -15,24 +15,21 @@ import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import moment from "moment";
 
 const MakeReward3 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
 
-  const today = new Date();
-  const todayDate =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-
   const [modalOpen, setModalOpen] = useState(false);
   const initCard = {
     rewardAmount: "",
-    rewardAvailableLimit: "",
+    rewardAvailableLimit: 0,
     rewardAvailableCount: 0,
     rewardTitle: "",
     rewardContent: "",
-    rewardDeleverydate: todayDate,
+    deliveryDate: "",
     rewardShipAddress: "",
     options: []
   };
@@ -278,12 +275,15 @@ const MakeReward3 = () => {
             id="rew-date-picker"
             showToday={true}
             allowClear={false}
-            format={"YYYY-MM-DD"}
-            value={dayjs(card.rewardDeleverydate)}
-            name="rewardDeleverydate"
-            onChange={(value, dateString) => {
-              setCard({ ...card, rewardDeleverydate: dateString });
+            format="YYYY-MM-DD"
+            value={card.deliveryDate ? dayjs(card.deliveryDate) : null}
+            onChange={(date, dateStr) => {
+              setCard({
+                ...card,
+                deliveryDate: dateStr,
+              });
             }}
+            name="deliveryDate"
           />
           <p className="custom-font-modal-sub-title">리워드 옵션</p>
           {!showOption && (
@@ -378,7 +378,7 @@ const MakeReward3 = () => {
                   </div>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <div className="make-rew-card-date">
-                    예상 배송일 {cardItem.rewardDeleverydate}
+                    예상 배송일 {cardItem.deliveryDate}
                   </div>
                 </div>
 

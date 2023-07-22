@@ -10,7 +10,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined
+  TwitterOutlined,
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -28,14 +28,14 @@ const MakeReward5 = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTotInfo({ ...totInfo, [name]: value });
+    setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
   };
 
   const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
   const handleNumInputChange = (e) => {
     const { name, value } = e.target;
     if (regexPattern.test(value)) {
-      setTotInfo({ ...totInfo, [name]: value });
+      setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
     }
   };
 
@@ -61,6 +61,18 @@ const MakeReward5 = () => {
     }
   }, []);
 
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
@@ -73,6 +85,7 @@ const MakeReward5 = () => {
 
       reader.readAsDataURL(file);
       setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
+      uploadImageToServer(file);
     }
   };
 
@@ -131,31 +144,31 @@ const MakeReward5 = () => {
     navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
 
-  const dispatch = useDispatch();
   const userId = useSelector((state) => state.Id);
 
   const handleNextStep = () => {
     const convertToFilesDTO = (files) => {
-      if (!files || files.length === 0) {
-        return null;
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
       }
       return {
         fileId: null,
-        fileName: files[0].name,
-        fileRegistrationDate: null
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null,
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
     const convertToOneFilesDTO = (files) => {
-      if (!files) {
-        // Check if files is null
-        return null;
+      if (!files || files.length === 0) {
+        return null; // 파일이 없는 경우 null로 설정
       }
 
       return {
         fileId: null,
-        fileName: files.name,
-        fileRegistrationDate: null
+        fileName: files.name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null,
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
@@ -173,18 +186,19 @@ const MakeReward5 = () => {
       ),
       rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
         totInfo.rewardBankAccountCopyImgSavedName
-      )
+      ),
     };
 
     axios
-      .post("http://localhost:8080/make-reward", requestData, {
-        params: { userId: userId } // Pass userId as a parameter
+      .post("http://localhost:8080/makeReward", requestData, {
+        params: { userId: userId }, // Pass userId as a parameter
       })
       .then((response) => {
         console.log(response.data);
+        const rewardId = response.data.id;
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/:rewardId`, {
-          state: { totInfo: totInfo }
+        navigateToStep2(`/reward-detail/story/${rewardId}`, {
+          state: { totInfo: totInfo },
         });
       })
       .catch((error) => {
@@ -194,7 +208,6 @@ const MakeReward5 = () => {
 
   return (
     <>
-      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">

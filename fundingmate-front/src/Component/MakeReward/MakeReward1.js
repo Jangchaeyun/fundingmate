@@ -9,6 +9,7 @@ import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
@@ -32,17 +33,18 @@ const MakeReward1 = () => {
       }
     } else {
       setTotInfo({
+        id: 0,
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        imageFile: null,
-        projKeyword: "",
+        rewardRepImgSavedName: null,
+        projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
-        inputs: [{ id: nanoid(), url: "" }],
-        projImages: [],
+        rewardContentImgSavedName: [],
         projContent: "",
         cards: [],
+        rewardVideoAddress: "",
         rewardRefundExchangePolicy: "",
         rewardContact: "",
         rewardEmail: "",
@@ -50,7 +52,7 @@ const MakeReward1 = () => {
         rewardLaw: "",
         countryOfOrigin: "",
         manufacturer: "",
-        asPhonenumber: "",
+        asPhoneNumber: "",
         businessAddress: "",
         bank: "",
         accNumber: "",
@@ -62,10 +64,22 @@ const MakeReward1 = () => {
         blogUrl: "",
         twitterUrl: "",
         rewardIdBusinessLicenseImgSavedName: null,
-        rewardBankAccountCopyImgSavedName: null
+        rewardBankAccountCopyImgSavedName: null,
       });
     }
   }, []);
+
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
 
   const handleInputChange = (e) => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
@@ -93,7 +107,8 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, imageFile: file });
+      setTotInfo({ ...totInfo, rewardRepImgSavedName: file });
+      uploadImageToServer(file);
     }
   };
 
@@ -209,14 +224,14 @@ const MakeReward1 = () => {
             setTotInfo({
               ...totInfo,
               projDateStart: dateStrings[0],
-              projDateEnd: dateStrings[1]
+              projDateEnd: dateStrings[1],
             });
           }}
           showToday={true}
           allowClear={false}
           value={[
             totInfo.projDateStart ? dayjs(totInfo.projDateStart) : null,
-            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null
+            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null,
           ]}
           format="YYYY-MM-DD"
         />
@@ -275,9 +290,9 @@ const MakeReward1 = () => {
         </p>
         <input
           type="text"
-          name="projKeyword"
+          name="projKeyWord"
           className="input-box"
-          value={totInfo.projKeyword}
+          value={totInfo.projKeyWord}
           onChange={handleInputChange}
           placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />

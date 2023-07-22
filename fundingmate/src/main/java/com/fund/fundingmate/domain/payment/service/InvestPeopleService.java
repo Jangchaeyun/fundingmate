@@ -20,7 +20,7 @@ public class InvestPeopleService {
         investPeople.setUser(investPeopleDTO.getUser());
         investPeople.setId(investPeopleDTO.getId());
         investPeople.setName(investPeopleDTO.getName());
-        investPeople.setSercuritynumber1(investPeopleDTO.getSecuritynumber1());
+        investPeople.setSecuritynumber1(investPeopleDTO.getSecuritynumber1());
         investPeople.setSecuritynumber2(investPeopleDTO.getSecuritynumber2());
         investPeople.setCalltype(investPeopleDTO.getCalltype());
         investPeople.setCallnumber(investPeopleDTO.getCallnumber());

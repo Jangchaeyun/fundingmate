@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,14 +49,16 @@ public class RewardController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/make-reward")
+    @PostMapping("/makeReward")
     public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId) {
         try {
-            Long savedRewardId = rewardService.createReward(rewardDTO, userId);
-
-            Map<String, Object> rewardMap = rewardService.getRewardById(savedRewardId);
-            RewardDTO createdReward = (RewardDTO) rewardMap.get("reward");
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+            if (rewardDTO != null) {
+                Long savedRewardId = rewardService.createReward(rewardDTO, userId);
+                RewardDTO createdReward = rewardService.getRewardById(savedRewardId);
+                return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -66,28 +69,28 @@ public class RewardController {
     }
 
     @GetMapping("/reward-detail/story/{rewardId}")
-    public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
+    public ResponseEntity<RewardDTO> rewardDetailStory(@PathVariable Long rewardId) {
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
-            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+            RewardDTO rewardDetail = rewardService.getRewardById(rewardId);
+            return ResponseEntity.ok(rewardDetail);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @GetMapping("/reward-detail/guide/{rewardId}")
-    public ResponseEntity<Map<String, Object>> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
+    public ResponseEntity<RewardDTO> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
-            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+            RewardDTO rewardDetail = rewardService.getRewardById(rewardId);
+            return ResponseEntity.ok(rewardDetail);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
@@ -142,6 +145,18 @@ public class RewardController {
 
             response.getOutputStream().write(fileBytes);
             response.getOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/upload-image")
+    public void uploadImage(@RequestPart MultipartFile file) {
+        try {
+            String fileName = file.getOriginalFilename();
+            String filePath = UPLOAD_DIRECTORY + "/" + fileName;
+
+            Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
