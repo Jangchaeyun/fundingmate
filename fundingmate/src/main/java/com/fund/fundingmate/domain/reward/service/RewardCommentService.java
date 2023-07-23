@@ -46,15 +46,16 @@ public class RewardCommentService {
     }
 
     public RewardCommentDTO getRewardCommentByRewardId(Long rewardId) {
+        if (rewardId == null) {
+            throw new IllegalArgumentException("Reward ID must not be null");
+        }
+
         RewardComment rewardComment = rewardCommentRepository.findById(rewardId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + rewardId));
 
-        RewardCommentDTO rewardCommentDTO = mapToRewardCommentDTO(rewardComment);
-        rewardCommentDTO.setComRegistrationDate(rewardComment.getComRegistrationDate());
-        rewardCommentDTO.setComContent(rewardComment.getComContent());
-
-        return rewardCommentDTO;
+        return mapToRewardCommentDTO(rewardComment);
     }
+
 
     private RewardCommentDTO mapToRewardCommentDTO(RewardComment rewardComment) {
         RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
@@ -66,7 +67,7 @@ public class RewardCommentService {
         rewardCommentDTO.setUser(mapToUserDTO(rewardComment.getUser()));
         rewardCommentDTO.setReplies(mapToRewardReplyDTOList(rewardComment.getReplies()));
 
-        return  rewardCommentDTO;
+        return rewardCommentDTO;
     }
 
     public void updateRewardComment(Long commentId, String updatedContent) {
@@ -190,15 +191,27 @@ public class RewardCommentService {
         RewardDTO rewardDTO = rewardCommentDTO.getReward();
         UserDTO userDTO = rewardCommentDTO.getUser();
 
-        Optional<Reward> rewardOptional = rewardRepository.findById(rewardDTO.getId());
+
+        if (rewardDTO == null) {
+            throw new IllegalArgumentException("RewardDTO is null");
+        }
+
+        if (userDTO == null) {
+            throw new IllegalArgumentException("UserDTO is null");
+        }
+
+        Long rewardId = rewardDTO.getId();
+        Long userId = userDTO.getId();
+
+        Optional<Reward> rewardOptional = rewardRepository.findById(rewardId);
         if (rewardOptional.isEmpty()) {
-            throw new IllegalArgumentException("Reward not found with ID: " + rewardDTO.getId());
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardId);
         }
         Reward reward = rewardOptional.get();
 
-        Optional<User> userOptional = userRepository.findById(userDTO.getId());
+        Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
-            throw  new IllegalArgumentException("User not founr with ID: " + userDTO.getId());
+            throw  new IllegalArgumentException("User not founr with ID: " + userId);
         }
 
         User user = userOptional.get();

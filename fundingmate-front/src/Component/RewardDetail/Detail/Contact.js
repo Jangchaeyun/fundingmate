@@ -12,7 +12,7 @@ const Contact = () => {
   const [rewardComments, setRewardComments] = useState([]);
   const [viewDesc, setViewDesc] = useState(false);
   const [inquiryText, setInquiryText] = useState("");
-  const userId = useSelector((state) => state.userid);
+  const userId = useSelector((state) => state.Id);
   const [replyText, setReplyText] = useState({});
   const [replyData, setReplyData] = useState({});
   const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
@@ -26,10 +26,12 @@ const Contact = () => {
 
     const requestBody = {
       comContent: inquiryText,
-      rewardId: {
-        rewardId: totInfo.id,
+      reward: {
+        id: totInfo.id,
       },
-      userId: userId,
+      user: {
+        id: userId,
+      },
     };
 
     axios
@@ -120,10 +122,13 @@ const Contact = () => {
           `http://localhost:8080/reward-detail/contact/${rewardId}`
         );
         console.log(contactResponse.data);
-        setRewardComments(contactResponse.data);
-        contactResponse.data.forEach((comment) => {
-          fetchCommentReplies(comment.id);
-        });
+
+        if (Array.isArray(contactResponse.data)) {
+          setRewardComments(contactResponse.data);
+          contactResponse.data.forEach((comment) => {
+            fetchCommentReplies(comment.id);
+          });
+        }
       } catch (error) {
         console.log(error);
       }

@@ -25,7 +25,7 @@ const Checkout = () => {
   let navigate = useNavigate();
   let { rewardId, rewardTypeId } = useParams();
   const [rewardType, setRewardType] = useState(null);
-  const [reward, setReward] = useState(null);
+  const [totInfo, setTotInfo] = useState();
 
   useEffect(() => {
     fetchRewardType();
@@ -37,8 +37,8 @@ const Checkout = () => {
       const response = await axios.get(
         `http://localhost:8080/reward-detail/story/${rewardId}`
       );
-      setReward(response.data.reward);
-      console.log(response.data.reward);
+      setTotInfo(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +103,7 @@ const Checkout = () => {
 
   return (
     <div className="checkout">
-      <div className="checkout_header">{reward && reward.projName}</div>
+      <div className="checkout_header">{totInfo && totInfo.projName}</div>
       <div className="checkout_processes">
         <div className="checkout_process active">
           <CreditCardOutlined className="card" />
