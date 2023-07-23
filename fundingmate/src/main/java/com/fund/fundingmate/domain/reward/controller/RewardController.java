@@ -8,7 +8,9 @@ import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
+import com.fund.fundingmate.global.file.Repository.FileRepository;
 import com.fund.fundingmate.global.file.Service.FileService;
+import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,10 +52,24 @@ public class RewardController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private FileRepository fileRepository;
+
     @PostMapping("/makeReward")
-    public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId) {
+    public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId,
+                                                  @RequestParam("rewardContentImages") List<MultipartFile> rewardContentImages) {
         try {
             if (rewardDTO != null) {
+                // Save reward content images
+                List<File> rewardContentImgEntities = saveMultipleFiles(rewardContentImages);
+
+                // Set the rewardContentImgSavedName in the rewardDTO
+                List<FileDTO> rewardContentImgSavedNames = rewardContentImgEntities.stream()
+                        .map(fileEntity -> modelMapper.map(fileEntity, FileDTO.class))
+                        .collect(Collectors.toList());
+                rewardDTO.setRewardContentImgSavedName(rewardContentImgSavedNames);
+
+                // Save the reward
                 Long savedRewardId = rewardService.createReward(rewardDTO, userId);
                 RewardDTO createdReward = rewardService.getRewardById(savedRewardId);
                 return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
@@ -67,6 +84,17 @@ public class RewardController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    private List<File> saveMultipleFiles(List<MultipartFile> multipartFiles) throws IOException {
+        List<File> savedFiles = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            File savedFile = fileService.saveFile(null, multipartFile);
+            fileRepository.save(savedFile);
+            savedFiles.add(savedFile);
+        }
+        return savedFiles;
+    }
+
 
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<RewardDTO> rewardDetailStory(@PathVariable Long rewardId) {

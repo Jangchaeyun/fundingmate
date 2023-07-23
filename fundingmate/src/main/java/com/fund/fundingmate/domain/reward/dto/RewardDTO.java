@@ -3,6 +3,7 @@ package com.fund.fundingmate.domain.reward.dto;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class RewardDTO {
     private String accNumber;
     private String depositorName;
     private String taxBillEmail;
-    private FileDTO rewardContentImgSavedName;
+    private List<FileDTO> rewardContentImgSavedName;
     private String websiteUrl;
     private String facebookUrl;
     private String instagramUrl;

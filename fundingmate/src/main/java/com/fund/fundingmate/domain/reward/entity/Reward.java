@@ -40,9 +40,8 @@ public class Reward {
 
     private String rewardVideoAddress;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="rewardContentImgSavedName_img")
-    private File rewardContentImgSavedName;
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    private List<File> rewardContentImgSavedName; //파일번호 목록: 1,2,3
 
     @Column(columnDefinition = "VARCHAR(9000)")
     private String projContent;
