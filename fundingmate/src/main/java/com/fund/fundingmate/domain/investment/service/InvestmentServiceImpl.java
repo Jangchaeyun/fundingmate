@@ -1,4 +1,5 @@
 package com.fund.fundingmate.domain.investment.service;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.investment.entity.Investment;
@@ -8,13 +9,19 @@ import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.global.file.Repository.FileRepository;
+import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Date;
 import java.util.*;
 
 @Service
@@ -36,53 +43,127 @@ public class InvestmentServiceImpl implements InvestmentService {
 
 
     @Override
-   public Long createInvestment(InvestmentDTO investmentDTO, Long userId) {
-        System.out.println("service"+investmentDTO);
-       User user = userRepository.findById(userId)
-               .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+   public Long createInvestment(Map<String, Object> param) throws  Exception {
+        Long userId = Long.valueOf((String)param.get("userId"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
 
-       //Investment investment = new Investment();
-       Investment investment = convertToInvestment(investmentDTO);
+        InvestmentDTO investmentDTO = new InvestmentDTO();
+        investmentDTO.setInvestCategory((String)param.get("investCategory"));
+        investmentDTO.setInvestTargetAmount(Integer.valueOf((String)param.get("investTargetAmount")));
+        investmentDTO.setInvestProjName((String)param.get("investProjName"));
+        investmentDTO.setInvestProjKeyword((String)param.get("investProjKeyword"));
+        investmentDTO.setInvestProjDateStart(Date.valueOf((String)param.get("investProjDateStart")));
+        investmentDTO.setInvestProjDateEnd(Date.valueOf((String)param.get("investProjDateEnd")));
+        investmentDTO.setInvestVideoUrl((String)param.get("investVideoUrl"));
+        investmentDTO.setInvestProjContent((String)param.get("investProjContent"));
+        investmentDTO.setBusinessAddress((String)param.get("businessAddress"));
+        investmentDTO.setBank((String)param.get("bank"));
+        investmentDTO.setAccNumber((String)param.get("accNumber"));
+        investmentDTO.setDepositorName((String)param.get("depositorName"));
+        investmentDTO.setTaxBillEmail((String)param.get("taxBillEmail"));
+        investmentDTO.setWebsiteUrl((String)param.get("websiteUrl"));
+        investmentDTO.setFacebookUrl((String)param.get("facebookUrl"));
+        investmentDTO.setInstagramUrl((String)param.get("instagramUrl"));
+        investmentDTO.setBlogUrl((String)param.get("blogUrl"));
+        investmentDTO.setTwitterUrl((String)param.get("twitterUrl"));
+        investmentDTO.setUseOfFunds((String)param.get("useOfFunds"));
+        investmentDTO.setUseOfFundsDateStart(Date.valueOf((String)param.get("useOfFundsDateStart")));
+        investmentDTO.setUseOfFundsDateEnd(Date.valueOf((String)param.get("useOfFundsDateEnd")));
+        investmentDTO.setRateOfReturn(Integer.valueOf((String)param.get("rateOfReturn")));
+        investmentDTO.setExpectedPaymentDate(Date.valueOf((String)param.get("expectedPaymentDate")));
+        investmentDTO.setRepaymentMethod((String)param.get("repaymentMethod"));
+        investmentDTO.setInvestItemIntro((String)param.get("investItemIntro"));
+        investmentDTO.setInvestItemBusinessValue((String)param.get("investItemBusinessValue"));
+        investmentDTO.setInvestItemValue((String)param.get("investItemValue"));
+        investmentDTO.setInvestItemBenefit((String)param.get("investItemBenefit"));
+        investmentDTO.setInvestEmail((String)param.get("investEmail"));
 
-       File investBankAccountCopyImgSavedName = converToFile(investmentDTO.getInvestBankAccountCopyImgSavedName());
-       investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
-       investBankAccountCopyImgSavedName = fileRepository.save(investBankAccountCopyImgSavedName);
+        Investment investment = modelMapper.map(investmentDTO, Investment.class);
+        investment.setUser(user);
 
-       File investIdBusinessLicenseImgSavedName = converToFile(investmentDTO.getInvestIdBusinessLicenseImgSavedName());
-       investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
-       investIdBusinessLicenseImgSavedName = fileRepository.save(investIdBusinessLicenseImgSavedName);
+        MultipartFile investRepImgSavedName = (MultipartFile)param.get("investRepImgSavedName");
 
-       File investRepImgSavedName = converToFile(investmentDTO.getInvestRepImgSavedName());
-       investment.setInvestRepImgSavedName(investRepImgSavedName);
-       investRepImgSavedName = fileRepository.save(investRepImgSavedName);
+//        String investContentImgSavedName = (String)param.get("investContentImgSavedName");
+//        System.out.println(investContentImgSavedName);
+        MultipartFile investIdBusinessLicenseImgSavedName = (MultipartFile)param.get("investIdBusinessLicenseImgSavedName");
+        MultipartFile investBankAccountCopyImgSavedName = (MultipartFile)param.get("investBankAccountCopyImgSavedName");
 
-      /* List<FileDTO> investContentImgSavedNameLists = investmentDTO.getInvestContentImgSavedName();
-       File investContentImgSavedName = null;
-       for(FileDTO investContentImgSavedNameList:investContentImgSavedNameLists){
-           investContentImgSavedName = converToFile(investContentImgSavedNameList);
-           investment.setInvestContentImgSavedName(investContentImgSavedName);
-           investContentImgSavedName = fileRepository.save(investContentImgSavedName);
-       }*/
+        String path = FileService.UPLOAD_DIRECTORY;
 
+        System.out.println(param.get("investRepImgSavedName"));
+        if(investRepImgSavedName!=null && !investRepImgSavedName.isEmpty()) {
+            java.io.File destFile = new java.io.File(path+investRepImgSavedName.getOriginalFilename());
+            investRepImgSavedName.transferTo(destFile);
+            File fileEntity = new File(investRepImgSavedName.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            investment.setInvestRepImgSavedName(fileEntity.getFileId());
+        } else {
+            System.out.println("AAAAAAAA");
+        }
 
-       File investContentImgSavedName = converToFile(investmentDTO.getInvestContentImgSavedName());
-       investment.setInvestContentImgSavedName(investContentImgSavedName);
-       investContentImgSavedName = fileRepository.save(investContentImgSavedName);
+        Integer investContentImgcnt = Integer.valueOf((String)param.get("investContentImgcnt"));
+        System.out.println(investContentImgcnt);
+        String fileIds = "";
+        for(int i=0 ; i<investContentImgcnt; i++) {
+            MultipartFile file = (MultipartFile)param.get("investContentImgSavedName"+i);
+            if(file!=null && !file.isEmpty()) {
+                java.io.File destFile = new java.io.File(path+file.getOriginalFilename());
+                file.transferTo(destFile);
+                File fileEntity = new File(file.getOriginalFilename());
+                fileRepository.save(fileEntity);
+                investment.setInvestRepImgSavedName(fileEntity.getFileId());
+            }
+        }
+        investment.setInvestContentImgSavedName(fileIds);
 
+//        if(investContentImgSavedName!=null && investContentImgSavedName.length!=0) {
+//            String fileIds = "";
+//            for(Object obj : investContentImgSavedName) {
+//                MultipartFile file = (MultipartFile) obj;
+//                java.io.File destFile = new java.io.File(path+file.getOriginalFilename());
+//                file.transferTo(destFile);
+//                File fileEntity = new File(file.getOriginalFilename());
+//                fileRepository.save(fileEntity);
+//                fileIds += fileEntity.getFileName()+",";
+//            }
+//            investment.setInvestContentImgSavedName(fileIds);
+//        }
 
-       investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
-       investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
-       investment.setInvestRepImgSavedName(investRepImgSavedName);
-       investment.setInvestContentImgSavedName(investContentImgSavedName);
+        if(investIdBusinessLicenseImgSavedName!=null && !investIdBusinessLicenseImgSavedName.isEmpty()) {
+            java.io.File destFile = new java.io.File(path+investIdBusinessLicenseImgSavedName.getOriginalFilename());
+            investIdBusinessLicenseImgSavedName.transferTo(destFile);
+            File fileEntity = new File(investIdBusinessLicenseImgSavedName.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            investment.setInvestIdBusinessLicenseImgSavedName(fileEntity.getFileId());
+        }
 
-       investment.setUser(user);
-       for(InvestType investType : investment.getInvestTypes()) {
-           investType.setInvestment(investment);
-       }
-        System.out.println(investment);
-       Investment savedInvestment = investmentRepository.save(investment);
+        if(investBankAccountCopyImgSavedName!=null && !investBankAccountCopyImgSavedName.isEmpty()) {
+            java.io.File destFile = new java.io.File(path+investBankAccountCopyImgSavedName.getOriginalFilename());
+            investBankAccountCopyImgSavedName.transferTo(destFile);
+            File fileEntity = new File(investBankAccountCopyImgSavedName.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            investment.setInvestBankAccountCopyImgSavedName(fileEntity.getFileId());
+        }
 
-       return savedInvestment.getId();
+        System.out.println(param.get("cards"));
+        JsonParser parser = new JsonParser();
+        JsonArray jsonArray =  (JsonArray)parser.parse((String)param.get("cards"));
+        ObjectMapper objectMapper = new ObjectMapper();
+        for(int i=0; i<jsonArray.size(); i++) {
+            JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+            System.out.println(jsonObject);
+            InvestType investType = new InvestType();
+            investType.setInvestAmount(jsonObject.get("investAmount").getAsInt());
+            investType.setInvestLimit(jsonObject.get("investLimit").getAsBoolean());
+            investType.setInvestLimitCount(jsonObject.get("investLimitCount").getAsInt());
+            investType.setInvestment(investment);
+            System.out.println(investment.getInvestTypes());
+            investment.getInvestTypes().add((InvestType) investType);
+        }
+
+        investmentRepository.save(investment);
+        return investment.getId();
    }
 
 //    @Override
@@ -117,75 +198,75 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 
 
-    private Investment convertToInvestment(InvestmentDTO investmentDTO) {
-        Investment investment = new Investment();
-        investment.setInvestCategory(investmentDTO.getInvestCategory());
-        investment.setInvestProjName(investmentDTO.getInvestProjName());
-        investment.setInvestTargetAmount(investmentDTO.getInvestTargetAmount());
-        investment.setInvestProjDateStart(investmentDTO.getInvestProjDateStart());
-        investment.setInvestProjDateEnd(investmentDTO.getInvestProjDateEnd());
-
-        FileDTO ibacisnFileDTO = investmentDTO.getInvestBankAccountCopyImgSavedName();
-        if (ibacisnFileDTO != null) {
-            File investBankAccountCopyImgSavedName = converToFile(ibacisnFileDTO);
-            investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
-        }
-
-        investment.setInvestProjKeyword(investmentDTO.getInvestProjKeyword());
-        investment.setUseOfFunds(investmentDTO.getUseOfFunds());
-
-        FileDTO iiblisnDTO = investmentDTO.getInvestIdBusinessLicenseImgSavedName();
-        if (iiblisnDTO != null) {
-            File investIdBusinessLicenseImgSavedName = converToFile(iiblisnDTO);
-            investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
-        }
-
-        investment.setUseOfFundsDateStart(investmentDTO.getUseOfFundsDateStart());
-        investment.setUseOfFundsDateEnd(investmentDTO.getUseOfFundsDateEnd());
-        investment.setRateOfReturn(investmentDTO.getRateOfReturn());
-        investment.setExpectedPaymentDate(investmentDTO.getExpectedPaymentDate());
-        investment.setRepaymentMethod(investmentDTO.getRepaymentMethod());
-        investment.setInvestVideoUrl(investmentDTO.getInvestVideoUrl());
-        investment.setInvestItemIntro(investmentDTO.getInvestItemIntro());
-        investment.setInvestItemBusinessValue(investmentDTO.getInvestItemBusinessValue());
-        investment.setInvestItemValue(investmentDTO.getInvestItemValue());
-        investment.setInvestItemBenefit(investmentDTO.getInvestItemBenefit());
-        investment.setInvestProjContent(investmentDTO.getInvestProjContent());
-
-        FileDTO irisnDTO = investmentDTO.getInvestRepImgSavedName();
-        if (irisnDTO != null) {
-            File investRepImgSavedName = converToFile(irisnDTO);
-            investment.setInvestRepImgSavedName(investRepImgSavedName);
-        }
-
-        investment.setBusinessAddress(investmentDTO.getBusinessAddress());
-        investment.setInvestEmail(investmentDTO.getInvestEmail());
-        investment.setBank(investmentDTO.getBank());
-        investment.setAccNumber(investmentDTO.getAccNumber());
-        investment.setDepositorName(investmentDTO.getDepositorName());
-
-        FileDTO ciisnDTO = investmentDTO.getInvestContentImgSavedName();
-        if (ciisnDTO != null) {
-            File investContentImgSavedName = converToFile(ciisnDTO);
-            investment.setInvestContentImgSavedName(investContentImgSavedName);
-        }
-
-        investment.setTaxBillEmail(investmentDTO.getTaxBillEmail());
-        investment.setWebsiteUrl(investmentDTO.getWebsiteUrl());
-        investment.setFacebookUrl(investmentDTO.getFacebookUrl());
-        investment.setInstagramUrl(investmentDTO.getInstagramUrl());
-        investment.setBlogUrl(investmentDTO.getBlogUrl());
-        investment.setTwitterUrl(investmentDTO.getTwitterUrl());
-        UserDTO userDTO = investmentDTO.getUser();
-        if (userDTO != null) {
-            User user = convertToUser(userDTO);
-            investment.setUser(user);
-        }
-        List<InvestType> investTypes = convertToInvestType(investmentDTO.getInvestTypes());
-        investment.setInvestTypes(investTypes);
-
-        return investment;
-    }
+//    private Investment convertToInvestment(InvestmentDTO investmentDTO) {
+//        Investment investment = new Investment();
+//        investment.setInvestCategory(investmentDTO.getInvestCategory());
+//        investment.setInvestProjName(investmentDTO.getInvestProjName());
+//        investment.setInvestTargetAmount(investmentDTO.getInvestTargetAmount());
+//        investment.setInvestProjDateStart(investmentDTO.getInvestProjDateStart());
+//        investment.setInvestProjDateEnd(investmentDTO.getInvestProjDateEnd());
+//
+//        FileDTO ibacisnFileDTO = investmentDTO.getInvestBankAccountCopyImgSavedName();
+//        if (ibacisnFileDTO != null) {
+//            File investBankAccountCopyImgSavedName = converToFile(ibacisnFileDTO);
+//            investment.setInvestBankAccountCopyImgSavedName(investBankAccountCopyImgSavedName);
+//        }
+//
+//        investment.setInvestProjKeyword(investmentDTO.getInvestProjKeyword());
+//        investment.setUseOfFunds(investmentDTO.getUseOfFunds());
+//
+//        FileDTO iiblisnDTO = investmentDTO.getInvestIdBusinessLicenseImgSavedName();
+//        if (iiblisnDTO != null) {
+//            File investIdBusinessLicenseImgSavedName = converToFile(iiblisnDTO);
+//            investment.setInvestIdBusinessLicenseImgSavedName(investIdBusinessLicenseImgSavedName);
+//        }
+//
+//        investment.setUseOfFundsDateStart(investmentDTO.getUseOfFundsDateStart());
+//        investment.setUseOfFundsDateEnd(investmentDTO.getUseOfFundsDateEnd());
+//        investment.setRateOfReturn(investmentDTO.getRateOfReturn());
+//        investment.setExpectedPaymentDate(investmentDTO.getExpectedPaymentDate());
+//        investment.setRepaymentMethod(investmentDTO.getRepaymentMethod());
+//        investment.setInvestVideoUrl(investmentDTO.getInvestVideoUrl());
+//        investment.setInvestItemIntro(investmentDTO.getInvestItemIntro());
+//        investment.setInvestItemBusinessValue(investmentDTO.getInvestItemBusinessValue());
+//        investment.setInvestItemValue(investmentDTO.getInvestItemValue());
+//        investment.setInvestItemBenefit(investmentDTO.getInvestItemBenefit());
+//        investment.setInvestProjContent(investmentDTO.getInvestProjContent());
+//
+//        FileDTO irisnDTO = investmentDTO.getInvestRepImgSavedName();
+//        if (irisnDTO != null) {
+//            File investRepImgSavedName = converToFile(irisnDTO);
+//            investment.setInvestRepImgSavedName(investRepImgSavedName);
+//        }
+//
+//        investment.setBusinessAddress(investmentDTO.getBusinessAddress());
+//        investment.setInvestEmail(investmentDTO.getInvestEmail());
+//        investment.setBank(investmentDTO.getBank());
+//        investment.setAccNumber(investmentDTO.getAccNumber());
+//        investment.setDepositorName(investmentDTO.getDepositorName());
+//
+//        FileDTO ciisnDTO = investmentDTO.getInvestContentImgSavedName();
+//        if (ciisnDTO != null) {
+//            File investContentImgSavedName = converToFile(ciisnDTO);
+//            investment.setInvestContentImgSavedName(investContentImgSavedName);
+//        }
+//
+//        investment.setTaxBillEmail(investmentDTO.getTaxBillEmail());
+//        investment.setWebsiteUrl(investmentDTO.getWebsiteUrl());
+//        investment.setFacebookUrl(investmentDTO.getFacebookUrl());
+//        investment.setInstagramUrl(investmentDTO.getInstagramUrl());
+//        investment.setBlogUrl(investmentDTO.getBlogUrl());
+//        investment.setTwitterUrl(investmentDTO.getTwitterUrl());
+//        UserDTO userDTO = investmentDTO.getUser();
+//        if (userDTO != null) {
+//            User user = convertToUser(userDTO);
+//            investment.setUser(user);
+//        }
+//        List<InvestType> investTypes = convertToInvestType(investmentDTO.getInvestTypes());
+//        investment.setInvestTypes(investTypes);
+//
+//        return investment;
+//    }
 
 
     private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {

@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "invset_people")
+@Table(name = "invest_people")
 @Getter
 @Setter
 @ToString
@@ -23,7 +23,7 @@ public class InvestPeople {
 
     private String name;
 
-    private String sercuritynumber1;
+    private String securitynumber1;
 
     private String securitynumber2;
 

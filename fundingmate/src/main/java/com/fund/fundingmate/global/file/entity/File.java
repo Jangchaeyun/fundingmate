@@ -1,5 +1,5 @@
 package com.fund.fundingmate.global.file.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
 import lombok.*;

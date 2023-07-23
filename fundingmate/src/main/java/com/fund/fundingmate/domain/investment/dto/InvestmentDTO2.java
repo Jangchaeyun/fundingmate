@@ -1,17 +1,11 @@
 package com.fund.fundingmate.domain.investment.dto;
 
-import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import lombok.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Getter
@@ -19,7 +13,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvestmentDTO {
+public class InvestmentDTO2 {
 
     private Long id;
 
@@ -33,7 +27,7 @@ public class InvestmentDTO {
 
     private Date investProjDateEnd;
 
-//    private FileDTO investRepImgSavedName;
+    private MultipartFile investRepImgSavedName;
 
     private String investProjKeyword;
 
@@ -51,7 +45,7 @@ public class InvestmentDTO {
 
     private String investVideoUrl;
 
-//    private List<FileDTO> investContentImgSavedName;
+    private MultipartFile[] investContentImgSavedName;
 
     private String investItemIntro;
 
@@ -63,7 +57,7 @@ public class InvestmentDTO {
 
     private String investProjContent;
 
-//    private FileDTO investIdBusinessLicenseImgSavedName;
+    private MultipartFile investIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -75,7 +69,7 @@ public class InvestmentDTO {
 
     private String depositorName;
 
-//    private FileDTO investBankAccountCopyImgSavedName;
+    private MultipartFile investBankAccountCopyImgSavedName;
 
     private String taxBillEmail;
 
@@ -91,7 +85,7 @@ public class InvestmentDTO {
 /*
     private Integer userNo;*/
     private UserDTO user;
-    private List<InvestTypeDTO> investTypes = new ArrayList<>();
+    private List<InvestTypeDTO> investTypes;
 
 
 }
