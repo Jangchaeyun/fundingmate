@@ -1,10 +1,8 @@
 package com.fund.fundingmate.domain.reward.service;
 
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
-//import com.fund.fundingmate.domain.reward.dto.RewardOptionDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
-import com.fund.fundingmate.domain.reward.entity.RewardOption;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.repository.RewardFindRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardOptionRepository;
@@ -20,11 +18,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-import java.io.OutputStream;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,14 +79,15 @@ public class RewardService {
         reward.setRewardRepImgSavedName(rewardRepImgSavedName);
         rewardRepImgSavedName = fileRepository.save(rewardRepImgSavedName);
 
-        File rewardContentImgSavedName = convertToFile(rewardDTO.getRewardContentImgSavedName());
-        reward.setRewardContentImgSavedName(rewardContentImgSavedName);
-        rewardContentImgSavedName = fileRepository.save(rewardContentImgSavedName);
+        List<FileDTO> rewardContentImgSavedNames = rewardDTO.getRewardContentImgSavedName();
+        List<File> rewardContentImgEntities = rewardContentImgSavedNames.stream()
+                .map(this::convertToFile)
+                .collect(Collectors.toList());
 
         reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
         reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
         reward.setRewardRepImgSavedName(rewardRepImgSavedName);
-        reward.setRewardContentImgSavedName(rewardContentImgSavedName);
+        reward.setRewardContentImgSavedName(rewardContentImgEntities);
 
         reward.setUser(user);
         for(RewardType rewardType : reward.getRewardTypes()) {
@@ -103,11 +99,34 @@ public class RewardService {
         return savedReward.getId();
     }
 
+
     private User convertToUser(UserDTO userDTO) {
         User user = new User();
         user.setUserid(userDTO.getUserid());
         user.setPassword(userDTO.getPassword());
         return user;
+    }
+
+    private FileDTO convertToFileDTO(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return null;
+        }
+
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setFileName(file.getOriginalFilename());
+        fileDTO.setFileRegistrationDate(new Date());
+
+        return fileDTO;
+    }
+
+    private List<File> convertToFileList(List<FileDTO> fileDTOs) {
+        if (fileDTOs == null) {
+            return Collections.emptyList();
+        }
+
+        return fileDTOs.stream()
+                .map(this::convertToFile)
+                .collect(Collectors.toList());
     }
 
     private File convertToFile(FileDTO fileDTO) {
@@ -174,11 +193,9 @@ public class RewardService {
         reward.setDepositorName(rewardDTO.getDepositorName());
         reward.setTaxBillEmail(rewardDTO.getTaxBillEmail());
 
-        FileDTO conFileDTO = rewardDTO.getRewardContentImgSavedName();
-        if (conFileDTO != null) {
-            File rewardContentImgSavedName = convertToFile(conFileDTO);
-            reward.setRewardContentImgSavedName(rewardContentImgSavedName);
-        }
+        List<FileDTO> conFileDTOs = rewardDTO.getRewardContentImgSavedName();
+        List<File> rewardContentImgEntities = convertToFileList(conFileDTOs);
+        reward.setRewardContentImgSavedName(rewardContentImgEntities);
 
         reward.setWebsiteUrl(rewardDTO.getWebsiteUrl());
         reward.setFacebookUrl(rewardDTO.getFacebookUrl());
