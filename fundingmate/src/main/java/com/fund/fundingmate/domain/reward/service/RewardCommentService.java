@@ -113,7 +113,11 @@ public class RewardCommentService {
         rewardDTO.setRewardTypes(mapToRewardTypeDTOList(reward.getRewardTypes()));
 
         rewardDTO.setRewardRepImgSavedName(mapToFileDTO(reward.getRewardRepImgSavedName()));
-        rewardDTO.setRewardContentImgSavedName(mapToFileDTO(reward.getRewardContentImgSavedName()));
+        rewardDTO.setRewardContentImgSavedName(new ArrayList<>());
+        List<File> fileList = reward.getRewardContentImgSavedName();
+        for(File file : fileList) {
+            rewardDTO.getRewardContentImgSavedName().add(mapToFileDTO(file));
+        }
         rewardDTO.setRewardIdBusinessLicenseImgSavedName(mapToFileDTO(reward.getRewardIdBusinessLicenseImgSavedName()));
         rewardDTO.setRewardBankAccountCopyImgSavedName(mapToFileDTO(reward.getRewardBankAccountCopyImgSavedName()));
 

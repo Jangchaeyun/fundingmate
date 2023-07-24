@@ -4,7 +4,7 @@ import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO2;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
-import com.fund.fundingmate.global.file.Service.FileService;
+
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,6 @@ public class InvestmentController {
 
     @Autowired
     private InvestmentService investmentService;
-
-    @Autowired
-    private FileService fileService;
 
     @Autowired
     private HttpSession session;
