@@ -10,8 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -25,17 +25,39 @@ public class InvestmentDTO {
 
     private String investCategory;
 
+    private Integer investTargetAmount;
+
     private String investProjName;
 
-    private Integer investTargetAmount;
+    private String investProjKeyword;
 
     private Date investProjDateStart;
 
     private Date investProjDateEnd;
 
-//    private FileDTO investRepImgSavedName;
+    private String investVideoUrl;
 
-    private String investProjKeyword;
+    private String investProjContent;
+
+    private String businessAddress;
+
+    private String bank;
+
+    private String accNumber;
+
+    private String depositorName;
+
+    private String taxBillEmail;
+
+    private String websiteUrl;
+
+    private String facebookUrl;
+
+    private String instagramUrl;
+
+    private String blogUrl;
+
+    private String twitterUrl;
 
     private String useOfFunds;
 
@@ -49,10 +71,6 @@ public class InvestmentDTO {
 
     private String repaymentMethod;
 
-    private String investVideoUrl;
-
-//    private List<FileDTO> investContentImgSavedName;
-
     private String investItemIntro;
 
     private String investItemBusinessValue;
@@ -61,36 +79,21 @@ public class InvestmentDTO {
 
     private String investItemBenefit;
 
-    private String investProjContent;
-
-//    private FileDTO investIdBusinessLicenseImgSavedName;
-
-    private String businessAddress;
-
     private String investEmail;
 
-    private String bank;
 
-    private String accNumber;
+    private String investRepImgSavedName;
 
-    private String depositorName;
+    private String investContentImgSavedName;
 
-//    private FileDTO investBankAccountCopyImgSavedName;
+    private String investIdBusinessLicenseImgSavedName;
 
-    private String taxBillEmail;
+    private String investBankAccountCopyImgSavedName;
 
-    private String websiteUrl;
-
-    private String facebookUrl;
-
-    private String instagramUrl;
-
-    private String blogUrl;
-
-    private String twitterUrl;
 /*
     private Integer userNo;*/
     private UserDTO user;
+
     private List<InvestTypeDTO> investTypes = new ArrayList<>();
 
 

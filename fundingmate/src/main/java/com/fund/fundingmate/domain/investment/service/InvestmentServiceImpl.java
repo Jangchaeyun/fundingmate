@@ -356,16 +356,82 @@ public class InvestmentServiceImpl implements InvestmentService {
     }
 */
 
- /*   public Map<String, Object> getInvestmentById(Long investmentId) {
-        Map<String, Object> map = new HashMap<>();
-        Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
-        if (oInvestment.isEmpty()) {
-            throw new IllegalArgumentException("Reward not found with ID: " + investmentId);
+    @Override
+    public Long createInvestment(InvestmentDTO investmentDTO, Long userId, String cards, MultipartFile reqFile, MultipartFile[] contentFiles, MultipartFile businessFile, MultipartFile bankFile) throws Exception {
+
+        Investment investment = modelMapper.map(investmentDTO, Investment.class);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+        investment.setUser(user);
+        System.out.println(investment);
+        // 파일 저장 시작
+        String path = FileService.UPLOAD_DIRECTORY;
+
+        if(reqFile!=null && !reqFile.isEmpty()) {
+            File fileEntity = new File(reqFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            reqFile.transferTo(destFile);
+            System.out.println(path+reqFile.getOriginalFilename());
+            investment.setInvestRepImgSavedName(fileEntity.getFileId());
         }
-        Investment investment = oInvestment.get();
-        map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
-        return map;
-    }*/
+
+
+        String fileIds = "";
+        for(int i=0 ; i<contentFiles.length; i++) {
+            MultipartFile file = contentFiles[i];
+            if(file!=null && !file.isEmpty()) {
+                File fileEntity = new File(file.getOriginalFilename());
+                fileRepository.save(fileEntity);
+                java.io.File destFile = new java.io.File(path+"/"+fileEntity);
+                file.transferTo(destFile);
+                fileIds += fileEntity.getFileId()+",";
+            }
+        }
+        investment.setInvestContentImgSavedName(fileIds);
+
+        if(businessFile!=null && !businessFile.isEmpty()) {
+            File fileEntity = new File(businessFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            businessFile.transferTo(destFile);
+            investment.setInvestIdBusinessLicenseImgSavedName(fileEntity.getFileId());
+        }
+        if(bankFile!=null && !bankFile.isEmpty()) {
+            File fileEntity = new File(bankFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            bankFile.transferTo(destFile);
+            investment.setInvestBankAccountCopyImgSavedName(fileEntity.getFileId());
+        }
+        // 파일 저장 끝
+
+        JsonParser parser = new JsonParser();
+        JsonArray jsonArray =  (JsonArray)parser.parse(cards);
+        for(int i=0; i<jsonArray.size(); i++) {
+            JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+            InvestType investType = new InvestType();
+            investType.setInvestAmount(jsonObject.get("investAmount").getAsInt());
+            investType.setInvestLimit(jsonObject.get("investLimit").getAsInt()==1);
+            investType.setInvestLimitCount(jsonObject.get("investLimitCount").getAsInt());
+            investType.setInvestment(investment);
+            investment.getInvestTypes().add(investType);
+        }
+
+        investmentRepository.save(investment);
+        return investment.getId();
+    }
+
+    /*   public Map<String, Object> getInvestmentById(Long investmentId) {
+            Map<String, Object> map = new HashMap<>();
+            Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
+            if (oInvestment.isEmpty()) {
+                throw new IllegalArgumentException("Reward not found with ID: " + investmentId);
+            }
+            Investment investment = oInvestment.get();
+            map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
+            return map;
+        }*/
  public Map<String, Object> getInvestmentById(Long investmentId) {
      Map<String, Object> map = new HashMap<>();
 
