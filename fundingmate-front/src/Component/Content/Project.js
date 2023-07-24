@@ -1,11 +1,30 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Project(p) {
+    const [reword, setResord] = useState([]);
+    const [visibleRewards, setVisibleRewards] = useState(4);
   const items = [{}, {}, {}, {}, {}, {}];
-
+  useEffect(() => {
+      axios.get(`http://localhost:8080/reward/find/finishreward/more`,
+          {
+              params: {
+                  startIndex: 0,
+                  endIndex: visibleRewards
+              },
+          })
+          .then(res => {
+              console.log(res.data);
+              setResord([...res.data]);
+          })
+          .catch(err => {
+              console.log(err);
+          })
+  })
   return (
     <section className="content">
       <div className="content-title">{p.title}</div>
