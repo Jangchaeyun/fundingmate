@@ -46,6 +46,7 @@ const MakeReward1 = () => {
         cards: [],
         rewardVideoAddress: "",
         rewardRefundExchangePolicy: "",
+
         rewardContact: "",
         rewardEmail: "",
         modelName: "",
@@ -53,6 +54,7 @@ const MakeReward1 = () => {
         countryOfOrigin: "",
         manufacturer: "",
         asPhoneNumber: "",
+
         businessAddress: "",
         bank: "",
         accNumber: "",
@@ -63,6 +65,7 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
+
         rewardBusinessLicenseImg: null,
         rewardBankAccountCopyImg: null
       });
