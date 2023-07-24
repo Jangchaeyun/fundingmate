@@ -83,19 +83,19 @@ public class Investment {
 
     private String taxBillEmail;
 
-    @Column(nullable = false)
+
     private String websiteUrl;
 
-    @Column(nullable = false)
+
     private String facebookUrl;
 
-    @Column(nullable = false)
+
     private String instagramUrl;
 
-    @Column(nullable = false)
+
     private String blogUrl;
 
-    @Column(nullable = false)
+
     private String twitterUrl;
 /*        @Column(name = "user_no")
         private Integer userNo;*/

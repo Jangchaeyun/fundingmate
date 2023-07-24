@@ -29,9 +29,9 @@ public class Reward {
 
     private Integer projTargetAmount;
 
-    private LocalDate projDateStart;
+    private Date projDateStart;
 
-    private LocalDate projDateEnd;
+    private Date projDateEnd;
 
     private Long rewardRepImgSavedName;
 
