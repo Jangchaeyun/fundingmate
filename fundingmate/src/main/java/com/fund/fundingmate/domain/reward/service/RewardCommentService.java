@@ -174,6 +174,7 @@ public class RewardCommentService {
 
         return fileDTO;
     }
+    
 
     private RewardReplyDTO mapToRewardReplyDTO(RewardReply rewardReply) {
         RewardReplyDTO rewardReplyDTO = new RewardReplyDTO();

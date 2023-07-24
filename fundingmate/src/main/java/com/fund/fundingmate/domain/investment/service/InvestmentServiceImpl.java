@@ -46,6 +46,60 @@ public class InvestmentServiceImpl implements InvestmentService {
 
 
 
+   @Override
+   public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
+       User user = convertToUser(userDTO);
+       userRepository.save(user);
+
+//        if(investContentImgSavedName!=null && investContentImgSavedName.length!=0) {
+//            String fileIds = "";
+//            for(Object obj : investContentImgSavedName) {
+//                MultipartFile file = (MultipartFile) obj;
+//                java.io.File destFile = new java.io.File(path+file.getOriginalFilename());
+//                file.transferTo(destFile);
+//                File fileEntity = new File(file.getOriginalFilename());
+//                fileRepository.save(fileEntity);
+//                fileIds += fileEntity.getFileName()+",";
+//            }
+//            investment.setInvestContentImgSavedName(fileIds);
+//        }
+
+       if(investIdBusinessLicenseImgSavedName!=null && !investIdBusinessLicenseImgSavedName.isEmpty()) {
+           java.io.File destFile = new java.io.File(path+investIdBusinessLicenseImgSavedName.getOriginalFilename());
+           investIdBusinessLicenseImgSavedName.transferTo(destFile);
+           File fileEntity = new File(investIdBusinessLicenseImgSavedName.getOriginalFilename());
+           fileRepository.save(fileEntity);
+           investment.setInvestIdBusinessLicenseImgSavedName(fileEntity.getFileId());
+       }
+
+       if(investBankAccountCopyImgSavedName!=null && !investBankAccountCopyImgSavedName.isEmpty()) {
+           java.io.File destFile = new java.io.File(path+investBankAccountCopyImgSavedName.getOriginalFilename());
+           investBankAccountCopyImgSavedName.transferTo(destFile);
+           File fileEntity = new File(investBankAccountCopyImgSavedName.getOriginalFilename());
+           fileRepository.save(fileEntity);
+           investment.setInvestBankAccountCopyImgSavedName(fileEntity.getFileId());
+       }
+
+       System.out.println(param.get("cards"));
+       JsonParser parser = new JsonParser();
+       JsonArray jsonArray =  (JsonArray)parser.parse((String)param.get("cards"));
+       ObjectMapper objectMapper = new ObjectMapper();
+       for(int i=0; i<jsonArray.size(); i++) {
+           JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+           System.out.println(jsonObject);
+           InvestType investType = new InvestType();
+           investType.setInvestAmount(jsonObject.get("investAmount").getAsInt());
+           investType.setInvestLimit(jsonObject.get("investLimit").getAsBoolean());
+           investType.setInvestLimitCount(jsonObject.get("investLimitCount").getAsInt());
+           investType.setInvestment(investment);
+           System.out.println(investment.getInvestTypes());
+           investment.getInvestTypes().add((InvestType) investType);
+       }
+
+       investmentRepository.save(investment);
+       return investment.getId();
+  }
+
 //    @Override
 //    public void createInvestWithUser(InvestmentDTO investmentDTO, UserDTO userDTO) {
 //        User user = convertToUser(userDTO);
@@ -57,25 +111,25 @@ public class InvestmentServiceImpl implements InvestmentService {
 //        investmentRepository.save(investment);
 //    }
 
-    private User convertToUser(UserDTO userDTO) {
-        User user = new User();
-        user.setUserid(userDTO.getUserid());
-        user.setPassword(userDTO.getPassword());
-        // Set other properties of User entity from UserDTO
-        return user;
-    }
+   private User convertToUser(UserDTO userDTO) {
+       User user = new User();
+       user.setUserid(userDTO.getUserid());
+       user.setPassword(userDTO.getPassword());
+       // Set other properties of User entity from UserDTO
+       return user;
+   }
 
-    private File converToFile(FileDTO fileDTO) {
-        if (fileDTO == null) {
-            return null;
-        }
+   private File converToFile(FileDTO fileDTO) {
+       if (fileDTO == null) {
+           return null;
+       }
 
-        File file = new File();
-        file.setFileId(fileDTO.getFileId());
-        file.setFileName(fileDTO.getFileName());
-        file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
-        return file;
-    }
+       File file = new File();
+       file.setFileId(fileDTO.getFileId());
+       file.setFileName(fileDTO.getFileName());
+       file.setFileRegistrationDate(fileDTO.getFileRegistrationDate());
+       return file;
+   }
 
 
 //    private Investment convertToInvestment(InvestmentDTO investmentDTO) {
@@ -147,6 +201,125 @@ public class InvestmentServiceImpl implements InvestmentService {
 //
 //        return investment;
 //    }
+
+
+   private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
+       List<InvestType> investTypes = new ArrayList<>();
+       for (InvestTypeDTO investTypeDTO : investTypeDTOs) {
+           InvestType investType = new InvestType();
+           investType.setInvestAmount(investTypeDTO.getInvestAmount());
+           investType.setInvestLimit(investTypeDTO.getInvestLimit());
+           investType.setInvestLimitCount(investTypeDTO.getInvestLimitCount());
+           investTypes.add(investType);
+       }
+       return investTypes;
+   }
+   /*private InvestmentDTO convertToInvestDTO(Investment investment) {
+       InvestmentDTO investmentDTO = new InvestmentDTO();
+       investmentDTO.setId(investment.getId());
+       investmentDTO.setInvestProjName(investment.getInvestProjName());
+       investmentDTO.setInvestTargetAmount(investment.getInvestTargetAmount());
+       investmentDTO.setInvestProjDateStart(investment.getInvestProjDateStart());
+       investmentDTO.setInvestProjDateEnd(investment.getInvestProjDateEnd());
+
+       if (investment.getInvestBankAccountCopyImgSavedName () != null) {
+           FileDTO ibacisnFileDTO = new FileDTO();
+           ibacisnFileDTO.setFileName(investment.getInvestBankAccountCopyImgSavedName().getFileName());
+           investmentDTO.setInvestBankAccountCopyImgSavedName(ibacisnFileDTO);
+       }
+
+       investmentDTO.setInvestProjKeyword(investment.getInvestProjKeyword());
+       investmentDTO.setUseOfFunds(investment.getUseOfFunds());
+
+     *//*  if (investment.getInvestContentImgSavedName() != null) {
+           FileDTO iiblisnDTO  = new FileDTO();
+           iiblisnDTO.setFileName(investment.getInvestContentImgSavedName().getFileName());
+           investmentDTO.setInvestContentImgSavedName(iiblisnDTO);
+       }
+*//*
+       List<File> investContentImgSavedName = investment.getInvestContentImgSavedName();
+       if (investContentImgSavedName != null && !investContentImgSavedName.isEmpty()) {
+           List<FileDTO> iiblisnDTOList = new ArrayList<>();
+           for (File file : investContentImgSavedName) {
+               FileDTO iiblisnDTO = new FileDTO();
+               iiblisnDTO.setFileName(file.getFileName());
+               // 필요한 다른 파일 정보 설정
+
+               iiblisnDTOList.add(iiblisnDTO);
+           }
+           investmentDTO.setInvestContentImgSavedName(iiblisnDTOList);
+       }
+
+       investmentDTO.setUseOfFundsDateStart(investment.getUseOfFundsDateStart());
+       investmentDTO.setUseOfFundsDateEnd(investment.getUseOfFundsDateEnd());
+       investmentDTO.setRateOfReturn(investment.getRateOfReturn());
+       investmentDTO.setExpectedPaymentDate(investment.getExpectedPaymentDate());
+       investmentDTO.setRepaymentMethod(investment.getRepaymentMethod());
+       investmentDTO.setInvestVideoUrl(investment.getInvestVideoUrl());
+       investmentDTO.setInvestItemIntro(investment.getInvestItemIntro());
+       investmentDTO.setInvestItemBusinessValue(investment.getInvestItemBusinessValue());
+       investmentDTO.setInvestItemValue(investment.getInvestItemValue());
+       investmentDTO.setInvestItemBenefit(investment.getInvestItemBenefit());
+       investmentDTO.setInvestProjContent(investment.getInvestProjContent());
+
+       if (investment.getInvestRepImgSavedName() != null) {
+           FileDTO irisnDTO  = new FileDTO();
+           irisnDTO .setFileName(investment.getInvestRepImgSavedName().getFileName());
+           investmentDTO.setInvestRepImgSavedName(irisnDTO );
+       }
+
+       investmentDTO.setBusinessAddress(investment.getBusinessAddress());
+       investmentDTO.setBank(investment.getBank());
+       investmentDTO.setAccNumber(investment.getAccNumber());
+       investmentDTO.setDepositorName(investment.getDepositorName());
+
+       if (investment.getInvestContentImgSavedName() != null) {
+           FileDTO ciisnDTO  = new FileDTO();
+           ciisnDTO .setFileName(investment.getInvestContentImgSavedName().getFileName());
+           investmentDTO.setInvestContentImgSavedName(ciisnDTO );
+       }
+
+       investmentDTO.setTaxBillEmail(investment.getTaxBillEmail());
+       investmentDTO.setWebsiteUrl(investment.getWebsiteUrl());
+       investmentDTO.setFacebookUrl(investment.getFacebookUrl());
+       investmentDTO.setInstagramUrl(investment.getInstagramUrl());
+       investmentDTO.setBlogUrl(investment.getBlogUrl());
+       investmentDTO.setTwitterUrl(investment.getTwitterUrl());
+
+       return investmentDTO;
+   }
+*/
+
+/*   public Map<String, Object> getInvestmentById(Long investmentId) {
+       Map<String, Object> map = new HashMap<>();
+       Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
+       if (oInvestment.isEmpty()) {
+           throw new IllegalArgumentException("Reward not found with ID: " + investmentId);
+       }
+       Investment investment = oInvestment.get();
+       map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
+       return map;
+   }*/
+public Map<String, Object> getInvestmentById(Long investmentId) {
+    Map<String, Object> map = new HashMap<>();
+
+    if (investmentId == null) {
+        throw new IllegalArgumentException("Invalid investment ID: null");
+    }
+
+    Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
+
+    if (oInvestment.isEmpty()) {
+        throw new IllegalArgumentException("Investment not found with ID: " + investmentId);
+    }
+
+    Investment investment = oInvestment.get();
+    map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
+
+    return map;
+}
+}
+
 
 
     private List<InvestType> convertToInvestType(List<InvestTypeDTO> investTypeDTOs) {
@@ -330,5 +503,4 @@ public class InvestmentServiceImpl implements InvestmentService {
 
      return map;
  }
-}
 
