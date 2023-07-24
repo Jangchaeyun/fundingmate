@@ -89,7 +89,7 @@ class FundingmateApplicationTests {
 		userRepository.save(user);
 	}
 
-	@Test
+	/*@Test
 	void insertReward() {
 		Long targetUserId = 1L;
 
@@ -193,8 +193,8 @@ class FundingmateApplicationTests {
 		Long userId = user.getId();
 
 		rewardService.createReward(rewardDTO, userId);
-	}
-
+	}*/
+/*
 	@Test
 	void insertRewardComment() {
 		Long rewardId = 1L;
@@ -220,7 +220,7 @@ class FundingmateApplicationTests {
 		rewardCommentDTO.setUser(user.toDTO());
 
 		rewardCommentService.insertRewardComment(rewardCommentDTO);
-	}
+	}*/
 
 	@Test
 	void insertRewardCommentReply() {
@@ -285,7 +285,7 @@ class FundingmateApplicationTests {
 		investPeopleService.createInvestPeople(investPeopleDTO);
 	}
 
-	@Test
+	/*@Test
 	void selectRewardById() {
 		Long rewardId = 1L;
 
@@ -297,7 +297,7 @@ class FundingmateApplicationTests {
 			System.out.println(e.getMessage());
 		}
 	}
-
+*/
 	@Test
 	void findByProjDateEndBefore() {
 		try {

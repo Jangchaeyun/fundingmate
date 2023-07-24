@@ -66,7 +66,7 @@ const MakeInvest3 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.investContentImgSavedName) {
+    for (let file of totInfo.investContentImg) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
@@ -95,10 +95,7 @@ const MakeInvest3 = () => {
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
-          investContentImgSavedName: [
-            ...totInfo.investContentImgSavedName,
-            event.target.files[0]
-          ]
+          investContentImg: [...totInfo.investContentImg, event.target.files[0]]
         });
       };
       // reader가 이미지 읽도록 하기
@@ -107,7 +104,7 @@ const MakeInvest3 = () => {
   };
 
   const handleImageClick = (e) => {
-    if (totInfo.investContentImgSavedName.length < MAX_IMAGES) {
+    if (totInfo.investContentImg.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -115,14 +112,14 @@ const MakeInvest3 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.investContentImgSavedName];
+    const updatedImagesFile = [...totInfo.investContentImg];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, investContentImgSavedName: [...updatedImages] });
+    setTotInfo({ ...totInfo, investContentImg: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 

@@ -4,7 +4,7 @@ import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO2;
 import com.fund.fundingmate.domain.investment.service.InvestmentService;
-import com.fund.fundingmate.global.file.Service.FileService;
+
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,6 @@ public class InvestmentController {
 
     @Autowired
     private InvestmentService investmentService;
-
-    @Autowired
-    private FileService fileService;
 
     @Autowired
     private HttpSession session;
@@ -70,11 +67,18 @@ public class InvestmentController {
     @PostMapping("/makeInvestHostinfo")
 //    public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
 //    public ResponseEntity<InvestmentDTO> createInvestment( @ModelAttribute InvestmentDTO2 investmentDTO) {
-    public ResponseEntity<InvestmentDTO> createInvestment( @RequestParam Map<String,Object> param) {
+//    public ResponseEntity<InvestmentDTO> createInvestment( @RequestParam Map<String,Object> param) {
+    public ResponseEntity<InvestmentDTO> createInvestment(@ModelAttribute InvestmentDTO investmentDTO,
+                                                          @RequestParam("userId") Long userId,
+                                                          @RequestParam("cards") String cards,
+                                                          @RequestParam("investRepImg") MultipartFile repFile,
+                                                          @RequestParam("investContentImg") MultipartFile[] contentFiles,
+                                                          @RequestParam("investBusinessLicenseImg" )  MultipartFile businessFile,
+                                                          @RequestParam("investBankAccountImg") MultipartFile bankFile) {
         try {
-
-//
-            Long savedInvestmentId = investmentService.createInvestment(param);
+            System.out.println(userId);
+            System.out.println(contentFiles.length);
+            Long savedInvestmentId = investmentService.createInvestment(investmentDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
 //
 //            Map<String, Object> investmentMap = investmentService.getInvestmentById(savedInvestmentId);
 //            InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
