@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.payment.dto;
 
+import com.fund.fundingmate.domain.investment.dto.InvestTypeDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
@@ -39,4 +40,6 @@ public class PaymentDTO {
     private String shippingaddressdesc;
 
     private RewardTypeDTO rewardType;
+
+    private InvestTypeDTO investType;
 }

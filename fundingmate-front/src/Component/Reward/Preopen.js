@@ -53,7 +53,7 @@ const Preopen = () => {
                   onClick={() => handleRewardClick(reward.id)}
                 >
                   <img
-                    src={`http://localhost:8080/img/${reward.repFile.fileName}`}
+                    src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
                     className="reward_img"
                     alt={reward.rewardName}
                   />
