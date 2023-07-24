@@ -21,11 +21,16 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
 
-    @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
-    private List<Reward> fundingimg;
+//    @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
+//    private List<Reward> fundingimg;
 
 
     private String fileName;
+    private String fileClassification;
+    private String fileOriginalName;
+    private String fileSavedName;
+    private String filePath;
+    private String fileSize;
 //
 //    private String filePath;
 //

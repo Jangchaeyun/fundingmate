@@ -1,6 +1,6 @@
 // components/Layout/Header/Header.tsx
 import "./Header.css"
-import {SearchOutlined} from "@ant-design/icons";
+import {BellOutlined, LogoutOutlined, SearchOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
@@ -21,7 +21,7 @@ function Header() {
         // isLoggedIn 상태 변경
         setIsLoggedIn(false);
 
-        document.location.href="/";
+        document.location.href="/login";
     }
     const searchSubmit = () => {
         if(keyword === ''){
@@ -35,12 +35,23 @@ function Header() {
             <div className="header-wrap">
                 <div className="hTop">
                     <span className="hlogo">
-                        <a href="/" className="hlogoL">LOGO</a>
+                        <a href="/" className="hlogoL logo">FundingMate</a>
                     </span>
                     <span className="hTopMenu">
-                        {(token==''||token==undefined) &&<span><a href="login">로그인</a></span>}
-                        <b>{userid}</b>&nbsp;&nbsp;{userid!=''&&<Link onClick={logout}>로그아웃</Link>}
-                        <span><a href="">프로젝트 만들기</a></span>
+                        {(token==''||token==undefined) &&<><a href="login">로그인</a><a href="join">회원가입</a></>}
+
+                        {/*<b className="userName">{userid}</b>*/}
+                        {userid!=''&&<>
+                        <a href="#" className="myPageLink">
+                            <img src={require(`../../assets/images/defaultImg.jpg`)} alt="" className="myPageImg"/>
+                        </a>
+                        <a href="#" className="noti">
+                            <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>
+                        </a>
+                        <Link onClick={logout}>
+                            로그아웃
+                        </Link></>}
+                        <a href="" className="projAdd">프로젝트 만들기</a>
                     </span>
                 </div>
                 <nav className="nav">
@@ -51,10 +62,12 @@ function Header() {
                         <li><a href="">창업정보</a></li>
                         <li><a href="">오픈예정</a></li>
                     </ul>
-                    <form onSubmit={searchSubmit} className="searchF">
-                        <input type="text" id="keyword" value={keyword} className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} autoComplete="off"/>
-                    </form>
-                    <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
+                    <span className="searchForm">
+                        <form onSubmit={searchSubmit} className="searchF">
+                            <input type="text" id="keyword" value={keyword} className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} autoComplete="off"/>
+                        </form>
+                        <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
+                    </span>
                 </nav>
             </div>
 
