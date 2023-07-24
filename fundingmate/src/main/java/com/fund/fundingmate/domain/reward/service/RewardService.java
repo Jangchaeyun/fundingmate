@@ -1,5 +1,8 @@
 package com.fund.fundingmate.domain.reward.service;
 
+import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
+import com.fund.fundingmate.domain.investment.entity.InvestType;
+import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
@@ -12,8 +15,13 @@ import com.fund.fundingmate.domain.user.dto.UserDTO;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import com.fund.fundingmate.global.file.Repository.FileRepository;
+import com.fund.fundingmate.global.file.Service.FileService;
 import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.time.LocalDate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +68,73 @@ public class RewardService {
         this.rewardTypeRepository = rewardTypeRepository;
         this.rewardOptionRepository = rewardOptionRepository;
     }
+    public Long createReward(RewardDTO rewardDTO, Long userId, String cards, MultipartFile reqFile, MultipartFile[] contentFiles, MultipartFile businessFile, MultipartFile bankFile) throws Exception {
 
+        Reward reword = modelMapper.map(rewardDTO, Reward.class);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+        reword.setUser(user);
+        System.out.println(reword);
+        // 파일 저장 시작
+        String path = FileService.UPLOAD_DIRECTORY;
+
+        if(reqFile!=null && !reqFile.isEmpty()) {
+            File fileEntity = new File(reqFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            reqFile.transferTo(destFile);
+            System.out.println(path+reqFile.getOriginalFilename());
+            reword.setRewardRepImgSavedName(fileEntity.getFileId());
+        }
+
+
+        String fileIds = "";
+        for(int i=0 ; i<contentFiles.length; i++) {
+            MultipartFile file = contentFiles[i];
+            if(file!=null && !file.isEmpty()) {
+                File fileEntity = new File(file.getOriginalFilename());
+                fileRepository.save(fileEntity);
+                java.io.File destFile = new java.io.File(path+"/"+fileEntity);
+                file.transferTo(destFile);
+                fileIds += fileEntity.getFileId()+",";
+            }
+        }
+        reword.setRewardContentImgSavedName(fileIds);
+
+        if(businessFile!=null && !businessFile.isEmpty()) {
+            File fileEntity = new File(businessFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            businessFile.transferTo(destFile);
+            reword.setRewardIdBusinessLicenseImgSavedName(fileEntity.getFileId());
+        }
+        if(bankFile!=null && !bankFile.isEmpty()) {
+            File fileEntity = new File(bankFile.getOriginalFilename());
+            fileRepository.save(fileEntity);
+            java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
+            bankFile.transferTo(destFile);
+            reword.setRewardBankAccountCopyImgSavedName(fileEntity.getFileId());
+        }
+        // 파일 저장 끝
+
+        JsonParser parser = new JsonParser();
+        JsonArray jsonArray =  (JsonArray)parser.parse(cards);
+        for(int i=0; i<jsonArray.size(); i++) {
+            JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+            RewardType rewardType = new RewardType();
+            rewardType.setRewardAmount(jsonObject.get("rewardAmount").getAsInt());
+            rewardType.setRewardAvailableLimit(jsonObject.get("rewardAvailableLimit").getAsInt()==1);
+            rewardType.setRewardAvailableCount(jsonObject.get("rewardAvailableCount").getAsInt());
+            rewardType.setRewardTitle(jsonObject.get("rewardTitle").getAsString());
+            rewardType.setRewardContent(jsonObject.get("rewardContent").getAsString());
+            //rewardType.setDeliveryDate((jsonObject.get("deliveryDate").getAsString()));
+            rewardType.setRewardShipAddress(jsonObject.get("rewardShipAddress").getAsInt()==1);
+
+        }
+
+        investmentRepository.save(investment);
+        return investment.getId();
+    }
     public Long createReward(RewardDTO rewardDTO, Long userId) {
         System.out.println("reward" + rewardDTO);
         User user = userRepository.findById(userId)

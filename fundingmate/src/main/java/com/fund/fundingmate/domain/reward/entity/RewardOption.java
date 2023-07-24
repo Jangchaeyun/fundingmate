@@ -22,6 +22,8 @@ public class RewardOption {
 
     private String getRewardOptCon;
 
+    private Long rewardTypeId;
+
 //    @OneToMany(mappedBy = "rewardOption")
 //    private List<RewardType> rewardTypes;
 }

@@ -7,8 +7,8 @@ import com.fund.fundingmate.domain.reward.entity.Reward;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class RewardType {
 
     private String rewardContent;
 
-    private LocalDate deliveryDate;
+    private Date deliveryDate;
 
     private Boolean rewardShipAddress;
 

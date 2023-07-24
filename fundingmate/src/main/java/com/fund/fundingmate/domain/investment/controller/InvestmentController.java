@@ -68,7 +68,7 @@ public class InvestmentController {
 //    public ResponseEntity<InvestmentDTO> createInvestment( @RequestBody InvestmentDTO investmentDTO, @RequestParam("userId") Long userId) {
 //    public ResponseEntity<InvestmentDTO> createInvestment( @ModelAttribute InvestmentDTO2 investmentDTO) {
 //    public ResponseEntity<InvestmentDTO> createInvestment( @RequestParam Map<String,Object> param) {
-    public ResponseEntity<InvestmentDTO> createInvestment(@ModelAttribute InvestmentDTO investmentDTO,
+    public ResponseEntity<Long> createInvestment(@ModelAttribute InvestmentDTO investmentDTO,
                                                           @RequestParam("userId") Long userId,
                                                           @RequestParam("cards") String cards,
                                                           @RequestParam("investRepImg") MultipartFile repFile,
@@ -79,11 +79,7 @@ public class InvestmentController {
             System.out.println(userId);
             System.out.println(contentFiles.length);
             Long savedInvestmentId = investmentService.createInvestment(investmentDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
-//
-//            Map<String, Object> investmentMap = investmentService.getInvestmentById(savedInvestmentId);
-//            InvestmentDTO createdInvestment = (InvestmentDTO) investmentMap.get("investment");
-//            return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestment);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(savedInvestmentId, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

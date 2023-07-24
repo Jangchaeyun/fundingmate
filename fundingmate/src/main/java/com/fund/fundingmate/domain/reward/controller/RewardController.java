@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.controller;
 
+import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
@@ -56,6 +57,24 @@ public class RewardController {
     private FileRepository fileRepository;
 
     @PostMapping("/makeReward")
+    public ResponseEntity<Long> createReward(@ModelAttribute RewardDTO rewardDTO,
+                                                  @RequestParam("userId") Long userId,
+                                                  @RequestParam("cards") String cards,
+                                                  @RequestParam("rewardRepImg") MultipartFile repFile,
+                                                  @RequestParam("rewardContentImg") MultipartFile[] contentFiles,
+                                                  @RequestParam("rewardBusinessLicenseImg" )  MultipartFile businessFile,
+                                                  @RequestParam("rewardBankAccountCopyImg") MultipartFile bankFile) {
+        try {
+            System.out.println(userId);
+            System.out.println(contentFiles.length);
+            Long savedInvestmentId = rewardService.createReward(rewardDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
+            return new ResponseEntity<>(savedInvestmentId, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping("/makeReward1")
     public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId,
                                                   @RequestParam("rewardContentImages") List<MultipartFile> rewardContentImages) {
         try {
