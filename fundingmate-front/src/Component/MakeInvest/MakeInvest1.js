@@ -36,13 +36,13 @@ const MakeInvest1 = () => {
         investCategory: "",
         investTargetAmount: 0,
         investProjName: "",
-        investRepImgSavedName: null,
+        investRepImg: null,
         investProjKeyword: "",
         investProjDateStart: "",
         investProjDateEnd: "",
         // investVideoUrl: [{ id: nanoid(), url: "" }],
         investVideoUrl: "",
-        investContentImgSavedName: [],
+        investContentImg: [],
         investProjContent: "",
         cards: [],
         businessAddress: "",
@@ -55,8 +55,8 @@ const MakeInvest1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        investIdBusinessLicenseImgSavedName: null,
-        investBankAccountCopyImgSavedName: null,
+        investBusinessLicenseImg: null,
+        investBankAccountImg: null,
         useOfFunds: "",
         useOfFundsDateStart: "",
         useOfFundsDateEnd: "",
@@ -98,7 +98,7 @@ const MakeInvest1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, investRepImgSavedName: file });
+      setTotInfo({ ...totInfo, investRepImg: file });
     }
   };
 
