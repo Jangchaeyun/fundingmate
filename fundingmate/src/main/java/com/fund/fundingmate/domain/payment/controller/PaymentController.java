@@ -46,9 +46,26 @@ public class PaymentController {
         }
     }
 
+    @GetMapping("/payment/total-amount-same-invest")
+    public ResponseEntity<Map<Long, Integer>> getTotalPaymentAmountsForSameInvests(@RequestParam List<Long> investIds) {
+        try {
+            Map<Long, Integer> totalAmounts = paymentService.getTotalPaymentAmountsForSameInvests(investIds);
+            return ResponseEntity.ok(totalAmounts);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
     @GetMapping("/person-count/{rewardId}")
     public ResponseEntity<Integer> getPersonCount(@PathVariable Long rewardId) {
         Integer distinctUserCount = paymentService.countDistinctUserIdsForReward(rewardId);
         return ResponseEntity.ok(distinctUserCount);
+    }
+
+    @GetMapping("/person-count/{investId}")
+    public ResponseEntity<Integer> getinvestPesonCount(@PathVariable Long investId) {
+        Integer investdistinctUserCount = paymentService.countDistinctUserIdsForInvest(investId);
+        return ResponseEntity.ok(investdistinctUserCount);
     }
 }

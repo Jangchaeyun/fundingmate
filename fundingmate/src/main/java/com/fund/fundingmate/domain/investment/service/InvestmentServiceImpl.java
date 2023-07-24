@@ -280,82 +280,6 @@ public class InvestmentServiceImpl implements InvestmentService {
         }
         return investTypes;
     }
-    /*private InvestmentDTO convertToInvestDTO(Investment investment) {
-        InvestmentDTO investmentDTO = new InvestmentDTO();
-        investmentDTO.setId(investment.getId());
-        investmentDTO.setInvestProjName(investment.getInvestProjName());
-        investmentDTO.setInvestTargetAmount(investment.getInvestTargetAmount());
-        investmentDTO.setInvestProjDateStart(investment.getInvestProjDateStart());
-        investmentDTO.setInvestProjDateEnd(investment.getInvestProjDateEnd());
-
-        if (investment.getInvestBankAccountCopyImgSavedName () != null) {
-            FileDTO ibacisnFileDTO = new FileDTO();
-            ibacisnFileDTO.setFileName(investment.getInvestBankAccountCopyImgSavedName().getFileName());
-            investmentDTO.setInvestBankAccountCopyImgSavedName(ibacisnFileDTO);
-        }
-
-        investmentDTO.setInvestProjKeyword(investment.getInvestProjKeyword());
-        investmentDTO.setUseOfFunds(investment.getUseOfFunds());
-
-      *//*  if (investment.getInvestContentImgSavedName() != null) {
-            FileDTO iiblisnDTO  = new FileDTO();
-            iiblisnDTO.setFileName(investment.getInvestContentImgSavedName().getFileName());
-            investmentDTO.setInvestContentImgSavedName(iiblisnDTO);
-        }
-*//*
-        List<File> investContentImgSavedName = investment.getInvestContentImgSavedName();
-        if (investContentImgSavedName != null && !investContentImgSavedName.isEmpty()) {
-            List<FileDTO> iiblisnDTOList = new ArrayList<>();
-            for (File file : investContentImgSavedName) {
-                FileDTO iiblisnDTO = new FileDTO();
-                iiblisnDTO.setFileName(file.getFileName());
-                // 필요한 다른 파일 정보 설정
-
-                iiblisnDTOList.add(iiblisnDTO);
-            }
-            investmentDTO.setInvestContentImgSavedName(iiblisnDTOList);
-        }
-
-        investmentDTO.setUseOfFundsDateStart(investment.getUseOfFundsDateStart());
-        investmentDTO.setUseOfFundsDateEnd(investment.getUseOfFundsDateEnd());
-        investmentDTO.setRateOfReturn(investment.getRateOfReturn());
-        investmentDTO.setExpectedPaymentDate(investment.getExpectedPaymentDate());
-        investmentDTO.setRepaymentMethod(investment.getRepaymentMethod());
-        investmentDTO.setInvestVideoUrl(investment.getInvestVideoUrl());
-        investmentDTO.setInvestItemIntro(investment.getInvestItemIntro());
-        investmentDTO.setInvestItemBusinessValue(investment.getInvestItemBusinessValue());
-        investmentDTO.setInvestItemValue(investment.getInvestItemValue());
-        investmentDTO.setInvestItemBenefit(investment.getInvestItemBenefit());
-        investmentDTO.setInvestProjContent(investment.getInvestProjContent());
-
-        if (investment.getInvestRepImgSavedName() != null) {
-            FileDTO irisnDTO  = new FileDTO();
-            irisnDTO .setFileName(investment.getInvestRepImgSavedName().getFileName());
-            investmentDTO.setInvestRepImgSavedName(irisnDTO );
-        }
-
-        investmentDTO.setBusinessAddress(investment.getBusinessAddress());
-        investmentDTO.setBank(investment.getBank());
-        investmentDTO.setAccNumber(investment.getAccNumber());
-        investmentDTO.setDepositorName(investment.getDepositorName());
-
-        if (investment.getInvestContentImgSavedName() != null) {
-            FileDTO ciisnDTO  = new FileDTO();
-            ciisnDTO .setFileName(investment.getInvestContentImgSavedName().getFileName());
-            investmentDTO.setInvestContentImgSavedName(ciisnDTO );
-        }
-
-        investmentDTO.setTaxBillEmail(investment.getTaxBillEmail());
-        investmentDTO.setWebsiteUrl(investment.getWebsiteUrl());
-        investmentDTO.setFacebookUrl(investment.getFacebookUrl());
-        investmentDTO.setInstagramUrl(investment.getInstagramUrl());
-        investmentDTO.setBlogUrl(investment.getBlogUrl());
-        investmentDTO.setTwitterUrl(investment.getTwitterUrl());
-
-        return investmentDTO;
-    }
-*/
-
     @Override
     public Long createInvestment(InvestmentDTO investmentDTO, Long userId, String cards, MultipartFile reqFile, MultipartFile[] contentFiles, MultipartFile businessFile, MultipartFile bankFile) throws Exception {
 
@@ -422,16 +346,6 @@ public class InvestmentServiceImpl implements InvestmentService {
         return investment.getId();
     }
 
-    /*   public Map<String, Object> getInvestmentById(Long investmentId) {
-            Map<String, Object> map = new HashMap<>();
-            Optional<Investment> oInvestment = investmentRepository.findById(investmentId);
-            if (oInvestment.isEmpty()) {
-                throw new IllegalArgumentException("Reward not found with ID: " + investmentId);
-            }
-            Investment investment = oInvestment.get();
-            map.put("investment", modelMapper.map(investment, InvestmentDTO.class));
-            return map;
-        }*/
     public Map<String, Object> getInvestmentById(Long investmentId) {
         Map<String, Object> map = new HashMap<>();
 

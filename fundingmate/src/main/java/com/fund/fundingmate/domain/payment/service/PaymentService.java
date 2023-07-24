@@ -10,6 +10,7 @@ import com.fund.fundingmate.domain.reward.repository.RewardTypeRepository;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -67,11 +68,24 @@ public class PaymentService {
         return totalAmounts;
    }
 
+   public Map<Long, Integer> getTotalPaymentAmountsForSameInvests(List<Long> investIds) {
+        Map<Long, Integer> totalAmounts = new HashMap<>();
+        for (Long investId : investIds) {
+            Integer totalAmount = paymentRepository.getTotalPaymentAmountForInvestments(Collections.singletonList(investId));
+            totalAmounts.put(investId, totalAmount);
+        }
+        return totalAmounts;
+   }
+
     public Integer countDistinctUserIds() {
         return paymentRepository.countDistinctUserIds();
     }
 
     public Integer countDistinctUserIdsForReward(Long rewardId) {
         return paymentRepository.countDistinctUserIdsForReward(rewardId);
+    }
+
+    public Integer countDistinctUserIdsForInvest(Long investId) {
+        return paymentRepository.countDistinctUserIdsForInvest(investId);
     }
 }

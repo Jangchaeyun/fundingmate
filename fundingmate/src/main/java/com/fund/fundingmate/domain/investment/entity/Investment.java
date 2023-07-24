@@ -57,14 +57,19 @@ public class Investment {
 
     private String  investContentImgSavedName;  //파일번호 목록: 1,2,3
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemIntro;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemBusinessValue;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemValue;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemBenefit;
 
+    @Column(columnDefinition = "VARCHAR(9000)")
     private String investProjContent;
 
     private Long investIdBusinessLicenseImgSavedName;
@@ -83,19 +88,19 @@ public class Investment {
 
     private String taxBillEmail;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String websiteUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String facebookUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String instagramUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String blogUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String twitterUrl;
 /*        @Column(name = "user_no")
         private Integer userNo;*/
