@@ -42,7 +42,7 @@ const MakeInvest5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.investIdBusinessLicenseImgSavedName;
+    let file = totInfo.investBusinessLicenseImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -50,7 +50,7 @@ const MakeInvest5 = () => {
       };
       reader.readAsDataURL(file);
     }
-    file = totInfo.investBankAccountCopyImgSavedName;
+    file = totInfo.investBankAccountCopyImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -71,7 +71,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, investIdBusinessLicenseImgSavedName: file });
+      setTotInfo({ ...totInfo, investBusinessLicenseImg: file });
     }
   };
 
@@ -90,7 +90,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, investBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, investBankAccountImg: file });
       console.log(file.src);
     }
   };
@@ -164,50 +164,34 @@ const MakeInvest5 = () => {
       };
     };
 
-    const requestData = {
-      ...totInfo,
-      investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
-      investContentImgSavedName: convertToFilesDTO(
-        totInfo.investContentImgSavedName
-      ), // investContentImgSavedName 필드를 배열로 변환하여 할당
-      investRepImgSavedName: convertToOneFilesDTO(
-        totInfo.investRepImgSavedName
-      ),
-      investIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.investIdBusinessLicenseImgSavedName
-      ),
-      investBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.investBankAccountCopyImgSavedName
-      )
-    };
+    // const requestData = {
+    //   ...totInfo,
+    //   investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
+    //   investContentImg: convertToFilesDTO(
+    //     totInfo.investContentImg
+    //   ), // investContentImgSavedName 필드를 배열로 변환하여 할당
+    //   investRepImgSavedName: convertToOneFilesDTO(
+    //     totInfo.investRepImgSavedName
+    //   ),
+    //   investIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
+    //     totInfo.investIdBusinessLicenseImgSavedName
+    //   ),
+    //   investBankAccountCopyImgSavedName: convertToOneFilesDTO(
+    //     totInfo.investBankAccountCopyImgSavedName
+    //   )
+    // };
 
     let formData = new FormData();
     formData.append("userId", userId);
     formData.append("investCategory", totInfo.investCategory);
     formData.append("investTargetAmount", totInfo.investTargetAmount);
     formData.append("investProjName", totInfo.investProjName);
-    formData.append("investRepImgSavedName", totInfo.investRepImgSavedName);
     formData.append("investProjKeyword", totInfo.investProjKeyword);
     formData.append("investProjDateStart", totInfo.investProjDateStart);
     formData.append("investProjDateEnd", totInfo.investProjDateEnd);
     formData.append("investVideoUrl", totInfo.investVideoUrl);
-    formData.append(
-      "investContentImgcnt",
-      totInfo.investContentImgSavedName.length
-    );
-    for (let i = 0; i <= totInfo.investContentImgSavedName.length; i++) {
-      formData.append(
-        "investContentImgSavedName" + (i + 1),
-        totInfo.investContentImgSavedName[i]
-      );
-    }
-    formData.append(
-      "investContentImgSavedName",
-      totInfo.investContentImgSavedName
-    );
     formData.append("investProjContent", totInfo.investProjContent);
     formData.append("cards", JSON.stringify(totInfo.cards));
-    // formData.append("cards", totInfo.cards);
     formData.append("businessAddress", totInfo.businessAddress);
     formData.append("bank", totInfo.bank);
     formData.append("accNumber", totInfo.accNumber);
@@ -218,14 +202,6 @@ const MakeInvest5 = () => {
     formData.append("instagramUrl", totInfo.instagramUrl);
     formData.append("blogUrl", totInfo.blogUrl);
     formData.append("twitterUrl", totInfo.twitterUrl);
-    formData.append(
-      "investIdBusinessLicenseImgSavedName",
-      totInfo.investIdBusinessLicenseImgSavedName
-    );
-    formData.append(
-      "investBankAccountCopyImgSavedName",
-      totInfo.investBankAccountCopyImgSavedName
-    );
     formData.append("useOfFunds", totInfo.useOfFunds);
     formData.append("useOfFundsDateStart", totInfo.useOfFundsDateStart);
     formData.append("useOfFundsDateEnd", totInfo.useOfFundsDateEnd);
@@ -238,14 +214,25 @@ const MakeInvest5 = () => {
     formData.append("investItemBenefit", totInfo.investItemBenefit);
     formData.append("investEmail", totInfo.investEmail);
 
-    //console.log(totInfo);
-    console.log(formData.get("investRepImgSavedName"));
+    formData.append("investRepImg", totInfo.investRepImg);
+    for (let i = 0; i <= totInfo.investContentImg.length; i++) {
+      formData.append("investContentImg", totInfo.investContentImg[i]);
+    }
+    formData.append(
+      "investBusinessLicenseImg",
+      totInfo.investBusinessLicenseImg
+    );
+    formData.append("investBankAccountImg", totInfo.investBankAccountImg);
+
+    console.log(totInfo);
+    console.log(formData.get("investRepImg"));
+    console.log(formData.get("investContentImg")[0]);
+    console.log(formData.get("investContentImg")[1]);
     axios
       .post("http://localhost:8080/makeInvestHostinfo", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-        },
-        params: { userId: userId }
+        }
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
