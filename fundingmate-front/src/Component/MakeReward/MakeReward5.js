@@ -86,8 +86,8 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
-      uploadImageToServer(file);
+      setTotInfo({ ...totInfo, rewardBusinessLicenseImg: file });
+      //uploadImageToServer(file);
     }
   };
 
@@ -106,7 +106,7 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, rewardBankAccountCopyImg: file });
       console.log(file.src);
     }
   };
@@ -190,6 +190,7 @@ const MakeReward5 = () => {
     //     totInfo.rewardBankAccountCopyImgSavedName
     //   ),
     // };
+
     let formData = new FormData();
     formData.append("userId", userId);
     formData.append("rewardCategory", totInfo.rewardCategory);
@@ -204,8 +205,18 @@ const MakeReward5 = () => {
       "rewardRefundExchangePolicy",
       totInfo.rewardRefundExchangePolicy
     );
-    formData.append("investProjContent", totInfo.projContent);
-    formData.append("cards", JSON.stringify(totInfo.cards));
+    formData.append("projContent", totInfo.projContent);
+
+    //cards 의 option id 값 초기화
+    let tcards = totInfo.cards;
+    for (let i = 0; i < tcards.length; i++) {
+      for (let j = 0; j < tcards[i].options.length; j++) {
+        tcards[i].options[j].id = null;
+      }
+    }
+
+    formData.append("cards", JSON.stringify(tcards));
+
     formData.append("rewardContact", totInfo.rewardContact);
     formData.append("rewardEmail", totInfo.rewardEmail);
     formData.append("modelName", totInfo.modelName);
