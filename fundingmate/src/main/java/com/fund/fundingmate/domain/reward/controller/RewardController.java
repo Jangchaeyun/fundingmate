@@ -67,8 +67,8 @@ public class RewardController {
         try {
             System.out.println(userId);
             System.out.println(contentFiles.length);
-            Long savedInvestmentId = rewardService.createReward(rewardDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
-            return new ResponseEntity<>(savedInvestmentId, HttpStatus.OK);
+            Long savedRewardId = rewardService.createReward(rewardDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
+            return new ResponseEntity<>(savedRewardId, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -117,6 +117,8 @@ public class RewardController {
 
     @GetMapping("/reward-detail/story/{rewardId}")
     public ResponseEntity<RewardDTO> rewardDetailStory(@PathVariable Long rewardId) {
+        System.out.println("rewardId:"+rewardId);
+
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);

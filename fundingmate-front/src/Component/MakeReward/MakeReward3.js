@@ -70,7 +70,10 @@ const MakeReward3 = () => {
   console.log("showOption:" + showOption);
 
   const handleShowOptionButtonClick = () => {
-    setCard({ ...card, options: [{ rewardOptName: "", getRewardOptCon: "" }] });
+    setCard({
+      ...card,
+      options: [{ id: nanoid(), rewardOptName: "", getRewardOptCon: "" }]
+    });
     setShowOption(true);
   };
   const handleAddOption = () => {

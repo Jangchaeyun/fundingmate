@@ -125,6 +125,7 @@ public class RewardService {
         List<RewardType> rewardTypeList = new ArrayList<>();
         for(int i=0; i<jsonArray.size(); i++) {
             JsonObject rewordObject = (JsonObject)jsonArray.get(i);
+            System.out.println(rewordObject.toString());
             RewardType rewardType = objectMapper.readValue(rewordObject.toString(), RewardType.class);
             for(RewardOption option : rewardType.getOptions()) {
                 option.setRewardType(rewardType);

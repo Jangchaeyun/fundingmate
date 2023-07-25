@@ -236,7 +236,11 @@ function App() {
                 {/* My Page */}
                 <Routes>
                   <Route exact path="/myPageForFounder" element={<Founder />} />
-                  <Route exact path="/myPageForInvestor" element={<Investor />} />
+                  <Route
+                    exact
+                    path="/myPageForInvestor"
+                    element={<Investor />}
+                  />
                 </Routes>
                 {/* My Page */}
               </BrowserRouter>
