@@ -37,6 +37,7 @@ import MakeInvest4 from "./Component/MakeInvest/MakeInvest4";
 import MakeInvest5 from "./Component/MakeInvest/MakeInvest5";
 import Founder from "./pages/MyPage/Founder";
 import Investor from "./pages/MyPage/Investor";
+import MyPage from "./pages/MyPage/MyPage";
 import RewardFundMain from "./Component/RewardFund/RewardFundMain";
 import Desc from "./Component/RewardDetail/Desc/Desc";
 import { Provider } from "react-redux";
@@ -233,12 +234,15 @@ function App() {
                   />
                 </Routes>
                 {/* 태희 부분 */}
+
                 {/* My Page */}
                 <Routes>
+                  <Route exact path="/myPage" element={<MyPage />} />
                   <Route exact path="/myPageForFounder" element={<Founder />} />
                   <Route exact path="/myPageForInvestor" element={<Investor />} />
                 </Routes>
                 {/* My Page */}
+
               </BrowserRouter>
             </PersistGate>
           </Provider>
