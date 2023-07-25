@@ -50,11 +50,6 @@ public class Investment {
 
     private String investVideoUrl;
 
-  /*  @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investContentImgSavedName_img")
-    private List<File> investContentImgSavedName;*/
-
-
     private String  investContentImgSavedName;  //파일번호 목록: 1,2,3
 
     @Column(columnDefinition = "VARCHAR(600)")
@@ -88,22 +83,21 @@ public class Investment {
 
     private String taxBillEmail;
 
-    @Column(nullable = true)
+
     private String websiteUrl;
 
-    @Column(nullable = true)
+
     private String facebookUrl;
 
-    @Column(nullable = true)
+
     private String instagramUrl;
 
-    @Column(nullable = true)
+
     private String blogUrl;
 
-    @Column(nullable = true)
+
     private String twitterUrl;
-/*        @Column(name = "user_no")
-        private Integer userNo;*/
+
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;

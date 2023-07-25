@@ -59,6 +59,7 @@ public class PaymentController {
 
     @GetMapping("/person-count/{rewardId}")
     public ResponseEntity<Integer> getPersonCount(@PathVariable Long rewardId) {
+        System.out.println("rewardId:"+rewardId);
         Integer distinctUserCount = paymentService.countDistinctUserIdsForReward(rewardId);
         return ResponseEntity.ok(distinctUserCount);
     }
