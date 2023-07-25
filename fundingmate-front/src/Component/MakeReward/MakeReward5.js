@@ -10,7 +10,7 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
@@ -86,8 +86,8 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
-      uploadImageToServer(file);
+      setTotInfo({ ...totInfo, rewardBusinessLicenseImg: file });
+      //uploadImageToServer(file);
     }
   };
 
@@ -106,7 +106,7 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, rewardBankAccountCopyImg: file });
       console.log(file.src);
     }
   };
@@ -156,7 +156,7 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files[0].name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
@@ -169,41 +169,103 @@ const MakeReward5 = () => {
       return {
         fileId: null,
         fileName: files.name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null,
+        fileRegistrationDate: null
         // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
-    const requestData = {
-      ...totInfo,
-      rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(
-        totInfo.rewardContentImgSavedName
-      ),
-      rewardRepImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardRepImgSavedName
-      ),
-      rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardIdBusinessLicenseImgSavedName
-      ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardBankAccountCopyImgSavedName
-      ),
-    };
+    // const requestData = {
+    //   ...totInfo,
+    //   rewardTypes: totInfo.cards,
+    //   rewardContentImgSavedName: convertToFilesDTO(
+    //     totInfo.rewardContentImgSavedName
+    //   ),
+    //   rewardRepImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardRepImgSavedName
+    //   ),
+    //   rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardIdBusinessLicenseImgSavedName
+    //   ),
+    //   rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardBankAccountCopyImgSavedName
+    //   ),
+    // };
 
+    let formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("rewardCategory", totInfo.rewardCategory);
+    formData.append("projTargetAmount", totInfo.projTargetAmount);
+    formData.append("projName", totInfo.projName);
+
+    formData.append("projKeyWord", totInfo.projKeyWord);
+    formData.append("projDateStart", totInfo.projDateStart);
+    formData.append("projDateEnd", totInfo.projDateEnd);
+    formData.append("rewardVideoAddress", totInfo.rewardVideoAddress);
+    formData.append(
+      "rewardRefundExchangePolicy",
+      totInfo.rewardRefundExchangePolicy
+    );
+    formData.append("projContent", totInfo.projContent);
+
+    //cards 의 option id 값 초기화
+    let tcards = totInfo.cards;
+    for (let i = 0; i < tcards.length; i++) {
+      for (let j = 0; j < tcards[i].options.length; j++) {
+        tcards[i].options[j].id = null;
+      }
+    }
+
+    formData.append("cards", JSON.stringify(tcards));
+
+    formData.append("rewardContact", totInfo.rewardContact);
+    formData.append("rewardEmail", totInfo.rewardEmail);
+    formData.append("modelName", totInfo.modelName);
+    formData.append("rewardLaw", totInfo.rewardLaw);
+    formData.append("countryOfOrigin", totInfo.countryOfOrigin);
+    formData.append("manufacturer", totInfo.manufacturer);
+    formData.append("asPhoneNumber", totInfo.asPhoneNumber);
+
+    formData.append("businessAddress", totInfo.businessAddress);
+    formData.append("bank", totInfo.bank);
+    formData.append("accNumber", totInfo.accNumber);
+    formData.append("depositorName", totInfo.depositorName);
+    formData.append("taxBillEmail", totInfo.taxBillEmail);
+    formData.append("websiteUrl", totInfo.websiteUrl);
+    formData.append("facebookUrl", totInfo.facebookUrl);
+    formData.append("instagramUrl", totInfo.instagramUrl);
+    formData.append("blogUrl", totInfo.blogUrl);
+    formData.append("twitterUrl", totInfo.twitterUrl);
+
+    formData.append("rewardRepImg", totInfo.rewardRepImg);
+    for (let i = 0; i <= totInfo.rewardContentImg.length; i++) {
+      formData.append("rewardContentImg", totInfo.rewardContentImg[i]);
+    }
+    formData.append(
+      "rewardBusinessLicenseImg",
+      totInfo.rewardBusinessLicenseImg
+    );
+    formData.append(
+      "rewardBankAccountCopyImg",
+      totInfo.rewardBankAccountCopyImg
+    );
+
+    console.log(totInfo);
     axios
-      .post("http://localhost:8080/makeReward", requestData, {
-        params: { userId: userId }, // Pass userId as a parameter
+      .post("http://localhost:8080/makeReward", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
       .then((response) => {
         console.log(response.data);
-        const rewardId = response.data.id;
+        const rewardId = response.data;
         setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
         navigateToStep2(`/reward-detail/story/${rewardId}`);
       })
       .catch((error) => {
         console.error(error);
+        alert("프로젝트를 완성해주세요.");
       });
   };
 

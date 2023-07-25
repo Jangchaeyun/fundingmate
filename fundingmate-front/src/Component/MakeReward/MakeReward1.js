@@ -37,15 +37,16 @@ const MakeReward1 = () => {
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        rewardRepImgSavedName: null,
+        rewardRepImg: null,
         projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
-        rewardContentImgSavedName: [],
+        rewardContentImg: [],
         projContent: "",
         cards: [],
         rewardVideoAddress: "",
         rewardRefundExchangePolicy: "",
+
         rewardContact: "",
         rewardEmail: "",
         modelName: "",
@@ -53,6 +54,7 @@ const MakeReward1 = () => {
         countryOfOrigin: "",
         manufacturer: "",
         asPhoneNumber: "",
+
         businessAddress: "",
         bank: "",
         accNumber: "",
@@ -63,8 +65,9 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        rewardIdBusinessLicenseImgSavedName: null,
-        rewardBankAccountCopyImgSavedName: null,
+
+        rewardBusinessLicenseImg: null,
+        rewardBankAccountCopyImg: null
       });
     }
   }, []);
@@ -107,8 +110,8 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardRepImgSavedName: file });
-      uploadImageToServer(file);
+      setTotInfo({ ...totInfo, rewardRepImg: file });
+      //uploadImageToServer(file);
     }
   };
 
@@ -224,14 +227,14 @@ const MakeReward1 = () => {
             setTotInfo({
               ...totInfo,
               projDateStart: dateStrings[0],
-              projDateEnd: dateStrings[1],
+              projDateEnd: dateStrings[1]
             });
           }}
           showToday={true}
           allowClear={false}
           value={[
             totInfo.projDateStart ? dayjs(totInfo.projDateStart) : null,
-            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null,
+            totInfo.projDateEnd ? dayjs(totInfo.projDateEnd) : null
           ]}
           format="YYYY-MM-DD"
         />
@@ -282,11 +285,11 @@ const MakeReward1 = () => {
         <br />
         <br />
         <p className="custom-font-sub-title">
-          <b>프로젝트 키워드를 적어주세요</b>
+          <b>프로젝트 메이커명을 적어주세요</b>
         </p>
         <p className="custom-font-text">
-          <b style={{ color: "#E93232" }}>(선택사항)</b> 제목 외에도 키워드 검색
-          시 검색 결과에 프로젝트가 나타납니다.
+          {/* <b style={{ color: "#E93232" }}>(선택사항)</b> */}
+          프로젝트에 노출될 메이커명 또는 기업명을 적어주세요.
         </p>
         <input
           type="text"
@@ -294,7 +297,7 @@ const MakeReward1 = () => {
           className="input-box"
           value={totInfo.projKeyWord}
           onChange={handleInputChange}
-          placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
+          // placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />
         <div className="button-top-margin"></div>
         <div className="investMake-button-div">

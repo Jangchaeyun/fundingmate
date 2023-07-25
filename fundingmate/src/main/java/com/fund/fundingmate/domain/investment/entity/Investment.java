@@ -7,8 +7,8 @@ import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -50,21 +50,21 @@ public class Investment {
 
     private String investVideoUrl;
 
-  /*  @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="investContentImgSavedName_img")
-    private List<File> investContentImgSavedName;*/
-
-
     private String  investContentImgSavedName;  //파일번호 목록: 1,2,3
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemIntro;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemBusinessValue;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemValue;
 
+    @Column(columnDefinition = "VARCHAR(600)")
     private String investItemBenefit;
 
+    @Column(length = 100000)
     private String investProjContent;
 
     private Long investIdBusinessLicenseImgSavedName;
@@ -83,22 +83,21 @@ public class Investment {
 
     private String taxBillEmail;
 
-    @Column(nullable = false)
+
     private String websiteUrl;
 
-    @Column(nullable = false)
+
     private String facebookUrl;
 
-    @Column(nullable = false)
+
     private String instagramUrl;
 
-    @Column(nullable = false)
+
     private String blogUrl;
 
-    @Column(nullable = false)
+
     private String twitterUrl;
-/*        @Column(name = "user_no")
-        private Integer userNo;*/
+
     @ManyToOne
     @JoinColumn(name = "user_no")
     private User user;

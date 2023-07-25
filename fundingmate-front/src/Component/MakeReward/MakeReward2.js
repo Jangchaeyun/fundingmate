@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
   PlusSquareOutlined,
   MinusCircleOutlined,
-  MinusSquareOutlined,
+  MinusSquareOutlined
 } from "@ant-design/icons";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -66,13 +66,13 @@ const MakeReward2 = () => {
   useEffect(() => {
     console.log(totInfo);
     let imgList = [];
-    for (let file of totInfo.rewardContentImgSavedName) {
+    for (let file of totInfo.rewardContentImg) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         imgList.push(imageCard);
         setImages([...imgList]);
@@ -103,17 +103,14 @@ const MakeReward2 = () => {
         const imageCard = {
           src: e.target.result,
           alt: "Selected",
-          style: { width: "100%", height: "100%", objectFit: "cover" },
+          style: { width: "100%", height: "100%", objectFit: "cover" }
         };
         setImages([...images, imageCard]);
         setTotInfo({
           ...totInfo,
-          rewardContentImgSavedName: [
-            ...totInfo.rewardContentImgSavedName,
-            event.target.files[0],
-          ],
+          rewardContentImg: [...totInfo.rewardContentImg, event.target.files[0]]
         });
-        uploadImageToServer(event.target.files);
+        //uploadImageToServer(event.target.files);
       };
       // reader가 이미지 읽도록 하기
       reader.readAsDataURL(event.target.files[0]);
@@ -121,7 +118,7 @@ const MakeReward2 = () => {
   };
 
   const handleImageClick = (e) => {
-    if (totInfo.rewardContentImgSavedName.length < MAX_IMAGES) {
+    if (totInfo.rewardContentImg.length < MAX_IMAGES) {
       document.getElementById("imageUpload").click();
     }
   };
@@ -129,14 +126,14 @@ const MakeReward2 = () => {
   const handleImageDelete = (e, index) => {
     e.stopPropagation();
 
-    const updatedImagesFile = [...totInfo.rewardContentImgSavedName];
+    const updatedImagesFile = [...totInfo.rewardContentImg];
     updatedImagesFile.splice(index, 1);
 
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
 
     setImages([...updatedImages]);
-    setTotInfo({ ...totInfo, rewardContentImgSavedName: [...updatedImages] });
+    setTotInfo({ ...totInfo, rewardContentImg: [...updatedImages] });
     setShowDeleteIcon(false);
   };
 
@@ -235,7 +232,7 @@ const MakeReward2 = () => {
                     zIndex: "1",
                     color: "#fff",
                     fontSize: "15px",
-                    display: showDeleteIcon ? "block" : "none",
+                    display: showDeleteIcon ? "block" : "none"
                   }}
                 >
                   <MinusCircleOutlined id="imi-image-delete-icon" />
@@ -256,7 +253,7 @@ const MakeReward2 = () => {
                     style={{
                       fontSize: "15px",
                       cursor: "pointer",
-                      marginRight: "3px",
+                      marginRight: "3px"
                     }}
                   />
                 </div>

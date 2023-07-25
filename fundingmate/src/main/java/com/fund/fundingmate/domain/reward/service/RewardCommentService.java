@@ -112,10 +112,14 @@ public class RewardCommentService {
         rewardDTO.setUser(mapToUserDTO(reward.getUser()));
         rewardDTO.setRewardTypes(mapToRewardTypeDTOList(reward.getRewardTypes()));
 
-        rewardDTO.setRewardRepImgSavedName(mapToFileDTO(reward.getRewardRepImgSavedName()));
-        rewardDTO.setRewardContentImgSavedName(mapToFileDTO(reward.getRewardContentImgSavedName()));
-        rewardDTO.setRewardIdBusinessLicenseImgSavedName(mapToFileDTO(reward.getRewardIdBusinessLicenseImgSavedName()));
-        rewardDTO.setRewardBankAccountCopyImgSavedName(mapToFileDTO(reward.getRewardBankAccountCopyImgSavedName()));
+//        rewardDTO.setRewardRepImgSavedName(mapToFileDTO(reward.getRewardRepImgSavedName()));
+//        rewardDTO.setRewardContentImgSavedName(new ArrayList<>());
+//        List<File> fileList = reward.getRewardContentImgSavedName();
+//        for(File file : fileList) {
+//            rewardDTO.getRewardContentImgSavedName().add(mapToFileDTO(file));
+//        }
+//        rewardDTO.setRewardIdBusinessLicenseImgSavedName(mapToFileDTO(reward.getRewardIdBusinessLicenseImgSavedName()));
+//        rewardDTO.setRewardBankAccountCopyImgSavedName(mapToFileDTO(reward.getRewardBankAccountCopyImgSavedName()));
 
         return rewardDTO;
     }
@@ -170,6 +174,7 @@ public class RewardCommentService {
 
         return fileDTO;
     }
+    
 
     private RewardReplyDTO mapToRewardReplyDTO(RewardReply rewardReply) {
         RewardReplyDTO rewardReplyDTO = new RewardReplyDTO();

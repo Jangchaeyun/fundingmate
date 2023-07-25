@@ -1,3 +1,8 @@
+.category {
+  overflow-x: hidden;
+  width: 1080px;
+  margin: 0 auto;
+}
 .category_card {
   margin-top: 10px;
   width: 100px;
@@ -27,10 +32,10 @@
   margin-top: 13px;
 }
 
-.category_name2{
+.category_name2 {
   margin-top: 7%;
-    margin-left: 25%;
-    font-size: 13px;
+  margin-left: 25%;
+  font-size: 13px;
 }
 
 .category_img3 {
@@ -40,7 +45,7 @@
   margin-top: 11px;
 }
 
-.category_name3{
+.category_name3 {
   margin-top: 7%;
   margin-left: 32%;
   font-size: 13px;
@@ -155,8 +160,8 @@
 
 .category_name12 {
   margin-top: 7%;
-    margin-left: 30%;
-    font-size: 13px;
+  margin-left: 30%;
+  font-size: 13px;
 }
 
 .category_img13 {
