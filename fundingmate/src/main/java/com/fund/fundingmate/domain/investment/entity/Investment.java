@@ -7,8 +7,8 @@ import com.fund.fundingmate.global.file.entity.File;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
