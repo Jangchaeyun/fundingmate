@@ -17,15 +17,12 @@ import java.util.List;
 @Service
 public class FileService {
     private final FileRepository fileRepository;
-  
-    private final FileService fileService;
 
-    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    public static final String UPLOAD_DIRECTORY = "C:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @Autowired
-    public FileService(FileRepository fileRepository, FileService fileService) {
+    public FileService(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
-        this.fileService = fileService;
     }
 
     public File saveFile(File existingFile, MultipartFile multipartFile) throws IOException {
@@ -51,7 +48,7 @@ public class FileService {
     private List<File> saveMultipleFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<File> savedFiles = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
-            File savedFile = fileService.saveFile(null, multipartFile);
+            File savedFile = saveFile(null, multipartFile);
             fileRepository.save(savedFile);
             savedFiles.add(savedFile);
         }

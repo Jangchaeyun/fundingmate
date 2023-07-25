@@ -4,15 +4,15 @@ import {BellOutlined, LogoutOutlined, SearchOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
-function Header() {
+import axios from "axios";
+function Header(props) {
   const token = useSelector((state) => state.Authorization);
   const userid = useSelector((state) => state.UserId);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const [keyword, setKeyword] = useState(state ? state : "");
-
+  const [keyword, setKeyword] = useState(props.word);
+  const [reward, setReward] = useState([])
   const logout = () => {
     dispatch({ type: "NEWTOKEN", payload: "" });
     dispatch({ type: "USERID", payload: "" });
@@ -29,7 +29,29 @@ function Header() {
             document.getElementById("keyword").focus();
             return;
         }
-        navigate("/search",{state:keyword});
+        // axios.get(`http://localhost:8080/search?word=${keyword}`)
+        //     .then(res => {
+        //         console.log("성공");
+        //         console.log(res);
+        //         const resData = res.data;
+        //         const addData = resData.map(item => {
+        //             const projDateEnd = new Date(item.projDateEnd);
+        //             const today = new Date();
+        //             const differenceInTime = Math.abs(projDateEnd.getTime() - today.getTime());
+        //             const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24)-1);
+        //             const formattedAmount = item.projTargetAmount.toLocaleString(); // 기본 로케일과 기본 숫자 포맷 사용
+        //             console.log(differenceInDays);
+        //             // item 객체와 차이를 추가하여 새로운 객체를 만듦
+        //             return { ...item, differenceInDays, formattedAmount };
+        //         });
+        //         setReward(addData);
+        //         let list = res.data.list;
+        //         setReward([...list])
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        navigate(`/search?word=${keyword}`,{state:{word:keyword,list:reward}});
     }
     return (
         <header className="header">
@@ -65,7 +87,7 @@ function Header() {
                     </ul>
                     <span className="searchForm">
                         <form onSubmit={searchSubmit} className="searchF">
-                            <input type="text" id="keyword" value={keyword} className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} autoComplete="off"/>
+                            <input type="text" id="keyword"  className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} value={keyword} autoComplete="off"/>
                         </form>
                         <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
                     </span>
