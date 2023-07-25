@@ -65,12 +65,12 @@ function Header(props) {
 
                         {/*<b className="userName">{userid}</b>*/}
                         {userid!=''&&<>
-                        <a href="#" className="myPageLink">
+                        <a href="myPage" className="myPageLink">
                             <img src={require(`../../assets/images/defaultImg.jpg`)} alt="" className="myPageImg"/>
                         </a>
-                        <a href="#" className="noti">
-                            <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>
-                        </a>
+                        {/*<a href="#" className="noti">*/}
+                        {/*    <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>*/}
+                        {/*</a>*/}
                         <Link onClick={logout}>
                             로그아웃
                         </Link></>}
@@ -79,11 +79,11 @@ function Header(props) {
                 </div>
                 <nav className="nav">
                     <ul className="nav-item">
-                        <li><a href="">홈</a></li>
-                        <li><a href="/reward">리워드</a></li>
-                        <li><a href="">창업</a></li>
-                        <li><a href="">창업정보</a></li>
-                        <li><a href="">오픈예정</a></li>
+                        <li><a href="/">홈</a></li>
+                        <li><a href="reward">리워드</a></li>
+                        <li><a href="fund">투자</a></li>
+                        {/*<li><a href="/">창업정보</a></li>*/}
+                        {/*<li><a href="">오픈예정</a></li>*/}
                     </ul>
                     <span className="searchForm">
                         <form onSubmit={searchSubmit} className="searchF">

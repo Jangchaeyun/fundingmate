@@ -14,7 +14,7 @@ function InvestProject(props) {
     }, [props.investData]);
   return (
     <section className="content">
-      <div className="content-title">투자형 프로젝트<a href="/invest">프로젝트 더보기 <RightOutlined /></a></div>
+      <div className="content-title">투자형 프로젝트<a href="fund">프로젝트 더보기 <RightOutlined /></a></div>
       <div className="content-proj">
         <Swiper
           modules={[Navigation, Scrollbar, A11y]}
@@ -30,7 +30,7 @@ function InvestProject(props) {
           {invest.map((item, idx) => {
             return (
               <SwiperSlide className="content-slide">
-                <a href={"reward/"+item.id} className="content-item-list-link">
+                <a href={"fund-detail/story/"+item.id} className="content-item-list-link">
                   <div className="content-item-list">
                     <img
                       src={require("../../assets/images/Project/고고.jpg")}
