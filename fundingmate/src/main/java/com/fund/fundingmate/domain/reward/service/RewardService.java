@@ -1,11 +1,13 @@
 package com.fund.fundingmate.domain.reward.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardTypeDTO;
 import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.fund.fundingmate.domain.reward.entity.RewardOption;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.repository.RewardFindRepository;
 import com.fund.fundingmate.domain.reward.repository.RewardOptionRepository;
@@ -94,7 +96,7 @@ public class RewardService {
             if(file!=null && !file.isEmpty()) {
                 File fileEntity = new File(file.getOriginalFilename());
                 fileRepository.save(fileEntity);
-                java.io.File destFile = new java.io.File(path+"/"+fileEntity);
+                java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
                 file.transferTo(destFile);
                 fileIds += fileEntity.getFileId()+",";
             }
@@ -117,61 +119,61 @@ public class RewardService {
         }
         // 파일 저장 끝
 
+        ObjectMapper objectMapper = new ObjectMapper();
         JsonParser parser = new JsonParser();
         JsonArray jsonArray =  (JsonArray)parser.parse(cards);
+        List<RewardType> rewardTypeList = new ArrayList<>();
         for(int i=0; i<jsonArray.size(); i++) {
-            JsonObject jsonObject = (JsonObject)jsonArray.get(i);
-            RewardType rewardType = new RewardType();
-            rewardType.setRewardAmount(jsonObject.get("rewardAmount").getAsInt());
-            rewardType.setRewardAvailableLimit(jsonObject.get("rewardAvailableLimit").getAsInt()==1);
-            rewardType.setRewardAvailableCount(jsonObject.get("rewardAvailableCount").getAsInt());
-            rewardType.setRewardTitle(jsonObject.get("rewardTitle").getAsString());
-            rewardType.setRewardContent(jsonObject.get("rewardContent").getAsString());
-            //rewardType.setDeliveryDate((jsonObject.get("deliveryDate").getAsString()));
-            rewardType.setRewardShipAddress(jsonObject.get("rewardShipAddress").getAsInt()==1);
-
+            JsonObject rewordObject = (JsonObject)jsonArray.get(i);
+            RewardType rewardType = objectMapper.readValue(rewordObject.toString(), RewardType.class);
+            for(RewardOption option : rewardType.getOptions()) {
+                option.setRewardType(rewardType);
+            }
+            rewardType.setReward(reword);
+            rewardTypeList.add(rewardType);
         }
 
-        investmentRepository.save(investment);
-        return investment.getId();
+        reword.setRewardTypes(rewardTypeList);
+        rewardRepository.save(reword);
+        return reword.getId();
     }
-    public Long createReward(RewardDTO rewardDTO, Long userId) {
-        System.out.println("reward" + rewardDTO);
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
-        Reward reward = convertToReward(rewardDTO);
-
-        File rewardBankAccountCopyImgSavedName = convertToFile(rewardDTO.getRewardBankAccountCopyImgSavedName());
-        reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
-        rewardBankAccountCopyImgSavedName = fileRepository.save(rewardBankAccountCopyImgSavedName);
-
-        File rewardIdBusinessLicenseImgSavedName = convertToFile(rewardDTO.getRewardIdBusinessLicenseImgSavedName());
-        reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
-        rewardIdBusinessLicenseImgSavedName = fileRepository.save(rewardIdBusinessLicenseImgSavedName);
-
-        File rewardRepImgSavedName = convertToFile(rewardDTO.getRewardRepImgSavedName());
-        reward.setRewardRepImgSavedName(rewardRepImgSavedName);
-        rewardRepImgSavedName = fileRepository.save(rewardRepImgSavedName);
-
-        List<FileDTO> rewardContentImgSavedNames = rewardDTO.getRewardContentImgSavedName();
-        List<File> rewardContentImgEntities = rewardContentImgSavedNames.stream()
-                .map(this::convertToFile)
-                .collect(Collectors.toList());
-
-        reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
-        reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
-        reward.setRewardRepImgSavedName(rewardRepImgSavedName);
-        reward.setRewardContentImgSavedName(rewardContentImgEntities);
-
-        reward.setUser(user);
-        for(RewardType rewardType : reward.getRewardTypes()) {
-            rewardType.setReward(reward);
-        }
-        System.out.println(reward);
-        Reward savedReward = rewardRepository.save(reward);
-
-        return savedReward.getId();
-    }
+//    public Long createReward(RewardDTO rewardDTO, Long userId) {
+//        System.out.println("reward" + rewardDTO);
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+//        Reward reward = convertToReward(rewardDTO);
+//
+//        File rewardBankAccountCopyImgSavedName = convertToFile(rewardDTO.getRewardBankAccountCopyImgSavedName());
+//        reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
+//        rewardBankAccountCopyImgSavedName = fileRepository.save(rewardBankAccountCopyImgSavedName);
+//
+//        File rewardIdBusinessLicenseImgSavedName = convertToFile(rewardDTO.getRewardIdBusinessLicenseImgSavedName());
+//        reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
+//        rewardIdBusinessLicenseImgSavedName = fileRepository.save(rewardIdBusinessLicenseImgSavedName);
+//
+//        File rewardRepImgSavedName = convertToFile(rewardDTO.getRewardRepImgSavedName());
+//        reward.setRewardRepImgSavedName(rewardRepImgSavedName);
+//        rewardRepImgSavedName = fileRepository.save(rewardRepImgSavedName);
+//
+//        List<FileDTO> rewardContentImgSavedNames = rewardDTO.getRewardContentImgSavedName();
+//        List<File> rewardContentImgEntities = rewardContentImgSavedNames.stream()
+//                .map(this::convertToFile)
+//                .collect(Collectors.toList());
+//
+//        reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
+//        reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
+//        reward.setRewardRepImgSavedName(rewardRepImgSavedName);
+//        reward.setRewardContentImgSavedName(rewardContentImgEntities);
+//
+//        reward.setUser(user);
+//        for(RewardType rewardType : reward.getRewardTypes()) {
+//            rewardType.setReward(reward);
+//        }
+//        System.out.println(reward);
+//        Reward savedReward = rewardRepository.save(reward);
+//
+//        return savedReward.getId();
+//    }
 
 
     private User convertToUser(UserDTO userDTO) {
@@ -193,100 +195,100 @@ public class RewardService {
         return fileDTO;
     }
 
-    private List<File> convertToFileList(List<FileDTO> fileDTOs) {
-        if (fileDTOs == null) {
-            return Collections.emptyList();
-        }
+//    private List<File> convertToFileList(List<FileDTO> fileDTOs) {
+//        if (fileDTOs == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        return fileDTOs.stream()
+//                .map(this::convertToFile)
+//                .collect(Collectors.toList());
+//    }
 
-        return fileDTOs.stream()
-                .map(this::convertToFile)
-                .collect(Collectors.toList());
-    }
-
-    private File convertToFile(FileDTO fileDTO) {
-        if (fileDTO == null) {
-            return null;
-        }
-
-        File file = new File();
-        file.setFileId(fileDTO.getFileId());
-        file.setFileName(fileDTO.getFileName());
-        file.setFileRegistrationDate(new Date());
-
-        // Map the RewardDTO to the Reward entity
-        if (fileDTO.getReward() != null) {
-            Reward reward = convertToReward(fileDTO.getReward());
-            file.setReward(reward);
-        }
-        return file;
-    }
+//    private File convertToFile(FileDTO fileDTO) {
+//        if (fileDTO == null) {
+//            return null;
+//        }
+//
+//        File file = new File();
+//        file.setFileId(fileDTO.getFileId());
+//        file.setFileName(fileDTO.getFileName());
+//        file.setFileRegistrationDate(new Date());
+//
+//        // Map the RewardDTO to the Reward entity
+//        if (fileDTO.getReward() != null) {
+//            Reward reward = convertToReward(fileDTO.getReward());
+//            file.setReward(reward);
+//        }
+//        return file;
+//    }
 
 
-    private Reward convertToReward(RewardDTO rewardDTO) {
-        Reward reward = new Reward();
-        reward.setRewardCategory(rewardDTO.getRewardCategory());
-        reward.setProjName(rewardDTO.getProjName());
-        reward.setProjTargetAmount(rewardDTO.getProjTargetAmount());
-        reward.setProjDateStart(rewardDTO.getProjDateStart());
-        reward.setProjDateEnd(rewardDTO.getProjDateEnd());
-
-        FileDTO bankFileDTO = rewardDTO.getRewardBankAccountCopyImgSavedName();
-        if (bankFileDTO != null) {
-            File rewardBankAccountCopyImgSavedName = convertToFile(bankFileDTO);
-            reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
-        }
-
-        reward.setProjKeyWord(rewardDTO.getProjKeyWord());
-        reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
-
-        FileDTO businessFileDTO = rewardDTO.getRewardIdBusinessLicenseImgSavedName();
-        if (businessFileDTO != null) {
-            File rewardIdBusinessLicenseImgSavedName = convertToFile(businessFileDTO);
-            reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
-        }
-
-        reward.setProjContent(rewardDTO.getProjContent());
-        reward.setRewardRefundExchangePolicy(rewardDTO.getRewardRefundExchangePolicy());
-        reward.setRewardContact(rewardDTO.getRewardContact());
-        reward.setRewardEmail(rewardDTO.getRewardEmail());
-        reward.setModelName(rewardDTO.getModelName());
-        reward.setCountryOfOrigin(rewardDTO.getCountryOfOrigin());
-        reward.setManufacturer(rewardDTO.getManufacturer());
-        reward.setRewardLaw(rewardDTO.getRewardLaw());
-        reward.setAsPhoneNumber(rewardDTO.getAsPhoneNumber());
-
-        FileDTO repFileDTO = rewardDTO.getRewardRepImgSavedName();
-        if (repFileDTO != null) {
-            File rewardRepImgSavedName = convertToFile(repFileDTO);
-            reward.setRewardRepImgSavedName(rewardRepImgSavedName);
-        }
-
-        reward.setBusinessAddress(rewardDTO.getBusinessAddress());
-        reward.setBank(rewardDTO.getBank());
-        reward.setAccNumber(rewardDTO.getAccNumber());
-        reward.setDepositorName(rewardDTO.getDepositorName());
-        reward.setTaxBillEmail(rewardDTO.getTaxBillEmail());
-
-        List<FileDTO> conFileDTOs = rewardDTO.getRewardContentImgSavedName();
-        List<File> rewardContentImgEntities = convertToFileList(conFileDTOs);
-        reward.setRewardContentImgSavedName(rewardContentImgEntities);
-
-        reward.setWebsiteUrl(rewardDTO.getWebsiteUrl());
-        reward.setFacebookUrl(rewardDTO.getFacebookUrl());
-        reward.setInstagramUrl(rewardDTO.getInstagramUrl());
-        reward.setBlogUrl(rewardDTO.getBlogUrl());
-        reward.setTwitterUrl(rewardDTO.getTwitterUrl());
-        UserDTO userDTO = rewardDTO.getUser();
-        if (userDTO != null) {
-            User user = convertToUser(userDTO);
-            reward.setUser(user);
-        }
-
-        List<RewardType> rewardTypes = convertToRewardType(rewardDTO.getRewardTypes());
-        reward.setRewardTypes(rewardTypes);
-
-        return reward;
-    }
+//    private Reward convertToReward(RewardDTO rewardDTO) {
+//        Reward reward = new Reward();
+//        reward.setRewardCategory(rewardDTO.getRewardCategory());
+//        reward.setProjName(rewardDTO.getProjName());
+//        reward.setProjTargetAmount(rewardDTO.getProjTargetAmount());
+//        reward.setProjDateStart(rewardDTO.getProjDateStart());
+//        reward.setProjDateEnd(rewardDTO.getProjDateEnd());
+//
+//        FileDTO bankFileDTO = rewardDTO.getRewardBankAccountCopyImgSavedName();
+//        if (bankFileDTO != null) {
+//            File rewardBankAccountCopyImgSavedName = convertToFile(bankFileDTO);
+//            reward.setRewardBankAccountCopyImgSavedName(rewardBankAccountCopyImgSavedName);
+//        }
+//
+//        reward.setProjKeyWord(rewardDTO.getProjKeyWord());
+//        reward.setRewardVideoAddress(rewardDTO.getRewardVideoAddress());
+//
+//        FileDTO businessFileDTO = rewardDTO.getRewardIdBusinessLicenseImgSavedName();
+//        if (businessFileDTO != null) {
+//            File rewardIdBusinessLicenseImgSavedName = convertToFile(businessFileDTO);
+//            reward.setRewardIdBusinessLicenseImgSavedName(rewardIdBusinessLicenseImgSavedName);
+//        }
+//
+//        reward.setProjContent(rewardDTO.getProjContent());
+//        reward.setRewardRefundExchangePolicy(rewardDTO.getRewardRefundExchangePolicy());
+//        reward.setRewardContact(rewardDTO.getRewardContact());
+//        reward.setRewardEmail(rewardDTO.getRewardEmail());
+//        reward.setModelName(rewardDTO.getModelName());
+//        reward.setCountryOfOrigin(rewardDTO.getCountryOfOrigin());
+//        reward.setManufacturer(rewardDTO.getManufacturer());
+//        reward.setRewardLaw(rewardDTO.getRewardLaw());
+//        reward.setAsPhoneNumber(rewardDTO.getAsPhoneNumber());
+//
+//        FileDTO repFileDTO = rewardDTO.getRewardRepImgSavedName();
+//        if (repFileDTO != null) {
+//            File rewardRepImgSavedName = convertToFile(repFileDTO);
+//            reward.setRewardRepImgSavedName(rewardRepImgSavedName);
+//        }
+//
+//        reward.setBusinessAddress(rewardDTO.getBusinessAddress());
+//        reward.setBank(rewardDTO.getBank());
+//        reward.setAccNumber(rewardDTO.getAccNumber());
+//        reward.setDepositorName(rewardDTO.getDepositorName());
+//        reward.setTaxBillEmail(rewardDTO.getTaxBillEmail());
+//
+//        List<FileDTO> conFileDTOs = rewardDTO.getRewardContentImgSavedName();
+//        List<File> rewardContentImgEntities = convertToFileList(conFileDTOs);
+//        reward.setRewardContentImgSavedName(rewardContentImgEntities);
+//
+//        reward.setWebsiteUrl(rewardDTO.getWebsiteUrl());
+//        reward.setFacebookUrl(rewardDTO.getFacebookUrl());
+//        reward.setInstagramUrl(rewardDTO.getInstagramUrl());
+//        reward.setBlogUrl(rewardDTO.getBlogUrl());
+//        reward.setTwitterUrl(rewardDTO.getTwitterUrl());
+//        UserDTO userDTO = rewardDTO.getUser();
+//        if (userDTO != null) {
+//            User user = convertToUser(userDTO);
+//            reward.setUser(user);
+//        }
+//
+//        List<RewardType> rewardTypes = convertToRewardType(rewardDTO.getRewardTypes());
+//        reward.setRewardTypes(rewardTypes);
+//
+//        return reward;
+//    }
 
     private List<RewardType> convertToRewardType(List<RewardTypeDTO> rewardTypeDTOs) {
         if (rewardTypeDTOs == null) {

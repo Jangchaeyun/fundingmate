@@ -71,10 +71,10 @@ public class InvestmentController {
     public ResponseEntity<Long> createInvestment(@ModelAttribute InvestmentDTO investmentDTO,
                                                           @RequestParam("userId") Long userId,
                                                           @RequestParam("cards") String cards,
-                                                          @RequestParam("investRepImg") MultipartFile repFile,
-                                                          @RequestParam("investContentImg") MultipartFile[] contentFiles,
-                                                          @RequestParam("investBusinessLicenseImg" )  MultipartFile businessFile,
-                                                          @RequestParam("investBankAccountImg") MultipartFile bankFile) {
+                                                          @RequestParam(value="investRepImg",required = false ) MultipartFile repFile,
+                                                          @RequestParam(value="investContentImg", required = false) MultipartFile[] contentFiles,
+                                                          @RequestParam(value="investBusinessLicenseImg" ,required = false)  MultipartFile businessFile,
+                                                          @RequestParam(value="investBankAccountImg", required = false) MultipartFile bankFile) {
         try {
             System.out.println(userId);
             System.out.println(contentFiles.length);

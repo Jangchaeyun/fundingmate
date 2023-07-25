@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.entity.File;
@@ -9,9 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 @Entity
@@ -20,6 +22,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({ "rewardTypes" })
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
