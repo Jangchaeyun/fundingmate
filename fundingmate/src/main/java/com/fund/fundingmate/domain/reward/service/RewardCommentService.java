@@ -1,3 +1,4 @@
+
 package com.fund.fundingmate.domain.reward.service;
 
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
@@ -174,7 +175,7 @@ public class RewardCommentService {
 
         return fileDTO;
     }
-    
+
 
     private RewardReplyDTO mapToRewardReplyDTO(RewardReply rewardReply) {
         RewardReplyDTO rewardReplyDTO = new RewardReplyDTO();

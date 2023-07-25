@@ -1,3 +1,4 @@
+
 package com.fund.fundingmate.domain.reward.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -323,75 +324,3 @@ public class RewardService {
 //    private List<RewardOption> convertToRewardOption(List<RewardOptionDTO> rewardOptionDTOs) {
 //        if (rewardOptionDTOs == null) {
 //            return Collections.emptyList(); // Return an empty list if rewardOptionDTOs is null
-//        }
-//
-//        List<RewardOption> rewardOptions = new ArrayList<>();
-//        for (RewardOptionDTO rewardOptionDTO : rewardOptionDTOs) {
-//            if (rewardOptionDTO != null) {
-//                RewardOption rewardOption = new RewardOption();
-//                rewardOption.setRewardOptName(rewardOptionDTO.getRewardOptName());
-//                rewardOption.setGetRewardOptCon(rewardOptionDTO.getRewardOptCon());
-//
-//                List<RewardTypeDTO> rewardTypeDTOs = rewardOptionDTO.getRewardTypes();
-//                List<RewardType> rewardTypes = convertToRewardType(rewardTypeDTOs);
-//                rewardOption.setRewardTypes(rewardTypes);
-//
-//                rewardOptions.add(rewardOption);
-//            }
-//        }
-//        return rewardOptions;
-//    }
-
-
-
-
-
-
-    public RewardDTO getRewardById(Long rewardId) {
-        Optional<Reward> optionalReward = rewardRepository.findById(rewardId);
-        if (optionalReward.isEmpty()) {
-            throw new IllegalArgumentException("Reward not found with ID: " + rewardId);
-        }
-        Reward reward = optionalReward.get();
-        return modelMapper.map(reward, RewardDTO.class);
-    }
-
-    public List<RewardDTO> getRewardWithProjDateEndBeforeToday() {
-        List<Reward> rewards = rewardFindRepository.findRewardDatesAfter();
-
-        return rewards.stream()
-                .map(reward -> modelMapper.map(reward, RewardDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<RewardDTO> getRewardWithProjDateEndBefore() {
-        List<Reward> rewards = rewardFindRepository.findRewardDatesBefore();
-
-        return rewards.stream()
-                .map(reward -> modelMapper.map(reward, RewardDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<RewardDTO> getRewardWithProjDateStartEndBetween() {
-        List<Reward> rewards = rewardFindRepository.findRewardsBetweenDates();
-
-        return rewards.stream()
-                .map(reward -> modelMapper.map(reward, RewardDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<RewardTypeDTO> getRewardTypesByRewardId(Long rewardId) {
-        Reward reward = rewardRepository.findById(rewardId)
-                .orElseThrow(() -> new IllegalArgumentException("Reward not found with ID: " + rewardId));
-        List<RewardType> rewardTypes = reward.getRewardTypes();
-        return rewardTypes.stream()
-                .map(rewardType -> modelMapper.map(rewardType, RewardTypeDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public RewardTypeDTO getRewardTypeById(Long rewardTypeId) {
-        RewardType rewardType = rewardTypeRepository.findById(rewardTypeId)
-                .orElseThrow(() -> new IllegalArgumentException("Reward type not found with ID: " + rewardTypeId));
-        return modelMapper.map(rewardType, RewardTypeDTO.class);
-    }
-}

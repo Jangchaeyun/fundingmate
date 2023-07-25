@@ -15,22 +15,22 @@ import SwiperCore from "swiper";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function Banner() {
+function Banner(props) {
   const [banner, setBanner] = useState([]);
   SwiperCore.use([Autoplay]);
   useEffect(() => {
-    getAllBanner();
-  },[])
-  const getAllBanner = () => {
-    axios.get(`http://localhost:8080/bannerList`)
-        .then(res => {
-          //console.log(res.data);
-          setBanner([...res.data]);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-  }
+    setBanner(props.bannerData);
+  },[props.bannerData])
+  // const getAllBanner = () => {
+  //   axios.get(`http://localhost:8080/bannerList`)
+  //       .then(res => {
+  //         console.log(res.data);
+  //         setBanner([...res.data]);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       })
+  // }
   return (
     <div className="banner">
       <div className="banner-slide">
@@ -61,7 +61,7 @@ function Banner() {
         >
           {banner.length !== 0 && banner.map((banner,index) => {
               return (
-                  <SwiperSlide className="banner-slide">
+                  <SwiperSlide className="banner-slide" key={banner.id}>
                     <a href={banner.bn_link} className="banner-link">
                       <div className="banner-wrap" >
                           <div className="banner-info">

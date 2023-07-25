@@ -19,7 +19,6 @@ import java.util.Set;
 @Table(name = "reward_type")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"payments", "reward"})

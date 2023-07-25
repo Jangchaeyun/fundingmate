@@ -47,9 +47,9 @@
     right: -30px;
     z-index: 1;
 }
-.swiper-slide {
+/*.swiper-slide {
     overflow: hidden;
-}
+}*/
 .swiper-pagination {
     position: relative!important;
      text-align: left!important;
@@ -100,4 +100,13 @@
     font-size: 16px;
     width: 300px;
     height: 100px;
+}
+.bannerPrevNav, .bannerNextNav {
+    background: rgba(0,0,0,0.1);
+}
+.bannerNav svg {
+    scale: 0.8;
+}
+.bannerNav>span:hover {
+    background: rgba(0,0,0,0.3);
 }
