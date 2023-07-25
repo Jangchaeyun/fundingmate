@@ -265,6 +265,7 @@ const MakeReward5 = () => {
       })
       .catch((error) => {
         console.error(error);
+        alert("프로젝트를 완성해주세요.");
       });
   };
 
