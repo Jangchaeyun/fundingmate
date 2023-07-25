@@ -119,7 +119,7 @@ public class InvestmentServiceImpl implements InvestmentService {
             if(file!=null && !file.isEmpty()) {
                 File fileEntity = new File(file.getOriginalFilename());
                 fileRepository.save(fileEntity);
-                java.io.File destFile = new java.io.File(path+"/"+fileEntity);
+                java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
                 file.transferTo(destFile);
                 fileIds += fileEntity.getFileId()+",";
             }
