@@ -7,9 +7,7 @@ import { useParams } from "react-router";
 import moment from "moment";
 
 const Desc = ({ reward, totalPaymentAmount, personCount }) => {
-  const [imageSrc, setImageSrc] = useState(
-    reward.rewardRepImgSavedName.fileName
-  );
+  const [imageSrc, setImageSrc] = useState(reward.rewardRepImgSavedName);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getRemainingDays = () => {
@@ -25,6 +23,9 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
     setIsModalVisible(true);
   };
 
+  console.log("AAA");
+  console.log(reward.rewardContentImgSavedName);
+
   const hasProjDateEndPassed = moment(reward?.projDateEnd).isBefore(moment());
 
   return (
@@ -37,19 +38,19 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
             className="main_img"
           />
           <img
-            src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
-            className="sub_img2"
-            id={reward.rewardRepImgSavedName.fileName}
-            onClick={(e) => setImageSrc(reward.rewardRepImgSavedName.fileName)}
-          />
-          <img
-            src={`http://localhost:8080/img/${reward.rewardContentImgSavedName.fileName}`}
+            src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
             className="sub_img1"
-            id={reward.rewardContentImgSavedName.fileName}
-            onClick={(e) =>
-              setImageSrc(reward.rewardContentImgSavedName.fileName)
-            }
+            id={reward.rewardRepImgSavedName.fileName}
+            onClick={(e) => setImageSrc(reward.rewardRepImgSavedName)}
           />
+          {reward.rewardContentImgSavedName.map((filename, index) => (
+            <img
+              src={`http://localhost:8080/img/${filename}`}
+              className="sub_img2"
+              id={filename}
+              onClick={(e) => setImageSrc(filename)}
+            />
+          ))}
         </div>
         <div className="desc_content">
           <div className="fund_category">리워드</div>

@@ -3,6 +3,8 @@ import "../../../pages/Rewarddetail/Rewarddetail.css";
 import { Link, useParams } from "react-router-dom";
 import Desc from "../Desc/Desc";
 import axios from "axios";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
 
 const Story = () => {
   const [viewDesc, setViewDesc] = useState(false);
@@ -19,7 +21,14 @@ const Story = () => {
         .get(`http://localhost:8080/reward-detail/story/${rewardId}`)
         .then((res) => {
           console.log(res.data);
-          setTotInfo(res.data);
+          let receiveData = {
+            ...res.data,
+            rewardContentImgSavedName:
+              res.data.rewardContentImgSavedName.split(",")
+          };
+          setTotInfo(receiveData);
+          console.log(receiveData);
+
           setViewDesc(true);
         })
         .catch((err) => {
@@ -96,20 +105,21 @@ const Story = () => {
       </div>
       <div className="story_content">
         {totInfo && totInfo.projContent && totInfo.projContent.trim() !== "" ? (
-          <div dangerouslySetInnerHTML={{ __html: totInfo.projContent }} />
+          // <div dangerouslySetInnerHTML={{ __html: totInfo.projContent }} />
+          <Viewer initialValue={totInfo.projContent.trim()} />
         ) : (
           <div>No content available</div>
         )}
-        <div className="product_img">
+        {/* <div className="product_img">
           {totInfo?.rewardContentImgSavedName?.length > 0 &&
             totInfo.rewardContentImgSavedName.map((img, index) => (
               <img
                 key={index}
-                src={`http://localhost:8080/img/${img.fileName}`}
+                src={`http://localhost:8080/img/${img}`}
                 className="images"
               />
             ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
