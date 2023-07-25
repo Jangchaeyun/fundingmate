@@ -44,7 +44,7 @@ public class Reward {
 
     private String rewardContentImgSavedName; //파일번호 목록: 1,2,3
 
-    @Column(columnDefinition = "VARCHAR(9000)")
+    @Column(length = 100000)
     private String projContent;
 
     @Column(columnDefinition = "VARCHAR(1000)")
