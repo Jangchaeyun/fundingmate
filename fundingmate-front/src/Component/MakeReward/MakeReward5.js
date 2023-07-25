@@ -258,7 +258,7 @@ const MakeReward5 = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const rewardId = response.data.id;
+        const rewardId = response.data;
         setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
         navigateToStep2(`/reward-detail/story/${rewardId}`);
