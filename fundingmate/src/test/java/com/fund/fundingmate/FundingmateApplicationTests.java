@@ -74,22 +74,6 @@ class FundingmateApplicationTests {
 		MockitoAnnotations.openMocks(this);
 	}
 
-	@Test
-	void insertMember() {
-		User user = new User();
-
-		user.setBirthday("2009/09/15");
-		user.setEmail("kyle0915@naver.com");
-		user.setUserid("kyle0915");
-		user.setName("장예준");
-		user.setNotificationStatus("Y");
-		user.setPassword("852963");
-		user.setTel("010-0915-2009");
-		user.setVitalization(0);
-
-		userRepository.save(user);
-	}
-
 	/*@Test
 	void insertReward() {
 		Long targetUserId = 1L;
