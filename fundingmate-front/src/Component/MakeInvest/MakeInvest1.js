@@ -287,11 +287,11 @@ const MakeInvest1 = () => {
         <br />
         <br />
         <p className="custom-font-sub-title">
-          <b>프로젝트 키워드를 적어주세요</b>
+          <b>프로젝트 메이커명을 적어주세요</b>
         </p>
         <p className="custom-font-text">
-          <b style={{ color: "#E93232" }}>(선택사항)</b> 제목 외에도 키워드 검색
-          시 검색 결과에 프로젝트가 나타납니다.
+          {/* <b style={{ color: "#E93232" }}>(선택사항)</b>   */}
+          프로젝트에 노출될 메이커명 또는 기업명을 적어주세요.
         </p>
         <input
           type="text"
@@ -299,7 +299,7 @@ const MakeInvest1 = () => {
           className="input-box"
           value={totInfo.investProjKeyword}
           onChange={handleInputChange}
-          placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
+          // placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />
         <div className="button-top-margin"></div>
         <div className="investMake-button-div">
