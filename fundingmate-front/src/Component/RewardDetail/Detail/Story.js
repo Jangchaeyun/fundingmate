@@ -24,7 +24,7 @@ const Story = () => {
           let receiveData = {
             ...res.data,
             rewardContentImgSavedName:
-              res.data.rewardContentImgSavedName.split(",")
+              res.data.rewardContentImgSavedName.split(","),
           };
           setTotInfo(receiveData);
           console.log(receiveData);

@@ -17,6 +17,9 @@ const Contact = () => {
   const [replyData, setReplyData] = useState({});
   const [totalPaymentAmounts, setTotalPaymentAmounts] = useState({});
   const [personCount, setPersonCount] = useState(0);
+  const [rewardContentImgSavedName, setRewardContentImgSavedName] = useState(
+    []
+  );
 
   const submitInquiry = () => {
     if (!totInfo || !totInfo.id) {
@@ -129,6 +132,11 @@ const Contact = () => {
             fetchCommentReplies(comment.id);
           });
         }
+        if (Array.isArray(storyResponse.data.rewardContentImgSavedName)) {
+          setRewardContentImgSavedName(
+            storyResponse.data.rewardContentImgSavedName
+          );
+        }
       } catch (error) {
         console.log(error);
       }
@@ -176,6 +184,7 @@ const Contact = () => {
             reward={totInfo}
             totalPaymentAmount={totalPaymentAmounts[totInfo.id] || 0}
             personCount={personCount}
+            rewardContentImgSavedName={rewardContentImgSavedName}
           />
         </div>
       )}

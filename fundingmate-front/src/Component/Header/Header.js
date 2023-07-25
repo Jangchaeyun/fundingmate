@@ -80,7 +80,7 @@ function Header(props) {
                 <nav className="nav">
                     <ul className="nav-item">
                         <li><a href="">홈</a></li>
-                        <li><a href="">리워드</a></li>
+                        <li><a href="/reward">리워드</a></li>
                         <li><a href="">창업</a></li>
                         <li><a href="">창업정보</a></li>
                         <li><a href="">오픈예정</a></li>

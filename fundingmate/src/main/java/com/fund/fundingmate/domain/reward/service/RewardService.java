@@ -99,7 +99,10 @@ public class RewardService {
                 fileRepository.save(fileEntity);
                 java.io.File destFile = new java.io.File(path+"/"+fileEntity.getFileId());
                 file.transferTo(destFile);
-                fileIds += fileEntity.getFileId()+",";
+                fileIds += fileEntity.getFileId();
+                if (i < contentFiles.length - 1) {
+                    fileIds += ",";
+                }
             }
         }
         reword.setRewardContentImgSavedName(fileIds);
