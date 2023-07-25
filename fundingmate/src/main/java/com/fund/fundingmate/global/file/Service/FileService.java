@@ -2,7 +2,6 @@ package com.fund.fundingmate.global.file.Service;
 
 import com.fund.fundingmate.global.file.Repository.FileRepository;
 import com.fund.fundingmate.global.file.entity.File;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +21,7 @@ public class FileService {
     public static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @Autowired
-    public FileService(FileRepository fileRepository) {
+    public FileService(FileRepository fileRepository, FileService fileService) {
         this.fileRepository = fileRepository;
     }
 
@@ -43,6 +42,8 @@ public class FileService {
 
         return savedFile;
     }
+
+
 
     private List<File> saveMultipleFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<File> savedFiles = new ArrayList<>();

@@ -1,13 +1,9 @@
 package com.fund.fundingmate.domain.reward.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.entity.File;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -22,7 +18,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({ "rewardTypes" })
+@ToString
+@JsonIgnoreProperties(value = { "rewardTypes" })
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +41,7 @@ public class Reward {
 
     private String rewardContentImgSavedName; //파일번호 목록: 1,2,3
 
-    @Column(columnDefinition = "VARCHAR(9000)")
+    @Column(length = 100000)
     private String projContent;
 
     @Column(columnDefinition = "VARCHAR(1000)")

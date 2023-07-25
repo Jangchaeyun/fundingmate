@@ -1,7 +1,13 @@
 package com.fund.fundingmate.domain.reward.repository;
 
+import com.fund.fundingmate.domain.payment.entity.QPayment;
 import com.fund.fundingmate.domain.reward.entity.QReward;
+import com.fund.fundingmate.domain.reward.entity.QRewardType;
 import com.fund.fundingmate.domain.reward.entity.Reward;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,9 +26,9 @@ public class RewardFindRepository {
         QReward reward = QReward.reward;
         LocalDate currentDate = LocalDate.now();
         return jpaQueryFactory.selectFrom(reward)
-                .where(reward.projDateStart.before(currentDate)
-                        .and(reward.projDateEnd.after(currentDate)
-                                .or(reward.projDateEnd.eq(currentDate))))
+                .where(reward.projDateStart.before(Date.valueOf(currentDate))
+                        .and(reward.projDateEnd.after(Date.valueOf(currentDate))
+                                .or(reward.projDateEnd.eq(Date.valueOf(currentDate)))))
                 .fetch();
     }
 
@@ -30,7 +36,7 @@ public class RewardFindRepository {
         QReward reward = QReward.reward;
         LocalDate currentDate = LocalDate.now();
         return jpaQueryFactory.selectFrom(reward)
-                .where(reward.projDateEnd.before(currentDate))
+                .where(reward.projDateEnd.before(Date.valueOf(currentDate)))
                 .fetch();
     }
 
@@ -38,7 +44,10 @@ public class RewardFindRepository {
         QReward reward = QReward.reward;
         LocalDate currentDate = LocalDate.now();
         return jpaQueryFactory.selectFrom(reward)
-                .where(reward.projDateStart.after(currentDate))
+                .where(reward.projDateStart.after(Date.valueOf(currentDate)))
                 .fetch();
     }
+
+
+
 }

@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes, useLocation} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
 import FindIdPw from "./pages/Login/FindIdPw";

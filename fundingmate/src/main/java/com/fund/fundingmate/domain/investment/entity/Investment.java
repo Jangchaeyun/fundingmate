@@ -64,7 +64,7 @@ public class Investment {
     @Column(columnDefinition = "VARCHAR(600)")
     private String investItemBenefit;
 
-    @Column(columnDefinition = "VARCHAR(9000)")
+    @Column(length = 100000)
     private String investProjContent;
 
     private Long investIdBusinessLicenseImgSavedName;

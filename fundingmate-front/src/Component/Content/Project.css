@@ -1,6 +1,7 @@
 .container {
-    width: 1080px;
+    max-width: 1080px;
     margin: 0 auto;
+    min-width: 700px;
 
 }
 .content {
@@ -10,18 +11,37 @@
     margin: 20px;
     font-weight: bold;
 }
+.content-title>a {
+    float: right;
+    color: #D2D2D2;
+    font-size: 14px;
+}
+.content-title>a:hover {
+    color: #999999;
+}
 .content-item-list {
-    width: 300px;
+    box-sizing: border-box;
     height: 350px;
+
+    padding: 10px;
+}
+.content-proj {
+    position: relative;
+}
+.content-slide{
     border: 1px solid #eaebed;
+    box-sizing: border-box;
 }
 .content-item-list-link {
-    display: inline-block;
+    display: block;
+}
+.content-item-list-link:hover .content-item-img {
+    transform: scale(1.09);
 }
 .content-item-img {
-    width: 280px;
-    height: 150px;
-    margin: 10px;
+    max-width: 100%;
+    height: auto;
+    /*margin: 10px;*/
 }
 .prevNav, .nextNav {
     color: #14B8FF;
@@ -36,19 +56,24 @@
     right: 0;
 }
 .content-item {
-    padding: 10px;
+    /*padding: 10px;*/
 }
 .fdrate {
     color: #14B8FF;
     font-weight: bold;
 }
 .fdprice {
+    font-size: 12px;
     margin-left: 5px;
     color: #9b9b9b;
 }
 .dday {
+    background: #14B8FF;
+    border-radius: 2px;
+    color: white;
+    font-size: 10px;
     float: right;
-    color: #9b9b9b;
+    padding: 2px;
 }
 .proN {
     padding: 10px 0;
@@ -62,8 +87,11 @@
 .fundGo {
     text-align: center;
     color: #9b9b9b;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .Commingsoon {
     color: #14B8FF;
+}
+.content .swiper {
+    max-width: 1020px;
 }
