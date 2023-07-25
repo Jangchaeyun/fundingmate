@@ -1,3 +1,4 @@
+
 package com.fund.fundingmate.domain.reward.service;
 
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
@@ -46,15 +47,16 @@ public class RewardCommentService {
     }
 
     public RewardCommentDTO getRewardCommentByRewardId(Long rewardId) {
+        if (rewardId == null) {
+            throw new IllegalArgumentException("Reward ID must not be null");
+        }
+
         RewardComment rewardComment = rewardCommentRepository.findById(rewardId)
                 .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + rewardId));
 
-        RewardCommentDTO rewardCommentDTO = mapToRewardCommentDTO(rewardComment);
-        rewardCommentDTO.setComRegistrationDate(rewardComment.getComRegistrationDate());
-        rewardCommentDTO.setComContent(rewardComment.getComContent());
-
-        return rewardCommentDTO;
+        return mapToRewardCommentDTO(rewardComment);
     }
+
 
     private RewardCommentDTO mapToRewardCommentDTO(RewardComment rewardComment) {
         RewardCommentDTO rewardCommentDTO = new RewardCommentDTO();
@@ -66,7 +68,17 @@ public class RewardCommentService {
         rewardCommentDTO.setUser(mapToUserDTO(rewardComment.getUser()));
         rewardCommentDTO.setReplies(mapToRewardReplyDTOList(rewardComment.getReplies()));
 
-        return  rewardCommentDTO;
+        return rewardCommentDTO;
+    }
+
+    public void updateRewardComment(Long commentId, String updatedContent) {
+        RewardComment rewardComment = rewardCommentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Reward Comment not found with ID: " + commentId));
+
+        rewardComment.setComContent(updatedContent);
+        rewardComment.setComRevisionDate(LocalDate.now());
+
+        rewardCommentRepository.save(rewardComment);
     }
 
     private RewardDTO mapToRewardDTO(Reward reward) {
@@ -76,11 +88,8 @@ public class RewardCommentService {
         rewardDTO.setProjTargetAmount(reward.getProjTargetAmount());
         rewardDTO.setProjDateStart(reward.getProjDateStart());
         rewardDTO.setProjDateEnd(reward.getProjDateEnd());
-        rewardDTO.setDeliveryDate(reward.getDeliveryDate());
-        rewardDTO.setRepFile(mapToFileDTO(reward.getRepfile()));
         rewardDTO.setProjKeyWord(reward.getProjKeyWord());
         rewardDTO.setRewardVideoAddress(reward.getRewardVideoAddress());
-        rewardDTO.setConFile(mapToFileDTO(reward.getConfile()));
         rewardDTO.setProjContent(reward.getProjContent());
         rewardDTO.setRewardRefundExchangePolicy(reward.getRewardRefundExchangePolicy());
         rewardDTO.setRewardContact(reward.getRewardContact());
@@ -91,12 +100,10 @@ public class RewardCommentService {
         rewardDTO.setManufacturer(reward.getManufacturer());
         rewardDTO.setRewardLaw(reward.getRewardLaw());
         rewardDTO.setAsPhoneNumber(reward.getAsPhoneNumber());
-        rewardDTO.setBusinessImg(mapToFileDTO(reward.getBusinessImg()));
         rewardDTO.setBusinessAddress(reward.getBusinessAddress());
         rewardDTO.setBank(reward.getBank());
         rewardDTO.setAccNumber(reward.getAccNumber());
         rewardDTO.setDepositorName(reward.getDepositorName());
-        rewardDTO.setBankImg(mapToFileDTO(reward.getBankImg()));
         rewardDTO.setTaxBillEmail(reward.getTaxBillEmail());
         rewardDTO.setWebsiteUrl(reward.getWebsiteUrl());
         rewardDTO.setFacebookUrl(reward.getFacebookUrl());
@@ -105,6 +112,16 @@ public class RewardCommentService {
         rewardDTO.setTwitterUrl(reward.getTwitterUrl());
         rewardDTO.setUser(mapToUserDTO(reward.getUser()));
         rewardDTO.setRewardTypes(mapToRewardTypeDTOList(reward.getRewardTypes()));
+
+//        rewardDTO.setRewardRepImgSavedName(mapToFileDTO(reward.getRewardRepImgSavedName()));
+//        rewardDTO.setRewardContentImgSavedName(new ArrayList<>());
+//        List<File> fileList = reward.getRewardContentImgSavedName();
+//        for(File file : fileList) {
+//            rewardDTO.getRewardContentImgSavedName().add(mapToFileDTO(file));
+//        }
+//        rewardDTO.setRewardIdBusinessLicenseImgSavedName(mapToFileDTO(reward.getRewardIdBusinessLicenseImgSavedName()));
+//        rewardDTO.setRewardBankAccountCopyImgSavedName(mapToFileDTO(reward.getRewardBankAccountCopyImgSavedName()));
+
         return rewardDTO;
     }
 
@@ -113,6 +130,16 @@ public class RewardCommentService {
 
         return rewardComments.stream()
                 .map(this::mapToRewardCommentDTO)
+                .collect(Collectors.toList());
+    }
+
+    private List<FileDTO> mapToFileDTOList(List<File> files) {
+        if (files == null) {
+            return null;
+        }
+
+        return files.stream()
+                .map(this::mapToFileDTO)
                 .collect(Collectors.toList());
     }
 
@@ -149,6 +176,7 @@ public class RewardCommentService {
         return fileDTO;
     }
 
+
     private RewardReplyDTO mapToRewardReplyDTO(RewardReply rewardReply) {
         RewardReplyDTO rewardReplyDTO = new RewardReplyDTO();
         rewardReplyDTO.setId(rewardReply.getId());
@@ -169,15 +197,27 @@ public class RewardCommentService {
         RewardDTO rewardDTO = rewardCommentDTO.getReward();
         UserDTO userDTO = rewardCommentDTO.getUser();
 
-        Optional<Reward> rewardOptional = rewardRepository.findById(rewardDTO.getId());
+
+        if (rewardDTO == null) {
+            throw new IllegalArgumentException("RewardDTO is null");
+        }
+
+        if (userDTO == null) {
+            throw new IllegalArgumentException("UserDTO is null");
+        }
+
+        Long rewardId = rewardDTO.getId();
+        Long userId = userDTO.getId();
+
+        Optional<Reward> rewardOptional = rewardRepository.findById(rewardId);
         if (rewardOptional.isEmpty()) {
-            throw new IllegalArgumentException("Reward not found with ID: " + rewardDTO.getId());
+            throw new IllegalArgumentException("Reward not found with ID: " + rewardId);
         }
         Reward reward = rewardOptional.get();
 
-        Optional<User> userOptional = userRepository.findById(userDTO.getId());
+        Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
-            throw  new IllegalArgumentException("User not founr with ID: " + userDTO.getId());
+            throw  new IllegalArgumentException("User not founr with ID: " + userId);
         }
 
         User user = userOptional.get();

@@ -9,6 +9,7 @@ import "dayjs/locale/zh-cn";
 import dayjs from "dayjs";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
@@ -32,25 +33,28 @@ const MakeReward1 = () => {
       }
     } else {
       setTotInfo({
+        id: 0,
         rewardCategory: "",
         projTargetAmount: 0,
         projName: "",
-        imageFile: null,
-        projKeyword: "",
+        rewardRepImg: null,
+        projKeyWord: "",
         projDateStart: "",
         projDateEnd: "",
-        inputs: [{ id: nanoid(), url: "" }],
-        projImages: [],
+        rewardContentImg: [],
         projContent: "",
         cards: [],
+        rewardVideoAddress: "",
         rewardRefundExchangePolicy: "",
+
         rewardContact: "",
         rewardEmail: "",
         modelName: "",
         rewardLaw: "",
         countryOfOrigin: "",
         manufacturer: "",
-        asPhonenumber: "",
+        asPhoneNumber: "",
+
         businessAddress: "",
         bank: "",
         accNumber: "",
@@ -61,11 +65,24 @@ const MakeReward1 = () => {
         instagramUrl: "",
         blogUrl: "",
         twitterUrl: "",
-        rewardIdBusinessLicenseImgSavedName: null,
-        rewardBankAccountCopyImgSavedName: null
+
+        rewardBusinessLicenseImg: null,
+        rewardBankAccountCopyImg: null
       });
     }
   }, []);
+
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
 
   const handleInputChange = (e) => {
     setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
@@ -93,7 +110,8 @@ const MakeReward1 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, imageFile: file });
+      setTotInfo({ ...totInfo, rewardRepImg: file });
+      //uploadImageToServer(file);
     }
   };
 
@@ -267,19 +285,19 @@ const MakeReward1 = () => {
         <br />
         <br />
         <p className="custom-font-sub-title">
-          <b>프로젝트 키워드를 적어주세요</b>
+          <b>프로젝트 메이커명을 적어주세요</b>
         </p>
         <p className="custom-font-text">
-          <b style={{ color: "#E93232" }}>(선택사항)</b> 제목 외에도 키워드 검색
-          시 검색 결과에 프로젝트가 나타납니다.
+          {/* <b style={{ color: "#E93232" }}>(선택사항)</b> */}
+          프로젝트에 노출될 메이커명 또는 기업명을 적어주세요.
         </p>
         <input
           type="text"
-          name="projKeyword"
+          name="projKeyWord"
           className="input-box"
-          value={totInfo.projKeyword}
+          value={totInfo.projKeyWord}
           onChange={handleInputChange}
-          placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
+          // placeholder="키워드, 키워드, 키워드, 키워드, 키워드"
         />
         <div className="button-top-margin"></div>
         <div className="investMake-button-div">

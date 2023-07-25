@@ -1,18 +1,18 @@
 // components/Layout/Header/Header.tsx
-import "./Header.css";
-import { SearchOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-function Header() {
+import "./Header.css"
+import {BellOutlined, LogoutOutlined, SearchOutlined} from "@ant-design/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import axios from "axios";
+function Header(props) {
   const token = useSelector((state) => state.Authorization);
   const userid = useSelector((state) => state.UserId);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const [keyword, setKeyword] = useState(state ? state : "");
-
+  const [keyword, setKeyword] = useState(props.word);
+  const [reward, setReward] = useState([])
   const logout = () => {
     dispatch({ type: "NEWTOKEN", payload: "" });
     dispatch({ type: "USERID", payload: "" });
@@ -22,73 +22,80 @@ function Header() {
     // isLoggedIn 상태 변경
     setIsLoggedIn(false);
 
-    document.location.href = "/";
-  };
-  const searchSubmit = () => {
-    if (keyword === "") {
-      document.getElementById("keyword").focus();
-      return;
+        document.location.href="/login";
     }
-    navigate("/search", { state: keyword });
-  };
-  return (
-    <header className="header">
-      <div className="header-wrap">
-        <div className="hTop">
-          <span className="hlogo">
-            <a href="/" className="hlogoL">
-              LOGO
-            </a>
-          </span>
-          <span className="hTopMenu">
-            {(token == "" || token == undefined) && (
-              <span>
-                <a href="login">로그인</a>
-              </span>
-            )}
-            <b>{userid}</b>&nbsp;&nbsp;
-            {userid != "" && <Link onClick={logout}>로그아웃</Link>}
-            <span>
-              <a href="rewardfund">프로젝트 만들기</a>
-            </span>
-          </span>
-        </div>
-        <nav className="nav">
-          <ul className="nav-item">
-            <li>
-              <a href="">홈</a>
-            </li>
-            <li>
-              <a href="">리워드</a>
-            </li>
-            <li>
-              <a href="">창업</a>
-            </li>
-            <li>
-              <a href="">창업정보</a>
-            </li>
-            <li>
-              <a href="">오픈예정</a>
-            </li>
-          </ul>
-          <form onSubmit={searchSubmit} className="searchF">
-            <input
-              type="text"
-              id="keyword"
-              className="nav-search float-r"
-              placeholder="프로젝트 명/기업 명"
-              maxLength="10"
-              onInput={(e) => {
-                setKeyword(e.target.value);
-              }}
-              autoComplete="off"
-            />
-          </form>
-          <SearchOutlined className="nav-search-btn" onClick={searchSubmit} />
-        </nav>
-      </div>
-    </header>
-  );
+    const searchSubmit = () => {
+        if(keyword === ''){
+            document.getElementById("keyword").focus();
+            return;
+        }
+        // axios.get(`http://localhost:8080/search?word=${keyword}`)
+        //     .then(res => {
+        //         console.log("성공");
+        //         console.log(res);
+        //         const resData = res.data;
+        //         const addData = resData.map(item => {
+        //             const projDateEnd = new Date(item.projDateEnd);
+        //             const today = new Date();
+        //             const differenceInTime = Math.abs(projDateEnd.getTime() - today.getTime());
+        //             const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24)-1);
+        //             const formattedAmount = item.projTargetAmount.toLocaleString(); // 기본 로케일과 기본 숫자 포맷 사용
+        //             console.log(differenceInDays);
+        //             // item 객체와 차이를 추가하여 새로운 객체를 만듦
+        //             return { ...item, differenceInDays, formattedAmount };
+        //         });
+        //         setReward(addData);
+        //         let list = res.data.list;
+        //         setReward([...list])
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        navigate(`/search?word=${keyword}`,{state:{word:keyword,list:reward}});
+    }
+    return (
+        <header className="header">
+            <div className="header-wrap">
+                <div className="hTop">
+                    <span className="hlogo">
+                        <a href="/" className="hlogoL logo">FundingMate</a>
+                    </span>
+                    <span className="hTopMenu">
+                        {(token==''||token==undefined) &&<><a href="login">로그인</a><a href="join">회원가입</a></>}
+
+                        {/*<b className="userName">{userid}</b>*/}
+                        {userid!=''&&<>
+                        <a href="#" className="myPageLink">
+                            <img src={require(`../../assets/images/defaultImg.jpg`)} alt="" className="myPageImg"/>
+                        </a>
+                        <a href="#" className="noti">
+                            <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>
+                        </a>
+                        <Link onClick={logout}>
+                            로그아웃
+                        </Link></>}
+                        <a href="rewardfund" className="projAdd">프로젝트 만들기</a>
+                    </span>
+                </div>
+                <nav className="nav">
+                    <ul className="nav-item">
+                        <li><a href="">홈</a></li>
+                        <li><a href="/reward">리워드</a></li>
+                        <li><a href="">창업</a></li>
+                        <li><a href="">창업정보</a></li>
+                        <li><a href="">오픈예정</a></li>
+                    </ul>
+                    <span className="searchForm">
+                        <form onSubmit={searchSubmit} className="searchF">
+                            <input type="text" id="keyword"  className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} value={keyword} autoComplete="off"/>
+                        </form>
+                        <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
+                    </span>
+                </nav>
+            </div>
+
+        </header>
+    )
 }
 
-export default Header;
+export default Header

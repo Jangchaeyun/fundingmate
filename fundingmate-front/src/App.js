@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes, useLocation} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
 import FindIdPw from "./pages/Login/FindIdPw";
@@ -239,7 +239,11 @@ function App() {
                 <Routes>
                   <Route exact path="/myPage" element={<MyPage />} />
                   <Route exact path="/myPageForFounder" element={<Founder />} />
-                  <Route exact path="/myPageForInvestor" element={<Investor />} />
+                  <Route
+                    exact
+                    path="/myPageForInvestor"
+                    element={<Investor />}
+                  />
                 </Routes>
                 {/* My Page */}
 

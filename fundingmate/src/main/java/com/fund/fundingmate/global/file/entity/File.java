@@ -21,21 +21,25 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
 
-    @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
-    private List<Reward> fundingimg;
+//    @OneToMany(mappedBy = "repfile", cascade = CascadeType.ALL)
+//    private List<Reward> fundingimg;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reward_id")
+    private Reward reward;
 
     private String fileName;
-//
-//    private String filePath;
-//
-//    private String fileOriginalName;
-//
-//    private String fileSize;
-//
+    private String fileClassification;
+    private String fileOriginalName;
+    private String fileSavedName;
+    private String filePath;
+    private String fileSize;
+
 
 
     private Date fileRegistrationDate;
 
-
+    public File(String fileName) {
+        this.fileName = fileName;
+    }
 }

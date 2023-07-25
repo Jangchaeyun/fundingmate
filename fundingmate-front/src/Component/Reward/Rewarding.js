@@ -12,53 +12,12 @@ const Rewarding = () => {
 
   useEffect(() => {
     fetchRewardingRewards();
-    fetchPaymentAmount();
-  }, [visibleRewards]);
-
-  useEffect(() => {
-    const fetchRewardingRewardsAndPaymentAmount = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/reward/find/rewarding/more",
-          {
-            params: {
-              startIndex: 0,
-              endIndex: visibleRewards,
-            },
-          }
-        );
-
-        setRewardingRewards(response.data);
-        setShowLoadMoreButton(response.data.length >= visibleRewards);
-
-        // Fetch payment amounts for all rewarding rewards
-        const rewardIds = response.data.map((reward) => reward.id);
-        const paymentResponse = await axios.get(
-          "http://localhost:8080/payment/total-amount-same-rewards",
-          {
-            params: {
-              rewardIds: rewardIds.join(","),
-            },
-          }
-        );
-
-        // Update paymentAmountsData with the new payment amounts
-        setPaymentAmountsData(paymentResponse.data);
-      } catch (error) {
-        console.error(
-          "Error fetching rewarding rewards and payment amounts:",
-          error
-        );
-      }
-    };
-
-    fetchRewardingRewardsAndPaymentAmount();
   }, [visibleRewards]);
 
   const fetchRewardingRewards = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8090/reward/find/rewarding/more",
+        "http://localhost:8080/reward/find/rewarding/more",
         {
           params: {
             startIndex: 0,
@@ -67,16 +26,24 @@ const Rewarding = () => {
         }
       );
 
-      setRewardingRewards(response.data);
-      setShowLoadMoreButton(response.data.length >= visibleRewards);
+      const rewardingRewardsData = response.data;
+      setRewardingRewards((prevRewards) => [
+        ...prevRewards,
+        ...rewardingRewardsData,
+      ]);
+      setShowLoadMoreButton(rewardingRewardsData.length >= 4);
     } catch (error) {
       console.error("Error fetching rewarding rewards:", error);
     }
   };
 
-  const fetchPaymentAmount = async () => {
+  useEffect(() => {
+    const rewardIds = rewardingRewards.map((reward) => reward.id);
+    fetchPaymentAmount(rewardIds);
+  }, [rewardingRewards]);
+
+  const fetchPaymentAmount = async (rewardIds) => {
     try {
-      const rewardIds = rewardingRewards.map((reward) => reward.id);
       const response = await axios.get(
         "http://localhost:8080/payment/total-amount-same-rewards",
         {
@@ -85,35 +52,19 @@ const Rewarding = () => {
           },
         }
       );
+
       setPaymentAmountsData(response.data);
     } catch (error) {
       console.error("Error fetching payment amounts:", error);
     }
   };
 
-  const loadMoreRewards = async () => {
-    const nextVisibleRewards = visibleRewards + 4;
-    try {
-      const response = await axios.get(
-        "http://localhost:8090/reward/find/rewarding/more",
-        {
-          params: {
-            startIndex: visibleRewards,
-            endIndex: nextVisibleRewards,
-          },
-        }
-      );
-      const nextRewards = response.data;
-      setRewardingRewards((prevRewards) => [...prevRewards, ...nextRewards]);
-      setVisibleRewards(nextVisibleRewards);
-      setShowLoadMoreButton(nextRewards.length >= 4);
-    } catch (error) {
-      console.error("Error loading more rewards:", error);
-    }
-  };
-
   const handleRewardClick = (rewardId) => {
     navigate(`/reward-detail/story/${rewardId}`);
+  };
+
+  const loadMoreRewards = () => {
+    setVisibleRewards((prevVisibleRewards) => prevVisibleRewards + 4);
   };
 
   const numVisibleRewards = Math.min(visibleRewards, rewardingRewards.length);
@@ -133,7 +84,7 @@ const Rewarding = () => {
             onClick={() => handleRewardClick(reward.id)}
           >
             <img
-              src={`http://localhost:8080/img/${reward.repFile.fileName}`}
+              src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
               className="reward_img"
               alt={reward.projName}
             />

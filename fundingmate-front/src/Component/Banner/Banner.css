@@ -1,12 +1,31 @@
 .banner {
     /*height: 400px;*/
+    -ms-user-select: none;
+    /*-moz-user-select: -moz-none;*/
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .banner-slide {
 }
 .banner-img {
     width: 100%;
     height: 400px;
+    object-fit: cover;
+    object-position: center;
 }
+/*@media only screen and (max-width: 1440px) {*/
+/*    .banner-img {*/
+/*        width: 1920px;*/
+/*        background-size: 1736px 380px;*/
+/*    }*/
+/*}*/
+/*@media only screen and (max-width: 1919px) {*/
+/*    .banner-img  {*/
+/*        width: 1920px;*/
+/*        background-size: 1736px 380px;*/
+/*    }*/
+/*}*/
 .banner-slide-swiper>.swiper-button-prev {
     margin-left: 20px;
 }
@@ -14,31 +33,80 @@
     margin-right: 20px;
 }
 
+.bannerNav {
+    position: relative;
+}
+.bannerPrevNav, .bannerNextNav {
+    color: #14B8FF;
+    font-size: 30px;
+}
+.bannerNav {
+    width: 1080px;
+    margin: 0 auto;
+    top: -100px;
+    right: -30px;
+    z-index: 1;
+}
+/*.swiper-slide {
+    overflow: hidden;
+}*/
+.swiper-pagination {
+    position: relative!important;
+     text-align: left!important;
+    margin: 0 0 10px 100px;
+    transition: .3s opacity;
+    transform: translate3d(0,0,0);
+    z-index: 10;
+    width: 1080px!important;;
+    margin: 0 auto!important;;
+}
 .banner-pagination {
     border: 1px solid #14B8FF;
     border-radius: 20px;
     padding: 5px;
     display: inline-block;
     width: 50px;
+    text-align: center;
+    position: relative;
+    top: -60px;
+    right: -100px;
+}
+.banner-info {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
+.banner-wrap {
+    width: 1080px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transition: translate(0, -36%);
+    transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 1080px) {
+    .banner-wrap {
+        width: auto;
+        left: 0;
+    }
+}
+.banner-title {
+    font-size: 24px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+.banner-content {
+    font-size: 16px;
+    width: 300px;
+    height: 100px;
 }
 .bannerPrevNav, .bannerNextNav {
-    color: #14B8FF;
-    top: 300px;
-    font-size: 30px;
-    z-index: 5;
+    background: rgba(0,0,0,0.1);
 }
-.bannerPrevNav {
-    position: absolute;
+.bannerNav svg {
+    scale: 0.8;
 }
-.bannerNextNav {
-    float: right;
-    position: relative;
-    top: -202px;
-}
-.bannerNav {
-    width: 1080px;
-    margin: 0 auto;
-}
-.swiper-slide {
-    overflow: hidden;
+.bannerNav>span:hover {
+    background: rgba(0,0,0,0.3);
 }

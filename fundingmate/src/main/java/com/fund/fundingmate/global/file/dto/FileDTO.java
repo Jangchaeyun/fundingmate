@@ -1,5 +1,6 @@
 package com.fund.fundingmate.global.file.dto;
 
+import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,14 +15,6 @@ import java.util.Date;
 public class FileDTO {
     private Long fileId;
     private String fileName;
-//    private String fileSavedName;
-//    private String fileOriginalName;
-//    private String filePath;
-//    private String fileSize;
-
-
     private Date fileRegistrationDate;
-
-
-
+    private RewardDTO reward;
 }

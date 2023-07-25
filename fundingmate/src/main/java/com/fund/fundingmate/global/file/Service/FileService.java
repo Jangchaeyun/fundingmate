@@ -1,16 +1,12 @@
 package com.fund.fundingmate.global.file.Service;
 
 import com.fund.fundingmate.global.file.Repository.FileRepository;
-import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -21,11 +17,11 @@ import java.util.List;
 @Service
 public class FileService {
     private final FileRepository fileRepository;
-
-    private static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+  
+    public static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
 
     @Autowired
-    public FileService(FileRepository fileRepository) {
+    public FileService(FileRepository fileRepository, FileService fileService) {
         this.fileRepository = fileRepository;
     }
 
@@ -38,6 +34,7 @@ public class FileService {
         file.getParentFile().mkdirs();
 
         Path destination = file.toPath();
+        Files.copy(multipartFile.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
         File savedFile = new File();
         savedFile.setFileName(filsSavedName);
@@ -46,6 +43,17 @@ public class FileService {
         return savedFile;
     }
 
+
+
+    private List<File> saveMultipleFiles(List<MultipartFile> multipartFiles) throws IOException {
+        List<File> savedFiles = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            File savedFile = saveFile(null, multipartFile);
+            fileRepository.save(savedFile);
+            savedFiles.add(savedFile);
+        }
+        return savedFiles;
+    }
 
     private String genetateUniqueFileName(String originalFilename) {
         long timestamp = System.currentTimeMillis();

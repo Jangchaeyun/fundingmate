@@ -42,7 +42,7 @@ const MakeInvest5 = () => {
   const [selectedImage2, setSelectedImage2] = useState(null);
 
   useEffect(() => {
-    let file = totInfo.investIdBusinessLicenseImgSavedName;
+    let file = totInfo.investBusinessLicenseImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -50,7 +50,7 @@ const MakeInvest5 = () => {
       };
       reader.readAsDataURL(file);
     }
-    file = totInfo.investBankAccountCopyImgSavedName;
+    file = totInfo.investBankAccountCopyImg;
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -71,7 +71,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, investIdBusinessLicenseImgSavedName: file });
+      setTotInfo({ ...totInfo, investBusinessLicenseImg: file });
     }
   };
 
@@ -90,7 +90,7 @@ const MakeInvest5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, investBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, investBankAccountImg: file });
       console.log(file.src);
     }
   };
@@ -127,71 +127,71 @@ const MakeInvest5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-invest/typelist", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeInvestTypelist", { state: { totInfo: totInfo } });
   };
   const userId = useSelector((state) => state.Id);
   // const [userId, setUserId] = useState(null);
   // const { id, ...requestData } = totInfo;
   const handleNextStep = () => {
-    // console.log(totInfo);
-    // console.log(totInfo.cards);
-    // console.log(totInfo.cards.join(","));
-    // const investTypes = [];
-    // investTypes = totInfo.cards[0].join(",");
-    // console.log(investTypes);
-    const convertToFilesDTO = (files) => {
-      if (files.length === 0) {
-        return null; // 빈 배열인 경우 null로 설정
-      }
-      return {
-        fileId: null,
-        fileName: files[0].name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null
-        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
-      };
-    };
+    let formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("investCategory", totInfo.investCategory);
+    formData.append("investTargetAmount", totInfo.investTargetAmount);
+    formData.append("investProjName", totInfo.investProjName);
+    formData.append("investProjKeyword", totInfo.investProjKeyword);
+    formData.append("investProjDateStart", totInfo.investProjDateStart);
+    formData.append("investProjDateEnd", totInfo.investProjDateEnd);
+    formData.append("investVideoUrl", totInfo.investVideoUrl);
+    formData.append("investProjContent", totInfo.investProjContent);
+    formData.append("cards", JSON.stringify(totInfo.cards));
+    formData.append("businessAddress", totInfo.businessAddress);
+    formData.append("bank", totInfo.bank);
+    formData.append("accNumber", totInfo.accNumber);
+    formData.append("depositorName", totInfo.depositorName);
+    formData.append("taxBillEmail", totInfo.taxBillEmail);
+    formData.append("websiteUrl", totInfo.websiteUrl);
+    formData.append("facebookUrl", totInfo.facebookUrl);
+    formData.append("instagramUrl", totInfo.instagramUrl);
+    formData.append("blogUrl", totInfo.blogUrl);
+    formData.append("twitterUrl", totInfo.twitterUrl);
+    formData.append("useOfFunds", totInfo.useOfFunds);
+    formData.append("useOfFundsDateStart", totInfo.useOfFundsDateStart);
+    formData.append("useOfFundsDateEnd", totInfo.useOfFundsDateEnd);
+    formData.append("rateOfReturn", totInfo.rateOfReturn);
+    formData.append("expectedPaymentDate", totInfo.expectedPaymentDate);
+    formData.append("repaymentMethod", totInfo.repaymentMethod);
+    formData.append("investItemIntro", totInfo.investItemIntro);
+    formData.append("investItemBusinessValue", totInfo.investItemBusinessValue);
+    formData.append("investItemValue", totInfo.investItemValue);
+    formData.append("investItemBenefit", totInfo.investItemBenefit);
+    formData.append("investEmail", totInfo.investEmail);
 
-    const convertToOneFilesDTO = (files) => {
-      if (!files || files.length === 0) {
-        return null; // 파일이 없는 경우 null로 설정
-      }
+    formData.append("investRepImg", totInfo.investRepImg);
+    for (let i = 0; i <= totInfo.investContentImg.length; i++) {
+      formData.append("investContentImg", totInfo.investContentImg[i]);
+    }
+    formData.append(
+      "investBusinessLicenseImg",
+      totInfo.investBusinessLicenseImg
+    );
+    formData.append("investBankAccountImg", totInfo.investBankAccountImg);
 
-      return {
-        fileId: null,
-        fileName: files.name, // 첫 번째 파일의 이름 사용
-        fileRegistrationDate: null
-        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
-      };
-    };
-
-    const requestData = {
-      ...totInfo,
-      investTypes: totInfo.cards, // cards 필드를 investTypes로 할당
-      investContentImgSavedName: convertToFilesDTO(
-        totInfo.investContentImgSavedName
-      ), // investContentImgSavedName 필드를 배열로 변환하여 할당
-      investRepImgSavedName: convertToOneFilesDTO(
-        totInfo.investRepImgSavedName
-      ),
-      investIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.investIdBusinessLicenseImgSavedName
-      ),
-      investBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.investBankAccountCopyImgSavedName
-      )
-    };
-
+    console.log(totInfo);
+    console.log(formData.get("investRepImg"));
+    console.log(formData.get("investContentImg")[0]);
+    console.log(formData.get("investContentImg")[1]);
     axios
-      .post("http://localhost:8080/makeInvestHostinfo", requestData, {
-        params: { userId: userId }
+      .post("http://localhost:8080/makeInvestHostinfo", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       }) // 액시오 요청 보내기
       .then((response) => {
         console.log(response.data); // 요청 성공 시 처리할 로직
+        const investId = response.data;
         // const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
-        navigateToStep2("/fund-detail/story", {
-          state: { totInfo: totInfo }
-        });
+        navigateToStep2(`/fund-detail/story/${investId}`);
       })
       .catch((error) => {
         console.error(error); // 요청 실패 시 처리할 로직

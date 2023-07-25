@@ -3,7 +3,7 @@ import "./Footer.css"
 function Footer() {
     return (
         <footer className="footer">
-            <div className="f-logo">LOGO</div>
+            <div className="f-logo logo">FundingMate</div>
             <div className="f-title">투자위험고지</div>
             <div className="f-content">
                 <div>창업 투자는 원금 손실과 유동성 및 현금성에 대한 투자위험을 가지고 있습니다.</div>
