@@ -6,7 +6,12 @@ import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
 import moment from "moment";
 
-const Desc = ({ reward, totalPaymentAmount, personCount }) => {
+const Desc = ({
+  reward,
+  totalPaymentAmount,
+  personCount,
+  rewardContentImgSavedName,
+}) => {
   const [imageSrc, setImageSrc] = useState(reward.rewardRepImgSavedName);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -43,14 +48,16 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
             id={reward.rewardRepImgSavedName.fileName}
             onClick={(e) => setImageSrc(reward.rewardRepImgSavedName)}
           />
-          {reward.rewardContentImgSavedName.map((filename, index) => (
-            <img
-              src={`http://localhost:8080/img/${filename}`}
-              className="sub_img2"
-              id={filename}
-              onClick={(e) => setImageSrc(filename)}
-            />
-          ))}
+          {Array.isArray(reward.rewardContentImgSavedName) &&
+            reward.rewardContentImgSavedName.map((filename, index) => (
+              <img
+                key={index}
+                src={`http://localhost:8080/img/${filename}`}
+                className="sub_img2"
+                id={filename}
+                onClick={(e) => setImageSrc(filename)}
+              />
+            ))}
         </div>
         <div className="desc_content">
           <div className="fund_category">리워드</div>

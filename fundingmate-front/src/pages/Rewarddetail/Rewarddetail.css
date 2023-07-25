@@ -1,5 +1,6 @@
 .desc {
   overflow-x: hidden;
+  overflow-y: hidden;
   width: 1080px;
   margin: 0 auto;
 }
@@ -44,7 +45,8 @@
 .sub_img2 {
   width: 100px;
   height: 52.583px;
-  margin-right: 10px;
+  margin-right: 4px;
+  margin-left: 4px;
 }
 
 .desc_content {
@@ -256,7 +258,7 @@
 
 .end3 {
   color: var(--main-color);
-  margin-left: 8.4%;
+  margin-left: 33px;
 }
 .company {
   border-radius: 5px;

@@ -59,7 +59,7 @@ function Header() {
               <a href="">홈</a>
             </li>
             <li>
-              <a href="">리워드</a>
+              <a href="/reward">리워드</a>
             </li>
             <li>
               <a href="">창업</a>
