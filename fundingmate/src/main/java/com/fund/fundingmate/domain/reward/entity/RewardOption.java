@@ -22,6 +22,10 @@ public class RewardOption {
 
     private String getRewardOptCon;
 
+    @ManyToOne
+    @JoinColumn(name = "reward_type_id")
+    private RewardType rewardType;
+
 //    @OneToMany(mappedBy = "rewardOption")
 //    private List<RewardType> rewardTypes;
 }

@@ -70,7 +70,7 @@ const MakeReward3 = () => {
   console.log("showOption:" + showOption);
 
   const handleShowOptionButtonClick = () => {
-    setCard({ ...card, options: [{ rewardOptName: "", rewardOptCon: "" }] });
+    setCard({ ...card, options: [{ rewardOptName: "", getRewardOptCon: "" }] });
     setShowOption(true);
   };
   const handleAddOption = () => {
@@ -78,7 +78,7 @@ const MakeReward3 = () => {
       ...card,
       options: [
         ...card.options,
-        { id: nanoid(), rewardOptName: "", rewardOptCon: "" }
+        { id: nanoid(), rewardOptName: "", getRewardOptCon: "" }
       ]
     });
   };
@@ -280,7 +280,7 @@ const MakeReward3 = () => {
             onChange={(date, dateStr) => {
               setCard({
                 ...card,
-                deliveryDate: dateStr,
+                deliveryDate: dateStr
               });
             }}
             name="deliveryDate"
@@ -317,13 +317,13 @@ const MakeReward3 = () => {
                     />
                     <input
                       type="text"
-                      name="rewardOptCon"
+                      name="getRewardOptCon"
                       className="reward-opt-con"
                       placeholder="예시)S, M, L"
                       style={{ marginLeft: "18px" }}
-                      defaultValue={card.options[index].rewardOptCon}
+                      defaultValue={card.options[index].getRewardOptCon}
                       onChange={(e) => {
-                        card.options[index].rewardOptCon = e.target.value;
+                        card.options[index].getRewardOptCon = e.target.value;
                       }}
                     />
                     <button className="rew-add" onClick={handleAddOption}>
