@@ -21,15 +21,15 @@ const Rewarding = () => {
         {
           params: {
             startIndex: 0,
-            endIndex: visibleRewards,
-          },
+            endIndex: visibleRewards
+          }
         }
       );
 
       const rewardingRewardsData = response.data;
       setRewardingRewards((prevRewards) => [
         ...prevRewards,
-        ...rewardingRewardsData,
+        ...rewardingRewardsData
       ]);
       setShowLoadMoreButton(rewardingRewardsData.length >= 4);
     } catch (error) {
@@ -48,8 +48,8 @@ const Rewarding = () => {
         "http://localhost:8080/payment/total-amount-same-rewards",
         {
           params: {
-            rewardIds: rewardIds.join(","),
-          },
+            rewardIds: rewardIds.join(",")
+          }
         }
       );
 
@@ -84,7 +84,7 @@ const Rewarding = () => {
             onClick={() => handleRewardClick(reward.id)}
           >
             <img
-              src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
+              src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
               className="reward_img"
               alt={reward.projName}
             />
