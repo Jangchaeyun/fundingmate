@@ -73,13 +73,13 @@ function Banner(props) {
                               </div>
                           </div>
                       </div>
-                      <img
+                      {/* <img
                           className="banner-img"
                           src={require(`../../assets/images/Banner/${banner.fileSavedName}`)}
                           alt="배너1"
                           // width={"100%"}
                           // height={"300px"}
-                      />
+                      /> */}
                     </a>
                   </SwiperSlide>
               )

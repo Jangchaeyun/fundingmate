@@ -3,7 +3,7 @@ import "./Header.css";
 import {
   BellOutlined,
   LogoutOutlined,
-  SearchOutlined
+  SearchOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
