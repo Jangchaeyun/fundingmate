@@ -3,6 +3,8 @@ import "../../../pages/Rewarddetail/Rewarddetail.css";
 import Desc from "../Desc/Desc";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import Header from "../../Header/Header";
+import CorFooter from "../../Footer/CorFooter";
 
 const Guide = () => {
   const { rewardId } = useParams();
@@ -59,6 +61,8 @@ const Guide = () => {
   }, [totInfo, totalPaymentAmounts]);
 
   return (
+    <>
+    <Header />
     <div className="desc">
       {viewDesc && totInfo && (
         <div>
@@ -72,19 +76,19 @@ const Guide = () => {
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <Link className="story " to={`/reward-detail/story/${rewardId}`}>
+        <Link className="story" to={`${window.location.origin}/rewarddetail/story/${rewardId}`}>
             스토리
           </Link>
           <div className="contact_box">
-            <Link className="contact" to={`/reward-detail/contact/${rewardId}`}>
+            <Link
+              className="contact"
+              to={`${window.location.origin}/rewarddetail/contact/${rewardId}`}
+            >
               문의
             </Link>
             <div className="contact_count">0</div>
           </div>
-          <Link
-            className="guide active"
-            to={`/reward-detail/guide/${rewardId}`}
-          >
+          <Link className="guide active" to={`${window.location.origin}/rewarddetail/guide/${rewardId}`}>
             안내
           </Link>
         </div>
@@ -111,6 +115,8 @@ const Guide = () => {
         )}
       </div>
     </div>
+    <CorFooter />
+    </>
   );
 };
 

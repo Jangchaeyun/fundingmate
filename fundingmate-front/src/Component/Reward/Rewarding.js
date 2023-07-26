@@ -60,7 +60,7 @@ const Rewarding = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/reward-detail/story/${rewardId}`);
+    window.location.href = `${window.location.origin}/rewarddetail/story/${rewardId}`;
   };
 
   const loadMoreRewards = () => {

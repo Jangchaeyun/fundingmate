@@ -107,17 +107,17 @@ function App() {
                 <Routes>
                   <Route
                     exact
-                    path="/reward-detail/story/:rewardId"
+                    path="/rewarddetail/story/:rewardId"
                     element={<Story />}
                   />
                   <Route
                     exact
-                    path="/reward-detail/contact/:rewardId"
+                    path="/rewarddetail/contact/:rewardId"
                     element={<Contact />}
                   />
                   <Route
                     exact
-                    path="/reward-detail/guide/:rewardId"
+                    path="/rewarddetail/guide/:rewardId"
                     element={<Guide />}
                   />
                 </Routes>
