@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import Header from "../../Header/Header";
+import CorFooter from "../../Footer/CorFooter";
 
 const Contact = () => {
   const { rewardId } = useParams();
@@ -177,6 +179,8 @@ const Contact = () => {
   }, [totInfo]);
 
   return (
+    <>
+    <Header />
     <div className="desc">
       {viewDesc && totInfo && (
         <div>
@@ -191,19 +195,19 @@ const Contact = () => {
       <div className="menu">
         <hr />
         <div className="menu_items">
-          <Link className="story" to={`/reward-detail/story/${rewardId}`}>
+          <Link className="story" to={`${window.location.origin}/rewarddetail/story/${rewardId}`}>
             스토리
           </Link>
           <div className="contact_box">
             <Link
               className="contact active"
-              to={`/reward-detail/contact/${rewardId}`}
+              to={`${window.location.origin}/rewarddetail/contact/${rewardId}`}
             >
               문의
             </Link>
             <div className="contact_count">0</div>
           </div>
-          <Link className="guide" to={`/reward-detail/guide/${rewardId}`}>
+          <Link className="guide" to={`${window.location.origin}/rewarddetail/guide/${rewardId}`}>
             안내
           </Link>
         </div>
@@ -279,6 +283,8 @@ const Contact = () => {
         )}
       </div>
     </div>
+    <CorFooter />
+    </>
   );
 };
 

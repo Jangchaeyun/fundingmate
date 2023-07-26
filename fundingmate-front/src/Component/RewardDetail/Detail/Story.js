@@ -5,6 +5,8 @@ import Desc from "../Desc/Desc";
 import axios from "axios";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
+import Header from "../../Header/Header";
+import CorFooter from "../../Footer/CorFooter";
 
 const Story = () => {
   const [viewDesc, setViewDesc] = useState(false);
@@ -73,6 +75,8 @@ const Story = () => {
   }, [totInfo]);
 
   return (
+    <>
+    <Header/>
     <div className="desc">
       {viewDesc && totInfo && (
         <div>
@@ -86,19 +90,19 @@ const Story = () => {
       <div className="menu">
         <hr className="menu_hr" />
         <div className="menu_items">
-          <Link
-            className="story active"
-            to={`/reward-detail/story/${rewardId}`}
-          >
+        <Link className="story active" to={`${window.location.origin}/rewarddetail/story/${rewardId}`}>
             스토리
           </Link>
           <div className="contact_box">
-            <Link className="contact" to={`/reward-detail/contact/${rewardId}`}>
+            <Link
+              className="contact"
+              to={`${window.location.origin}/rewarddetail/contact/${rewardId}`}
+            >
               문의
             </Link>
             <div className="contact_count">0</div>
           </div>
-          <Link className="guide" to={`/reward-detail/guide/${rewardId}`}>
+          <Link className="guide" to={`${window.location.origin}/rewarddetail/guide/${rewardId}`}>
             안내
           </Link>
         </div>
@@ -122,6 +126,8 @@ const Story = () => {
         </div> */}
       </div>
     </div>
+    <CorFooter />
+    </>
   );
 };
 
