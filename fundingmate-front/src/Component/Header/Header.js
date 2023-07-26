@@ -74,7 +74,7 @@ function Header(props) {
                         <Link onClick={logout}>
                             로그아웃
                         </Link></>}
-                        <a href="rewardfund" className="projAdd">프로젝트 만들기</a>
+                        <a href="/rewardfund" className="projAdd">프로젝트 만들기</a>
                     </span>
                 </div>
                 <nav className="nav">

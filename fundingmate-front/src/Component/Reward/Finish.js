@@ -101,7 +101,7 @@ const Finish = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/reward-detail/story/${rewardId}`);
+    window.location.href = `${window.location.origin}/rewarddetail/story/${rewardId}`;
   };
 
   return (
@@ -117,7 +117,7 @@ const Finish = () => {
               onClick={() => handleRewardClick(reward.id)}
             >
               <img
-                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
+                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
                 className="reward_img"
                 alt={reward.projName}
               />
