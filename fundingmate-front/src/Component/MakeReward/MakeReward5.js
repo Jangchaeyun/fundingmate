@@ -198,6 +198,8 @@ const MakeReward5 = () => {
     formData.append("projName", totInfo.projName);
 
     formData.append("projKeyWord", totInfo.projKeyWord);
+
+
     formData.append("projDateStart", totInfo.projDateStart);
     formData.append("projDateEnd", totInfo.projDateEnd);
     formData.append("rewardVideoAddress", totInfo.rewardVideoAddress);
@@ -271,6 +273,7 @@ const MakeReward5 = () => {
 
   return (
     <>
+    <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
