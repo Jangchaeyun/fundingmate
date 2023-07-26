@@ -1,6 +1,12 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import {BrowserRouter, Link, Route, Routes, useLocation} from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useLocation
+} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
 import FindIdPw from "./pages/Login/FindIdPw";
@@ -47,6 +53,7 @@ import store from "./persist-store";
 import SocialLogin from "./pages/Login/SocialLogin";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "./Component/Login/Auth/AuthContext";
+import MakeInvestlast from "./pages/MakeInvest/MakeInvestlast";
 
 const persister = persistStore(store);
 function App() {
@@ -230,7 +237,7 @@ function App() {
                   <Route
                     exact
                     path="/makeInvestHostinfo"
-                    element={<MakeInvest5 />}
+                    element={<MakeInvestlast />}
                   />
                 </Routes>
                 {/* 태희 부분 */}
@@ -246,7 +253,6 @@ function App() {
                   />
                 </Routes>
                 {/* My Page */}
-
               </BrowserRouter>
             </PersistGate>
           </Provider>
