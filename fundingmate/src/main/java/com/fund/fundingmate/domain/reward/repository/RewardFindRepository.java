@@ -30,6 +30,9 @@ public class RewardFindRepository {
                         .and(reward.projDateEnd.after(Date.valueOf(currentDate))
                                 .or(reward.projDateEnd.eq(Date.valueOf(currentDate)))))
                 .fetch();
+
+
+
     }
 
     public List<Reward> findRewardDatesBefore() {
