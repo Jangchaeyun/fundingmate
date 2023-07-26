@@ -64,9 +64,9 @@ public class PaymentController {
         return ResponseEntity.ok(distinctUserCount);
     }
 
-    @GetMapping("/person-count/{investId}")
-    public ResponseEntity<Integer> getinvestPesonCount(@PathVariable Long investId) {
-        Integer investdistinctUserCount = paymentService.countDistinctUserIdsForInvest(investId);
-        return ResponseEntity.ok(investdistinctUserCount);
-    }
+//    @GetMapping("/person-count/{investId}")
+//    public ResponseEntity<Integer> getinvestPesonCount(@PathVariable Long investId) {
+//        Integer investdistinctUserCount = paymentService.countDistinctUserIdsForInvest(investId);
+//        return ResponseEntity.ok(investdistinctUserCount);
+//    }
 }
