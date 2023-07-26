@@ -198,6 +198,7 @@ const MakeReward5 = () => {
     formData.append("projName", totInfo.projName);
 
     formData.append("projKeyWord", totInfo.projKeyWord);
+
     formData.append("projDateStart", totInfo.projDateStart);
     formData.append("projDateEnd", totInfo.projDateEnd);
     formData.append("rewardVideoAddress", totInfo.rewardVideoAddress);
@@ -261,7 +262,7 @@ const MakeReward5 = () => {
         const rewardId = response.data;
         setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/${rewardId}`);
+        navigateToStep2(`/rewarddetail/story/${rewardId}`);
       })
       .catch((error) => {
         console.error(error);
@@ -271,6 +272,7 @@ const MakeReward5 = () => {
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">

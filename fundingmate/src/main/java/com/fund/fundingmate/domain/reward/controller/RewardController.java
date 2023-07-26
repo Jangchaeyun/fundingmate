@@ -180,7 +180,7 @@ public class RewardController {
         }
     }
 
-    private static final String UPLOAD_DIRECTORY = "C:/IntelliJ/workspace/fundingmate/imgUpload";
+    private static final String UPLOAD_DIRECTORY = "D:/yth/springboot-work/intellj/fundingmate/imgUpload";
 
     @GetMapping("/img/{fileOriginalName}")
     public void imageView(@PathVariable String fileOriginalName, HttpServletResponse response) {

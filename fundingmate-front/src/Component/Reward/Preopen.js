@@ -28,7 +28,7 @@ const Preopen = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/reward-detail/story/${rewardId}`);
+    navigate(`/rewarddetail/story/${rewardId}`);
   };
 
   return (
@@ -53,7 +53,7 @@ const Preopen = () => {
                   onClick={() => handleRewardClick(reward.id)}
                 >
                   <img
-                    src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
+                    src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
                     className="reward_img"
                     alt={reward.rewardName}
                   />
@@ -79,7 +79,7 @@ const Preopen = () => {
           {rewards.map((reward) => (
             <div key={reward.id} className="reward_card">
               <img
-                src={`http://localhost:8080/img/${reward.repFile.fileName}`}
+                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
                 className="reward_img"
                 alt={reward.rewardName}
               />

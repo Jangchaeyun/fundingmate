@@ -75,14 +75,14 @@ function Header(props) {
                         <Link onClick={logout}>
                             로그아웃
                         </Link></>}
-                        <a href="rewardfund" className="projAdd">프로젝트 만들기</a>
+                        <a href="/rewardfund" className="projAdd">프로젝트 만들기</a>
                     </span>
                 </div>
                 <nav className="nav">
                     <ul className="nav-item">
                         <li><a href="/">홈</a></li>
-                        <li><a href="reward">리워드</a></li>
-                        <li><a href="fund">투자</a></li>
+                        <li><a href="/reward">리워드</a></li>
+                        <li><a href="/fund">투자</a></li>
                         {/*<li><a href="/">창업정보</a></li>*/}
                         {/*<li><a href="">오픈예정</a></li>*/}
                     </ul>

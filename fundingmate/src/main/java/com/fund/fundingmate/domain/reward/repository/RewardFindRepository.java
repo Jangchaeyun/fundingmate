@@ -26,10 +26,13 @@ public class RewardFindRepository {
         QReward reward = QReward.reward;
         LocalDate currentDate = LocalDate.now();
         return jpaQueryFactory.selectFrom(reward)
-                .where(reward.projDateStart.before(Date.valueOf(currentDate))
+                .where(reward.projDateStart.loe(Date.valueOf(currentDate))
                         .and(reward.projDateEnd.after(Date.valueOf(currentDate))
                                 .or(reward.projDateEnd.eq(Date.valueOf(currentDate)))))
                 .fetch();
+
+
+
     }
 
     public List<Reward> findRewardDatesBefore() {

@@ -191,7 +191,8 @@ const MakeInvest5 = () => {
         const investId = response.data;
         // const investmentId = response.data.investment.id; // 새로 생성된 투자의 id 값
         alert("프로젝트가 등록되었습니다");
-        navigateToStep2(`/fund-detail/story/${investId}`);
+        // navigateToStep2(`/funddetail/story/${investId}`);
+        navigateToStep2("/fund-detail/story/");
       })
       .catch((error) => {
         console.error(error); // 요청 실패 시 처리할 로직
@@ -205,7 +206,6 @@ const MakeInvest5 = () => {
 
   return (
     <>
-      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -532,7 +532,6 @@ const MakeInvest5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <Footer />
     </>
   );
 };
