@@ -205,7 +205,6 @@ const MakeInvest5 = () => {
 
   return (
     <>
-      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -532,7 +531,6 @@ const MakeInvest5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <Footer />
     </>
   );
 };
