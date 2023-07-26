@@ -16,7 +16,7 @@ function InvestProject(props) {
     <section className="content">
       <div className="content-title">
         투자형 프로젝트
-        <a href="fund">
+        <a href="/fund">
           프로젝트 더보기 <RightOutlined />
         </a>
       </div>
@@ -36,7 +36,7 @@ function InvestProject(props) {
             return (
               <SwiperSlide className="content-slide">
                 <a
-                  href={"fund-detail/story/" + item.id}
+                  href={"/fund-detail/story/" + item.id}
                   className="content-item-list-link"
                 >
                   <div className="content-item-list">

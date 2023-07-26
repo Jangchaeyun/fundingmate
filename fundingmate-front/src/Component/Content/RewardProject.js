@@ -17,7 +17,7 @@ function RewardProject(props) {
     <section className="content">
       <div className="content-title">
         리워드 프로젝트
-        <a href="reward">
+        <a href="/reward">
           프로젝트 더보기 <RightOutlined />
         </a>
       </div>
@@ -35,15 +35,15 @@ function RewardProject(props) {
             return (
               <SwiperSlide className="content-slide">
                 <a
-                  href={"reward-detail/story/" + item.id}
+                  href={"/rewarddetail/story/" + item.id}
                   className="content-item-list-link"
                 >
                   <div className="content-item-list">
-                    {/* <img
-                      src={require("../../assets/images/Project/고고.jpg")}
+                    <img
+                      src={`http://localhost:8080/img/${item.rewardRepImgSavedName}`}
                       alt=""
                       className="content-item-img"
-                    /> */}
+                    />
                     <div className="content-item">
                       <div className="corP">KOSTA</div>
 
