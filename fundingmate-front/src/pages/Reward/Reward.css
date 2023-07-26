@@ -47,7 +47,7 @@
   margin-bottom: 3%;
   transition: all 0.2s linear;
   cursor: pointer;
-  margin-left: 0.6%;
+  margin-left: 0.6%;s
 } */
 
 .reward_card_row {
@@ -75,7 +75,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  height: 326px;
 }
 
 .reward_card:hover {
@@ -128,7 +127,7 @@
 .bell_box {
   display: flex;
   width: 250px;
-  height: 32px;
+  height: 23px;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.18);
   font-size: 13px;
