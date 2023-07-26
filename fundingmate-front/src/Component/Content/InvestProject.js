@@ -29,7 +29,7 @@ function InvestProject(props) {
           slidesOffsetAfter={-30}*/
           navigation={{
             prevEl: ".investprevNav",
-            nextEl: ".investnextNav"
+            nextEl: ".investnextNav",
           }}
         >
           {invest.map((item, idx) => {
@@ -40,11 +40,11 @@ function InvestProject(props) {
                   className="content-item-list-link"
                 >
                   <div className="content-item-list">
-                    <img
+                    {/* <img
                       src={require("../../assets/images/Project/고고.jpg")}
                       alt=""
                       className="content-item-img"
-                    />
+                    /> */}
                     <div className="content-item">
                       <div className="corP">KOSTA</div>
 
