@@ -6,15 +6,19 @@ import Preopen from "../../Component/Fund/Preopen";
 import Realtime from "../../Component/Fund/realtime";
 import Category from "../../Component/Category/Category";
 import Banner from "../../Component/Banner/Banner";
+import Header from "../../Component/Header/Header";
+import CorFooter from "../../Component/Footer/CorFooter";
 
 const Fund = () => {
   return (
     <div className="App">
+      <Header/>
       <Category />
       <Funding />
       <Preopen />
       <Realtime />
       <Finish />
+      <CorFooter />
     </div>
   );
 };
