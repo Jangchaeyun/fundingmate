@@ -51,7 +51,8 @@ function Header(props) {
         //     .catch(err => {
         //         console.log(err);
         //     })
-        navigate(`/search?word=${keyword}`,{state:{word:keyword,list:reward}});
+        navigate(`/search/${keyword}`);
+        // navigate(`/search/${keyword}`);
     }
     return (
         <header className="header">

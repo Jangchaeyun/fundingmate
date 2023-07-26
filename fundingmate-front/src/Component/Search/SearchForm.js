@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {SearchOutlined} from "@ant-design/icons";
 import "./SearchForm.css"
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 function SearchForm(props) {
+    // const {keyword} = useParams();
     const { state } = useLocation();
-    const [keyword, setKeyword] = useState(state.word ? state.word : "");
-    const [reward, setReward] = useState(state.list ? state.list : [])
+    const [keyword, setKeyword] = useState(props.word ? props.word : "");
+    // const [reward, setReward] = useState(state.list ? state.list : [])
     return (
         <div className="searchForm">
             <div className="searchCnt">0건의 검색 결과</div>
