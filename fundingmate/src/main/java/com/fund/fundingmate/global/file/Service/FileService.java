@@ -18,7 +18,7 @@ import java.util.List;
 public class FileService {
     private final FileRepository fileRepository;
   
-    public static final String UPLOAD_DIRECTORY = "C:/Users/f_hya/Desktop/funding/imgUpload";
+    public static final String UPLOAD_DIRECTORY = "D:/yth/springboot-work/intellj/fundingmate/imgUpload";
 
     @Autowired
     public FileService(FileRepository fileRepository) {
