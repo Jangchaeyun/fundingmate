@@ -28,7 +28,7 @@ function RewardProject(props) {
           slidesPerView={4}
           navigation={{
             prevEl: ".rewardprevNav",
-            nextEl: ".rewardnextNav",
+            nextEl: ".rewardnextNav"
           }}
         >
           {reward.map((item, idx) => {

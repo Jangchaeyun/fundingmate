@@ -26,7 +26,7 @@ const Story = () => {
           let receiveData = {
             ...res.data,
             rewardContentImgSavedName:
-              res.data.rewardContentImgSavedName.split(","),
+              res.data.rewardContentImgSavedName.split(",")
           };
           setTotInfo(receiveData);
           console.log(receiveData);
@@ -76,45 +76,53 @@ const Story = () => {
 
   return (
     <>
-    <Header/>
-    <div className="desc">
-      {viewDesc && totInfo && (
-        <div>
-          <Desc
-            reward={totInfo}
-            totalPaymentAmount={totalPaymentAmounts[totInfo.id] || 0}
-            personCount={personCount}
-          />
-        </div>
-      )}
-      <div className="menu">
-        <hr className="menu_hr" />
-        <div className="menu_items">
-        <Link className="story active" to={`${window.location.origin}/rewarddetail/story/${rewardId}`}>
-            스토리
-          </Link>
-          <div className="contact_box">
-            <Link
-              className="contact"
-              to={`${window.location.origin}/rewarddetail/contact/${rewardId}`}
-            >
-              문의
-            </Link>
-            <div className="contact_count">0</div>
+      <Header />
+      <div className="desc">
+        {viewDesc && totInfo && (
+          <div>
+            <Desc
+              reward={totInfo}
+              totalPaymentAmount={totalPaymentAmounts[totInfo.id] || 0}
+              personCount={personCount}
+            />
           </div>
-          <Link className="guide" to={`${window.location.origin}/rewarddetail/guide/${rewardId}`}>
-            안내
-          </Link>
-        </div>
-      </div>
-      <div className="story_content">
-        {totInfo && totInfo.projContent && totInfo.projContent.trim() !== "" ? (
-          // <div dangerouslySetInnerHTML={{ __html: totInfo.projContent }} />
-          <Viewer initialValue={totInfo.projContent.trim()} />
-        ) : (
-          <div>No content available</div>
         )}
-        {/* <div className="product_img">
+        <div className="menu">
+          <hr className="menu_hr" />
+          <div className="menu_items">
+            <Link
+              className="story active"
+              to={`${window.location.origin}/rewarddetail/story/${rewardId}`}
+            >
+              스토리
+            </Link>
+            <div className="contact_box">
+              <Link
+                className="contact"
+                to={`${window.location.origin}/rewarddetail/contact/${rewardId}`}
+              >
+                문의
+              </Link>
+              <div className="contact_count">0</div>
+            </div>
+            <Link
+              className="guide"
+              to={`${window.location.origin}/rewarddetail/guide/${rewardId}`}
+            >
+              안내
+            </Link>
+          </div>
+        </div>
+        <div className="story_content">
+          {totInfo &&
+          totInfo.projContent &&
+          totInfo.projContent.trim() !== "" ? (
+            // <div dangerouslySetInnerHTML={{ __html: totInfo.projContent }} />
+            <Viewer initialValue={totInfo.projContent.trim()} />
+          ) : (
+            <div>No content available</div>
+          )}
+          {/* <div className="product_img">
           {totInfo?.rewardContentImgSavedName?.length > 0 &&
             totInfo.rewardContentImgSavedName.map((img, index) => (
               <img
@@ -124,9 +132,9 @@ const Story = () => {
               />
             ))}
         </div> */}
+        </div>
       </div>
-    </div>
-    <CorFooter />
+      <CorFooter />
     </>
   );
 };
