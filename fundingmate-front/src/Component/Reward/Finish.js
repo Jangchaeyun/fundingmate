@@ -101,7 +101,7 @@ const Finish = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    window.location.href = `${window.location.origin}/rewarddetail/story/${rewardId}`;
+    navigate(`/rewarddetail/story/${rewardId}`);
   };
 
   return (
