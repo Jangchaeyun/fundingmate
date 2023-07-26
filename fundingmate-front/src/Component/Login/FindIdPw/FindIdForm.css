@@ -16,7 +16,7 @@
 /*.authblank {*/
 /*    margin-top: 5px;*/
 /*}*/
-.findwrap input {
+.findwrap>input {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -25,17 +25,17 @@
     margin-top: -1px;
     padding-left: 20px;
 }
-.findwrap input::after {
+.findwrap>input::after {
     position: absolute;
     border-radius: inherit;
     pointer-events: none;
     content: '';
 }
-.findwrap input:first-of-type {
+.findwrap>input:first-of-type {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.findwrap input:last-of-type {
+.findwrap>input:last-of-type {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -79,7 +79,7 @@
 }
 .authChkBtn {
     position: absolute;
-    top: 128px;
+    top: 79%;
     right: 10px;
     width: 100px;
     height: 30px;
@@ -102,7 +102,4 @@
     border-radius: 5px;
     background-color: white;
     cursor: pointer;
-}
-.findIdformWrap {
-    margin-bottom: 50px;
 }

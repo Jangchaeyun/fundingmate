@@ -25,7 +25,6 @@ public class BannerController {
     @GetMapping("/bannerList")
     public ResponseEntity<List> articleList() {
         try {
-            System.out.println("성공");
 //            Map<String,Object> map = new HashMap<>();
             List<Tuple> tuples = bannerRepository.findBannerAll();
 //            List<Banner> banners = new ArrayList<>();

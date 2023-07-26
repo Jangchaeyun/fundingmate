@@ -1,7 +1,6 @@
 package com.fund.fundingmate.global.file.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fund.fundingmate.domain.investment.entity.Investment;
 import com.fund.fundingmate.domain.reward.entity.Reward;
 import lombok.*;
@@ -17,7 +16,6 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"reward"})
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

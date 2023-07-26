@@ -28,7 +28,6 @@
 }
 .joinwrap {
     margin: 20px 0;
-    position: relative;
 }
 .joinChkL {
     box-sizing: border-box;
@@ -37,7 +36,6 @@
     color: #9b9b9b;
     font-size: 12px;
     padding-left: 20px;
-    cursor: pointer;
 }
 .joinChkL>input {
     position: relative;
@@ -53,8 +51,8 @@
 }
 .authChk {
     position: relative;
-    top: -73px;
-    right: -245px;
+    top: -35px;
+    right: -120px;
     width: 100px;
     height: 30px;
     border: 1px solid #14B8FF;
@@ -98,7 +96,6 @@
     font-size: 13px;
     text-align: left;
     color: #9b9b9b;
-    overflow: hidden;
 }
 .joinChkP::-webkit-scrollbar {
     width: 10px;
@@ -136,18 +133,3 @@ input:focus:-ms-input-placeholder,
 textarea:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:transparent;
 }
-.useridChk {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 100px;
-    height: 30px;
-    border: 1px solid #14B8FF;
-    color: #14B8FF;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-}
-input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fff inset ; -webkit-text-fill-color: #000; }
-input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }

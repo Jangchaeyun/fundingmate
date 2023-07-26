@@ -99,7 +99,7 @@ function App() {
                     element={<FindPwResult />}
                   />
                   <Route exact path="/join" element={<Join />} />
-                  <Route exact path="/search/:keyword" element={<Search />} />
+                  <Route exact path="/search" element={<Search />} />
                   <Route exact path="/reward" element={<Reward />} />
                   {/*<Route exact path="/reward-detail" element={<Rewarddetail />} />*/}
                 </Routes>

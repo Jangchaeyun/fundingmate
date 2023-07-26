@@ -16,10 +16,8 @@ function Home() {
             .get("http://localhost:8080/bannerList")
             .then((res) => {
                 setBannerData([...res.data]);
-                console.log("성공")
             })
             .catch((err) => {
-                console.log("실패")
                 console.log(err);
             });
         // Project 데이터 가져오기

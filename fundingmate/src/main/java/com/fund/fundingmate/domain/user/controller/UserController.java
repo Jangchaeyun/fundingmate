@@ -77,12 +77,6 @@ public class UserController {
         User user = (User)customUserDetailService.loadUserByUsername(id);
         return new ResponseEntity<User>(user,HttpStatus.OK);
     }
-    @PostMapping("/useridChk")
-    public ResponseEntity<Boolean> useridChk(@RequestParam("id") String id) {
-        Optional<User> ouser = userRepository.findByUserid(id);
-        Boolean useridChk = !ouser.isPresent();
-        return new ResponseEntity<Boolean>(useridChk,HttpStatus.OK);
-    }
 
     @PostMapping("/findById")
     public ResponseEntity<User> findById(@RequestBody UserDTO userDto) {
@@ -91,9 +85,6 @@ public class UserController {
         String tel = userDto.getTel();
         String email = userDto.getEmail();
         User user = null;
-        System.out.println(name);
-        System.out.println(tel);
-        System.out.println(email);
         if (email == null || email == "") {
             // 이름과 전화번호로 아이디 검색
             user = userRepository.findByNameAndTel(name, tel);

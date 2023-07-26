@@ -1,21 +1,18 @@
 import Header from "../../Component/Header/Header";
-import {Route, Routes, useLocation, useParams} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import Footer from "../../Component/Footer/Footer";
 import Main from "../../Component/Main/Main";
 import Banner from "../../Component/Banner/Banner";
 import SearchForm from "../../Component/Search/SearchForm";
-import {useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
-function Search(props) {
+function Home(props) {
     const [bannerData, setBannerData] = useState([]);
     const [rewardData, setRewardData] = useState([]);
     const [investData, setinvestData] = useState([]);
     const { state } = useLocation();
-    // const [keyword, setKeyword] = useState(state.word ? state.word : "");
-
-    const {keyword} = useParams();
-
+    const [keyword, setKeyword] = useState(state.word ? state.word : "");
     useEffect(() => {
         // Project 데이터 가져오기
         axios
@@ -98,4 +95,4 @@ function Search(props) {
         </div>
     );
 }
-export default Search;
+export default Home;
