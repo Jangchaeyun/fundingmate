@@ -18,7 +18,7 @@ import java.util.List;
 public class FileService {
     private final FileRepository fileRepository;
   
-    public static final String UPLOAD_DIRECTORY = "C:/kec/fundingmate-upload";
+    public static final String UPLOAD_DIRECTORY = "C:/IntelliJ/workspace/fundingmate/imgUpload";
 
     @Autowired
     public FileService(FileRepository fileRepository) {

@@ -165,17 +165,17 @@ function LoginForm(props) {
         />
         <br />
         <div className="keepSearch">
-          <label for="keep" className="keepChkLb">
-            <input
-              type="checkbox"
-              name=""
-              id="keep"
-              className="keepChk"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            로그인 상태 유지
-          </label>
+          {/*<label for="keep" className="keepChkLb">*/}
+          {/*  <input*/}
+          {/*    type="checkbox"*/}
+          {/*    name=""*/}
+          {/*    id="keep"*/}
+          {/*    className="keepChk"*/}
+          {/*    checked={rememberMe}*/}
+          {/*    onChange={(e) => setRememberMe(e.target.checked)}*/}
+          {/*  />*/}
+          {/*  로그인 상태 유지*/}
+          {/*</label>*/}
           <a href="findIdPw" className="idPwSearch">
             아이디 비밀번호 찾기 <RightOutlined />
           </a>

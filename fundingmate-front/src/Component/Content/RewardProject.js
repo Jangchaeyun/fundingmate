@@ -32,7 +32,7 @@ function RewardProject(props) {
                 <a href={"reward-detail/story/"+item.id} className="content-item-list-link">
                   <div className="content-item-list">
                     <img
-                      src={require("../../assets/images/Project/고고.jpg")}
+                      src={`http://localhost:8080/img/${item.rewardRepImgSavedName}`}
                       alt=""
                       className="content-item-img"
                     />
