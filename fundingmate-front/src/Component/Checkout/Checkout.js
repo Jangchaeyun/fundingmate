@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Checkout = () => {
   const [cardNum1, setCardNum1] = useState("");
@@ -21,6 +22,7 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [addressDesc, setAddressDesc] = useState("");
   const [paymentamount, setPaymentAmount] = useState(0);
+  const userId = useSelector((state) => state.Id);
 
   let navigate = useNavigate();
   let { rewardId, rewardTypeId } = useParams();
@@ -73,7 +75,7 @@ const Checkout = () => {
 
     const paymentData = {
       user: {
-        id: 1,
+        id: userId,
       },
       cardnumber: combinedCardNum,
       cardpassword: cardPw,
