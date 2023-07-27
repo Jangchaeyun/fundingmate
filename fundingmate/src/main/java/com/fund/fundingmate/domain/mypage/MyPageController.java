@@ -25,7 +25,7 @@ public class MyPageController {
         }
     }
 
-    @PutMapping("/updateEmail")
+    @PutMapping("/updateEmail/{id}")
     public ResponseEntity<UserDTO> updateEmail(@RequestBody Map<String, String> request) {
         String userId = request.get("id");
         String newEmail = request.get("email");
@@ -44,7 +44,7 @@ public class MyPageController {
         }
     }
 
-    @PutMapping("/updateTel")
+    @PutMapping("/updateTel/{id}")
     public ResponseEntity<UserDTO> updateTel(@RequestBody Map<String, String> request) {
         String userId = request.get("id");
         String newTel = request.get("tel");
@@ -63,7 +63,7 @@ public class MyPageController {
         }
     }
 
-    @PutMapping("/updatePassword")
+    @PutMapping("/updatePassword/{id}")
     public ResponseEntity<UserDTO> updatePassword(@RequestBody Map<String, String> request) {
         String userId = request.get("id");
         String newPassword = request.get("password");
@@ -80,5 +80,11 @@ public class MyPageController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/deleteAccount/{id}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable String id) {
+        myPageService.deleteAccount(id);
+        return ResponseEntity.ok().build();
     }
 }
