@@ -27,6 +27,7 @@ function MyPage() {
             });
         }
     };
+
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
@@ -105,6 +106,132 @@ function MyPage() {
         }
     };
 
+    // State variables to hold updated email, tel, and password values
+    const [updatedEmail, setUpdatedEmail] = useState('');
+    const [updatedTel, setUpdatedTel] = useState('');
+    const [updatedPassword, setUpdatedPassword] = useState('');
+
+    const handleEmailSubmit = () => {
+        // Make the API request to update the email
+        axios.put(`${API_BASE_URL}/updateEmail`, { email: updatedEmail })
+            .then(response => {
+                // Handle success
+                // For example, show a success notification or update the user info in state
+                notification.success({ message: 'Email updated successfully.' });
+                setUserInfo({ ...userInfo, email: updatedEmail });
+                setUpdatedEmail('');
+            })
+            .catch(error => {
+                // Handle error
+                // For example, show an error notification
+                notification.error({ message: 'Failed to update email. Please try again.' });
+            });
+    };
+
+    const handleTelSubmit = () => {
+        // Make the API request to update the tel
+        axios.put(`${API_BASE_URL}/updateTel`, { tel: updatedTel })
+            .then(response => {
+                // Handle success
+                // For example, show a success notification or update the user info in state
+                notification.success({ message: 'Tel updated successfully.' });
+                setUserInfo({ ...userInfo, tel: updatedTel });
+                setUpdatedTel('');
+            })
+            .catch(error => {
+                // Handle error
+                // For example, show an error notification
+                notification.error({ message: 'Failed to update tel. Please try again.' });
+            });
+    };
+
+    const handleEmailUpdate = (newEmail) => {
+        // Make the API request to update the email
+        const requestData = {
+            id: userInfo.id,
+            email: newEmail,
+        };
+
+        axios.put(`${API_BASE_URL}/updateEmail`, requestData)
+            .then(response => {
+                // Email updated successfully, you may want to show a success message to the user
+                console.log('Email updated successfully:', response.data);
+            })
+            .catch(error => {
+                // Handle error here, show error message to the user, etc.
+                console.error('Error updating email:', error);
+            });
+    };
+
+    const handleTelUpdate = (newTel) => {
+        // Make the API request to update the telephone number
+        const requestData = {
+            id: userInfo.id,
+            tel: newTel,
+        };
+
+        axios.put(`${API_BASE_URL}/updateTel`, requestData)
+            .then(response => {
+                // Telephone number updated successfully, you may want to show a success message to the user
+                console.log('Telephone number updated successfully:', response.data);
+            })
+            .catch(error => {
+                // Handle error here, show error message to the user, etc.
+                console.error('Error updating telephone number:', error);
+            });
+    };
+
+    const handlePasswordUpdate = (newPassword) => {
+        // Make the API request to update the password
+        const requestData = {
+            id: userInfo.id,
+            password: newPassword,
+        };
+
+        axios.put(`${API_BASE_URL}/updatePassword`, requestData)
+            .then(response => {
+                // Password updated successfully, you may want to show a success message to the user
+                console.log('Password updated successfully:', response.data);
+            })
+            .catch(error => {
+                // Handle error here, show error message to the user, etc.
+                console.error('Error updating password:', error);
+            });
+    };
+
+    const [confirmedPassword, setConfirmedPassword] = useState('');
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+    const handlePasswordSubmit = (event) => {
+        event.preventDefault();
+
+        // Check if the updated password and confirmed password match
+        if (updatedPassword !== confirmedPassword) {
+            setPasswordsMatch(false);
+            return;
+        }
+
+        // Make the API request to update the password if the passwords match
+        const requestData = {
+            id: userInfo.id,
+            password: updatedPassword,
+        };
+
+        axios.put(`${API_BASE_URL}/updatePassword`, requestData)
+            .then(response => {
+                // Password updated successfully, you may want to show a success message to the user
+                console.log('Password updated successfully:', response.data);
+                // Clear the input fields and reset the passwordsMatch state
+                setUpdatedPassword('');
+                setConfirmedPassword('');
+                setPasswordsMatch(true);
+            })
+            .catch(error => {
+                // Handle error here, show error message to the user, etc.
+                console.error('Error updating password:', error);
+            });
+    };
+
     return (
         <div className='mypage-body'>
             <Header />
@@ -161,8 +288,8 @@ function MyPage() {
                                 <td>
                                     <Form.Group>
                                         <Form.Label>이메일: {userInfo.email}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="email" />&nbsp;&nbsp;
-                                        <Button type="submit">확인</Button>
+                                        <Form.Control type="email" value={updatedEmail} onChange={(e) => setUpdatedEmail(e.target.value)} />&nbsp;&nbsp;
+                                        <Button type="submit" onClick={handleEmailSubmit}>확인</Button>
                                     </Form.Group>
                                 </td>
                             </tr>
@@ -179,8 +306,8 @@ function MyPage() {
                                 <td>
                                     <Form.Group >
                                         <Form.Label>연락처: {userInfo.tel}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="phone" />&nbsp;&nbsp;
-                                        <Button type="submit" >인증</Button>
+                                        <Form.Control type="phone" value={updatedTel} onChange={(e) => setUpdatedTel(e.target.value)} />&nbsp;&nbsp;
+                                        <Button type="submit" onClick={handleTelSubmit}>인증</Button>
                                     </Form.Group>
                                 </td>
                             </tr>
@@ -191,16 +318,17 @@ function MyPage() {
                                 <td>
                                     <Form.Group>
                                         <Form.Label>비밀번호: {userInfo.password}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="password" />
+                                        <Form.Control type="password" value={updatedPassword} onChange={(e) => setUpdatedPassword(e.target.value)} />
                                     </Form.Group>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <Form.Group>
-                                        <Form.Label>비밀번호 확인:{userInfo.password}</Form.Label>&nbsp;
-                                        <Form.Control type="password" />&nbsp;&nbsp;
-                                        <Button type="submit">변경</Button>
+                                        <Form.Label>비밀번호 확인: {userInfo.password}</Form.Label>&nbsp;
+                                        <Form.Control type="password" value={confirmedPassword} onChange={(e) => setConfirmedPassword(e.target.value)} />&nbsp;&nbsp;
+                                        {!passwordsMatch && <span style={{ color: 'red' }}>Passwords do not match</span>}
+                                        <Button type="submit" onClick={handlePasswordSubmit}>변경</Button>
                                     </Form.Group>
                                 </td>
                             </tr>
