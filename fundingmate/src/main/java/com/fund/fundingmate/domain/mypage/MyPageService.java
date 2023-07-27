@@ -34,4 +34,43 @@ public class MyPageService {
         }
         return null;
     }
+
+    public UserDTO updateEmail(String userId, String email) {
+        Optional<User> optionalUser = userRepository.findByUserid(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setEmail(email);
+            userRepository.save(user);
+            return convertToUserDto(Optional.of(user));
+        }
+
+        return null;
+    }
+
+    public UserDTO updateTel(String userId, String tel) {
+        Optional<User> optionalUser = userRepository.findByUserid(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setTel(tel);
+            userRepository.save(user);
+            return convertToUserDto(Optional.of(user));
+        }
+
+        return null;
+    }
+
+    public UserDTO updatePassword(String userId, String password) {
+        Optional<User> optionalUser = userRepository.findByUserid(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setPassword(password);
+            userRepository.save(user);
+            return convertToUserDto(Optional.of(user));
+        }
+
+        return null;
+    }
 }
