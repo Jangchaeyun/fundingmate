@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,6 +8,10 @@ import Button from 'react-bootstrap/Button';
 import { notification } from 'antd';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
+import axios from 'axios';
+
+// Define the API_BASE_URL directly in MyPage.js
+const API_BASE_URL = 'http://localhost:8080/api';
 
 function MyPage() {
     const [activeSection, setActiveSection] = useState('my-settings');
@@ -23,6 +27,14 @@ function MyPage() {
             });
         }
     };
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        // Make the API request to fetch user information for "My Page"
+        axios.get(`${API_BASE_URL}/myPage`)
+            .then(response => setUserInfo(response.data))
+            .catch(error => console.error('Error fetching user info:', error));
+    }, []);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -86,7 +98,7 @@ function MyPage() {
                         <tr>
                             <td>
                                 <Form.Group>
-                                    <Form.Label>이름: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Form.Label>이름: {userInfo.name}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <Form.Control type="text" />
                                 </Form.Group>
                             </td>
@@ -94,25 +106,25 @@ function MyPage() {
                         <tr>
                             <td>
                                 <Form.Group>
-                                    <Form.Label>이메일: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Form.Label>이메일: {userInfo.email}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <Form.Control type="email" />&nbsp;&nbsp;
                                     <Button type="submit">확인</Button>
                                 </Form.Group>
                             </td>
                         </tr>
+                        {/*<tr>*/}
+                        {/*    <td>*/}
+                        {/*        <Form.Group >*/}
+                        {/*            <Form.Label>주소: {userInfo.address}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                        {/*            <Form.Control type="address" />&nbsp;&nbsp;*/}
+                        {/*            <Button type="submit">검색</Button>*/}
+                        {/*        </Form.Group>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
                         <tr>
                             <td>
                                 <Form.Group >
-                                    <Form.Label>주소: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Form.Control type="address" />&nbsp;&nbsp;
-                                    <Button type="submit">검색</Button>
-                                </Form.Group>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <Form.Group >
-                                    <Form.Label>연락처: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Form.Label>연락처: {userInfo.tel}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <Form.Control type="phone" />&nbsp;&nbsp;
                                     <Button type="submit" >인증</Button>
                                 </Form.Group>
@@ -124,7 +136,7 @@ function MyPage() {
                         <tr>
                             <td>
                                 <Form.Group>
-                                    <Form.Label>비밀번호: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <Form.Label>비밀번호: {userInfo.password}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <Form.Control type="password" />
                                 </Form.Group>
                             </td>
@@ -132,7 +144,7 @@ function MyPage() {
                         <tr>
                             <td>
                                 <Form.Group>
-                                    <Form.Label>비밀번호 확인: </Form.Label>&nbsp;
+                                    <Form.Label>비밀번호 확인:{userInfo.password}</Form.Label>&nbsp;
                                     <Form.Control type="password" />&nbsp;&nbsp;
                                     <Button type="submit">변경</Button>
                                 </Form.Group>
