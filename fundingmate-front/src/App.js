@@ -77,12 +77,12 @@ function App() {
                 {/* 은총 부분 */}
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route exact path="/login" element={<Login />} />
-                  {/* <Route
+                  {/* <Route exact path="/login" element={<Login />} /> */}
+                  <Route
                     exact
                     path="/login"
                     element={isLoggedIn ? <Home /> : <Login />}
-                  /> */}
+                  />
                   <Route exact path="/findIdPw" element={<FindIdPw />} />
                   <Route exact path="/findId" element={<FindId />} />
                   <Route

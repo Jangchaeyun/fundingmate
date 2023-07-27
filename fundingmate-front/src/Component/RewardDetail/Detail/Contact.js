@@ -68,6 +68,7 @@ const Contact = () => {
       .catch((err) => {
         console.log(err);
       });
+    window.location.reload();
   };
 
   const submitReply = (commentId) => {

@@ -21,17 +21,14 @@ const Finish = () => {
         {
           params: {
             startIndex: 0,
-            endIndex: visibleRewards,
-          },
+            endIndex: visibleRewards + 4
+          }
         }
       );
 
-      const rewardingRewardsData = response.data;
-      setFinishRewards((prevRewards) => [
-        ...prevRewards,
-        ...rewardingRewardsData
-      ]);
-      setShowLoadMoreButton(rewardingRewardsData.length >= 4);
+      const finishRewardsData = response.data;
+      setFinishRewards(finishRewardsData);
+      setShowLoadMoreButton(finishRewardsData.length >= 4);
     } catch (error) {
       console.error("Error fetching rewarding rewards:", error);
     }
@@ -79,8 +76,8 @@ const Finish = () => {
         "http://localhost:8080/payment/total-amount-same-rewards",
         {
           params: {
-            rewardIds: rewardIds.join(","),
-          },
+            rewardIds: rewardIds.join(",")
+          }
         }
       );
       setPaymentAmountsData(response.data);
@@ -97,8 +94,8 @@ const Finish = () => {
         {
           params: {
             startIndex: visibleRewards,
-            endIndex: nextVisibleRewards,
-          },
+            endIndex: nextVisibleRewards
+          }
         }
       );
       const nextRewards = response.data; // Use response.data.data to get the array of finish rewards
