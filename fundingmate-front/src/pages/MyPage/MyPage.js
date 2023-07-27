@@ -9,7 +9,7 @@ import { notification } from 'antd';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Define the API_BASE_URL directly in MyPage.js
 const API_BASE_URL = 'http://localhost:8080';
@@ -233,14 +233,14 @@ function MyPage() {
             });
     };
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleDeleteAccount = () => {
         // Assuming you have a function in your API to delete the user account
-        axios.delete(`${API_BASE_URL}/deleteAccount/${userId}`)
+        axios.delete(`${API_BASE_URL}/deleteAccount/${userInfo.userId}`)
             .then(() => {
                 // Account deleted successfully, navigate back to the main page
-                history.push('/'); // Replace '/' with the route of your main page
+                navigate('/'); // Replace '/' with the route of your main page
             })
             .catch(error => {
                 console.error('Error deleting account:', error);
