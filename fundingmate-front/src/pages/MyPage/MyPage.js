@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,7 +11,7 @@ import Footer from '../../Component/Footer/Footer';
 import axios from 'axios';
 
 // Define the API_BASE_URL directly in MyPage.js
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8080';
 
 function MyPage() {
     const [activeSection, setActiveSection] = useState('my-settings');
@@ -33,8 +33,62 @@ function MyPage() {
         // Make the API request to fetch user information for "My Page"
         axios.get(`${API_BASE_URL}/myPage`)
             .then(response => setUserInfo(response.data))
-            .catch(error => console.error('Error fetching user info:', error));
+            .catch(error => console.error('Error fetching my settings info:', error));
     }, []);
+
+    // Make additional API calls for other sections here
+    useEffect(() => {
+        if (activeSection === 'business-license') {
+            // Make the API request to fetch business license information
+            // Replace the below endpoint with your actual backend API endpoint for business license data
+            axios.get(`${API_BASE_URL}/myPageBusinessLicense`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setBusinessLicenseInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching business license info:', error));
+        } else if (activeSection === 'my-projects') {
+            // Make the API request to fetch user's projects information
+            // Replace the below endpoint with your actual backend API endpoint for user's projects data
+            axios.get(`${API_BASE_URL}/myPageMyProjects`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setMyProjectsInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching my projects info:', error));
+        } else if (activeSection === 'other-projects') {
+            // Make the API request to fetch user's projects information
+            // Replace the below endpoint with your actual backend API endpoint for user's projects data
+            axios.get(`${API_BASE_URL}/myPageOtherProjects`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setMyProjectsInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching other projects info:', error));
+        } else if (activeSection === 'following') {
+            // Make the API request to fetch user's projects information
+            // Replace the below endpoint with your actual backend API endpoint for user's projects data
+            axios.get(`${API_BASE_URL}/myPageFollowing`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setMyProjectsInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching following info:', error));
+        } else if (activeSection === 'other') {
+            // Make the API request to fetch user's projects information
+            // Replace the below endpoint with your actual backend API endpoint for user's projects data
+            axios.get(`${API_BASE_URL}/myPageOther`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setMyProjectsInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching other info:', error));
+        } else {
+            // Make the API request to fetch user's projects information
+            // Replace the below endpoint with your actual backend API endpoint for user's projects data
+            axios.get(`${API_BASE_URL}/myPage`)
+                .then(response => {
+                    // Handle the response data accordingly, e.g., setMyProjectsInfo(response.data)
+                })
+                .catch(error => console.error('Error fetching my settings info:', error));
+        }
+        // Add more conditions for other sections if needed
+    }, [activeSection]);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -83,73 +137,73 @@ function MyPage() {
                     </div>
                     <table className="my-settings mypage-table">
                         <thead>
-                        <tr>
-                            <th>
-                                <h3>기본 정보</h3>
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>
+                                    <h3>기본 정보</h3>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <Form.Group>
-                                    <Form.Label>이름: {userInfo.name}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Form.Control type="text" />
-                                </Form.Group>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <Form.Group>
-                                    <Form.Label>이메일: {userInfo.email}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Form.Control type="email" />&nbsp;&nbsp;
-                                    <Button type="submit">확인</Button>
-                                </Form.Group>
-                            </td>
-                        </tr>
-                        {/*<tr>*/}
-                        {/*    <td>*/}
-                        {/*        <Form.Group >*/}
-                        {/*            <Form.Label>주소: {userInfo.address}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
-                        {/*            <Form.Control type="address" />&nbsp;&nbsp;*/}
-                        {/*            <Button type="submit">검색</Button>*/}
-                        {/*        </Form.Group>*/}
-                        {/*    </td>*/}
-                        {/*</tr>*/}
-                        <tr>
-                            <td>
-                                <Form.Group >
-                                    <Form.Label>연락처: {userInfo.tel}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Form.Control type="phone" />&nbsp;&nbsp;
-                                    <Button type="submit" >인증</Button>
-                                </Form.Group>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><br></br></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <Form.Group>
-                                    <Form.Label>비밀번호: {userInfo.password}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Form.Control type="password" />
-                                </Form.Group>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <Form.Group>
-                                    <Form.Label>비밀번호 확인:{userInfo.password}</Form.Label>&nbsp;
-                                    <Form.Control type="password" />&nbsp;&nbsp;
-                                    <Button type="submit">변경</Button>
-                                </Form.Group>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <img src="/assets/imgs/user.png" className="profile-image" alt="Profile" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>이름: {userInfo.name}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="text" />
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>이메일: {userInfo.email}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="email" />&nbsp;&nbsp;
+                                        <Button type="submit">확인</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            {/*<tr>*/}
+                            {/*    <td>*/}
+                            {/*        <Form.Group >*/}
+                            {/*            <Form.Label>주소: {userInfo.address}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                            {/*            <Form.Control type="address" />&nbsp;&nbsp;*/}
+                            {/*            <Button type="submit">검색</Button>*/}
+                            {/*        </Form.Group>*/}
+                            {/*    </td>*/}
+                            {/*</tr>*/}
+                            <tr>
+                                <td>
+                                    <Form.Group >
+                                        <Form.Label>연락처: {userInfo.tel}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="phone" />&nbsp;&nbsp;
+                                        <Button type="submit" >인증</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br></br></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>비밀번호: {userInfo.password}</Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Form.Control type="password" />
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group>
+                                        <Form.Label>비밀번호 확인:{userInfo.password}</Form.Label>&nbsp;
+                                        <Form.Control type="password" />&nbsp;&nbsp;
+                                        <Button type="submit">변경</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
                         </tbody>
                     </table >
                 </div>
@@ -163,15 +217,15 @@ function MyPage() {
                     <Form onSubmit={handleFormSubmit}>
                         <table className='mypage-table'>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <Form.Group style={{ textAlign: 'center' }}>
-                                        <Form.Label>사업자/주민등록증 업로드: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Form.Control type="file" accept=".jpg, .png, .pdf, .gif, .tif, .bmp" />&nbsp;&nbsp;
-                                        <Button type="submit">확인</Button>
-                                    </Form.Group>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <Form.Group style={{ textAlign: 'center' }}>
+                                            <Form.Label>사업자/주민등록증 업로드: </Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Form.Control type="file" accept=".jpg, .png, .pdf, .gif, .tif, .bmp" />&nbsp;&nbsp;
+                                            <Button type="submit">확인</Button>
+                                        </Form.Group>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table >
                     </Form>
@@ -311,14 +365,14 @@ function MyPage() {
                     </div>
                     <table className='mypage-table' style={{ textIndent: 0 }}>
                         <tbody>
-                        <tr>
-                            <td>
-                                <Form.Group style={{ textAlign: 'center' }}>
-                                    <Form.Label><b>회원탈퇴</b></Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Button type="submit">탈퇴</Button>
-                                </Form.Group>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <Form.Group style={{ textAlign: 'center' }}>
+                                        <Form.Label><b>회원탈퇴</b></Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Button type="submit">탈퇴</Button>
+                                    </Form.Group>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div >
