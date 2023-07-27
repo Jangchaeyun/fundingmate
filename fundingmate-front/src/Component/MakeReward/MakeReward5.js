@@ -10,36 +10,34 @@ import {
   FacebookOutlined,
   InstagramOutlined,
   BoldOutlined,
-  TwitterOutlined,
+  TwitterOutlined
 } from "@ant-design/icons";
 import DaumPostcode from "react-daum-postcode";
 import { Modal } from "antd";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
-
+import Story from "../RewardDetail/Detail/Story";
 
 const MakeReward5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
   const [totInfo, setTotInfo] = useState(preTotInfo);
-
+  const [rewardInfo, setRewardInfo] = useState(null);
 
   const { rewardId } = useParams();
 
-
   const handleInputChange = (e) => {
-    setTotInfo({ ...totInfo, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
   };
 
   const regexPattern = /^[0-9]*$/; // 숫자만 입력되도록 정규식 패턴 설정
   const handleNumInputChange = (e) => {
     const { name, value } = e.target;
-
-    // 숫자만 입력되도록 검증
     if (regexPattern.test(value)) {
-      setTotInfo({ ...totInfo, [name]: value });
+      setTotInfo((prevTotInfo) => ({ ...prevTotInfo, [name]: value }));
     }
   };
 
@@ -65,6 +63,18 @@ const MakeReward5 = () => {
     }
   }, []);
 
+  const uploadImageToServer = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios.post("http://localhost:8080/upload-image", formData);
+      console.log("Image uploaded successfully!");
+    } catch (error) {
+      console.log("Error uploading image:", error);
+    }
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
@@ -76,7 +86,8 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardIdBusinessLicenseImgSavedName: file });
+      setTotInfo({ ...totInfo, rewardBusinessLicenseImg: file });
+      //uploadImageToServer(file);
     }
   };
 
@@ -95,7 +106,7 @@ const MakeReward5 = () => {
       };
 
       reader.readAsDataURL(file);
-      setTotInfo({ ...totInfo, rewardBankAccountCopyImgSavedName: file });
+      setTotInfo({ ...totInfo, rewardBankAccountCopyImg: file });
       console.log(file.src);
     }
   };
@@ -132,73 +143,134 @@ const MakeReward5 = () => {
   const navigateToStep2 = useNavigate();
 
   const handlePreviousStep = () => {
-    navigateToStep1("/make-reward/goodsinfo", { state: { totInfo: totInfo } });
+    navigateToStep1("/makeRewardGoodsinfo", { state: { totInfo: totInfo } });
   };
-
 
   const userId = useSelector((state) => state.Id);
 
   const handleNextStep = () => {
     const convertToFilesDTO = (files) => {
-      if (!files || files.length === 0) {
-        return null;
+      if (files.length === 0) {
+        return null; // 빈 배열인 경우 null로 설정
       }
       return {
         fileId: null,
-        fileName: files[0].name,
-        fileRegistrationDate: null,
+        fileName: files[0].name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
     const convertToOneFilesDTO = (files) => {
-      if (!files) {
-        // Check if files is null
-        return null;
+      if (!files || files.length === 0) {
+        return null; // 파일이 없는 경우 null로 설정
       }
 
       return {
         fileId: null,
-        fileName: files.name,
-        fileRegistrationDate: null,
+        fileName: files.name, // 첫 번째 파일의 이름 사용
+        fileRegistrationDate: null
+        // 필요한 경우 다른 필드를 추가하거나 변경할 수 있습니다.
       };
     };
 
-    const requestData = {
-      ...totInfo,
-      rewardTypes: totInfo.cards,
-      rewardContentImgSavedName: convertToFilesDTO(
-        totInfo.rewardContentImgSavedName
-      ),
-      rewardRepImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardRepImgSavedName
-      ),
-      rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardIdBusinessLicenseImgSavedName
-      ),
-      rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
-        totInfo.rewardBankAccountCopyImgSavedName
-      ),
-    };
+    // const requestData = {
+    //   ...totInfo,
+    //   rewardTypes: totInfo.cards,
+    //   rewardContentImgSavedName: convertToFilesDTO(
+    //     totInfo.rewardContentImgSavedName
+    //   ),
+    //   rewardRepImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardRepImgSavedName
+    //   ),
+    //   rewardIdBusinessLicenseImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardIdBusinessLicenseImgSavedName
+    //   ),
+    //   rewardBankAccountCopyImgSavedName: convertToOneFilesDTO(
+    //     totInfo.rewardBankAccountCopyImgSavedName
+    //   ),
+    // };
 
+    let formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("rewardCategory", totInfo.rewardCategory);
+    formData.append("projTargetAmount", totInfo.projTargetAmount);
+    formData.append("projName", totInfo.projName);
+
+    formData.append("projKeyWord", totInfo.projKeyWord);
+    formData.append("projDateStart", totInfo.projDateStart);
+    formData.append("projDateEnd", totInfo.projDateEnd);
+    formData.append("rewardVideoAddress", totInfo.rewardVideoAddress);
+    formData.append(
+      "rewardRefundExchangePolicy",
+      totInfo.rewardRefundExchangePolicy
+    );
+    formData.append("projContent", totInfo.projContent);
+
+    //cards 의 option id 값 초기화
+    let tcards = totInfo.cards;
+    for (let i = 0; i < tcards.length; i++) {
+      for (let j = 0; j < tcards[i].options.length; j++) {
+        tcards[i].options[j].id = null;
+      }
+    }
+
+    formData.append("cards", JSON.stringify(tcards));
+
+    formData.append("rewardContact", totInfo.rewardContact);
+    formData.append("rewardEmail", totInfo.rewardEmail);
+    formData.append("modelName", totInfo.modelName);
+    formData.append("rewardLaw", totInfo.rewardLaw);
+    formData.append("countryOfOrigin", totInfo.countryOfOrigin);
+    formData.append("manufacturer", totInfo.manufacturer);
+    formData.append("asPhoneNumber", totInfo.asPhoneNumber);
+
+    formData.append("businessAddress", totInfo.businessAddress);
+    formData.append("bank", totInfo.bank);
+    formData.append("accNumber", totInfo.accNumber);
+    formData.append("depositorName", totInfo.depositorName);
+    formData.append("taxBillEmail", totInfo.taxBillEmail);
+    formData.append("websiteUrl", totInfo.websiteUrl);
+    formData.append("facebookUrl", totInfo.facebookUrl);
+    formData.append("instagramUrl", totInfo.instagramUrl);
+    formData.append("blogUrl", totInfo.blogUrl);
+    formData.append("twitterUrl", totInfo.twitterUrl);
+
+    formData.append("rewardRepImg", totInfo.rewardRepImg);
+    for (let i = 0; i <= totInfo.rewardContentImg.length; i++) {
+      formData.append("rewardContentImg", totInfo.rewardContentImg[i]);
+    }
+    formData.append(
+      "rewardBusinessLicenseImg",
+      totInfo.rewardBusinessLicenseImg
+    );
+    formData.append(
+      "rewardBankAccountCopyImg",
+      totInfo.rewardBankAccountCopyImg
+    );
+
+    console.log(totInfo);
     axios
-      .post("http://localhost:8080/make-reward", requestData, {
-        params: { userId: userId },
+      .post("http://localhost:8080/makeReward", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
       .then((response) => {
         console.log(response.data);
+        const rewardId = response.data;
+        setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/:rewardId`, {
-          state: { totInfo: totInfo },
-        });
+        navigateToStep2(`/reward-detail/story/${rewardId}`);
       })
       .catch((error) => {
         console.error(error);
+        alert("프로젝트를 완성해주세요.");
       });
   };
 
   return (
     <>
-
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -243,7 +315,6 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
-
                 </div>
                 이미지 추가하기
               </>
@@ -385,7 +456,6 @@ const MakeReward5 = () => {
                   <PlusCircleOutlined
                     style={{ fontSize: "25px", cursor: "pointer" }}
                   />
-
                 </div>
                 이미지 추가하기
               </>
@@ -514,10 +584,7 @@ const MakeReward5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-
       <CorFooter />
-
-
     </>
   );
 };

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+
+import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,8 +18,9 @@ public class RewardTypeDTO {
     private Integer rewardAmount;
     private Boolean rewardAvailableLimit;
     private Integer rewardAvailableCount;
+    private Date deliveryDate;
     private String rewardTitle;
     private String rewardContent;
     private Boolean rewardShipAddress;
-    private RewardOptionDTO rewardOption;
+//    private List<RewardOptionDTO> rewardOptions;
 }

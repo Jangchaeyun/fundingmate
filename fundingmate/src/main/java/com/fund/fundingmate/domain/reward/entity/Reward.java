@@ -3,14 +3,13 @@ package com.fund.fundingmate.domain.reward.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.entity.File;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+
 import java.util.List;
 
 @Entity
@@ -19,6 +18,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@JsonIgnoreProperties(value = { "rewardTypes" })
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,25 +29,19 @@ public class Reward {
 
     private Integer projTargetAmount;
 
-    private LocalDate projDateStart;
+    private Date projDateStart;
 
-    private LocalDate projDateEnd;
+    private Date projDateEnd;
 
-    private LocalDate deliveryDate;
-
-    @ManyToOne
-    @JoinColumn(name="rep_img")
-    private File repfile;
+    private Long rewardRepImgSavedName;
 
     private String projKeyWord;
 
     private String rewardVideoAddress;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="con_img")
-    private File confile;
-    
-    @Column(columnDefinition = "VARCHAR(1000)")
+    private String rewardContentImgSavedName; //파일번호 목록: 1,2,3
+
+    @Column(length = 100000)
     private String projContent;
 
     @Column(columnDefinition = "VARCHAR(1000)")
@@ -69,9 +64,7 @@ public class Reward {
 
     private String asPhoneNumber;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "business_img")
-    private File businessImg;
+    private Long rewardIdBusinessLicenseImgSavedName;
 
     private String businessAddress;
 
@@ -81,9 +74,7 @@ public class Reward {
 
     private String depositorName;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "bank_img")
-    private File bankImg;
+    private Long rewardBankAccountCopyImgSavedName;
 
     @Column(nullable = true)
     private String taxBillEmail;
@@ -107,7 +98,7 @@ public class Reward {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reward")
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<RewardType> rewardTypes;
+    private List<RewardType> rewardTypes = new ArrayList<>();;
 }

@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.reward.controller;
 
+import com.fund.fundingmate.domain.investment.dto.InvestmentDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardCommentDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardDTO;
 import com.fund.fundingmate.domain.reward.dto.RewardReplyDTO;
@@ -8,7 +9,9 @@ import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.reward.service.RewardCommentService;
 import com.fund.fundingmate.domain.reward.service.RewardService;
+import com.fund.fundingmate.global.file.Repository.FileRepository;
 import com.fund.fundingmate.global.file.Service.FileService;
+import com.fund.fundingmate.global.file.dto.FileDTO;
 import com.fund.fundingmate.global.file.entity.File;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,47 +53,93 @@ public class RewardController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/make-reward")
-    public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId) {
+    @Autowired
+    private FileRepository fileRepository;
+
+    @PostMapping("/makeReward")
+    public ResponseEntity<Long> createReward(@ModelAttribute RewardDTO rewardDTO,
+                                                  @RequestParam("userId") Long userId,
+                                                  @RequestParam("cards") String cards,
+                                                  @RequestParam(value="rewardRepImg", required = false) MultipartFile repFile,
+                                                  @RequestParam(value="rewardContentImg", required = false) MultipartFile[] contentFiles,
+                                                  @RequestParam(value="rewardBusinessLicenseImg", required = false )  MultipartFile businessFile,
+                                                  @RequestParam(value="rewardBankAccountCopyImg", required = false) MultipartFile bankFile) {
         try {
             System.out.println(userId);
-            System.out.println(rewardDTO);
-            System.out.println(rewardDTO.getRewardTypes());
-
-            Long savedRewardId = rewardService.createReward(rewardDTO, userId);
-
-            Map<String, Object> rewardMap = rewardService.getRewardById(savedRewardId);
-            RewardDTO createdReward = (RewardDTO) rewardMap.get("reward");
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+            System.out.println(contentFiles.length);
+            Long savedRewardId = rewardService.createReward(rewardDTO, userId, cards, repFile, contentFiles, businessFile, bankFile);
+            return new ResponseEntity<>(savedRewardId, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+//    @PostMapping("/makeReward1")
+//    public ResponseEntity<RewardDTO> createReward(@RequestBody RewardDTO rewardDTO, @RequestParam("userId") Long userId,
+//                                                  @RequestParam("rewardContentImages") List<MultipartFile> rewardContentImages) {
+//        try {
+//            if (rewardDTO != null) {
+//                // Save reward content images
+//                List<File> rewardContentImgEntities = saveMultipleFiles(rewardContentImages);
+//
+//                // Set the rewardContentImgSavedName in the rewardDTO
+//                List<FileDTO> rewardContentImgSavedNames = rewardContentImgEntities.stream()
+//                        .map(fileEntity -> modelMapper.map(fileEntity, FileDTO.class))
+//                        .collect(Collectors.toList());
+//                rewardDTO.setRewardContentImgSavedName(rewardContentImgSavedNames);
+//
+//                // Save the reward
+//                Long savedRewardId = rewardService.createReward(rewardDTO, userId);
+//                RewardDTO createdReward = rewardService.getRewardById(savedRewardId);
+//                return ResponseEntity.status(HttpStatus.CREATED).body(createdReward);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//            }
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        }
+//    }
+
+    private List<File> saveMultipleFiles(List<MultipartFile> multipartFiles) throws IOException {
+        List<File> savedFiles = new ArrayList<>();
+        for (MultipartFile multipartFile : multipartFiles) {
+            File savedFile = fileService.saveFile(null, multipartFile);
+            fileRepository.save(savedFile);
+            savedFiles.add(savedFile);
+        }
+        return savedFiles;
+    }
+
 
     @GetMapping("/reward-detail/story/{rewardId}")
-    public ResponseEntity<Map<String, Object>> rewardDetailStory(@PathVariable Long rewardId) {
+    public ResponseEntity<RewardDTO> rewardDetailStory(@PathVariable Long rewardId) {
+        System.out.println("rewardId:"+rewardId);
+
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
-            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+            RewardDTO rewardDetail = rewardService.getRewardById(rewardId);
+            return ResponseEntity.ok(rewardDetail);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @GetMapping("/reward-detail/guide/{rewardId}")
-    public ResponseEntity<Map<String, Object>> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
+    public ResponseEntity<RewardDTO> rewardDetailGuide(@PathVariable Long rewardId, HttpSession session) {
         try {
             String userId = (String) session.getAttribute("userId");
             System.out.println("rewardDetail: " + userId);
-            Map<String, Object> rewardDetail = rewardService.getRewardById(rewardId);
-            return new ResponseEntity<Map<String, Object>>(rewardDetail, HttpStatus.OK);
+            RewardDTO rewardDetail = rewardService.getRewardById(rewardId);
+            return ResponseEntity.ok(rewardDetail);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
@@ -143,6 +194,18 @@ public class RewardController {
 
             response.getOutputStream().write(fileBytes);
             response.getOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/upload-image")
+    public void uploadImage(@RequestPart MultipartFile file) {
+        try {
+            String fileName = file.getOriginalFilename();
+            String filePath = UPLOAD_DIRECTORY + "/" + fileName;
+
+            Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -56,6 +56,12 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	//gson
 	implementation 'com.google.code.gson:gson:2.9.0'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+
 }
 
 tasks.named('test') {

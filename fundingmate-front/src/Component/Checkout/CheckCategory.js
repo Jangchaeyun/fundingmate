@@ -8,7 +8,7 @@ const CheckCategory = () => {
   let navigate = useNavigate();
   let { rewardId } = useParams();
   const [rewardTypes, setRewardTypes] = useState([]);
-  const [reward, setReward] = useState(null);
+  const [totInfo, setTotInfo] = useState();
 
   useEffect(() => {
     fetchRewardDetail();
@@ -20,8 +20,8 @@ const CheckCategory = () => {
       const response = await axios.get(
         `http://localhost:8080/reward-detail/story/${rewardId}`
       );
-      setReward(response.data.reward);
-      console.log(response.data.reward);
+      setTotInfo(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +45,7 @@ const CheckCategory = () => {
 
   return (
     <div className="rew_check_category checkout">
-      <div className="rew_check_header">{reward && reward.projName}</div>
+      <div className="rew_check_header">{totInfo && totInfo.projName}</div>
       <div className="rew_check_info">펀딩을 마치면 결제 예약 상태입니다.</div>
 
       <h1 className="rew_title">리워드 선택</h1>
@@ -60,7 +60,7 @@ const CheckCategory = () => {
               {rewardType.rewardAvailableCount}개 펀딩
             </div>
             <div className="rew_date">
-              예상 배송일 {reward && reward.deliveryDate}
+              예상 배송일 {rewardType.deliveryDate}
             </div>
           </div>
           <div

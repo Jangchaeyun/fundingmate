@@ -212,8 +212,8 @@ const MakeReward4 = () => {
         </p>
         <textarea
           type="text"
-          name="asPhonenumber"
-          defaultValue={totInfo.asPhonenumber}
+          name="asPhoneNumber"
+          defaultValue={totInfo.asPhoneNumber}
           className="rew-textarea"
           placeholder="내용을 입력하세요."
           style={{ width: "99%", height: "90px" }}

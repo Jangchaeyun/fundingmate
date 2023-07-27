@@ -1,73 +1,80 @@
+.reward_make {
+  max-width: 1080px;
+  /* overflow-x: hidden; */
+  margin: 0 auto;
+  padding: 0;
+}
+
 .makerewardfund {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .makereward_title {
-    font-size: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .makereward {
-    width: 99.9%;
-    height: 385px;
-    border: 1px solid var(--main-color);
-    transition: all 0.2s linear;
+  width: 99.9%;
+  height: 385px;
+  border: 1px solid var(--main-color);
+  transition: all 0.2s linear;
 }
 
 .makereward:hover {
-    transform: scale(1.005);
+  transform: scale(1.005);
 }
 
 .reward_button {
-    width: 100px;
-    height: 30px;
-    background-color: var(--white);
-    color: var(--main-color);
-    border: 1px solid var(--main-color);
-    float: right;
-    margin-top: 6px;
-    cursor: pointer;
-    transition: all 0.2s linear;
-    font-size: 15px;
+  width: 100px;
+  height: 30px;
+  background-color: var(--white);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  float: right;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  font-size: 15px;
 }
 
 .reward_button:hover {
-    background-color: var(--main-color);
-    color: var(--white);
+  background-color: var(--main-color);
+  color: var(--white);
 }
 
 .makefund_title {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .makefund {
-    width: 100%;
-    height: 385px;
-    border: 1px solid var(--main-color);
-    transition: all 0.2s linear;
+  width: 100%;
+  height: 385px;
+  border: 1px solid var(--main-color);
+  transition: all 0.2s linear;
 }
 
 .makefund:hover {
-    transform: scale(1.005);
+  transform: scale(1.005);
 }
 
 .fund_button {
-    width: 100px;
-    height: 30px;
-    background-color: var(--white);
-    color: var(--main-color);
-    border: 1px solid var(--main-color);
-    float: right;
-    margin-top: 6px;
-    cursor: pointer;
-    transition: all 0.2s linear;
-    font-size: 15px;
-    margin-bottom: 20px;
+  width: 100px;
+  height: 30px;
+  background-color: var(--white);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  float: right;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  font-size: 15px;
+  margin-bottom: 20px;
 }
 
 .fund_button:hover {
-    background-color: var(--main-color);
-    color: var(--white);
+  background-color: var(--main-color);
+  color: var(--white);
 }

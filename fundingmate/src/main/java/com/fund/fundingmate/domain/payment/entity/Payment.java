@@ -1,6 +1,7 @@
 package com.fund.fundingmate.domain.payment.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fund.fundingmate.domain.investment.entity.InvestType;
 import com.fund.fundingmate.domain.reward.entity.Reward;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.entity.User;
@@ -44,5 +45,10 @@ public class Payment {
     @JoinColumn(name = "reward_type_id")
     @JsonBackReference
     private RewardType rewardType;
+
+    @ManyToOne
+    @JoinColumn(name = "invest_type_id")
+    @JsonBackReference
+    private InvestType investType;
 }
 

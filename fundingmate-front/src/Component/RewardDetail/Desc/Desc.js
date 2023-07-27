@@ -6,12 +6,17 @@ import CompanyModel from "../../Company/CompanyModel";
 import { useParams } from "react-router";
 import moment from "moment";
 
-const Desc = ({ reward, totalPaymentAmount, personCount }) => {
-  const [imageSrc, setImageSrc] = useState(reward.repFile.fileName);
+const Desc = ({
+  reward,
+  totalPaymentAmount,
+  personCount,
+  rewardContentImgSavedName,
+}) => {
+  const [imageSrc, setImageSrc] = useState(reward.rewardRepImgSavedName);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getRemainingDays = () => {
-    const endDate = moment(reward.projDateEnd);
+    const endDate = moment(reward?.projDateEnd);
     const today = moment();
     const remainingDays = endDate.diff(today, "days");
     return remainingDays;
@@ -23,7 +28,10 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
     setIsModalVisible(true);
   };
 
-  const hasProjDateEndPassed = moment(reward.projDateEnd).isBefore(moment());
+  console.log("AAA");
+  console.log(reward.rewardContentImgSavedName);
+
+  const hasProjDateEndPassed = moment(reward?.projDateEnd).isBefore(moment());
 
   return (
     <div className="desc">
@@ -35,17 +43,21 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
             className="main_img"
           />
           <img
-            src={`http://localhost:8080/img/${reward.repFile.fileName}`}
-            className="sub_img2"
-            id={reward.repFile.fileName}
-            onClick={(e) => setImageSrc(reward.repFile.fileName)}
-          />
-          <img
-            src={`http://localhost:8080/img/${reward.conFile.fileName}`}
+            src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
             className="sub_img1"
-            id={reward.conFile.fileName}
-            onClick={(e) => setImageSrc(reward.conFile.fileName)}
+            id={reward.rewardRepImgSavedName.fileName}
+            onClick={(e) => setImageSrc(reward.rewardRepImgSavedName)}
           />
+          {Array.isArray(reward.rewardContentImgSavedName) &&
+            reward.rewardContentImgSavedName.map((filename, index) => (
+              <img
+                key={index}
+                src={`http://localhost:8080/img/${filename}`}
+                className="sub_img2"
+                id={filename}
+                onClick={(e) => setImageSrc(filename)}
+              />
+            ))}
         </div>
         <div className="desc_content">
           <div className="fund_category">리워드</div>
@@ -114,11 +126,9 @@ const Desc = ({ reward, totalPaymentAmount, personCount }) => {
           <div className="schedule">
             <div className="end1">{reward.projDateEnd}</div>
             <div className="end2">
-              {moment(reward.projDateEnd)
-                .subtract(1, "day")
-                .format("YYYY-MM-DD")}
+              {moment(reward.projDateEnd).add(1, "day").format("YYYY-MM-DD")}
             </div>
-            <div className="end3">{reward.deliveryDate}</div>
+            <div className="end3">{reward.rewardTypes[0].deliveryDate}</div>
           </div>
           <div className="company" onClick={handleCompanyClick}>
             <div className="name_view">

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CompanyModel from "../../Company/CompanyModel";
 
 const Desc = () => {
-  const [imageSrc, setImageSrc] = useState("/assets/imgs/bracelet.jpg");
+  const [imageSrc, setImageSrc] = useState();
   const [isClicked, setIsClicked] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   let navigate = useNavigate();

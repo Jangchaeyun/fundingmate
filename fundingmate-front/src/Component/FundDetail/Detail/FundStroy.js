@@ -1,8 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Desc from "../Desc/Desc";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { ca } from "date-fns/locale";
 
 const FundStory = () => {
+  const [viewDesc, setViewDesc] = useState(false);
+  const [totalPayment, setTotalPaymentAmounts] = useState([]);
+  const [totInfo, setTotInfo] = useState();
+  const [personCount, setPersonCount] = useState(0);
+  const { investId } = useParams();
+
+  useEffect(() => {
+    console.log("Fetching invest data for investId:", investId);
+    if (investId) {
+      axios
+        .get(`http://localhost:8080/invest-detail/story/${investId}`)
+        .then((res) => {
+          console.log(res.data);
+          setTotInfo(res.data);
+          setViewDesc(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setViewDesc(false);
+        });
+
+      fetchParticipantCount();
+    }
+  }, [investId]);
+
+  const fetchTotalPaymentAmounts = async () => {
+    try {
+      if (totInfo && totInfo.id) {
+        const response = await axios.get(
+          `http://localhost:8080/payment/total-amount-same-invests?investIds=${totInfo.id}`
+        );
+        const totalAmounts = response.data;
+        setTotalPaymentAmounts(totalAmounts);
+      }
+    } catch (error) {
+      console.log("Error fetching total payment amounts: ", error);
+    }
+  };
+
+  const fetchParticipantCount = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/person-count/${investId}`
+      );
+      const count = response.data;
+      setPersonCount(count);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (totInfo && totInfo.id) {
+      fetchTotalPaymentAmounts();
+    }
+  }, [totInfo]);
   return (
     <div className="desc">
       <Desc />
