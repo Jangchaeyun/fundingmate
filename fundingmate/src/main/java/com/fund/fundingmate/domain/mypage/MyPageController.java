@@ -1,15 +1,26 @@
 package com.fund.fundingmate.domain.mypage;
 
+import com.fund.fundingmate.domain.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MyPageController {
-    private final MyPageService myPageService;
 
     @Autowired
-    public MyPageController(MyPageService myPageService) {
-        this.myPageService = myPageService;
-    }
+    private MyPageService myPageService;
 
+    @GetMapping("/myPage")
+    public ResponseEntity<UserDTO> getMyPageData(String id) {
+        // Assuming you have a method in the UserService to fetch basic user data
+        UserDTO userData = myPageService.getBasicUserData(id);
+
+        if (userData != null) {
+            return ResponseEntity.ok(userData);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
