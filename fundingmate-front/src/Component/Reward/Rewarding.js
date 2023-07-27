@@ -11,31 +11,79 @@ const Rewarding = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchRewardingRewards();
-  }, [visibleRewards]);
+    fetchInitialRewardingRewards();
+  }, []);
 
-  const fetchRewardingRewards = async () => {
+  const fetchInitialRewardingRewards = async () => {
     try {
       const response = await axios.get(
         "http://localhost:8080/reward/find/rewarding/more",
         {
           params: {
             startIndex: 0,
-            endIndex: visibleRewards,
-          },
+            endIndex: visibleRewards
+          }
+        }
+      );
+
+      const rewardingRewardsData = response.data;
+      setRewardingRewards(rewardingRewardsData);
+      setShowLoadMoreButton(rewardingRewardsData.length >= 4);
+    } catch (error) {
+      console.error("Error fetching initial rewarding rewards:", error);
+    }
+  };
+
+  const loadMoreRewards = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/reward/find/rewarding/more",
+        {
+          params: {
+            startIndex: visibleRewards,
+            endIndex: visibleRewards + 4
+          }
         }
       );
 
       const rewardingRewardsData = response.data;
       setRewardingRewards((prevRewards) => [
         ...prevRewards,
-        ...rewardingRewardsData,
+        ...rewardingRewardsData
       ]);
+      setVisibleRewards((prevVisibleRewards) => prevVisibleRewards + 4);
       setShowLoadMoreButton(rewardingRewardsData.length >= 4);
     } catch (error) {
-      console.error("Error fetching rewarding rewards:", error);
+      console.error("Error fetching more rewarding rewards:", error);
     }
   };
+
+  // useEffect(() => {
+  //   fetchRewardingRewards();
+  // }, [visibleRewards]);
+
+  // const fetchRewardingRewards = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8080/reward/find/rewarding/more",
+  //       {
+  //         params: {
+  //           startIndex: 0,
+  //           endIndex: visibleRewards
+  //         }
+  //       }
+  //     );
+
+  //     const rewardingRewardsData = response.data;
+  //     setRewardingRewards((prevRewards) => [
+  //       ...prevRewards,
+  //       ...rewardingRewardsData
+  //     ]);
+  //     setShowLoadMoreButton(rewardingRewardsData.length >= 4);
+  //   } catch (error) {
+  //     console.error("Error fetching rewarding rewards:", error);
+  //   }
+  // };
 
   useEffect(() => {
     const rewardIds = rewardingRewards.map((reward) => reward.id);
@@ -48,8 +96,8 @@ const Rewarding = () => {
         "http://localhost:8080/payment/total-amount-same-rewards",
         {
           params: {
-            rewardIds: rewardIds.join(","),
-          },
+            rewardIds: rewardIds.join(",")
+          }
         }
       );
 
@@ -60,11 +108,7 @@ const Rewarding = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/reward-detail/story/${rewardId}`);
-  };
-
-  const loadMoreRewards = () => {
-    setVisibleRewards((prevVisibleRewards) => prevVisibleRewards + 4);
+    navigate(`/rewarddetail/story/${rewardId}`);
   };
 
   const numVisibleRewards = Math.min(visibleRewards, rewardingRewards.length);
@@ -84,7 +128,7 @@ const Rewarding = () => {
             onClick={() => handleRewardClick(reward.id)}
           >
             <img
-              src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
+              src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
               className="reward_img"
               alt={reward.projName}
             />

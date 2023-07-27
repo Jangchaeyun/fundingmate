@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
 import Story from "../RewardDetail/Detail/Story";
-
+import Footer from "../../Component/Footer/Footer";
 const MakeReward5 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
@@ -261,7 +261,7 @@ const MakeReward5 = () => {
         const rewardId = response.data;
         setRewardInfo(totInfo);
         alert("프로젝트가 등록되었습니다.");
-        navigateToStep2(`/reward-detail/story/${rewardId}`);
+        navigateToStep2(`/rewarddetail/story/${rewardId}`);
       })
       .catch((error) => {
         console.error(error);
@@ -271,6 +271,7 @@ const MakeReward5 = () => {
 
   return (
     <>
+      <Header />
       <div className="investMake-wrapper">
         <div className="proj-progress-div">
           <div className="proj-progress proj-progress-common proj-progress-line">
@@ -584,7 +585,7 @@ const MakeReward5 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <CorFooter />
+      <Footer />
     </>
   );
 };

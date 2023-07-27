@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
 import axios from "axios";
-
+import Footer from "../../Component/Footer/Footer";
 const { RangePicker } = DatePicker;
 
 const MakeReward1 = () => {
@@ -307,7 +307,7 @@ const MakeReward1 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <CorFooter />
+      <Footer />
     </>
   );
 };

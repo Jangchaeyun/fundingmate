@@ -20,7 +20,7 @@ import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
 import axios from "axios";
-
+import Footer from "../../Component/Footer/Footer";
 const MAX_IMAGES = 15;
 
 const MakeReward2 = () => {
@@ -312,7 +312,7 @@ const MakeReward2 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <CorFooter />
+      <Footer />
     </>
   );
 };
