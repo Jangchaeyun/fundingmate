@@ -9,6 +9,7 @@
 }
 .keepSearch {
     margin: 10px 0;
+    text-align: right;
 }
 .loginIp {
     box-sizing: border-box;
@@ -62,7 +63,6 @@
     margin-bottom: 10px;
 }
 .idPwSearch {
-    float: right;
     font-size: 13px;
     color: #9b9b9b;
 }
@@ -83,6 +83,7 @@
     cursor: pointer;
 }
 .googleLogin {
+    background-color: white;
     border: 1px solid #eaebed;
 }
 .naverLogin {

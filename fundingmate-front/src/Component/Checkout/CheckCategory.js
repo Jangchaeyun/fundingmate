@@ -3,8 +3,7 @@ import "../../pages/Checkout/Checkout.css";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import CorFooter from "../../Component/Footer/CorFooter";
-import Header from "../../Component/Header/Header";
+
 const CheckCategory = () => {
   let navigate = useNavigate();
   let { rewardId } = useParams();
@@ -45,38 +44,34 @@ const CheckCategory = () => {
   };
 
   return (
-    <>
-      {/* <Header /> */}
-      <div className="rew_check_category checkout">
-        <div className="rew_check_header">{totInfo && totInfo.projName}</div>
-        <div className="rew_check_info">
-          펀딩을 마치면 결제 예약 상태입니다.
-        </div>
+    <div className="rew_check_category checkout">
+      <div className="rew_check_header">{totInfo && totInfo.projName}</div>
+      <div className="rew_check_info">펀딩을 마치면 결제 예약 상태입니다.</div>
 
-        <h1 className="rew_title">리워드 선택</h1>
-        {rewardTypes.map((rewardType) => (
-          <div className="rew_category_card" key={rewardType.id}>
-            <h1 className="rew_price">
-              {rewardType.rewardAmount.toLocaleString()}원
-            </h1>
-            <div className="rew_sub_content">
-              <div className="rew_count">
-                {rewardType.rewardAvailableLimit ? "제한" : "무제한"} |
-                {rewardType.rewardAvailableCount}개 펀딩
-              </div>
-              <div className="rew_date">
-                예상 배송일 {rewardType.deliveryDate}
-              </div>
+      <h1 className="rew_title">리워드 선택</h1>
+      {rewardTypes.map((rewardType) => (
+        <div className="rew_category_card" key={rewardType.id}>
+          <h1 className="rew_price">
+            {rewardType.rewardAmount.toLocaleString()}원
+          </h1>
+          <div className="rew_sub_content">
+            <div className="rew_count">
+              {rewardType.rewardAvailableLimit ? "제한" : "무제한"} |
+              {rewardType.rewardAvailableCount}개 펀딩
             </div>
-            <div
-              className="right"
-              onClick={() => handleCheckoutClick(rewardType.id)}
-            >
-              <CaretRightOutlined />
+            <div className="rew_date">
+              예상 배송일 {rewardType.deliveryDate}
             </div>
-            <div className="rew_content">{rewardType.rewardTitle}</div>
-            <div className="rew_content_info">{rewardType.rewardContent}</div>
-            {/* <div className="rew_content_checkoption">
+          </div>
+          <div
+            className="right"
+            onClick={() => handleCheckoutClick(rewardType.id)}
+          >
+            <CaretRightOutlined />
+          </div>
+          <div className="rew_content">{rewardType.rewardTitle}</div>
+          <div className="rew_content_info">{rewardType.rewardContent}</div>
+          {/* <div className="rew_content_checkoption">
           <select className="rew_content_select">
             <option value="s">S</option>
             <option value="m">M</option>
@@ -84,11 +79,9 @@ const CheckCategory = () => {
             <option value="xl">XL</option>
           </select>
       </div> */}
-          </div>
-        ))}
-      </div>
-      {/* <CorFooter /> */}
-    </>
+        </div>
+      ))}
+    </div>
   );
 };
 

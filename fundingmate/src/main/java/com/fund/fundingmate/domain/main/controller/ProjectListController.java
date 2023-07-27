@@ -24,14 +24,17 @@ public class ProjectListController {
     @GetMapping("/rewardList")
     public ResponseEntity<List> rewardList(@RequestParam(value = "word",required = false) String word) {
         try {
-            System.out.println(word);
             List<Tuple> tuples = mainRepository.findRewardAll(word);
+            System.out.println("test" );
             List data = new ArrayList();
             for(Tuple tuple:tuples){
+//                System.out.println("머임" );
 //                System.out.println(tuple.size());
                 Reward reward = tuple.get(0,Reward.class);
 //                System.out.println("reward: " + reward.toString());
                 Integer paymentamountSum  =  tuple.get(1,Integer.class);
+//                Long rewardCtn  =  tuple.get(2,Long.class);
+//                System.out.println("rewardCtn : " + rewardCtn );
 //                System.out.println("paymentamountSum : " + paymentamountSum );
 //                int a = tuple.get(1,Integer.class);
 //                System.out.println("a: " + a);

@@ -1,13 +1,9 @@
 import React from "react";
 import Desc from "../Desc/Desc";
 import { Link } from "react-router-dom";
-import Header from "../../Header/Header";
-import CorFooter from "../../Footer/CorFooter";
 
 const FundGuide = () => {
   return (
-    <>
-      <Header/>
     <div className="desc">
       <Desc />
       <div className="menu">
@@ -63,8 +59,6 @@ const FundGuide = () => {
         </p>
       </div>
     </div>
-    <CorFooter />
-    </>
   );
 };
 

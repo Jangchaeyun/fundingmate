@@ -1,12 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes,
-  useLocation
-} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes, useLocation} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
 import FindIdPw from "./pages/Login/FindIdPw";
@@ -53,7 +47,6 @@ import store from "./persist-store";
 import SocialLogin from "./pages/Login/SocialLogin";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "./Component/Login/Auth/AuthContext";
-import MakeInvestlast from "./pages/MakeInvest/MakeInvestlast";
 
 const persister = persistStore(store);
 function App() {
@@ -99,7 +92,7 @@ function App() {
                     element={<FindPwResult />}
                   />
                   <Route exact path="/join" element={<Join />} />
-                  <Route exact path="/search" element={<Search />} />
+                  <Route exact path="/search/:keyword" element={<Search />} />
                   <Route exact path="/reward" element={<Reward />} />
                   {/*<Route exact path="/reward-detail" element={<Rewarddetail />} />*/}
                 </Routes>
@@ -107,17 +100,17 @@ function App() {
                 <Routes>
                   <Route
                     exact
-                    path="/rewarddetail/story/:rewardId"
+                    path="/reward-detail/story/:rewardId"
                     element={<Story />}
                   />
                   <Route
                     exact
-                    path="/rewarddetail/contact/:rewardId"
+                    path="/reward-detail/contact/:rewardId"
                     element={<Contact />}
                   />
                   <Route
                     exact
-                    path="/rewarddetail/guide/:rewardId"
+                    path="/reward-detail/guide/:rewardId"
                     element={<Guide />}
                   />
                 </Routes>
@@ -237,7 +230,7 @@ function App() {
                   <Route
                     exact
                     path="/makeInvestHostinfo"
-                    element={<MakeInvestlast />}
+                    element={<MakeInvest5 />}
                   />
                 </Routes>
                 {/* 태희 부분 */}
@@ -253,6 +246,7 @@ function App() {
                   />
                 </Routes>
                 {/* My Page */}
+
               </BrowserRouter>
             </PersistGate>
           </Provider>

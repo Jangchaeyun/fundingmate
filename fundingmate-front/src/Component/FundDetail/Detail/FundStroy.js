@@ -3,8 +3,6 @@ import Desc from "../Desc/Desc";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ca } from "date-fns/locale";
-import Header from "../../Header/Header";
-import CorFooter from "../../Footer/CorFooter";
 
 const FundStory = () => {
   const [viewDesc, setViewDesc] = useState(false);
@@ -64,8 +62,6 @@ const FundStory = () => {
     }
   }, [totInfo]);
   return (
-    <>
-      <Header />
     <div className="desc">
       <Desc />
       <div className="menu">
@@ -94,8 +90,6 @@ const FundStory = () => {
       <div className="fund_story_content">창업 아이템 의 기대효과</div>
       <div className="fund_story_content_text"></div>
     </div>
-    <CorFooter />
-    </>
   );
 };
 

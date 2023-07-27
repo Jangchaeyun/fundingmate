@@ -2,13 +2,9 @@ import React from "react";
 import Desc from "../Desc/Desc";
 import { Link } from "react-router-dom";
 import "../../../pages/Funddetail/Funddetail.css";
-import Header from "../../Header/Header";
-import CorFooter from "../../Footer/CorFooter";
 
 const FundContact = () => {
   return (
-    <>
-      <Header />
     <div className="desc">
       <Desc />
       <div className="menu">
@@ -41,11 +37,13 @@ const FundContact = () => {
           문의하기
         </button>
 
-        <div className="con_list">등록된 문의가 없습니다.</div>
+        <div className="fund_con_list">
+          <div className="fund_con_name">박주미 | 2023.06.29</div>
+          <div className="fund_con_content"></div>
+          <button className="del_sub">삭제</button>
+        </div>
       </div>
     </div>
-    <CorFooter />
-    </>
   );
 };
 

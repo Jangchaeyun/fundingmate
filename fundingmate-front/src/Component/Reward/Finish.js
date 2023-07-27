@@ -26,44 +26,34 @@ const Finish = () => {
         }
       );
 
-      const rewardingRewardsData = response.data;
-      setFinishRewards((prevRewards) => [
-        ...prevRewards,
-        ...rewardingRewardsData
-      ]);
-      setShowLoadMoreButton(rewardingRewardsData.length >= 4);
+      if (response.data && Array.isArray(response.data.data)) {
+        // If the response data is available and contains the array of finish rewards
+        const fetchedRewards = response.data.data;
+        setFinishRewards(fetchedRewards);
+        setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
+
+        // Fetch payment amounts for all finish rewards
+        const rewardIds = fetchedRewards.map((reward) => reward.id);
+        const paymentResponse = await axios.get(
+          "http://localhost:8080/payment/total-amount-same-rewards",
+          {
+            params: {
+              rewardIds: rewardIds.join(","),
+            },
+          }
+        );
+
+        setPaymentAmountsData(paymentResponse.data);
+      } else {
+        // If the response data is not available or doesn't contain the array of finish rewards
+        setFinishRewards([]);
+        setShowLoadMoreButton(false);
+        setPaymentAmountsData({});
+      }
     } catch (error) {
-      console.error("Error fetching rewarding rewards:", error);
+      console.error("Error fetching finish rewards:", error);
+      // Handle the error gracefully, show an error message, or take appropriate action
     }
-
-    //   if (response.data && Array.isArray(response.data.data)) {
-    //     // If the response data is available and contains the array of finish rewards
-    //     const fetchedRewards = response.data;
-    //     setFinishRewards(fetchedRewards);
-    //     setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
-
-    //     // Fetch payment amounts for all finish rewards
-    //     const rewardIds = fetchedRewards.map((reward) => reward.id);
-    //     const paymentResponse = await axios.get(
-    //       "http://localhost:8080/payment/total-amount-same-rewards",
-    //       {
-    //         params: {
-    //           rewardIds: rewardIds.join(","),
-    //         },
-    //       }
-    //     );
-
-    //     setPaymentAmountsData(paymentResponse.data);
-    //   } else {
-    //     // If the response data is not available or doesn't contain the array of finish rewards
-    //     setFinishRewards([]);
-    //     setShowLoadMoreButton(false);
-    //     setPaymentAmountsData({});
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching finish rewards:", error);
-    //   // Handle the error gracefully, show an error message, or take appropriate action
-    // }
   };
 
   useEffect(() => {
@@ -101,7 +91,7 @@ const Finish = () => {
           },
         }
       );
-      const nextRewards = response.data; // Use response.data.data to get the array of finish rewards
+      const nextRewards = response.data.data; // Use response.data.data to get the array of finish rewards
       setFinishRewards((prevRewards) => [...prevRewards, ...nextRewards]);
       setVisibleRewards(nextVisibleRewards);
       setShowLoadMoreButton(nextRewards.length >= 4);
@@ -111,7 +101,7 @@ const Finish = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/rewarddetail/story/${rewardId}`);
+    navigate(`/reward-detail/story/${rewardId}`);
   };
 
   return (
@@ -127,7 +117,7 @@ const Finish = () => {
               onClick={() => handleRewardClick(reward.id)}
             >
               <img
-                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
+                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
                 className="reward_img"
                 alt={reward.projName}
               />
