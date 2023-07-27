@@ -6,6 +6,7 @@ import { DatePicker, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
+import Footer from "../../Component/Footer/Footer";
 const { RangePicker } = DatePicker;
 const MakeReward4 = () => {
   const location = useLocation();
@@ -239,7 +240,7 @@ const MakeReward4 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <CorFooter />
+      <Footer />
     </>
   );
 };

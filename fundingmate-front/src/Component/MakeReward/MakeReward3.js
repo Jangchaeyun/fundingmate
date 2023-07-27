@@ -16,7 +16,7 @@ import { nanoid } from "nanoid";
 import CorFooter from "../../Component/Footer/CorFooter";
 import Header from "../../Component/Header/Header";
 import moment from "moment";
-
+import Footer from "../../Component/Footer/Footer";
 const MakeReward3 = () => {
   const location = useLocation();
   const preTotInfo = location.state.totInfo;
@@ -438,7 +438,7 @@ const MakeReward3 = () => {
         </div>
         <div className="button-botoom-margin"></div>
       </div>
-      <CorFooter />
+      <Footer />
     </>
   );
 };

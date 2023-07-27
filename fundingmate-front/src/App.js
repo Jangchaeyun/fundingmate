@@ -1,6 +1,12 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import {BrowserRouter, Link, Route, Routes, useLocation} from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useLocation
+} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import * as React from "react";
 import FindIdPw from "./pages/Login/FindIdPw";
@@ -71,12 +77,12 @@ function App() {
                 {/* 은총 부분 */}
                 <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route exact path="/login" element={<Login />} />
-                  {/* <Route
+                  {/* <Route exact path="/login" element={<Login />} /> */}
+                  <Route
                     exact
                     path="/login"
                     element={isLoggedIn ? <Home /> : <Login />}
-                  /> */}
+                  />
                   <Route exact path="/findIdPw" element={<FindIdPw />} />
                   <Route exact path="/findId" element={<FindId />} />
                   <Route
@@ -100,17 +106,17 @@ function App() {
                 <Routes>
                   <Route
                     exact
-                    path="/reward-detail/story/:rewardId"
+                    path="/rewarddetail/story/:rewardId"
                     element={<Story />}
                   />
                   <Route
                     exact
-                    path="/reward-detail/contact/:rewardId"
+                    path="/rewarddetail/contact/:rewardId"
                     element={<Contact />}
                   />
                   <Route
                     exact
-                    path="/reward-detail/guide/:rewardId"
+                    path="/rewarddetail/guide/:rewardId"
                     element={<Guide />}
                   />
                 </Routes>
@@ -246,7 +252,6 @@ function App() {
                   />
                 </Routes>
                 {/* My Page */}
-
               </BrowserRouter>
             </PersistGate>
           </Provider>

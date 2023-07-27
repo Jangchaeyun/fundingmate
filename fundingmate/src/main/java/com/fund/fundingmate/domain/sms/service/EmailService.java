@@ -94,7 +94,7 @@ public class EmailService {
         String ePw = createKey();
         MimeMessage message = createMessage(to, ePw);
         try{
-//            javaMailSender.send(message); // 메일 발송
+            javaMailSender.send(message); // 메일 발송
         }catch(MailException es){
             es.printStackTrace();
             throw new IllegalArgumentException();

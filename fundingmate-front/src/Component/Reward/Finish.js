@@ -21,39 +21,46 @@ const Finish = () => {
         {
           params: {
             startIndex: 0,
-            endIndex: visibleRewards,
-          },
+            endIndex: visibleRewards + 4
+          }
         }
       );
 
-      if (response.data && Array.isArray(response.data.data)) {
-        // If the response data is available and contains the array of finish rewards
-        const fetchedRewards = response.data.data;
-        setFinishRewards(fetchedRewards);
-        setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
-
-        // Fetch payment amounts for all finish rewards
-        const rewardIds = fetchedRewards.map((reward) => reward.id);
-        const paymentResponse = await axios.get(
-          "http://localhost:8080/payment/total-amount-same-rewards",
-          {
-            params: {
-              rewardIds: rewardIds.join(","),
-            },
-          }
-        );
-
-        setPaymentAmountsData(paymentResponse.data);
-      } else {
-        // If the response data is not available or doesn't contain the array of finish rewards
-        setFinishRewards([]);
-        setShowLoadMoreButton(false);
-        setPaymentAmountsData({});
-      }
+      const finishRewardsData = response.data;
+      setFinishRewards(finishRewardsData);
+      setShowLoadMoreButton(finishRewardsData.length >= 4);
     } catch (error) {
-      console.error("Error fetching finish rewards:", error);
-      // Handle the error gracefully, show an error message, or take appropriate action
+      console.error("Error fetching rewarding rewards:", error);
     }
+
+    //   if (response.data && Array.isArray(response.data.data)) {
+    //     // If the response data is available and contains the array of finish rewards
+    //     const fetchedRewards = response.data;
+    //     setFinishRewards(fetchedRewards);
+    //     setShowLoadMoreButton(fetchedRewards.length >= visibleRewards);
+
+    //     // Fetch payment amounts for all finish rewards
+    //     const rewardIds = fetchedRewards.map((reward) => reward.id);
+    //     const paymentResponse = await axios.get(
+    //       "http://localhost:8080/payment/total-amount-same-rewards",
+    //       {
+    //         params: {
+    //           rewardIds: rewardIds.join(","),
+    //         },
+    //       }
+    //     );
+
+    //     setPaymentAmountsData(paymentResponse.data);
+    //   } else {
+    //     // If the response data is not available or doesn't contain the array of finish rewards
+    //     setFinishRewards([]);
+    //     setShowLoadMoreButton(false);
+    //     setPaymentAmountsData({});
+    //   }
+    // } catch (error) {
+    //   console.error("Error fetching finish rewards:", error);
+    //   // Handle the error gracefully, show an error message, or take appropriate action
+    // }
   };
 
   useEffect(() => {
@@ -69,8 +76,8 @@ const Finish = () => {
         "http://localhost:8080/payment/total-amount-same-rewards",
         {
           params: {
-            rewardIds: rewardIds.join(","),
-          },
+            rewardIds: rewardIds.join(",")
+          }
         }
       );
       setPaymentAmountsData(response.data);
@@ -87,11 +94,11 @@ const Finish = () => {
         {
           params: {
             startIndex: visibleRewards,
-            endIndex: nextVisibleRewards,
-          },
+            endIndex: nextVisibleRewards
+          }
         }
       );
-      const nextRewards = response.data.data; // Use response.data.data to get the array of finish rewards
+      const nextRewards = response.data; // Use response.data.data to get the array of finish rewards
       setFinishRewards((prevRewards) => [...prevRewards, ...nextRewards]);
       setVisibleRewards(nextVisibleRewards);
       setShowLoadMoreButton(nextRewards.length >= 4);
@@ -101,7 +108,7 @@ const Finish = () => {
   };
 
   const handleRewardClick = (rewardId) => {
-    navigate(`/reward-detail/story/${rewardId}`);
+    navigate(`/rewarddetail/story/${rewardId}`);
   };
 
   return (
@@ -117,7 +124,7 @@ const Finish = () => {
               onClick={() => handleRewardClick(reward.id)}
             >
               <img
-                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName.fileName}`}
+                src={`http://localhost:8080/img/${reward.rewardRepImgSavedName}`}
                 className="reward_img"
                 alt={reward.projName}
               />

@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
                 .userid(userDto.getUserid())
                 .password(passwordEncoder.encode(userDto.getPassword()))  //비밀번호 인코딩
                 .email(userDto.getEmail())
-                .name(userDto.getUsername())
+                .name(userDto.getName())
                 .birthday(userDto.getBirthday())
                 .tel(userDto.getTel())
                 .notificationStatus("Y")
