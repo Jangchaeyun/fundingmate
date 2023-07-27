@@ -47,14 +47,17 @@ function Home() {
           const paymentamountPercent = Math.ceil(
             item.paymentamountSum / item.projTargetAmount
           );
-          const formattedPaymentamountSum =
-            item.paymentamountSum.toLocaleString();
-          const formattedPaymentamountPercent =
-            paymentamountPercent.toLocaleString();
+          const formattedPaymentamountSum = item.paymentamountSum;
+
+          const formattedPaymentamountPercent = Math.ceil(
+            (formattedPaymentamountSum / item.projTargetAmount) * 100
+          );
+
           return {
             ...item,
             differenceInDays,
             formattedAmount,
+            paymentamountPercent,
             formattedPaymentamountSum,
             formattedPaymentamountPercent
           };

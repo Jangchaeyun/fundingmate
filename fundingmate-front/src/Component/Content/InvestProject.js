@@ -36,7 +36,8 @@ function InvestProject(props) {
             return (
               <SwiperSlide className="content-slide">
                 <a
-                  href={"fund-detail/story/" + item.id}
+                  // href={"fund-detail/story/" + item.id}
+                  href={"fund-detail/story/"}
                   className="content-item-list-link"
                 >
                   <div className="content-item-list">
