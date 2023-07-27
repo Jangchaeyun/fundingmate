@@ -9,6 +9,7 @@ import { notification } from 'antd';
 import Header from '../../Component/Header/Header';
 import Footer from '../../Component/Footer/Footer';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 // Define the API_BASE_URL directly in MyPage.js
 const API_BASE_URL = 'http://localhost:8080';
@@ -229,6 +230,21 @@ function MyPage() {
             .catch(error => {
                 // Handle error here, show error message to the user, etc.
                 console.error('Error updating password:', error);
+            });
+    };
+
+    const history = useHistory();
+
+    const handleDeleteAccount = () => {
+        // Assuming you have a function in your API to delete the user account
+        axios.delete(`${API_BASE_URL}/deleteAccount/${userId}`)
+            .then(() => {
+                // Account deleted successfully, navigate back to the main page
+                history.push('/'); // Replace '/' with the route of your main page
+            })
+            .catch(error => {
+                console.error('Error deleting account:', error);
+                // Handle error if needed
             });
     };
 
@@ -497,7 +513,7 @@ function MyPage() {
                                 <td>
                                     <Form.Group style={{ textAlign: 'center' }}>
                                         <Form.Label><b>회원탈퇴</b></Form.Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <Button type="submit">탈퇴</Button>
+                                        <Button type="button" onClick={handleDeleteAccount}>탈퇴</Button>
                                     </Form.Group>
                                 </td>
                             </tr>

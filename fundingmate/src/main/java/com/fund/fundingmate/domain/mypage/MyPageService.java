@@ -73,4 +73,8 @@ public class MyPageService {
 
         return null;
     }
+
+    public void deleteAccount(String id) {
+        userRepository.deleteByUserid(id);
+    }
 }
