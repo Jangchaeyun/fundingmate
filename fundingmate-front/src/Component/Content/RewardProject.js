@@ -15,7 +15,7 @@ function RewardProject(props) {
 
   return (
     <section className="content">
-      <div className="content-title">리워드 프로젝트<a href="/reward">프로젝트 더보기 <RightOutlined /></a></div>
+      <div className="content-title">리워드 프로젝트<a href="reward">프로젝트 더보기 <RightOutlined /></a></div>
       <div className="content-proj">
         <Swiper
           modules={[Navigation, Scrollbar, A11y]}
@@ -29,15 +29,15 @@ function RewardProject(props) {
           {reward.map((item, idx) => {
             return (
               <SwiperSlide className="content-slide">
-                <a href={"reward/"+item.id} className="content-item-list-link">
+                <a href={"reward-detail/story/"+item.id} className="content-item-list-link">
                   <div className="content-item-list">
                     <img
-                      src={require("../../assets/images/Project/고고.jpg")}
+                      src={`http://localhost:8080/img/${item.rewardRepImgSavedName}`}
                       alt=""
                       className="content-item-img"
                     />
                     <div className="content-item">
-                      <div className="corP">KOSTA</div>
+                      <div className="corP">{item.projKeyWord}</div>
 
                         <div className="">
                           <span className="fdrate">{item.formattedPaymentamountPercent}% 달성</span>

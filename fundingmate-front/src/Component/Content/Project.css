@@ -1,97 +1,99 @@
 .container {
-    max-width: 1080px;
-    margin: 0 auto;
-    min-width: 700px;
-
+  max-width: 1080px;
+  margin: 0 auto;
+  min-width: 700px;
 }
 .content {
-    margin: 30px 0 100px;
+  margin: 30px 0 100px;
 }
 .content-title {
-    margin: 20px;
-    font-weight: bold;
+  margin: 20px;
+  font-weight: bold;
 }
-.content-title>a {
-    float: right;
-    color: #D2D2D2;
-    font-size: 14px;
+.content-title > a {
+  float: right;
+  color: #d2d2d2;
+  font-size: 14px;
 }
-.content-title>a:hover {
-    color: #999999;
+.content-title > a:hover {
+  color: #999999;
 }
 .content-item-list {
-    box-sizing: border-box;
-    height: 350px;
+  box-sizing: border-box;
+  height: 350px;
 
-    padding: 10px;
+  padding: 10px;
 }
 .content-proj {
-    position: relative;
+  position: relative;
 }
-.content-slide{
-    border: 1px solid #eaebed;
-    box-sizing: border-box;
+.content-slide {
+  border: 1px solid #eaebed;
+  box-sizing: border-box;
 }
 .content-item-list-link {
-    display: block;
+  display: block;
 }
 .content-item-list-link:hover .content-item-img {
-    transform: scale(1.09);
+  transform: scale(1.09);
 }
 .content-item-img {
-    max-width: 100%;
-    height: auto;
-    /*margin: 10px;*/
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 50%;
+  min-height: 50%;
+  /*margin: 10px;*/
 }
-.prevNav, .nextNav {
-    color: #14B8FF;
-    top: 150px;
-    position: absolute;
-    font-size: 20px;
-    z-index: 5;
+.prevNav,
+.nextNav {
+  color: #14b8ff;
+  top: 150px;
+  position: absolute;
+  font-size: 20px;
+  z-index: 5;
 }
 .prevNav {
 }
 .nextNav {
-    right: 0;
+  right: 0;
 }
 .content-item {
-    /*padding: 10px;*/
+  /*padding: 10px;*/
 }
 .fdrate {
-    color: #14B8FF;
-    font-weight: bold;
+  color: #14b8ff;
+  font-weight: bold;
 }
 .fdprice {
-    font-size: 12px;
-    margin-left: 5px;
-    color: #9b9b9b;
+  font-size: 12px;
+  margin-left: 5px;
+  color: #9b9b9b;
 }
 .dday {
-    background: #14B8FF;
-    border-radius: 2px;
-    color: white;
-    font-size: 10px;
-    float: right;
-    padding: 2px;
+  background: #14b8ff;
+  border-radius: 2px;
+  color: white;
+  font-size: 10px;
+  float: right;
+  padding: 2px;
 }
 .proN {
-    padding: 10px 0;
-    height: 50px;
+  padding: 10px 0;
+  height: 50px;
 }
 .corP {
-    color: #9b9b9b;
-    padding-bottom: 10px;
-    font-size: 12px;
+  color: #9b9b9b;
+  padding-bottom: 10px;
+  font-size: 12px;
 }
 .fundGo {
-    text-align: center;
-    color: #9b9b9b;
-    padding: 10px 0;
+  text-align: center;
+  color: #9b9b9b;
+  padding: 10px 0;
 }
 .Commingsoon {
-    color: #14B8FF;
+  color: #14b8ff;
 }
 .content .swiper {
-    max-width: 1020px;
+  max-width: 1020px;
 }

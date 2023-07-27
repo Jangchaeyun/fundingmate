@@ -41,8 +41,8 @@ public class InvestmentServiceImpl implements InvestmentService {
     @Autowired
     private FileRepository fileRepository;
 
-    @Autowired
-    private FileService fileService;
+//    @Autowired
+//    private FileService fileService;
 
 
 

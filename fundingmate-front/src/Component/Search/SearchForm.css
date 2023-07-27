@@ -26,3 +26,13 @@
     border: none;
     cursor: pointer;
 }
+.searchForm-nav-search {
+    width: 350px;
+    height: 40px;
+    font-size: 1.1em;
+    border: 1px solid #14B8FF;
+    border-radius: 20px;
+    padding-left: 20px;
+    position: relative;
+    top: 10px;
+}

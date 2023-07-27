@@ -11,7 +11,7 @@ function Header(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [keyword, setKeyword] = useState(props.word);
+  const [keyword, setKeyword] = useState('');
   const [reward, setReward] = useState([])
   const logout = () => {
     dispatch({ type: "NEWTOKEN", payload: "" });
@@ -24,10 +24,14 @@ function Header(props) {
 
         document.location.href="/login";
     }
-    const searchSubmit = () => {
-        if(keyword === ''){
+    const searchSubmit = (e) => {
+        if (keyword.trim() === '') {
+            e.preventDefault();
+            document.getElementById("keyword").value = '';
             document.getElementById("keyword").focus();
             return;
+        }else {
+            navigate(`/search/${keyword}`);
         }
         // axios.get(`http://localhost:8080/search?word=${keyword}`)
         //     .then(res => {
@@ -51,7 +55,7 @@ function Header(props) {
         //     .catch(err => {
         //         console.log(err);
         //     })
-        navigate(`/search?word=${keyword}`,{state:{word:keyword,list:reward}});
+        // navigate(`/search/${keyword}`);
     }
     return (
         <header className="header">
@@ -65,12 +69,12 @@ function Header(props) {
 
                         {/*<b className="userName">{userid}</b>*/}
                         {userid!=''&&<>
-                        <a href="#" className="myPageLink">
+                        <a href="myPage" className="myPageLink">
                             <img src={require(`../../assets/images/defaultImg.jpg`)} alt="" className="myPageImg"/>
                         </a>
-                        <a href="#" className="noti">
-                            <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>
-                        </a>
+                        {/*<a href="#" className="noti">*/}
+                        {/*    <BellOutlined className="notiIcon" style={{ fontSize: "28px" }}/>*/}
+                        {/*</a>*/}
                         <Link onClick={logout}>
                             로그아웃
                         </Link></>}
@@ -79,17 +83,17 @@ function Header(props) {
                 </div>
                 <nav className="nav">
                     <ul className="nav-item">
-                        <li><a href="">홈</a></li>
-                        <li><a href="/reward">리워드</a></li>
-                        <li><a href="">창업</a></li>
-                        <li><a href="">창업정보</a></li>
-                        <li><a href="">오픈예정</a></li>
+                        <li><a href="/">홈</a></li>
+                        <li><a href="reward">리워드</a></li>
+                        <li><a href="fund">투자</a></li>
+                        {/*<li><a href="/">창업정보</a></li>*/}
+                        {/*<li><a href="">오픈예정</a></li>*/}
                     </ul>
                     <span className="searchForm">
                         <form onSubmit={searchSubmit} className="searchF">
-                            <input type="text" id="keyword"  className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} value={keyword} autoComplete="off"/>
+                            <input type="text" id="keyword"  className="nav-search float-r" placeholder="프로젝트 명/기업 명" maxLength="10" onInput={(e)=>{setKeyword(e.target.value)}} autoComplete="off"/>
+                            <button type="submit" className="nav-search-btn"><SearchOutlined /></button>
                         </form>
-                        <SearchOutlined className="nav-search-btn" onClick={searchSubmit}/>
                     </span>
                 </nav>
             </div>

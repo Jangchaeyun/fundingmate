@@ -18,10 +18,10 @@ import java.util.List;
 public class FileService {
     private final FileRepository fileRepository;
   
-    public static final String UPLOAD_DIRECTORY = "D:/웹 애플리케이션 Full-Stack 과정/fundingmate/imgUpload";
+    public static final String UPLOAD_DIRECTORY = "D:/yth/springboot-work/intellj/fundingmate/imgUpload";
 
     @Autowired
-    public FileService(FileRepository fileRepository, FileService fileService) {
+    public FileService(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
     }
 

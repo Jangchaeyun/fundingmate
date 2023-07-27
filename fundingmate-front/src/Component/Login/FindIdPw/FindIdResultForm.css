@@ -6,6 +6,7 @@
 .findIdInfo {
     border: 1px solid;
     text-align: -webkit-center;
+    margin-bottom: 10px;
 }
 
 .findIdResult {

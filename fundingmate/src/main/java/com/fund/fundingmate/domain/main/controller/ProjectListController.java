@@ -24,14 +24,16 @@ public class ProjectListController {
     @GetMapping("/rewardList")
     public ResponseEntity<List> rewardList(@RequestParam(value = "word",required = false) String word) {
         try {
-            System.out.println(word);
             List<Tuple> tuples = mainRepository.findRewardAll(word);
             List data = new ArrayList();
             for(Tuple tuple:tuples){
+//                System.out.println("머임" );
 //                System.out.println(tuple.size());
                 Reward reward = tuple.get(0,Reward.class);
 //                System.out.println("reward: " + reward.toString());
                 Integer paymentamountSum  =  tuple.get(1,Integer.class);
+//                Long rewardCtn  =  tuple.get(2,Long.class);
+//                System.out.println("rewardCtn : " + rewardCtn );
 //                System.out.println("paymentamountSum : " + paymentamountSum );
 //                int a = tuple.get(1,Integer.class);
 //                System.out.println("a: " + a);
@@ -55,13 +57,13 @@ public class ProjectListController {
     @GetMapping("/InvestList")
     public ResponseEntity<List> investList(@RequestParam(value = "word",required = false) String word) {
         try {
-            System.out.println(word);
+            System.out.println("인베스트 확인이요");
             List<Tuple> tuples = mainRepository.findInvestAll(word);
             List data = new ArrayList();
             for(Tuple tuple:tuples){
 //                System.out.println(tuple.size());
                 Investment investment = tuple.get(0,Investment.class);
-//                System.out.println("reward: " + reward.toString());
+//                System.out.println("investment: " + investment.toString());
                 Integer paymentamountSum  =  tuple.get(1,Integer.class);
 //                System.out.println("paymentamountSum : " + paymentamountSum );
 //                int a = tuple.get(1,Integer.class);
@@ -76,10 +78,13 @@ public class ProjectListController {
 
                 //totmap.putAll(paymentamountmapper.convertValue(paymentamountSum, Map.class));
                 data.add(totmap);
-
+//                System.out.println("인베스트 확인이요2");
             }
+//                System.out.println(data);
+
             return new ResponseEntity<List>(data, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
         }
     }

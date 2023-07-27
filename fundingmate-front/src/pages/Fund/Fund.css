@@ -1,3 +1,10 @@
+.realtime {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 1080px;
+  margin: 0 auto;  
+}
+
 .realtime_boxs {
   display: flex;
 }
@@ -33,5 +40,5 @@
   font-size: 11px;
   text-align: center;
   margin-left: 2%;
-  margin-top: 31%;
+  margin-top: -10%;
 }

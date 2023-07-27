@@ -1,5 +1,6 @@
 package com.fund.fundingmate.domain.investment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fund.fundingmate.domain.reward.entity.RewardType;
 import com.fund.fundingmate.domain.user.entity.User;
 import com.fund.fundingmate.global.file.dto.FileDTO;
@@ -18,6 +19,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"investTypes"})
 public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

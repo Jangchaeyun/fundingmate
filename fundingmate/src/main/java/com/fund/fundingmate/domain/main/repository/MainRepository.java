@@ -30,7 +30,6 @@ public class MainRepository {
 
         BooleanExpression whereCondition = reward.projDateStart.loe(Date.valueOf(today))
                 .and(reward.projDateEnd.goe(Date.valueOf(today)));
-
         if (word != null && !word.isEmpty()) {
             whereCondition = whereCondition.and(
                     reward.projName.contains(word)

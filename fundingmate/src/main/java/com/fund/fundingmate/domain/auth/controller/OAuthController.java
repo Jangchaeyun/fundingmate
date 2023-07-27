@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,4 +38,17 @@ public class OAuthController {
 //        return new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
 //        return new ResponseEntity<Map<String,Object>>(res, HttpStatus.OK);
     }
+    @GetMapping("/login/naver")
+    @ResponseBody
+    public ResponseEntity<LoginResponseDto> naverLogin(@RequestParam String code) {
+        String kakaoAccessToken = authService.getKakaoAccessToken(code).getAccess_token();
+        return authService.kakaoLogin(kakaoAccessToken);
+    }
+//    @GetMapping("/oauth")
+//    public ResponseEntity<String> naverConnect() throws UnsupportedEncodingException {
+//        System.out.println("test");
+//        String url = authService.createNaverURL();
+//
+//        return new ResponseEntity<String>(url, HttpStatus.OK); // 프론트 브라우저로 보내는 주소
+//    }
 }

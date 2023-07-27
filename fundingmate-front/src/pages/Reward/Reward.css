@@ -47,7 +47,7 @@
   margin-bottom: 3%;
   transition: all 0.2s linear;
   cursor: pointer;
-  margin-left: 0.6%;
+  margin-left: 0.6%;s
 } */
 
 .reward_card_row {
@@ -102,7 +102,7 @@
 
 .reward_detail {
   margin-left: 6px;
-  margin-top: 38px;
+  margin-top: 62px;
 }
 
 .price {
@@ -115,7 +115,7 @@
 .rate {
   font-size: 13px;
   margin-left: 66%;
-  margin-top: -4.3%;
+  margin-top: 5px;
 }
 
 .d_day {
@@ -127,12 +127,12 @@
 .bell_box {
   display: flex;
   width: 250px;
-  height: 36px;
+  height: 23px;
   border-radius: 2px;
   border: 1px solid rgba(0, 0, 0, 0.18);
   font-size: 13px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 11px;
   justify-items: center;
   align-items: center;
   align-content: center;
@@ -142,7 +142,7 @@
 }
 
 .bell_box:hover {
-  transform: scale(1.01);
+  transform: scale(1.0001);
   border: 1px solid #14b8ff;
   color: #14b8ff;
 }

@@ -15,6 +15,12 @@ function LoginForm(props) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  const NAVER_CLIENT_ID = "ra3NHpwYEs3KCyDuy1O9"; // 발급받은 클라이언트 아이디
+  const REDIRECT_URI = "http://localhost:3000/login"; // Callback URL
+  const STATE = "flase";
+  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
+
   useEffect(() => {
     // 로컬 스토리지에서 토큰 가져오기
     const token = localStorage.getItem("token");
@@ -25,8 +31,46 @@ function LoginForm(props) {
     // }
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+    const state = urlParams.get("state");
+    // alert(state);
+    if (state && code) {
+      axios
+        .get(`http://localhost:8080/login/naver?code=${code}&state=${state}`)
+        .then((res) => {
+          const loginSuccess = res.data.loginSuccess;
+          const user = res.data.user;
+          if (loginSuccess) {
+            // 로그인 성공 시 처리
+            if (user.userid == null) {
+              // 처음 로그인하는 사용자인 경우 회원가입 페이지로 이동
 
-    if (code) {
+              navigate("/join", { state: res.data.user.snsLogin });
+            } else {
+              dispatch({ type: "NEWTOKEN", payload: res.data.accessToken });
+              dispatch({ type: "USERID", payload: res.data.user.userid });
+
+              const expires = new Date();
+              expires.setDate(expires.getDate() + 1);
+              setCookie("refreshToken", res.data.refreshToken, {
+                url: "/",
+                expires
+              });
+              // 토큰을 로컬 스토리지에 저장
+              storeTokenInLocalStorage(res.data.accessToken);
+              // isLoggedIn 상태를 변경
+              setIsLoggedIn(true);
+              // 이미 회원가입된 사용자인 경우 메인 페이지로 이동
+              navigate("/");
+            }
+          } else {
+            // 로그인 실패 처리
+          }
+        })
+        .catch((error) => {
+          console.error("로그인 요청 실패:", error);
+          // 에러 처리
+        });
+    } else if (code) {
       axios
         .get(`http://localhost:8080/login/kakao?code=${code}`)
         .then((res) => {
@@ -46,7 +90,7 @@ function LoginForm(props) {
               expires.setDate(expires.getDate() + 1);
               setCookie("refreshToken", res.data.refreshToken, {
                 url: "/",
-                expires,
+                expires
               });
               // 토큰을 로컬 스토리지에 저장
               storeTokenInLocalStorage(res.data.accessToken);
@@ -74,9 +118,9 @@ function LoginForm(props) {
       .post("http://localhost:8080/login", null, {
         params: {
           id: id,
-          password: password,
+          password: password
           // 'remember-me': true // Remember Me 파라미터를 설정하여 로그인 요청 보냄
-        },
+        }
       })
       .then((res) => {
         console.log(res);
@@ -88,7 +132,7 @@ function LoginForm(props) {
         expires.setDate(expires.getDate() + 1);
         setCookie("refreshToken", res.data.refreshToken, {
           url: "/",
-          expires,
+          expires
         });
         // 토큰을 로컬 스토리지에 저장
         storeTokenInLocalStorage(res.data.accessToken);
@@ -103,7 +147,12 @@ function LoginForm(props) {
       });
   };
   const kakaoLogin = (e) => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code`;
+    // window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=a4759eb6df46f2eda8d168437d5cf8f7&redirect_uri=http://localhost:3000/login&response_type=code`;
+  };
+
+  const naverLogin = () => {
+    window.location.href = NAVER_AUTH_URL;
   };
   // const sociallogin = (e) => {
   //     alert("확인용");
@@ -165,17 +214,17 @@ function LoginForm(props) {
         />
         <br />
         <div className="keepSearch">
-          <label for="keep" className="keepChkLb">
-            <input
-              type="checkbox"
-              name=""
-              id="keep"
-              className="keepChk"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            로그인 상태 유지
-          </label>
+          {/*<label for="keep" className="keepChkLb">*/}
+          {/*  <input*/}
+          {/*    type="checkbox"*/}
+          {/*    name=""*/}
+          {/*    id="keep"*/}
+          {/*    className="keepChk"*/}
+          {/*    checked={rememberMe}*/}
+          {/*    onChange={(e) => setRememberMe(e.target.checked)}*/}
+          {/*  />*/}
+          {/*  로그인 상태 유지*/}
+          {/*</label>*/}
           <a href="findIdPw" className="idPwSearch">
             아이디 비밀번호 찾기 <RightOutlined />
           </a>
@@ -188,7 +237,7 @@ function LoginForm(props) {
           구글 로그인
         </button>
         <br />
-        <button className="naverLogin">
+        <button className="naverLogin" onClick={naverLogin}>
           <img src={require("../../assets/images/Login/naverIcon.png")} />
           네이버 로그인
         </button>
